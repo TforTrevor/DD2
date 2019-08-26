@@ -12,6 +12,13 @@ namespace DD2.AI
         [SerializeField] State remainState;
         [SerializeField] float updateRate;
 
+        [HideInInspector] public EnemyStats enemyStats;
+
+        void Awake()
+        {
+            enemyStats = GetComponent<EnemyStats>();
+        }
+
         void Start()
         {
             currentState.EnterState(this);
@@ -29,11 +36,14 @@ namespace DD2.AI
 
         public void TransitionToState(State nextState)
         {
-            if (nextState != remainState)
+            if (nextState != null)
             {
-                currentState.ExitState(this);
-                currentState = nextState;
-                currentState.EnterState(this);
+                if (nextState != remainState)
+                {
+                    currentState.ExitState(this);
+                    currentState = nextState;
+                    currentState.EnterState(this);
+                }
             }
         }
 

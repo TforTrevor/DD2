@@ -42,10 +42,12 @@ namespace DD2.AI
                 if (decisionSucceeded)
                 {
                     controller.TransitionToState(transitions[i].trueState);
+                    return;
                 }
                 else
                 {
                     controller.TransitionToState(transitions[i].falseState);
+                    return;
                 }
             }
         }
