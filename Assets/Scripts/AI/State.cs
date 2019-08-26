@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace DD2.AI
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/AI/State")]
     public class State : ScriptableObject
     {
-        [SerializeField] Action[] enterActions;
-        [SerializeField] Action[] updateActions;
-        [SerializeField] Action[] exitActions;
-        [SerializeField] Transition[] transitions;
+        [SerializeField] [ReorderableList] [Expandable] Action[] enterActions;
+        [SerializeField] [ReorderableList] [Expandable] Action[] updateActions;
+        [SerializeField] [ReorderableList] [Expandable] Action[] exitActions;
+        [SerializeField] [ReorderableList] Transition[] transitions;
 
         public void EnterState(StateController controller)
         {

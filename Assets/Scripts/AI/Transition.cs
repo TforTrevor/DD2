@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace DD2.AI
 {
@@ -8,7 +9,7 @@ namespace DD2.AI
     public class Transition
     {
         public Decision decision;
-        public State trueState;
-        public State falseState;
+        [Expandable] [Required] public State trueState;
+        [Expandable] [Required] public State falseState;
     }
 }

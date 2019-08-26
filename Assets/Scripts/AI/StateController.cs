@@ -7,7 +7,7 @@ namespace DD2.AI
 {
     public class StateController : MonoBehaviour
     {
-        [SerializeField] State currentState;
+        [SerializeField] [Expandable] State currentState;
         [SerializeField] State destroyState;
         public State remainState;
         [SerializeField] float updateRate;
