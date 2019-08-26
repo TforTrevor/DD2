@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f103f1453a4f3564e98d6fd9bd0d5049, type: 3}
   m_Name: New Debug Message
   m_EditorClassIdentifier: 
-  message: 
+  message: It works

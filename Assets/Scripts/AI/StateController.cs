@@ -9,7 +9,7 @@ namespace DD2.AI
     {
         [SerializeField] State currentState;
         [SerializeField] State destroyState;
-        [SerializeField] State remainState;
+        public State remainState;
         [SerializeField] float updateRate;
 
         [HideInInspector] public EnemyStats enemyStats;
@@ -34,17 +34,16 @@ namespace DD2.AI
             }
         }
 
-        public void TransitionToState(State nextState)
+        public bool TransitionToState(State nextState)
         {
-            if (nextState != null)
+            if (nextState != remainState)
             {
-                if (nextState != remainState)
-                {
-                    currentState.ExitState(this);
-                    currentState = nextState;
-                    currentState.EnterState(this);
-                }
+                currentState.ExitState(this);
+                currentState = nextState;
+                currentState.EnterState(this);
+                return true;
             }
+            return false;
         }
 
         void OnDestroy()

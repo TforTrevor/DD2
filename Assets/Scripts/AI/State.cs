@@ -41,16 +41,15 @@ namespace DD2.AI
                 bool decisionSucceeded = transitions[i].decision.Decide(controller);
                 if (decisionSucceeded)
                 {
-                    controller.TransitionToState(transitions[i].trueState);
-                    return;
+                    if (controller.TransitionToState(transitions[i].trueState))
+                        return;
                 }
                 else
                 {
-                    controller.TransitionToState(transitions[i].falseState);
-                    return;
+                    if (controller.TransitionToState(transitions[i].falseState))
+                        return;
                 }
             }
         }
     }
 }
-

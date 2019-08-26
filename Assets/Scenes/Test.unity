@@ -446,7 +446,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1114451506
+--- !u!114 &1031024984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: ecac71d5b6eeaa0419166f1a63d947a5, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 1114451506}
+  m_SkySettings: {fileID: 1031024984}
   m_SkySettingsFromProfile: {fileID: -8637867899953461897, guid: ecac71d5b6eeaa0419166f1a63d947a5,
     type: 2}
 --- !u!1 &1192792625
@@ -1240,12 +1240,12 @@ PrefabInstance:
     - target: {fileID: 8676088420473901218, guid: 66f56e6037110c14f979b8eb4f03595a,
         type: 3}
       propertyPath: maxHealth
-      value: 1e+15
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 8676088420473901218, guid: 66f56e6037110c14f979b8eb4f03595a,
         type: 3}
       propertyPath: currentHealth
-      value: 1e+15
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66f56e6037110c14f979b8eb4f03595a, type: 3}
@@ -1271,3 +1271,4 @@ MonoBehaviour:
   destroyState: {fileID: 11400000, guid: 96030b80a01e659448c8f0d4750db979, type: 2}
   remainState: {fileID: 11400000, guid: add0053284cd61a49a5f65ef8af34060, type: 2}
   updateRate: 1
+  enemyStats: {fileID: 0}
