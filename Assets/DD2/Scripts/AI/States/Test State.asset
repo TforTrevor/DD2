@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Test State
   m_EditorClassIdentifier: 
   enterActions:
-  - {fileID: 11400000, guid: 1c2ef268a88985349ac11d8f544038d5, type: 2}
+  - {fileID: 0}
   updateActions:
-  - {fileID: 11400000, guid: 562f89278859d6043812038bb652caf7, type: 2}
+  - {fileID: 0}
   exitActions:
-  - {fileID: 11400000, guid: bba263332b297384bb7ddcf58a1e86a5, type: 2}
+  - {fileID: 0}
   transitions:
   - decision: {fileID: 0}
-    trueState: {fileID: 11400000, guid: c75de10e6064d98418775fcea8d256e3, type: 2}
+    trueState: {fileID: 0}
+    falseState: {fileID: 0}
+  transition:
+    decision: {fileID: 0}
+    trueState: {fileID: 0}
     falseState: {fileID: 0}

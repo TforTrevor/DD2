@@ -16,6 +16,7 @@ namespace DD2
         [SerializeField] float aggro;
         [SearchableEnum] [SerializeField] ElementType elementType;
         [SerializeField] float speed;
+        [SerializeField] float attackRate;
 
         public float GetMaxHealth()
         {
@@ -35,6 +36,11 @@ namespace DD2
         public float GetSearchRange()
         {
             return searchRange;
+        }
+
+        public float GetAttackRate()
+        {
+            return attackRate;
         }
     }
 }

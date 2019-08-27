@@ -10,13 +10,16 @@ namespace DD2.AI.Actions
         [SerializeField] bool ensureMaxRange;
         public override void Act(StateController controller)
         {
-            float distance = Vector3.Distance(controller.status.target.position, controller.transform.position);
-            if (distance > controller.status.stats.GetAttackRange() || ensureMaxRange)
+            if (controller.status.target != null)
             {
-                Vector3 direction = Vector3.Normalize(controller.status.target.position - controller.transform.position);
-                float distanceFromRange = distance - controller.status.stats.GetAttackRange();
-                Vector3 position = (direction * distanceFromRange) + controller.transform.position;
-                controller.status.navMeshAgent.SetDestination(position);
+                float distance = Vector3.Distance(controller.status.target.position, controller.transform.position);
+                if (distance > controller.status.stats.GetAttackRange() || ensureMaxRange)
+                {
+                    Vector3 direction = Vector3.Normalize(controller.status.target.position - controller.transform.position);
+                    float distanceFromRange = distance - controller.status.stats.GetAttackRange();
+                    Vector3 position = (direction * distanceFromRange) + controller.transform.position;
+                    controller.status.navMeshAgent.SetDestination(position);
+                }
             }
         }
     }

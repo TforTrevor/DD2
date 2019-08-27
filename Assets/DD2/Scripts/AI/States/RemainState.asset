@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c84e9de72358047bf2fb948e69dced, type: 3}
   m_Name: RemainState
   m_EditorClassIdentifier: 
-  actions: []
+  enterActions: []
+  updateActions: []
+  exitActions: []
   transitions: []
+  transition:
+    decision: {fileID: 0}
+    trueState: {fileID: 0}
+    falseState: {fileID: 0}
