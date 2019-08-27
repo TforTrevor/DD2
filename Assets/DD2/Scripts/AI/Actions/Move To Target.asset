@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3319e98d215fa34dab249494b9aeb7f, type: 3}
   m_Name: Move To Target
   m_EditorClassIdentifier: 
+  ensureMaxRange: 0
