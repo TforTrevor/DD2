@@ -9,8 +9,10 @@ namespace DD2
     public class Stats : ScriptableObject
     {
         [SerializeField] float maxHealth;
-        [SerializeField] float range;
-        [SerializeField] float cone;
+        [SerializeField] float attackRange;
+        [SerializeField] float attackCone;
+        [SerializeField] float searchRange;
+        [SerializeField] float searchCone;
         [SerializeField] float aggro;
         [SearchableEnum] [SerializeField] ElementType elementType;
         [SerializeField] float speed;
@@ -25,9 +27,14 @@ namespace DD2
             return aggro;
         }
 
-        public float GetRange()
+        public float GetAttackRange()
         {
-            return range;
+            return attackRange;
+        }
+
+        public float GetSearchRange()
+        {
+            return searchRange;
         }
     }
 }

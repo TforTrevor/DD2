@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace DD2
 {
@@ -9,6 +10,12 @@ namespace DD2
         [Expandable] public Stats stats;
         [SerializeField] float currentHealth;
         public Transform target;
+        public NavMeshAgent navMeshAgent;
+
+        private void Awake()
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
         void Start()
         {
@@ -18,11 +25,6 @@ namespace DD2
         void Initialize()
         {
             currentHealth = stats.GetMaxHealth();
-        }
-
-        public Vector3 GetPosition()
-        {
-            return transform.position;
         }
     }
 }

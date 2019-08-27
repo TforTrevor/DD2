@@ -13,7 +13,7 @@ namespace DD2.AI.Actions
 
         public override void Act(StateController controller)
         {
-            Collider[] colliders = Physics.OverlapSphere(controller.status.GetPosition(), controller.status.stats.GetRange(), layerMasks);
+            Collider[] colliders = Physics.OverlapSphere(controller.status.transform.position, controller.status.stats.GetAttackRange(), layerMasks);
             List<Status> statuses = new List<Status>();
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -40,8 +40,8 @@ namespace DD2.AI.Actions
                     //Same aggro, checks closer distance
                     else if (statuses[i].stats.GetAggro() < highestAggro)
                     {
-                        float distance1 = Vector3.Distance(controller.transform.position, statuses[index].GetPosition());
-                        float distance2 = Vector3.Distance(controller.transform.position, statuses[i].GetPosition());
+                        float distance1 = Vector3.Distance(controller.transform.position, statuses[index].transform.position);
+                        float distance2 = Vector3.Distance(controller.transform.position, statuses[i].transform.position);
                         if (distance2 < distance1)
                         {
                             index = i;
