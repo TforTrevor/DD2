@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21f00b3a5552f2545aedcba90dcfcb75, type: 3}
-  m_Name: New Test Decision
+  m_Script: {fileID: 11500000, guid: 6d82ec7db91cd884cbcd668d7147d3a1, type: 3}
+  m_Name: Find Target
   m_EditorClassIdentifier: 
+  layerMasks:
+    serializedVersion: 2
+    m_Bits: 1024

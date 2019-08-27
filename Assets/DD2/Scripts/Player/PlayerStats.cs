@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SmartData.SmartFloat;
-
+using DD2;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] float maxHealth;

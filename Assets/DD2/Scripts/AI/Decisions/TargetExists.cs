@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace DD2.AI.Decisions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/AI/Decisions/Test Decision")]
-    public class TestDecision : Decision
+    [CreateAssetMenu(menuName = "Scriptable Objects/AI/Decisions/Target Exists")]
+    public class TargetExists : Decision
     {
         public override bool Decide(StateController controller)
         {
-            if (controller.enemyStats.GetCurrentHealth() < controller.enemyStats.GetMaxHealth())
+            if (controller.status.target != null)
             {
                 return true;
             }

@@ -11,12 +11,11 @@ namespace DD2.AI
         [SerializeField] State destroyState;
         public State remainState;
         [SerializeField] float updateRate;
-
-        [HideInInspector] public EnemyStats enemyStats;
+        [HideInInspector] public Status status;
 
         void Awake()
         {
-            enemyStats = GetComponent<EnemyStats>();
+            status = GetComponent<Status>();
         }
 
         void Start()

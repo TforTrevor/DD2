@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ElementType
+namespace DD2
 {
-    Physical,
-    Fire,
-    Lightning,
-    Energy,
-    Water
+    public enum ElementType
+    {
+        Physical,
+        Fire,
+        Lightning,
+        Energy,
+        Water
+    }
 }

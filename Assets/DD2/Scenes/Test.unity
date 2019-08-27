@@ -127,7 +127,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8604827748892991110}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 781089512}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30e1e3dfbb696ef43b438be361602a46, type: 3}
@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316839459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.5, z: -3}
+  m_LocalPosition: {x: 0, y: 1, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -446,7 +446,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &764212130
+--- !u!1 &781089512 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8604827748878426759, guid: ba3f00e1f0f6d5344868698a7390010c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8604827748892991110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &781089521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781089512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff54246401138534f90db99147d8082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 7f910af96db63254bb7b1a14f209b737, type: 2}
+  currentHealth: 100
+  target: {fileID: 0}
+--- !u!114 &980582253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -585,7 +606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: ecac71d5b6eeaa0419166f1a63d947a5, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 764212130}
+  m_SkySettings: {fileID: 980582253}
   m_SkySettingsFromProfile: {fileID: -8637867899953461897, guid: ecac71d5b6eeaa0419166f1a63d947a5,
     type: 2}
 --- !u!1 &1192792625
@@ -1267,8 +1288,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5256028ec872943b4f96fd2f54de00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: b7963e73990e96e40820eb3fc8b8e0d1, type: 2}
+  currentState: {fileID: 11400000, guid: dee5e71939102fb459e3e92ca2a298c8, type: 2}
   destroyState: {fileID: 11400000, guid: 96030b80a01e659448c8f0d4750db979, type: 2}
   remainState: {fileID: 11400000, guid: add0053284cd61a49a5f65ef8af34060, type: 2}
-  updateRate: 1
-  enemyStats: {fileID: 0}
+  updateRate: 0.5
+  status: {fileID: 0}
+--- !u!114 &8676088420029802148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8676088420029802141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff54246401138534f90db99147d8082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 7f910af96db63254bb7b1a14f209b737, type: 2}
+  currentHealth: 0
+  target: {fileID: 0}
