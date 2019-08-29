@@ -26,5 +26,15 @@ namespace DD2
         {
             currentHealth = stats.GetMaxHealth();
         }
+
+        public void Damage(float damage)
+        {
+            currentHealth -= damage;
+        }
+
+        public float GetCurrentHealth()
+        {
+            return currentHealth;
+        }
     }
 }

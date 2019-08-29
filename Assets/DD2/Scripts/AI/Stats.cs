@@ -42,5 +42,10 @@ namespace DD2
         {
             return attackRate;
         }
+
+        public ElementType GetElementType()
+        {
+            return elementType;
+        }
     }
 }

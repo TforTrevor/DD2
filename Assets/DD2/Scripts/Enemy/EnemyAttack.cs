@@ -7,7 +7,7 @@ namespace DD2.Enemy
 {
     public class EnemyAttack : MonoBehaviour
     {
-        public Status status;
+        Status status;
         CoroutineHandle fireHandle;
 
         void Awake()
