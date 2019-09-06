@@ -11,4 +11,4 @@ ScriptedImporter:
   generateWrapperCode: 1
   wrapperCodePath: Assets/Scripts/Actions.cs
   wrapperClassName: 
-  wrapperCodeNamespace: 
+  wrapperCodeNamespace: DD2.Input
