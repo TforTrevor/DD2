@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RoboRyanTron.SearchableEnum;
 
-namespace DD2.Ability.Effects
+namespace DD2.Abilities.Effects
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Effects/Damage")]
     public class Damage : Effect

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DD2.Abilities;
 
 namespace DD2
 {
@@ -11,6 +12,7 @@ namespace DD2
         [SerializeField] float currentHealth;
         public Transform target;
         public NavMeshAgent navMeshAgent;
+        [SerializeField] Ability ability;
 
         private void Awake()
         {
@@ -35,6 +37,11 @@ namespace DD2
         public float GetCurrentHealth()
         {
             return currentHealth;
+        }
+
+        public Ability GetAbility()
+        {
+            return ability;
         }
     }
 }

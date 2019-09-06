@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD2.Ability
+namespace DD2.Abilities
 {
     public abstract class Effect : ScriptableObject
     {

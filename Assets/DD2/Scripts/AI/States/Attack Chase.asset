@@ -15,6 +15,7 @@ MonoBehaviour:
   enterActions: []
   updateActions:
   - {fileID: 11400000, guid: 863e693c14911524c9c91b53533ecd55, type: 2}
+  - {fileID: 11400000, guid: e2d17a0c54760804cb29cd72ee38165e, type: 2}
   exitActions: []
   transitions:
   - decision: {fileID: 11400000, guid: a509b30567e513044909efb8d212b116, type: 2}

@@ -4,27 +4,19 @@ using UnityEngine;
 using MEC;
 using NaughtyAttributes;
 
-namespace DD2.Ability
+namespace DD2.Abilities
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Abilities/Ability")]
     public class Ability : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] [Expandable] Effect[] abilityEffects;
-        [SerializeField] float cooldown;
-        bool onCooldown;
-        CoroutineHandle cooldownRoutine;
+        [SerializeField] [ReorderableList] [Expandable] protected Effect[] abilityEffects;
+        [SerializeField] protected float cooldown;
+        protected bool onCooldown;
+        protected CoroutineHandle cooldownRoutine;
 
-        public void UseAbility()
-        {
-            if (onCooldown)
-            {
-                return;
-            }
+        public virtual void UseAbility() { }
+        public virtual void UseAbility(Transform target) { }
 
-            cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
-        }
-
-        IEnumerator<float> CooldownRoutine()
+        protected IEnumerator<float> CooldownRoutine()
         {
             yield return Timing.WaitForSeconds(cooldown);
             onCooldown = false;
