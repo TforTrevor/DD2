@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using NaughtyAttributes;
 using DD2.Abilities;
 
 namespace DD2
@@ -10,14 +10,8 @@ namespace DD2
     {
         [Expandable] public Stats stats;
         [SerializeField] float currentHealth;
-        public Transform target;
-        public NavMeshAgent navMeshAgent;
-        [SerializeField] Ability ability;
 
-        private void Awake()
-        {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-        }
+        [SerializeField] [ReorderableList] Ability[] abilities;
 
         void Start()
         {
@@ -39,9 +33,19 @@ namespace DD2
             return currentHealth;
         }
 
-        public Ability GetAbility()
+        public Ability GetAbility(int index)
         {
-            return ability;
+            return abilities[index];
+        }
+
+        public Ability[] GetAllAbilities()
+        {
+            return abilities;
+        }
+
+        public float GetAbilityCount()
+        {
+            return abilities.Length;
         }
     }
 }

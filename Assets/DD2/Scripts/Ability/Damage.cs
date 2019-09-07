@@ -12,9 +12,9 @@ namespace DD2.Abilities.Effects
         [SerializeField] [SearchableEnum] DamageType damageType;
         [SerializeField] float damage;
 
-        public override void ApplyEffect(Ability controller, Transform hit)
+        public override void ApplyEffect(Ability controller, Transform target)
         {
-            Status status = hit.GetComponent<Status>();
+            Status status = target.GetComponent<Status>();
             switch (damageType)
             {
                 case DamageType.PercentMaxHealth:
