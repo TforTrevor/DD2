@@ -17,7 +17,12 @@ namespace DD2.AI.Actions
             List<Status> statuses = new List<Status>();
             for (int i = 0; i < colliders.Length; i++)
             {
-                statuses.Add(colliders[i].GetComponent<Status>());
+                float enemyDot = Vector3.Dot(controller.status.GetForward(), Vector3.Normalize(colliders[i].transform.position - controller.status.GetPosition()));
+                float desiredDot = Mathf.Cos((Mathf.Deg2Rad * controller.status.stats.GetSearchAngle()) / 2f);
+                if (enemyDot > desiredDot)
+                {
+                    statuses.Add(colliders[i].GetComponent<Status>());
+                }
             }
             if (statuses.Count > 0)
             {

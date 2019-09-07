@@ -12,7 +12,6 @@ namespace DD2.AI
         [SerializeField] [ReorderableList] [Expandable] Action[] updateActions;
         [SerializeField] [ReorderableList] [Expandable] Action[] exitActions;
         [SerializeField] [ReorderableList] Transition[] transitions;
-        public Transition transition;
 
         public void EnterState(StateController controller)
         {

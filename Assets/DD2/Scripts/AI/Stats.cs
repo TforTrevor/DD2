@@ -12,7 +12,7 @@ namespace DD2
         [SerializeField] float attackRange;
         [SerializeField] float attackCone;
         [SerializeField] float searchRange;
-        [SerializeField] float searchCone;
+        [SerializeField] float searchAngle;
         [SerializeField] float aggro;
         [SearchableEnum] [SerializeField] ElementType elementType;
         [SerializeField] float speed;
@@ -36,6 +36,11 @@ namespace DD2
         public float GetSearchRange()
         {
             return searchRange;
+        }
+
+        public float GetSearchAngle()
+        {
+            return searchAngle;
         }
 
         public float GetAttackRate()

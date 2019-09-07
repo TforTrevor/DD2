@@ -47,5 +47,15 @@ namespace DD2
         {
             return abilities.Length;
         }
+
+        public virtual Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
+        public virtual Vector3 GetForward()
+        {
+            return transform.forward;
+        }
     }
 }
