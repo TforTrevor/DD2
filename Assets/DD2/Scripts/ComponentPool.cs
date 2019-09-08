@@ -21,13 +21,12 @@ namespace DD2
 
         void Start()
         {
-            GameObject emptyObject = new GameObject();
-
-            GameObject poolParent = Instantiate(emptyObject);
+            GameObject poolParent = new GameObject();
             poolParent.name = "Object Pool";
             foreach (Pool pool in pools)
             {
-                GameObject groupParent = Instantiate(emptyObject, poolParent.transform);
+                GameObject groupParent = new GameObject();
+                groupParent.transform.SetParent(poolParent.transform);
                 groupParent.name = pool.tag;
 
                 Queue<T> queue = new Queue<T>();

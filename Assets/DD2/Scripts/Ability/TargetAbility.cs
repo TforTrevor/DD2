@@ -22,13 +22,16 @@ namespace DD2.Abilities
                 return;
             }
 
-            Projectile projectile = objectPool.GetObject(objectKey);
-            if (projectile != null)
+            if (objectPool != null)
             {
-                projectile.transform.position = transform.position;
-                projectile.target = target;
-                projectile.objectPool = objectPool;
-                projectile.gameObject.SetActive(true);
+                Projectile projectile = objectPool.GetObject(objectKey);
+                if (projectile != null)
+                {
+                    projectile.transform.position = transform.position;
+                    projectile.target = target;
+                    projectile.objectPool = objectPool;
+                    projectile.gameObject.SetActive(true);
+                }
             }
             
             for (int i = 0; i < abilityEffects.Length; i++)
