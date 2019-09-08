@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3352995537772311248}
-  - component: {fileID: 305948347532634231}
+  - component: {fileID: 8632037013885343072}
   m_Layer: 0
   m_Name: Tower Projectile
   m_TagString: Untagged
@@ -110,7 +110,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &305948347532634231
+--- !u!114 &8632037013885343072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8613999063513529128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ce74000a475df48875f8f9a9c6d9fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 28df95cb6303f2048bb384efc55e77d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  damage: 20
   speed: 5
-  radius: 0.1
+  destroyDistance: 0.5
+  target: {fileID: 0}
+  objectPool: {fileID: 0}
