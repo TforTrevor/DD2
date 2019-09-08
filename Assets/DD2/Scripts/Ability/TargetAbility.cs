@@ -8,11 +8,11 @@ namespace DD2.Abilities
     public class TargetAbility : Ability
     {
         [SerializeField] string objectKey;
-        ObjectPool objectPool;
+        ComponentPool<Projectile> objectPool;
 
         void Awake()
         {
-            objectPool = GetComponent<ObjectPool>();
+            objectPool = GetComponent<ComponentPool<Projectile>>();
         }
 
         public override void UseAbility(Transform target)
@@ -22,14 +22,13 @@ namespace DD2.Abilities
                 return;
             }
 
-            GameObject vfx = objectPool.GetObject(objectKey);
-            if (vfx != null)
+            Projectile projectile = objectPool.GetObject(objectKey);
+            if (projectile != null)
             {
-                vfx.transform.position = transform.position;
-                Projectile projectile = vfx.GetComponent<Projectile>();
+                projectile.transform.position = transform.position;
                 projectile.target = target;
                 projectile.objectPool = objectPool;
-                vfx.SetActive(true);
+                projectile.gameObject.SetActive(true);
             }
             
             for (int i = 0; i < abilityEffects.Length; i++)

@@ -7,15 +7,6 @@ namespace DD2
 {
     public class ObjectPool : MonoBehaviour
     {
-        [System.Serializable]
-        public class Pool
-        {
-            public string tag;
-            public GameObject prefab;
-            public int size;
-            public bool canExpand;
-        }
-
         [SerializeField] [ReorderableList] List<Pool> pools;
         Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
