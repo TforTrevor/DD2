@@ -17,6 +17,7 @@ namespace DD2.Abilities
         public virtual void UseAbility() { }
         public virtual void UseAbility(Transform target) { }
         public virtual void UseAbility(AIStatus status) { }
+        public virtual void UseAbility(Vector3 position) { }
 
         protected IEnumerator<float> CooldownRoutine()
         {
