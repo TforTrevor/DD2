@@ -9,7 +9,7 @@ namespace DD2.AI.Actions
     {
         public override void Act(StateController controller)
         {
-            controller.status.GetAbility(0).UseAbility(controller.status.target);
+            controller.status.GetAbility(0).UseAbility(controller.status);
         }
     }
 }

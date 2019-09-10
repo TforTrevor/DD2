@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 using NaughtyAttributes;
+using DD2.AI;
 
 namespace DD2.Abilities
 {
@@ -15,6 +16,7 @@ namespace DD2.Abilities
 
         public virtual void UseAbility() { }
         public virtual void UseAbility(Transform target) { }
+        public virtual void UseAbility(AIStatus status) { }
 
         protected IEnumerator<float> CooldownRoutine()
         {

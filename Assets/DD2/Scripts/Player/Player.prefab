@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 8604827748878426767}
   - component: {fileID: 8604827748878426766}
   - component: {fileID: 8604827748878426764}
+  - component: {fileID: 781089521}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -144,21 +145,14 @@ MonoBehaviour:
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInput.PlayerInput+DeviceLostEvent, Unity.InputSystem,
-      Version=0.9.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceLostEvent, Unity.InputSystem,
+      Version=0.9.6.0, Culture=neutral, PublicKeyToken=null
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInput.PlayerInput+DeviceRegainedEvent,
-      Unity.InputSystem, Version=0.9.0.0, Culture=neutral, PublicKeyToken=null
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.InputSystem.PlayerInput.PlayerInput+ActionEvent, Unity.InputSystem,
-      Version=0.9.0.0, Culture=neutral, PublicKeyToken=null
-    m_ActionId: bdaa640a-f715-4c48-9e05-8030772d7cb2
-    m_ActionName: Player/Move
-  m_AutoSwitchControlScheme: 0
+    m_TypeName: UnityEngine.InputSystem.PlayerInput+DeviceRegainedEvent, Unity.InputSystem,
+      Version=0.9.6.0, Culture=neutral, PublicKeyToken=null
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: 4bd46b80-34b9-4dc7-9d1a-d2c853f8d1e7
   m_SplitScreenIndex: -1
@@ -290,7 +284,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &8604827748878426752
@@ -335,15 +329,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e1e3dfbb696ef43b438be361602a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildTowerPrefab: {fileID: 6793038176500546034, guid: e08830e8c24a97f438ed7e26c87e04c2,
+    type: 3}
   towerPrefab: {fileID: 4457593369233793390, guid: 3f62256095b38494b9f94066f5274bbe,
     type: 3}
   camera: {fileID: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   towerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  lookInput:
+    _owner: {fileID: 8604827748878426766}
+    _propertyPath: lookInput
+    _autoListen: 0
+    _multiIndex: 0
+    _refType: 2
+    _value: {x: 0, y: 0, z: 0}
+    _smartConst: {fileID: 0}
+    _smartVar: {fileID: 11400000, guid: 548f42b8689068d40b8af1b5bf7b17b6, type: 2}
+    _smartMulti: {fileID: 0}
+    _onUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: SmartData.SmartVector3.Data.Vector3Var+Vector3Event, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  rotationSensitivity: 10
+  moveBuild: 0
+  rotateBuild: 0
   enableBuild: 0
 --- !u!114 &8604827748878426764
 MonoBehaviour:
@@ -404,6 +418,21 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+--- !u!114 &781089521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604827748878426759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff54246401138534f90db99147d8082c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 7f910af96db63254bb7b1a14f209b737, type: 2}
+  currentHealth: 100
+  abilities: []
 --- !u!1 &8604827748941629618
 GameObject:
   m_ObjectHideFlags: 0

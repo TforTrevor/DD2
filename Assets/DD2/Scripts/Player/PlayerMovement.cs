@@ -67,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotate()
     {
-        transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
+        Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.value.x * sensitivity * Time.deltaTime, Vector3.up);
+        rb.MoveRotation(rb.rotation * deltaRotation);
+        //transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
     }
 }

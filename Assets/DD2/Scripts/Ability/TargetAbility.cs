@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using DD2.AI;
 
 namespace DD2.Abilities
 {
@@ -15,7 +16,7 @@ namespace DD2.Abilities
             objectPool = GetComponent<ComponentPool<Projectile>>();
         }
 
-        public override void UseAbility(Transform target)
+        public override void UseAbility(AIStatus status)
         {
             if (onCooldown)
             {
@@ -27,8 +28,8 @@ namespace DD2.Abilities
                 Projectile projectile = objectPool.GetObject(objectKey);
                 if (projectile != null)
                 {
-                    projectile.transform.position = transform.position;
-                    projectile.target = target;
+                    projectile.transform.position = status.GetFirePosition();
+                    projectile.target = status.target;
                     projectile.objectPool = objectPool;
                     projectile.gameObject.SetActive(true);
                 }
@@ -36,7 +37,7 @@ namespace DD2.Abilities
             
             for (int i = 0; i < abilityEffects.Length; i++)
             {
-                abilityEffects[i].ApplyEffect(this, target);
+                abilityEffects[i].ApplyEffect(this, status.target);
             }
 
             cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
