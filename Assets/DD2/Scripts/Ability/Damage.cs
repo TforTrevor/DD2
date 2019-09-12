@@ -12,7 +12,7 @@ namespace DD2.Abilities.Effects
         [SerializeField] [SearchableEnum] DamageType damageType;
         [SerializeField] float damage;
 
-        public override void ApplyEffect(Ability controller, Transform target)
+        public override void ApplyEffect(Transform target)
         {
             Status status = target.GetComponent<Status>();
             switch (damageType)

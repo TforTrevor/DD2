@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4285924794078333588}
-  - component: {fileID: 1752318625606642025}
   - component: {fileID: 1355049772777206513}
+  - component: {fileID: 1949355031069859308}
   m_Layer: 0
   m_Name: Test Projectile Ability
   m_TagString: Untagged
@@ -32,22 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1752318625606642025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616626135852177044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed454230fbb0b354682f47c92f8e74c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityEffects:
-  - {fileID: 11400000, guid: 5ba07559611a94f49a4ffbef2f23aed1, type: 2}
-  cooldown: 1
-  objectKey: Projectile
 --- !u!114 &1355049772777206513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,3 +50,27 @@ MonoBehaviour:
       type: 3}
     size: 5
     canExpand: 0
+--- !u!114 &1949355031069859308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616626135852177044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8c80f57360a1e4d858a483107ac58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityEffects:
+  - {fileID: 11400000, guid: 5ba07559611a94f49a4ffbef2f23aed1, type: 2}
+  cooldown: 1
+  continuous: 0
+  tickRate: 0
+  duration: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  multiTarget: 0
+  radius: 1
+  objectKey: Projectile

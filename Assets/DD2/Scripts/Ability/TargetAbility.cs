@@ -16,12 +16,9 @@ namespace DD2.Abilities
             objectPool = GetComponent<ComponentPool<Projectile>>();
         }
 
-        public override void UseAbility(AIStatus status)
+        /*public override void UseAbility(Vector3 position)
         {
-            if (onCooldown)
-            {
-                return;
-            }
+            base.UseAbility(position);
 
             if (objectPool != null)
             {
@@ -34,13 +31,12 @@ namespace DD2.Abilities
                     projectile.gameObject.SetActive(true);
                 }
             }
-            
-            for (int i = 0; i < abilityEffects.Length; i++)
-            {
-                abilityEffects[i].ApplyEffect(this, status.target);
-            }
+
+            ApplyEffects(status.target);
 
             cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
-        }
+
+            EndAbility();
+        }*/
     }
 }

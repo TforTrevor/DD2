@@ -10,38 +10,47 @@ namespace DD2.Abilities
     public class PositionAbility : Ability
     {
         [SerializeField] float radius;
-        [SerializeField] [SearchableEnum] LayerMask layerMask;
-        [SerializeField] bool multiTarget;
+        [SerializeField] string objectKey;
+        ComponentPool<Projectile> objectPool;
 
-        public override void UseAbility(Vector3 position)
+        void Awake()
         {
-            if (onCooldown)
-            {
-                return;
-            }
+            objectPool = GetComponent<ComponentPool<Projectile>>();
+        }
 
+        protected override void StartAbility(Vector3 position)
+        {
             Collider[] hitColliders = Physics.OverlapSphere(position, radius, layerMask);
 
             if (multiTarget)
             {
                 foreach (Collider hitCollider in hitColliders)
                 {
-                    for (int i = 0; i < abilityEffects.Length; i++)
-                    {
-                        abilityEffects[i].ApplyEffect(this, hitCollider.transform);
-                    }
+                    CreateProjectile(hitCollider.transform);
+                    ApplyEffects(hitCollider.transform);
                 }
             }
             else
             {
                 Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
-                for (int i = 0; i < abilityEffects.Length; i++)
+                CreateProjectile(collider.transform);
+                ApplyEffects(collider.transform);
+            }
+        }
+
+        void CreateProjectile(Transform target)
+        {
+            if (objectPool != null)
+            {
+                Projectile projectile = objectPool.GetObject(objectKey);
+                if (projectile != null)
                 {
-                    abilityEffects[i].ApplyEffect(this, collider.transform);
+                    projectile.transform.position = GetFirePosition();
+                    projectile.target = target;
+                    projectile.objectPool = objectPool;
+                    projectile.gameObject.SetActive(true);
                 }
             }
-
-            cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
         }
     }
 }

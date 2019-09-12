@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04667682, g: 0.06610702, b: 0.10523157, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -236,7 +236,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 465611281}
---- !u!114 &185769485
+--- !u!114 &263183518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,6 +312,12 @@ MonoBehaviour:
   enableSunDisk:
     m_OverrideState: 0
     m_Value: 0
+--- !u!4 &275735629 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1756811866147878884, guid: 3f62256095b38494b9f94066f5274bbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 4457593368220717556}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &316839459
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +496,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316839459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -3.4}
+  m_LocalPosition: {x: 0.5, y: 1.5, z: -3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -777,7 +783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: ecac71d5b6eeaa0419166f1a63d947a5, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 185769485}
+  m_SkySettings: {fileID: 263183518}
   m_SkySettingsFromProfile: {fileID: -8637867899953461897, guid: ecac71d5b6eeaa0419166f1a63d947a5,
     type: 2}
 --- !u!1 &1192792625
@@ -1193,18 +1199,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &2039371570 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1752318625606642025, guid: 0be748b6f57715641a99156bc079eeff,
-    type: 3}
-  m_PrefabInstance: {fileID: 3856294628989839406}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed454230fbb0b354682f47c92f8e74c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3856294628989839406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1272,8 +1266,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: fireTransform
+      value: 
+      objectReference: {fileID: 275735629}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0be748b6f57715641a99156bc079eeff, type: 3}
+--- !u!114 &3856294628989839407 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+    type: 3}
+  m_PrefabInstance: {fileID: 3856294628989839406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8c80f57360a1e4d858a483107ac58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4457593368220717556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1344,7 +1355,7 @@ PrefabInstance:
     - target: {fileID: 864047157, guid: 3f62256095b38494b9f94066f5274bbe, type: 3}
       propertyPath: abilities.Array.data[0]
       value: 
-      objectReference: {fileID: 2039371570}
+      objectReference: {fileID: 3856294628989839407}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f62256095b38494b9f94066f5274bbe, type: 3}
 --- !u!1001 &8604827748892991110
@@ -1354,6 +1365,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8604827748878426759, guid: ba3f00e1f0f6d5344868698a7390010c,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8604827748878426754, guid: ba3f00e1f0f6d5344868698a7390010c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1414,11 +1430,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 316839463}
-    - target: {fileID: 8604827748878426759, guid: ba3f00e1f0f6d5344868698a7390010c,
-        type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 8604827748941629618, guid: ba3f00e1f0f6d5344868698a7390010c,
         type: 3}
       propertyPath: m_IsActive
