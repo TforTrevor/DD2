@@ -18,14 +18,17 @@ namespace DD2
     {
         [SerializeField] [ReorderableList] List<Pool> pools;
         Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
+        Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
+        GameObject poolParent;
 
         void Start()
         {
-            GameObject poolParent = new GameObject();
+            poolParent = new GameObject();
             poolParent.name = "Object Pool";
             foreach (Pool pool in pools)
             {
                 GameObject groupParent = new GameObject();
+                parentDictionary.Add(pool.tag, groupParent);
                 groupParent.transform.SetParent(poolParent.transform);
                 groupParent.name = pool.tag;
 
@@ -58,7 +61,7 @@ namespace DD2
                 Pool pool = pools.Find(x => x.tag == key);
                 if (pool.canExpand)
                 {
-                    GameObject poolObject = Instantiate(pool.prefab);
+                    GameObject poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
                     poolObject.SetActive(false);
                     T poolComponent = poolObject.GetComponent<T>();
                     return poolComponent;
