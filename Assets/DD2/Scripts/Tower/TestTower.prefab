@@ -312,9 +312,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 2d66aa5466eb5084c8238ddfa04b40b5, type: 2}
   currentHealth: 0
+  fireTransform: {fileID: 1756811866147878884}
   abilities:
   - {fileID: 1393092326826140726}
-  fireTransform: {fileID: 1756811866147878884}
   target: {fileID: 0}
   navMeshAgent: {fileID: 0}
 --- !u!114 &864047158
@@ -484,6 +484,11 @@ PrefabInstance:
       propertyPath: fireTransform
       value: 
       objectReference: {fileID: 1756811866147878884}
+    - target: {fileID: 1355049772777206513, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: pools.Array.data[0].size
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0be748b6f57715641a99156bc079eeff, type: 3}
 --- !u!4 &3684626063328375630 stripped
