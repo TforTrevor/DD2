@@ -11,7 +11,16 @@ namespace DD2
         [Expandable] public Stats stats;
         [SerializeField] float currentHealth;
 
-        [SerializeField] [ReorderableList] Ability[] abilities;
+        [SerializeField] Transform fireTransform;
+        [SerializeField] [ReorderableList] protected Ability[] abilities;
+
+        protected void Awake()
+        {
+            for (int i = 0; i < abilities.Length; i++)
+            {
+                abilities[i].SetStatus(this);
+            }
+        }
 
         void Start()
         {
@@ -56,6 +65,11 @@ namespace DD2
         public virtual Vector3 GetForward()
         {
             return transform.forward;
+        }
+
+        public Vector3 GetFirePosition()
+        {
+            return fireTransform.position;
         }
     }
 }

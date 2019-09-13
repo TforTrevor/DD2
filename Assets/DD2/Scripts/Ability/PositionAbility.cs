@@ -38,6 +38,11 @@ namespace DD2.Abilities
             }
         }
 
+        protected override void ContinuousTick(Vector3 position)
+        {
+            StartAbility(position);
+        }
+
         void CreateProjectile(Transform target)
         {
             if (objectPool != null)

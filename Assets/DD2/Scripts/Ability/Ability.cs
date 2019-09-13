@@ -9,23 +9,47 @@ namespace DD2.Abilities
 {
     public class Ability : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] [Expandable] protected Effect[] abilityEffects;
-        [SerializeField] protected float cooldown;
-        [SerializeField] protected bool continuous;
-        [SerializeField] [ShowIf("continuous")] protected float tickRate;
-        [SerializeField] [ShowIf("continuous")] protected float duration;
+        Status status;
+        [SerializeField] [ReorderableList] [Expandable]
+        protected Effect[] abilityEffects;
+        [SerializeField] [MinValue(0)]
+        protected float cooldown;
+        [SerializeField] [BoxGroup("Continuous")]
+        protected bool isContinuous;
+        [SerializeField] [ShowIf("isContinuous")] [BoxGroup("Continuous")]
+        protected float tickRate;
+        [SerializeField] [ShowIf("isContinuous")] [BoxGroup("Continuous")]
+        protected float duration;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected bool multiTarget;
-        [SerializeField] Transform fireTransform;
+        [SerializeField] [BoxGroup("Input Buffering")]
+        bool enableInputBuffer;
+        [SerializeField] [ShowIf("enableInputBuffer")] [MinValue(0)] [BoxGroup("Input Buffering")]
+        float bufferTime;
+        [BoxGroup("Input Buffering")]
+        bool buffer;
 
         protected bool onCooldown;
         protected CoroutineHandle cooldownRoutine;
         protected CoroutineHandle continuousRoutine;
+        protected CoroutineHandle bufferRoutine;
+        protected CoroutineHandle bufferTimeRoutine;
 
         public virtual void UseAbility(Vector3 position)
         {
-            if (onCooldown) { return; }
-            if (continuous)
+            if (onCooldown)
+            {
+                Timing.KillCoroutines(bufferTimeRoutine);
+                Timing.KillCoroutines(bufferRoutine);
+                if (enableInputBuffer)
+                {
+                    bufferTimeRoutine = Timing.RunCoroutine(BufferTimerRoutine());
+                    bufferRoutine = Timing.RunCoroutine(BufferRoutine(position));
+                }
+                
+                return;
+            }
+            if (isContinuous)
             {
                 continuousRoutine = Timing.RunCoroutine(ContinuousRoutine(position));
             }
@@ -67,6 +91,22 @@ namespace DD2.Abilities
             EndCooldown();
         }
 
+        protected IEnumerator<float> BufferRoutine(Vector3 position)
+        {
+            while (buffer)
+            {
+                yield return Timing.WaitForOneFrame;
+                UseAbility(position);
+            }
+        }
+
+        protected IEnumerator<float> BufferTimerRoutine()
+        {
+            buffer = true;
+            yield return Timing.WaitForSeconds(bufferTime);
+            buffer = false;
+        }
+
         protected void ApplyEffects(Transform target)
         {
             StartEffects();
@@ -79,7 +119,12 @@ namespace DD2.Abilities
 
         protected Vector3 GetFirePosition()
         {
-            return fireTransform.position;
+            return status.GetFirePosition();
+        }
+
+        public void SetStatus(Status status)
+        {
+            this.status = status;
         }
     }
 }

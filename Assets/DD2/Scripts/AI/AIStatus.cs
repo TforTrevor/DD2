@@ -7,18 +7,13 @@ namespace DD2.AI
 {
     public class AIStatus : Status
     {
-        public Transform firePosition;
         public Transform target;
         [HideInInspector] public NavMeshAgent navMeshAgent;
 
-        private void Awake()
+        protected void Awake()
         {
+            base.Awake();
             navMeshAgent = GetComponent<NavMeshAgent>();
-        }
-
-        public Vector3 GetFirePosition()
-        {
-            return firePosition.position;
         }
     }
 }
