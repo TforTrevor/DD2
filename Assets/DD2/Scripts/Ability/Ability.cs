@@ -39,10 +39,10 @@ namespace DD2.Abilities
         {
             if (onCooldown)
             {
-                Timing.KillCoroutines(bufferTimeRoutine);
-                Timing.KillCoroutines(bufferRoutine);
                 if (enableInputBuffer)
                 {
+                    Timing.KillCoroutines(bufferTimeRoutine);
+                    Timing.KillCoroutines(bufferRoutine);
                     bufferTimeRoutine = Timing.RunCoroutine(BufferTimerRoutine());
                     bufferRoutine = Timing.RunCoroutine(BufferRoutine(position));
                 }
