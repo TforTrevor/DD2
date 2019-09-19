@@ -20,22 +20,34 @@ namespace DD2.Abilities
 
         protected override void StartAbility(Vector3 position)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(position, radius, layerMask);
-
-            if (multiTarget)
+            List<Collider> hitColliders = new List<Collider>();
+            float delay = 0;
+            foreach (Hitbox hitbox in hitboxes)
             {
-                foreach (Collider hitCollider in hitColliders)
+                delay += hitbox.GetDelay();
+                Timing.CallDelayed(delay, () =>
                 {
-                    CreateProjectile(hitCollider.transform);
-                    ApplyEffects(hitCollider.transform);
-                }
+                    hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
+                    if (multiTarget)
+                    {
+                        foreach (Collider hitCollider in hitColliders)
+                        {
+                            CreateProjectile(hitCollider.transform);
+                            ApplyEffects(hitCollider.transform);
+                        }
+                    }
+                    else
+                    {
+                        Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
+                        CreateProjectile(collider.transform);
+                        ApplyEffects(collider.transform);
+                    }
+                });
             }
-            else
+            Timing.CallDelayed(delay, () =>
             {
-                Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
-                CreateProjectile(collider.transform);
-                ApplyEffects(collider.transform);
-            }
+                EndAbility(position);
+            });
         }
 
         protected override void ContinuousTick(Vector3 position)

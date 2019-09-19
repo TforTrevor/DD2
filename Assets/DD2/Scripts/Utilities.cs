@@ -31,6 +31,31 @@ namespace DD2.Util
             return closestCollider;
         }
 
+        public static Collider GetClosestToPoint(List<Collider> colliders, Vector3 position)
+        {
+            Collider closestCollider = null;
+            float closestDistance = 0;
+
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                if (closestCollider == null)
+                {
+                    closestCollider = colliders[i];
+                }
+                else
+                {
+                    float distance = Vector3.Distance(colliders[i].transform.position, position);
+                    if (distance < closestDistance)
+                    {
+                        closestCollider = colliders[i];
+                        closestDistance = distance;
+                    }
+                }
+            }
+
+            return closestCollider;
+        }
+
         public static Transform GetClosestToPoint(Transform[] transforms, Vector3 position)
         {
             Transform closestTransform = null;

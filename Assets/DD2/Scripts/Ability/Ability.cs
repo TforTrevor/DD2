@@ -29,7 +29,10 @@ namespace DD2.Abilities
         [BoxGroup("Input Buffering")]
         bool buffer;
 
+        [SerializeField] [ReorderableList] protected Hitbox[] hitboxes;
+
         protected bool onCooldown;
+        protected bool isUsing;
         protected CoroutineHandle cooldownRoutine;
         protected CoroutineHandle continuousRoutine;
         protected CoroutineHandle bufferRoutine;
@@ -37,16 +40,16 @@ namespace DD2.Abilities
 
         public virtual void UseAbility(Vector3 position)
         {
-            if (onCooldown)
+            if (onCooldown || isUsing)
             {
-                if (enableInputBuffer)
-                {
-                    Timing.KillCoroutines(bufferTimeRoutine);
-                    Timing.KillCoroutines(bufferRoutine);
-                    bufferTimeRoutine = Timing.RunCoroutine(BufferTimerRoutine());
-                    bufferRoutine = Timing.RunCoroutine(BufferRoutine(position));
-                }
-                
+                //if (enableInputBuffer)
+                //{
+                //    Timing.KillCoroutines(bufferTimeRoutine);
+                //    Timing.KillCoroutines(bufferRoutine);
+                //    bufferTimeRoutine = Timing.RunCoroutine(BufferTimerRoutine());
+                //    bufferRoutine = Timing.RunCoroutine(BufferRoutine(position));
+                //}
+
                 return;
             }
             if (isContinuous)
@@ -55,14 +58,14 @@ namespace DD2.Abilities
             }
             else
             {
+                isUsing = true;
                 StartAbility(position);
-                EndAbility(position);
             }
             cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
         }
 
         protected virtual void StartAbility(Vector3 position) { }
-        protected virtual void EndAbility(Vector3 position) { }
+        protected virtual void EndAbility(Vector3 position) { Debug.Log("Ability Ended"); isUsing = false; }
         protected virtual void ContinuousTick(Vector3 position) { }
         protected virtual void StartCooldown() { }
         protected virtual void EndCooldown() { }
