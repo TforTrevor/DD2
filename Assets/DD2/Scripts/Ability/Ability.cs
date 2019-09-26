@@ -65,7 +65,7 @@ namespace DD2.Abilities
         }
 
         protected virtual void StartAbility(Vector3 position) { }
-        protected virtual void EndAbility(Vector3 position) { Debug.Log("Ability Ended"); isUsing = false; }
+        protected virtual void EndAbility(Vector3 position) { isUsing = false; }
         protected virtual void ContinuousTick(Vector3 position) { }
         protected virtual void StartCooldown() { }
         protected virtual void EndCooldown() { }

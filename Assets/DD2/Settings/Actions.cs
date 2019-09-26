@@ -164,11 +164,11 @@ namespace DD2.Input
     ]
 }");
             // Standard
-            m_Standard = asset.GetActionMap("Standard");
-            m_Standard_Move = m_Standard.GetAction("Move");
-            m_Standard_Look = m_Standard.GetAction("Look");
-            m_Standard_BuildTower = m_Standard.GetAction("BuildTower");
-            m_Standard_ConfirmBuild = m_Standard.GetAction("ConfirmBuild");
+            m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
+            m_Standard_Move = m_Standard.FindAction("Move", throwIfNotFound: true);
+            m_Standard_Look = m_Standard.FindAction("Look", throwIfNotFound: true);
+            m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
+            m_Standard_ConfirmBuild = m_Standard.FindAction("ConfirmBuild", throwIfNotFound: true);
         }
 
         ~Actions()
@@ -276,7 +276,7 @@ namespace DD2.Input
         {
             get
             {
-                if (m_KeyboardandMouseSchemeIndex == -1) m_KeyboardandMouseSchemeIndex = asset.GetControlSchemeIndex("Keyboard and Mouse");
+                if (m_KeyboardandMouseSchemeIndex == -1) m_KeyboardandMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard and Mouse");
                 return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
             }
         }
