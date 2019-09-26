@@ -66,7 +66,7 @@ namespace DD2.Abilities
 
         protected virtual void StartAbility(Vector3 position) { }
         protected virtual void EndAbility(Vector3 position) { isUsing = false; }
-        protected virtual void ContinuousTick(Vector3 position) { }
+        protected virtual void Tick(Vector3 position) { }
         protected virtual void StartCooldown() { }
         protected virtual void EndCooldown() { }
         protected virtual void StartEffects() { }
@@ -78,7 +78,7 @@ namespace DD2.Abilities
             float tempDuration = duration;
             while (tempDuration > 0)
             {
-                ContinuousTick(position);
+                Tick(position);
                 yield return Timing.WaitForSeconds(tickRate);
                 tempDuration -= tickRate;
             }

@@ -10,7 +10,7 @@ namespace DD2.Abilities
         [SerializeField] Shape hitboxShape;
         [SerializeField] GameObject hitbox;
         [SerializeField] float delay;
-        [SerializeField] float lingerTime;
+        [SerializeField] float duration;
         SphereCollider sphereCollider;
         BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
@@ -55,6 +55,11 @@ namespace DD2.Abilities
         public float GetDelay()
         {
             return delay;
+        }
+
+        public float GetDuration()
+        {
+            return duration;
         }
     }
 }

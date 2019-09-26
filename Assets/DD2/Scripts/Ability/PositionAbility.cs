@@ -20,37 +20,38 @@ namespace DD2.Abilities
 
         protected override void StartAbility(Vector3 position)
         {
-            List<Collider> hitColliders = new List<Collider>();
-            float delay = 0;
-            foreach (Hitbox hitbox in hitboxes)
-            {
-                delay += hitbox.GetDelay();
-                Timing.CallDelayed(delay, () =>
-                {
-                    hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
-                    if (multiTarget)
-                    {
-                        foreach (Collider hitCollider in hitColliders)
-                        {
-                            CreateProjectile(hitCollider.transform);
-                            ApplyEffects(hitCollider.transform);
-                        }
-                    }
-                    else
-                    {
-                        Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
-                        CreateProjectile(collider.transform);
-                        ApplyEffects(collider.transform);
-                    }
-                });
-            }
-            Timing.CallDelayed(delay, () =>
-            {
-                EndAbility(position);
-            });
+            Timing.RunCoroutine(Test(position));
         }
 
-        protected override void ContinuousTick(Vector3 position)
+        IEnumerator<float> Test(Vector3 position)
+        {
+            List<Collider> hitColliders = new List<Collider>();
+            foreach (Hitbox hitbox in hitboxes)
+            {
+                yield return Timing.WaitForSeconds(hitbox.GetDelay());
+
+                hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
+                if (multiTarget)
+                {
+                    foreach (Collider hitCollider in hitColliders)
+                    {
+                        CreateProjectile(hitCollider.transform);
+                        ApplyEffects(hitCollider.transform);
+                    }
+                }
+                else
+                {
+                    Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
+                    CreateProjectile(collider.transform);
+                    ApplyEffects(collider.transform);
+                }
+
+                yield return Timing.WaitForSeconds(hitbox.GetDuration());
+            }
+            EndAbility(position);
+        }
+
+        protected override void Tick(Vector3 position)
         {
             StartAbility(position);
         }
