@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c84e9de72358047bf2fb948e69dced, type: 3}
   m_Name: Tower Attack State
   m_EditorClassIdentifier: 
-  enterActions: []
-  updateActions:
+  enterActions:
   - {fileID: 11400000, guid: e2d17a0c54760804cb29cd72ee38165e, type: 2}
+  updateActions: []
   exitActions:
+  - {fileID: 11400000, guid: e2d17a0c54760804cb29cd72ee38165e, type: 2}
   - {fileID: 11400000, guid: eb846286ac491b34a812479e9d94cef5, type: 2}
   transitions:
   - decision: {fileID: 11400000, guid: a509b30567e513044909efb8d212b116, type: 2}
