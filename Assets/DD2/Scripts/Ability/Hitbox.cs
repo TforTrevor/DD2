@@ -8,7 +8,7 @@ namespace DD2.Abilities
     {
         enum Shape { Sphere, Box, Capsule };
         [SerializeField] Shape hitboxShape;
-        [SerializeField] GameObject hitbox;
+        public GameObject hitboxObject;
         [SerializeField] float delay;
         [SerializeField] float duration;
         SphereCollider sphereCollider;
@@ -19,15 +19,15 @@ namespace DD2.Abilities
         {
             if (hitboxShape == Shape.Sphere)
             {
-                sphereCollider = hitbox.GetComponent<SphereCollider>();
+                sphereCollider = hitboxObject.GetComponent<SphereCollider>();
             }
             else if (hitboxShape == Shape.Box)
             {
-                boxCollider = hitbox.GetComponent<BoxCollider>();
+                boxCollider = hitboxObject.GetComponent<BoxCollider>();
             }
             else if (hitboxShape == Shape.Capsule)
             {
-                capsuleCollider = hitbox.GetComponent<CapsuleCollider>();
+                capsuleCollider = hitboxObject.GetComponent<CapsuleCollider>();
             }
         }
 
@@ -40,13 +40,7 @@ namespace DD2.Abilities
                     Initialize();
                 }
 
-                hitbox.transform.position = position;
-                hitbox.SetActive(true);
-                Timing.CallDelayed(1f, () =>
-                {
-                    hitbox.SetActive(false);
-                });
-                return Physics.OverlapSphere(position, sphereCollider.radius * hitbox.transform.lossyScale.x, layerMask);
+                return Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask);
             }
 
             return null;

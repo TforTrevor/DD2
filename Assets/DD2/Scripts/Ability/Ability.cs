@@ -12,75 +12,66 @@ namespace DD2.Abilities
         Status status;
         [SerializeField] [ReorderableList] [Expandable]
         protected Effect[] abilityEffects;
-        [SerializeField] [MinValue(0)]
+        [SerializeField] [MinValue(0)] [BoxGroup("Cooldown")]
         protected float cooldown;
-        [SerializeField] [BoxGroup("Continuous")]
-        protected bool isContinuous;
-        [SerializeField] [ShowIf("isContinuous")] [BoxGroup("Continuous")]
+        [SerializeField] [BoxGroup("Cooldown")]
+        protected bool beforeEnd;
+        [ReadOnly] [SerializeField] [BoxGroup("Cooldown")]
+        protected bool onCooldown;
+        [ReadOnly] [SerializeField] [BoxGroup("Cooldown")]
+        protected bool isUsing;
+        [SerializeField] [BoxGroup("Toggle")]
+        protected bool isToggle;
+        [SerializeField] [BoxGroup("Toggle")]
         protected float tickRate;
-        [SerializeField] [ShowIf("isContinuous")] [BoxGroup("Continuous")]
-        protected float duration;
         [SerializeField] protected LayerMask layerMask;
         [SerializeField] protected bool multiTarget;
-        [SerializeField] [BoxGroup("Input Buffering")]
-        bool enableInputBuffer;
-        [SerializeField] [ShowIf("enableInputBuffer")] [MinValue(0)] [BoxGroup("Input Buffering")]
-        float bufferTime;
-        [BoxGroup("Input Buffering")]
-        bool buffer;
 
         [SerializeField] [ReorderableList] protected Hitbox[] hitboxes;
 
-        protected bool onCooldown;
-        protected bool isUsing;
-        protected CoroutineHandle cooldownRoutine;
-        protected CoroutineHandle continuousRoutine;
-        protected CoroutineHandle bufferRoutine;
-        protected CoroutineHandle bufferTimeRoutine;
-
         public virtual void UseAbility(Vector3 position)
         {
-            if (onCooldown || isUsing)
+            if (onCooldown)
             {
-                //if (enableInputBuffer)
-                //{
-                //    Timing.KillCoroutines(bufferTimeRoutine);
-                //    Timing.KillCoroutines(bufferRoutine);
-                //    bufferTimeRoutine = Timing.RunCoroutine(BufferTimerRoutine());
-                //    bufferRoutine = Timing.RunCoroutine(BufferRoutine(position));
-                //}
-
                 return;
             }
-            if (isContinuous)
+            //Toggle ability
+            if (isToggle)
             {
-                continuousRoutine = Timing.RunCoroutine(ContinuousRoutine(position));
+                isUsing = !isUsing;
+                if (isUsing)
+                {
+                    Timing.RunCoroutine(ToggleRoutine(position));
+                }
+                return;
+            }
+            //Non-toggle ability
+            if (isUsing)
+            {
+                return;
             }
             else
             {
                 isUsing = true;
                 StartAbility(position);
             }
-            cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
         }
 
-        protected virtual void StartAbility(Vector3 position) { }
-        protected virtual void EndAbility(Vector3 position) { isUsing = false; }
+        protected virtual void StartAbility(Vector3 position) { if (beforeEnd) { Timing.RunCoroutine(CooldownRoutine()); } }
+        protected virtual void EndAbility(Vector3 position) { isUsing = false; if (!beforeEnd) { Timing.RunCoroutine(CooldownRoutine()); } }
         protected virtual void Tick(Vector3 position) { }
         protected virtual void StartCooldown() { }
         protected virtual void EndCooldown() { }
         protected virtual void StartEffects() { }
         protected virtual void EndEffects() { }
 
-        protected IEnumerator<float> ContinuousRoutine(Vector3 position)
+        protected IEnumerator<float> ToggleRoutine(Vector3 position)
         {
-            StartAbility(position);
-            float tempDuration = duration;
-            while (tempDuration > 0)
+            while (isUsing)
             {
                 Tick(position);
+
                 yield return Timing.WaitForSeconds(tickRate);
-                tempDuration -= tickRate;
             }
             EndAbility(position);
         }
@@ -92,22 +83,6 @@ namespace DD2.Abilities
             yield return Timing.WaitForSeconds(cooldown);
             onCooldown = false;
             EndCooldown();
-        }
-
-        protected IEnumerator<float> BufferRoutine(Vector3 position)
-        {
-            while (buffer)
-            {
-                yield return Timing.WaitForOneFrame;
-                UseAbility(position);
-            }
-        }
-
-        protected IEnumerator<float> BufferTimerRoutine()
-        {
-            buffer = true;
-            yield return Timing.WaitForSeconds(bufferTime);
-            buffer = false;
         }
 
         protected void ApplyEffects(Transform target)

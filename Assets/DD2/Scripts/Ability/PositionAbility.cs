@@ -20,6 +20,7 @@ namespace DD2.Abilities
 
         protected override void StartAbility(Vector3 position)
         {
+            base.StartAbility(position);
             Timing.RunCoroutine(Test(position));
         }
 
@@ -30,6 +31,10 @@ namespace DD2.Abilities
             {
                 yield return Timing.WaitForSeconds(hitbox.GetDelay());
 
+                hitbox.hitboxObject.transform.position = position;
+                hitbox.hitboxObject.SetActive(true);
+
+                hitColliders.Clear();
                 hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
                 if (multiTarget)
                 {
@@ -42,18 +47,23 @@ namespace DD2.Abilities
                 else
                 {
                     Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
-                    CreateProjectile(collider.transform);
-                    ApplyEffects(collider.transform);
+                    if (collider)
+                    {
+                        CreateProjectile(collider.transform);
+                        ApplyEffects(collider.transform);
+                    }
                 }
 
                 yield return Timing.WaitForSeconds(hitbox.GetDuration());
+                hitbox.hitboxObject.SetActive(false);
             }
-            EndAbility(position);
+            if (!isToggle)
+                EndAbility(position);
         }
 
         protected override void Tick(Vector3 position)
         {
-            StartAbility(position);
+            Timing.RunCoroutine(Test(position));
         }
 
         void CreateProjectile(Transform target)
