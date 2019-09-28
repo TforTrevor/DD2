@@ -13,15 +13,19 @@ namespace DD2.AI.Actions
 
         public override void Act(StateController controller)
         {
-            Collider[] colliders = Physics.OverlapSphere(controller.status.transform.position, controller.status.stats.GetAttackRange(), layerMasks);
+            Collider[] colliders = Physics.OverlapSphere(controller.status.GetPosition(), controller.status.stats.GetSearchRange(), layerMasks);
             List<Status> statuses = new List<Status>();
             for (int i = 0; i < colliders.Length; i++)
             {
-                float enemyDot = Vector3.Dot(controller.status.GetForward(), Vector3.Normalize(colliders[i].transform.position - controller.status.GetPosition()));
-                float desiredDot = Mathf.Cos((Mathf.Deg2Rad * controller.status.stats.GetSearchAngle()) / 2f);
-                if (enemyDot > desiredDot)
+                float enemyDistance = Vector3.Distance(controller.status.GetPosition(), colliders[i].transform.position);
+                if (enemyDistance < controller.status.stats.GetSearchRange())
                 {
-                    statuses.Add(colliders[i].GetComponent<Status>());
+                    float enemyDot = Vector3.Dot(controller.status.GetForward(), Vector3.Normalize(colliders[i].transform.position - controller.status.GetPosition()));
+                    float desiredDot = Mathf.Cos((Mathf.Deg2Rad * controller.status.stats.GetSearchAngle()) / 2f);
+                    if (enemyDot > desiredDot)
+                    {
+                        statuses.Add(colliders[i].GetComponent<Status>());
+                    }
                 }
             }
             if (statuses.Count > 0)

@@ -9,9 +9,10 @@ namespace DD2.Abilities
 {
     public class Ability : MonoBehaviour
     {
-        Status status;
+        //Effects
         [SerializeField] [ReorderableList] [Expandable]
         protected Effect[] abilityEffects;
+        //Cooldown
         [SerializeField] [MinValue(0)] [BoxGroup("Cooldown")]
         protected float cooldown;
         [SerializeField] [BoxGroup("Cooldown")]
@@ -20,19 +21,43 @@ namespace DD2.Abilities
         protected bool onCooldown;
         [ReadOnly] [SerializeField] [BoxGroup("Cooldown")]
         protected bool isUsing;
+        //Toggle
         [SerializeField] [BoxGroup("Toggle")]
         protected bool isToggle;
-        [SerializeField] [BoxGroup("Toggle")]
+        [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
         protected float tickRate;
-        [SerializeField] protected LayerMask layerMask;
-        [SerializeField] protected bool multiTarget;
+        //Input buffering
+        [SerializeField] [BoxGroup("Input Buffering")]
+        protected bool bufferInput;
+        [SerializeField] [BoxGroup("Input Buffering")] [ShowIf("bufferInput")]
+        protected float bufferTime;
+        [ReadOnly] [SerializeField] [BoxGroup("Input Buffering")] [ShowIf("bufferInput")]
+        protected bool isBuffered;
+        protected CoroutineHandle bufferHandle;
+        //Targetting
+        [SerializeField] [BoxGroup("Targetting")]
+        protected LayerMask layerMask;
+        [SerializeField] [BoxGroup("Targetting")]
+        protected bool multiTarget;
+        //Hitboxes
+        [SerializeField] [ReorderableList]
+        protected Hitbox[] hitboxes;
+        
+        Status status;
 
-        [SerializeField] [ReorderableList] protected Hitbox[] hitboxes;
-
-        public virtual void UseAbility(Vector3 position)
+        public virtual void UseAbility(Transform transform)
         {
             if (onCooldown)
             {
+                if (bufferInput)
+                {
+                    isBuffered = true;
+                    Timing.KillCoroutines(bufferHandle);
+                    bufferHandle = Timing.CallDelayed(bufferTime, () =>
+                    {
+                        isBuffered = false;
+                    });
+                }
                 return;
             }
             //Toggle ability
@@ -41,7 +66,7 @@ namespace DD2.Abilities
                 isUsing = !isUsing;
                 if (isUsing)
                 {
-                    Timing.RunCoroutine(ToggleRoutine(position));
+                    Timing.RunCoroutine(ToggleRoutine(transform));
                 }
                 return;
             }
@@ -53,36 +78,28 @@ namespace DD2.Abilities
             else
             {
                 isUsing = true;
-                StartAbility(position);
+                StartAbility(transform);
             }
         }
 
-        protected virtual void StartAbility(Vector3 position) { if (beforeEnd) { Timing.RunCoroutine(CooldownRoutine()); } }
-        protected virtual void EndAbility(Vector3 position) { isUsing = false; if (!beforeEnd) { Timing.RunCoroutine(CooldownRoutine()); } }
-        protected virtual void Tick(Vector3 position) { }
-        protected virtual void StartCooldown() { }
-        protected virtual void EndCooldown() { }
-        protected virtual void StartEffects() { }
-        protected virtual void EndEffects() { }
-
-        protected IEnumerator<float> ToggleRoutine(Vector3 position)
+        protected IEnumerator<float> ToggleRoutine(Transform transform)
         {
             while (isUsing)
             {
-                Tick(position);
+                Tick(transform);
 
                 yield return Timing.WaitForSeconds(tickRate);
             }
-            EndAbility(position);
+            EndAbility(transform);
         }
 
-        protected IEnumerator<float> CooldownRoutine()
+        protected IEnumerator<float> CooldownRoutine(Transform transform)
         {
             onCooldown = true;
             StartCooldown();
             yield return Timing.WaitForSeconds(cooldown);
             onCooldown = false;
-            EndCooldown();
+            EndCooldown(transform);
         }
 
         protected void ApplyEffects(Transform target)
@@ -104,5 +121,37 @@ namespace DD2.Abilities
         {
             this.status = status;
         }
+
+        //Events
+        protected virtual void StartAbility(Transform transform) {
+            if (beforeEnd)
+            {
+                Timing.RunCoroutine(CooldownRoutine(transform));
+            }
+        }
+        protected virtual void EndAbility(Transform transform)
+        {
+            if (!isToggle)
+            {
+                isUsing = false;
+            }
+            if (!beforeEnd)
+            {
+                Timing.RunCoroutine(CooldownRoutine(transform));
+            }
+        }
+        protected virtual void Tick(Transform transform) { }
+        protected virtual void StartCooldown() { }
+        protected virtual void EndCooldown(Transform transform)
+        {
+            if (isBuffered)
+            {
+                UseAbility(transform);
+                isBuffered = false;
+                Timing.KillCoroutines(bufferHandle);
+            }
+        }
+        protected virtual void StartEffects() { }
+        protected virtual void EndEffects() { }
     }
 }

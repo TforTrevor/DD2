@@ -18,15 +18,16 @@ namespace DD2.Abilities
             objectPool = GetComponent<ComponentPool<Projectile>>();
         }
 
-        protected override void StartAbility(Vector3 position)
+        protected override void StartAbility(Transform transform)
         {
-            base.StartAbility(position);
-            Timing.RunCoroutine(Test(position));
+            base.StartAbility(transform);
+            Timing.RunCoroutine(Test(transform));
         }
 
-        IEnumerator<float> Test(Vector3 position)
+        IEnumerator<float> Test(Transform transform)
         {
             List<Collider> hitColliders = new List<Collider>();
+            Vector3 position = transform.position;
             foreach (Hitbox hitbox in hitboxes)
             {
                 yield return Timing.WaitForSeconds(hitbox.GetDelay());
@@ -58,12 +59,14 @@ namespace DD2.Abilities
                 hitbox.hitboxObject.SetActive(false);
             }
             if (!isToggle)
-                EndAbility(position);
+            {
+                EndAbility(transform);
+            }
         }
 
-        protected override void Tick(Vector3 position)
+        protected override void Tick(Transform transform)
         {
-            Timing.RunCoroutine(Test(position));
+            Timing.RunCoroutine(Test(transform));
         }
 
         void CreateProjectile(Transform target)
