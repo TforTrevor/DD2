@@ -4,6 +4,7 @@ using UnityEngine;
 using MEC;
 using RoboRyanTron.SearchableEnum;
 using DD2.Util;
+using UnityEngine.AI;
 
 namespace DD2.Abilities
 {
@@ -52,6 +53,10 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(collider.transform);
                         ApplyEffects(collider.transform);
+                        Rigidbody rb = collider.transform.GetComponent<Rigidbody>();
+                        NavMeshAgent agent = collider.transform.GetComponent<NavMeshAgent>();
+                        agent.updatePosition = false;
+                        rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
 

@@ -636,7 +636,7 @@ PrefabInstance:
     - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
         type: 3}
       propertyPath: bufferTime
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
         type: 3}

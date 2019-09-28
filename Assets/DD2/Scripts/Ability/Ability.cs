@@ -26,6 +26,8 @@ namespace DD2.Abilities
         protected bool isToggle;
         [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
         protected float tickRate;
+        [ReadOnly] [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
+        protected bool toggleState;
         //Input buffering
         [SerializeField] [BoxGroup("Input Buffering")]
         protected bool bufferInput;
@@ -47,7 +49,7 @@ namespace DD2.Abilities
 
         public virtual void UseAbility(Transform transform)
         {
-            if (onCooldown)
+            if (onCooldown || isUsing)
             {
                 if (bufferInput)
                 {
@@ -58,13 +60,21 @@ namespace DD2.Abilities
                         isBuffered = false;
                     });
                 }
-                return;
+                if (onCooldown)
+                    return;
             }
             //Toggle ability
             if (isToggle)
             {
-                isUsing = !isUsing;
                 if (isUsing)
+                {
+                    toggleState = false;
+                }
+                else
+                {
+                    toggleState = !toggleState;
+                }
+                if (toggleState)
                 {
                     Timing.RunCoroutine(ToggleRoutine(transform));
                 }
@@ -75,16 +85,14 @@ namespace DD2.Abilities
             {
                 return;
             }
-            else
-            {
-                isUsing = true;
-                StartAbility(transform);
-            }
+            isUsing = true;
+            StartAbility(transform);
         }
 
         protected IEnumerator<float> ToggleRoutine(Transform transform)
         {
-            while (isUsing)
+            isUsing = true;
+            while (toggleState)
             {
                 Tick(transform);
 
@@ -131,10 +139,7 @@ namespace DD2.Abilities
         }
         protected virtual void EndAbility(Transform transform)
         {
-            if (!isToggle)
-            {
-                isUsing = false;
-            }
+            isUsing = false;
             if (!beforeEnd)
             {
                 Timing.RunCoroutine(CooldownRoutine(transform));
