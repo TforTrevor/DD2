@@ -13,9 +13,13 @@ namespace DD2
 
         [SerializeField] Transform fireTransform;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
+        [ReadOnly] [SerializeField] protected bool grounded;
+        [ReadOnly] [SerializeField] protected bool ragdolled;
+        protected Rigidbody rb;
 
-        protected void Awake()
+        protected virtual void Awake()
         {
+            rb = GetComponent<Rigidbody>();
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i].SetStatus(this);
@@ -36,6 +40,34 @@ namespace DD2
         {
             currentHealth -= damage;
         }
+
+        public virtual void Ragdoll()
+        {
+
+        }
+
+        public virtual void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            rb.AddForce(force, forceMode);
+        }
+
+        public void SetGrounded(bool value)
+        {
+            grounded = value;
+            if (grounded)
+            {
+                OnGrounded();
+            }
+        }
+
+        protected virtual void OnGrounded()
+        {
+            
+        }
+
+
+
+        //ACCESSORS
 
         public float GetCurrentHealth()
         {

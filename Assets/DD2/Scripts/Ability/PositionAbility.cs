@@ -53,10 +53,9 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(collider.transform);
                         ApplyEffects(collider.transform);
-                        Rigidbody rb = collider.transform.GetComponent<Rigidbody>();
-                        NavMeshAgent agent = collider.transform.GetComponent<NavMeshAgent>();
-                        agent.updatePosition = false;
-                        rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+                        Status status = collider.transform.GetComponent<Status>();
+                        status.Ragdoll();
+                        status.AddForce(Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
 

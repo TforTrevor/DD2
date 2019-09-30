@@ -17,6 +17,7 @@ namespace DD2
         [SearchableEnum] [SerializeField] ElementType elementType;
         [SerializeField] float speed;
         [SerializeField] float attackRate;
+        [SerializeField] float ragdollTime;
 
         public float GetMaxHealth()
         {
@@ -51,6 +52,11 @@ namespace DD2
         public ElementType GetElementType()
         {
             return elementType;
+        }
+
+        public float GetRagdollTime()
+        {
+            return ragdollTime;
         }
     }
 }

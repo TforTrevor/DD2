@@ -21,3 +21,4 @@ MonoBehaviour:
   elementType: 0
   speed: 10
   attackRate: 0
+  ragdollTime: 1
