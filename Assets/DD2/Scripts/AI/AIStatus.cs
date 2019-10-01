@@ -24,10 +24,7 @@ namespace DD2.AI
             base.Ragdoll();
             navMeshAgent.ResetPath();
             Vector3 velocity = navMeshAgent.velocity;
-            navMeshAgent.updatePosition = false;
-            navMeshAgent.updateRotation = false;
-            navMeshAgent.updateUpAxis = false;
-            rb.isKinematic = false;
+            SetAgentActive(false);
             rb.velocity = velocity;
             ragdolled = true;
         }
@@ -48,14 +45,19 @@ namespace DD2.AI
                     if (grounded)
                     {
                         navMeshAgent.nextPosition = transform.position;
-                        navMeshAgent.updatePosition = true;
-                        navMeshAgent.updateRotation = true;
-                        navMeshAgent.updateUpAxis = true;
-                        rb.isKinematic = true;
+                        SetAgentActive(true);
                         ragdolled = false;
                     }
                 });
             }
+        }
+
+        void SetAgentActive(bool value)
+        {
+            navMeshAgent.updatePosition = value;
+            navMeshAgent.updateRotation = value;
+            navMeshAgent.updateUpAxis = value;
+            rb.isKinematic = value;
         }
 
         void FixedUpdate()
