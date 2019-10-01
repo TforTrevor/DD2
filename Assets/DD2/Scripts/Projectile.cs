@@ -9,7 +9,6 @@ namespace DD2
         [SerializeField] float speed;
         [SerializeField] float destroyDistance;
         public Transform target;
-        [HideInInspector] public ComponentPool<Projectile> objectPool;
 
         void Update()
         {
@@ -23,7 +22,7 @@ namespace DD2
 
             if (Vector3.Distance(transform.position, target.position) < destroyDistance)
             {
-                objectPool.ReturnObject("Projectile", this);
+                ProjectilePool.Instance.ReturnObject("Projectile", this);
             }
         }
     }

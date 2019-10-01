@@ -12,12 +12,6 @@ namespace DD2.Abilities
     {
         [SerializeField] float radius;
         [SerializeField] string objectKey;
-        ComponentPool<Projectile> objectPool;
-
-        void Awake()
-        {
-            objectPool = GetComponent<ComponentPool<Projectile>>();
-        }
 
         protected override void StartAbility(Transform transform)
         {
@@ -44,6 +38,7 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(hitCollider.transform);
                         ApplyEffects(hitCollider.transform);
+                        Knockback(hitCollider.transform, Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
                 else
@@ -53,8 +48,7 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(collider.transform);
                         ApplyEffects(collider.transform);
-                        Status status = collider.transform.GetComponent<Status>();
-                        status.AddForce(Vector3.up * 10, ForceMode.Impulse);
+                        Knockback(collider.transform, Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
 
@@ -67,6 +61,12 @@ namespace DD2.Abilities
             }
         }
 
+        void Knockback(Transform entity, Vector3 force, ForceMode forceMode)
+        {
+            Status status = entity.GetComponent<Status>();
+            status.AddForce(force, forceMode);
+        }
+
         protected override void Tick(Transform transform)
         {
             Timing.RunCoroutine(Test(transform));
@@ -74,16 +74,12 @@ namespace DD2.Abilities
 
         void CreateProjectile(Transform target)
         {
-            if (objectPool != null)
+            Projectile projectile = ProjectilePool.Instance.GetObject(objectKey);
+            if (projectile != null)
             {
-                Projectile projectile = objectPool.GetObject(objectKey);
-                if (projectile != null)
-                {
-                    projectile.transform.position = GetFirePosition();
-                    projectile.target = target;
-                    projectile.objectPool = objectPool;
-                    projectile.gameObject.SetActive(true);
-                }
+                projectile.transform.position = GetFirePosition();
+                projectile.target = target;
+                projectile.gameObject.SetActive(true);
             }
         }
     }

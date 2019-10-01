@@ -14,29 +14,27 @@ namespace DD2
         public bool canExpand;
     }
 
-    public class ComponentPool<T> : MonoBehaviour where T : MonoBehaviour
+    public class ComponentPool<T> : Singleton<ComponentPool<T>> where T : MonoBehaviour
     {
         [SerializeField] [ReorderableList] List<Pool> pools;
         Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
         Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
-        GameObject poolParent;
 
-        void Start()
+        protected override void Awake()
         {
-            poolParent = new GameObject();
-            poolParent.name = "Object Pool";
+            base.Awake();
             foreach (Pool pool in pools)
             {
-                GameObject groupParent = new GameObject();
-                parentDictionary.Add(pool.tag, groupParent);
-                groupParent.transform.SetParent(poolParent.transform);
-                groupParent.name = pool.tag;
+                GameObject poolParent = new GameObject();
+                parentDictionary.Add(pool.tag, poolParent);
+                poolParent.transform.SetParent(transform);
+                poolParent.name = pool.tag;
 
                 Queue<T> queue = new Queue<T>();
 
                 for (int i = 0; i < pool.size; i++)
                 {
-                    GameObject poolObject = Instantiate(pool.prefab, groupParent.transform);
+                    GameObject poolObject = Instantiate(pool.prefab, poolParent.transform);
                     poolObject.SetActive(false);
                     T poolComponent = poolObject.GetComponent<T>();
                     if (poolComponent != null)
