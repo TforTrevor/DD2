@@ -54,7 +54,6 @@ namespace DD2.Abilities
                         CreateProjectile(collider.transform);
                         ApplyEffects(collider.transform);
                         Status status = collider.transform.GetComponent<Status>();
-                        status.Ragdoll();
                         status.AddForce(Vector3.up * 10, ForceMode.Impulse);
                     }
                 }

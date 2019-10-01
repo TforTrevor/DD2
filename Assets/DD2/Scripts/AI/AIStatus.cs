@@ -23,12 +23,19 @@ namespace DD2.AI
         {
             base.Ragdoll();
             navMeshAgent.ResetPath();
+            Vector3 velocity = navMeshAgent.velocity;
             navMeshAgent.updatePosition = false;
             navMeshAgent.updateRotation = false;
             navMeshAgent.updateUpAxis = false;
             rb.isKinematic = false;
+            rb.velocity = velocity;
             ragdolled = true;
-            
+        }
+
+        public override void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            Ragdoll();
+            base.AddForce(force, forceMode);
         }
 
         protected override void OnGrounded()
