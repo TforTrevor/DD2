@@ -51,6 +51,24 @@ namespace DD2
             rb.AddForce(force, forceMode);
         }
 
+        public virtual void ClearVelocity(bool x, bool y, bool z)
+        {
+            Vector3 velocity = rb.velocity;
+            if (x)
+            {
+                velocity.x = 0;
+            }
+            if (y)
+            {
+                velocity.y = 0;
+            }
+            if (z)
+            {
+                velocity.z = 0;
+            }
+            rb.velocity = velocity;
+        }
+
         public void SetGrounded(bool value)
         {
             grounded = value;

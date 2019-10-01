@@ -54,7 +54,6 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(hitCollider.transform);
                         ApplyEffects(hitCollider.transform);
-                        Knockback(hitCollider.transform, Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
                 else
@@ -64,17 +63,10 @@ namespace DD2.Abilities
                     {
                         CreateProjectile(collider.transform);
                         ApplyEffects(collider.transform);
-                        Knockback(collider.transform, Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
                 yield return Timing.WaitForSeconds(hitboxTickRate);
             }
-        }
-
-        void Knockback(Transform entity, Vector3 force, ForceMode forceMode)
-        {
-            Status status = entity.GetComponent<Status>();
-            status.AddForce(force, forceMode);
         }
 
         protected override void Tick(Transform transform)
