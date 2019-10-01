@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using MEC;
+using System.Collections.Generic;
 
 namespace DD2.Abilities
 {
@@ -11,6 +12,9 @@ namespace DD2.Abilities
         public GameObject hitboxObject;
         [SerializeField] float delay;
         [SerializeField] float duration;
+        [SerializeField] float repeatDelay;
+        List<Collider> repeatList = new List<Collider>();
+
         SphereCollider sphereCollider;
         BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
@@ -40,7 +44,24 @@ namespace DD2.Abilities
                     Initialize();
                 }
 
-                return Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask);
+                List<Collider> hitColliders = new List<Collider>(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
+                for (int i = 0; i < hitColliders.Count; i++)
+                {
+                    if (repeatList.Contains(hitColliders[i]))
+                    {
+                        hitColliders.RemoveAt(i);
+                    }
+                }
+                repeatList.AddRange(hitColliders);
+                Timing.CallDelayed(repeatDelay, () =>
+                {
+                    foreach (Collider hitCollider in hitColliders)
+                    {
+                        repeatList.Remove(hitCollider);
+                    }
+                });
+
+                return hitColliders.ToArray();
             }
 
             return null;

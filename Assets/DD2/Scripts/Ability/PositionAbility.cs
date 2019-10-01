@@ -16,22 +16,38 @@ namespace DD2.Abilities
         protected override void StartAbility(Transform transform)
         {
             base.StartAbility(transform);
-            Timing.RunCoroutine(Test(transform));
+            Timing.RunCoroutine(AbilityRoutine(transform));
         }
 
-        IEnumerator<float> Test(Transform transform)
+        IEnumerator<float> AbilityRoutine(Transform transform)
         {
             List<Collider> hitColliders = new List<Collider>();
             Vector3 position = transform.position;
             foreach (Hitbox hitbox in hitboxes)
             {
-                yield return Timing.WaitForSeconds(hitbox.GetDelay());
-
                 hitbox.hitboxObject.transform.position = position;
                 hitbox.hitboxObject.SetActive(true);
 
+                yield return Timing.WaitForSeconds(hitbox.GetDelay());
+                CoroutineHandle hitboxHandle = Timing.RunCoroutine(HitboxRoutine(hitbox, hitColliders, position));
+                yield return Timing.WaitForSeconds(hitbox.GetDuration());
+                Timing.KillCoroutines(hitboxHandle);
+
+                hitbox.hitboxObject.SetActive(false);
+            }
+            if (!isToggle)
+            {
+                EndAbility(transform);
+            }
+        }
+
+        IEnumerator<float> HitboxRoutine(Hitbox hitbox, List<Collider> hitColliders, Vector3 position)
+        {
+            while(true)
+            {
                 hitColliders.Clear();
                 hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
+                
                 if (multiTarget)
                 {
                     foreach (Collider hitCollider in hitColliders)
@@ -51,13 +67,7 @@ namespace DD2.Abilities
                         Knockback(collider.transform, Vector3.up * 10, ForceMode.Impulse);
                     }
                 }
-
-                yield return Timing.WaitForSeconds(hitbox.GetDuration());
-                hitbox.hitboxObject.SetActive(false);
-            }
-            if (!isToggle)
-            {
-                EndAbility(transform);
+                yield return Timing.WaitForSeconds(hitboxTickRate);
             }
         }
 
@@ -69,7 +79,7 @@ namespace DD2.Abilities
 
         protected override void Tick(Transform transform)
         {
-            Timing.RunCoroutine(Test(transform));
+            Timing.RunCoroutine(AbilityRoutine(transform));
         }
 
         void CreateProjectile(Transform target)

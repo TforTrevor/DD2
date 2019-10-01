@@ -25,7 +25,7 @@ namespace DD2.Abilities
         [SerializeField] [BoxGroup("Toggle")]
         protected bool isToggle;
         [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
-        protected float tickRate;
+        protected float toggleTickRate;
         [ReadOnly] [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
         protected bool toggleState;
         //Input buffering
@@ -42,7 +42,9 @@ namespace DD2.Abilities
         [SerializeField] [BoxGroup("Targetting")]
         protected bool multiTarget;
         //Hitboxes
-        [SerializeField] [ReorderableList]
+        [SerializeField] [BoxGroup("Hitboxes")]
+        protected float hitboxTickRate;
+        [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         
         Status status;
@@ -96,7 +98,7 @@ namespace DD2.Abilities
             {
                 Tick(transform);
 
-                yield return Timing.WaitForSeconds(tickRate);
+                yield return Timing.WaitForSeconds(toggleTickRate);
             }
             EndAbility(transform);
         }
