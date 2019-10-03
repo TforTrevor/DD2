@@ -6,6 +6,6 @@ namespace DD2.Abilities
 {
     public abstract class Effect : ScriptableObject
     {
-        public abstract void ApplyEffect(Transform hit);
+        public abstract void ApplyEffect(Transform target, Status status, Vector3 position);
     }
 }

@@ -53,7 +53,7 @@ namespace DD2.Abilities
                     foreach (Collider hitCollider in hitColliders)
                     {
                         CreateProjectile(hitCollider.transform);
-                        ApplyEffects(hitCollider.transform);
+                        ApplyEffects(hitCollider.transform, position);
                     }
                 }
                 else
@@ -62,7 +62,7 @@ namespace DD2.Abilities
                     if (collider)
                     {
                         CreateProjectile(collider.transform);
-                        ApplyEffects(collider.transform);
+                        ApplyEffects(collider.transform, position);
                     }
                 }
                 yield return Timing.WaitForSeconds(hitboxTickRate);

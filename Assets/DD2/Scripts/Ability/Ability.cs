@@ -112,12 +112,12 @@ namespace DD2.Abilities
             EndCooldown(transform);
         }
 
-        protected void ApplyEffects(Transform target)
+        protected void ApplyEffects(Transform target, Vector3 position)
         {
             StartEffects();
             for (int i = 0; i < abilityEffects.Length; i++)
             {
-                abilityEffects[i].ApplyEffect(target);
+                abilityEffects[i].ApplyEffect(target, target.GetComponent<Status>(), position);
             }
             EndEffects();
         }

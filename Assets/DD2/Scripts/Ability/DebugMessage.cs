@@ -11,7 +11,7 @@ namespace DD2.Abilities.Effects
     {
         [SerializeField] string message;
 
-        public override void ApplyEffect(Transform target)
+        public override void ApplyEffect(Transform target, Status status, Vector3 position)
         {
             if (!string.IsNullOrWhiteSpace(message))
             {
