@@ -19,7 +19,7 @@ namespace DD2.Abilities
         BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
 
-        public void Initialize()
+        void Initialize()
         {
             if (hitboxShape == Shape.Sphere)
             {
@@ -35,36 +35,45 @@ namespace DD2.Abilities
             }
         }
 
-        public Collider[] GetCollision(Vector3 position, LayerMask layerMask)
+        public List<Collider> GetCollision(Vector3 position, LayerMask layerMask)
         {
+            List<Collider> hitColliders = new List<Collider>();
+            List<Collider> colliders = new List<Collider>();
             if (hitboxShape == Shape.Sphere)
             {
                 if (sphereCollider == null)
                 {
                     Initialize();
                 }
-
-                List<Collider> hitColliders = new List<Collider>(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
-                for (int i = 0; i < hitColliders.Count; i++)
-                {
-                    if (repeatList.Contains(hitColliders[i]))
-                    {
-                        hitColliders.RemoveAt(i);
-                    }
-                }
-                repeatList.AddRange(hitColliders);
-                Timing.CallDelayed(repeatDelay, () =>
-                {
-                    foreach (Collider hitCollider in hitColliders)
-                    {
-                        repeatList.Remove(hitCollider);
-                    }
-                });
-
-                return hitColliders.ToArray();
+                hitColliders.AddRange(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
             }
 
-            return null;
+            if (hitColliders.Count > 0)
+            {
+                foreach (Collider collider in hitColliders)
+                {
+                    if (!repeatList.Contains(collider))
+                    {
+                        colliders.Add(collider);
+                    }
+                }
+                if (colliders.Count > 0)
+                {
+                    repeatList.AddRange(colliders);
+                    Timing.RunCoroutine(RemoveRoutine(colliders));
+                }
+            }
+
+            return colliders;
+        }
+
+        IEnumerator<float> RemoveRoutine(List<Collider> colliders)
+        {
+            yield return Timing.WaitForSeconds(repeatDelay);
+            foreach(Collider collider in colliders)
+            {
+                repeatList.Remove(collider);
+            }
         }
 
         public float GetDelay()
