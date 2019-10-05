@@ -71,10 +71,13 @@ namespace DD2
 
         public void SetGrounded(bool value)
         {
-            grounded = value;
-            if (grounded)
+            if (value && !grounded)
             {
+                grounded = value;
                 OnGrounded();
+            } else
+            {
+                grounded = value;
             }
         }
 

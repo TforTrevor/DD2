@@ -11,6 +11,7 @@ namespace DD2.AI
         public Transform target;
         [HideInInspector] public NavMeshAgent navMeshAgent;
         [SerializeField] float distance;
+        [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
 
         protected override void Awake()
@@ -63,8 +64,9 @@ namespace DD2.AI
         void FixedUpdate()
         {
             RaycastHit hit;
-            Ray ray = new Ray(transform.position, Vector3.down);
-            if (Physics.Raycast(ray, out hit, distance, groundedMask)) {
+            Debug.DrawRay(transform.position + offset, Vector3.down * distance, Color.cyan, 2);
+            if (Physics.Raycast(transform.position + offset, Vector3.down, out hit, distance, groundedMask))
+            {
                 SetGrounded(true);
             }
             else
