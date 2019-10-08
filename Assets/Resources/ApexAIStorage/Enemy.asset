@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1719459976, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  description: 
+  version: 16779010
+  aiId: 7a7637be-60cb-4739-8bb9-855cbde6eb7f
+  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":d0ec3e1cfd384c31b02a88545bac04bb,"_id":7a7637be60cb47398bb9855cbde6eb7f,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":d0ec3e1cfd384c31b02a88545bac04bb,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI"}}]}'
+  editorConfiguration: '{"offset":{"@x":4,"@y":-14},"zoom":1,"SelectorView":{"ViewArea":{"@left":104,"@top":86,"@width":200,"@height":100},"DefaultQualifier":{}}}'
