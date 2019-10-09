@@ -38,23 +38,23 @@ namespace DD2.AI.Actions
                     if (highestAggro < 0)
                     {
                         index = i;
-                        highestAggro = statuses[i].stats.GetAggro();
+                        highestAggro = statuses[i].stats.GetPresence();
                     }
                     //Higher aggro
-                    else if (statuses[i].stats.GetAggro() > highestAggro)
+                    else if (statuses[i].stats.GetPresence() > highestAggro)
                     {
                         index = i;
-                        highestAggro = statuses[i].stats.GetAggro();
+                        highestAggro = statuses[i].stats.GetPresence();
                     }
                     //Same aggro, checks closer distance
-                    else if (statuses[i].stats.GetAggro() < highestAggro)
+                    else if (statuses[i].stats.GetPresence() < highestAggro)
                     {
                         float distance1 = Vector3.Distance(controller.transform.position, statuses[index].transform.position);
                         float distance2 = Vector3.Distance(controller.transform.position, statuses[i].transform.position);
                         if (distance2 < distance1)
                         {
                             index = i;
-                            highestAggro = statuses[i].stats.GetAggro();
+                            highestAggro = statuses[i].stats.GetPresence();
                         }
                     }
                 }

@@ -9,6 +9,7 @@ namespace Apex.AI
 
     public static class AINameMap
     {
+		public static readonly Guid BasicEnemy = new Guid("b84a18f4-e411-4811-a7dc-c5cf5372e71b");
 		public static readonly Guid Enemy = new Guid("7a7637be-60cb-4739-8bb9-855cbde6eb7f");
 
     }

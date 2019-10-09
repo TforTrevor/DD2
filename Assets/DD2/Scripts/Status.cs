@@ -95,6 +95,11 @@ namespace DD2
             return currentHealth;
         }
 
+        public float GetMaxHealth()
+        {
+            return stats.GetMaxHealth();
+        }
+
         public Ability GetAbility(int index)
         {
             return abilities[index];
@@ -123,6 +128,16 @@ namespace DD2
         public Vector3 GetFirePosition()
         {
             return fireTransform.position;
+        }
+
+        public float GetPresence()
+        {
+            return stats.GetPresence();
+        }
+
+        public float GetAttackRange()
+        {
+            return stats.GetAttackRange();
         }
     }
 }

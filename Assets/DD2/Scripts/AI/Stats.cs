@@ -13,7 +13,7 @@ namespace DD2
         [SerializeField] float attackCone;
         [SerializeField] float searchRange;
         [SerializeField] float searchAngle;
-        [SerializeField] float aggro;
+        [SerializeField] float presence;
         [SearchableEnum] [SerializeField] ElementType elementType;
         [SerializeField] float speed;
         [SerializeField] float attackRate;
@@ -24,9 +24,9 @@ namespace DD2
             return maxHealth;
         }
 
-        public float GetAggro()
+        public float GetPresence()
         {
-            return aggro;
+            return presence;
         }
 
         public float GetAttackRange()
