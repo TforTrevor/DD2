@@ -18,14 +18,17 @@ MonoBehaviour:
   configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":3cb09a8eaa4141629485cb110e2949a9,"_id":b84a18f4e4114811a7dcc5cf5372e71b,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":3cb09a8eaa4141629485cb110e2949a9,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":ef91fde56a6f41aab7268e268e78333f},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
-    Assembly-CSharp","not":false}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.TargetScanner,
+    Assembly-CSharp","not":true,"score":10}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.PrintMessage,
+    Assembly-CSharp","message":"Scanning for targets"},{"@type":"DD2.AI.Actions.TargetScanner,
     Assembly-CSharp","layerMasks":1024},{"@type":"DD2.AI.Actions.SelectBestTarget,
-    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.Distance, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.Presence,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.Presence, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.Distance,
     Assembly-CSharp","multiplier":1}]}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":ef91fde56a6f41aab7268e268e78333f,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"DD2.AI.Actions.MoveToTarget, Assembly-CSharp","ensureMaxRange":true}}}]}'
-  editorConfiguration: '{"offset":{"@x":0,"@y":0},"zoom":1,"SelectorView":{"ViewArea":{"@left":200,"@top":140,"@width":200,"@height":160},"Name":"Scan
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.PrintMessage,
+    Assembly-CSharp","message":"Moving to target"},{"@type":"DD2.AI.Actions.MoveToTarget,
+    Assembly-CSharp","ensureMaxRange":true}]}}}]}'
+  editorConfiguration: '{"offset":{"@x":246,"@y":35},"zoom":1,"SelectorView":{"ViewArea":{"@left":446,"@top":175,"@width":200,"@height":160},"Name":"Scan
     for Targets","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
     for Targets","Description":"Scans for targets and adds their Status to a list
-    in the EnemyContext"}}},"SelectorView":{"ViewArea":{"@left":480,"@top":140,"@width":200,"@height":100},"Name":"Pursue
-    Target","DefaultQualifier":{"ActionView":{}}}}'
+    in the EnemyContext"}}},"SelectorView":{"ViewArea":{"@left":726,"@top":175,"@width":200,"@height":100},"Name":"Pursue
+    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'

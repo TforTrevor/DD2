@@ -14,13 +14,16 @@ namespace DD2.AI.Actions
         {
             EnemyContext c = (EnemyContext)context;
 
-            float distance = Vector3.Distance(c.target.GetPosition(), c.enemy.GetPosition());
-            if (distance > c.enemy.GetAttackRange() || ensureMaxRange)
+            if (c.target)
             {
-                Vector3 direction = Vector3.Normalize(c.target.GetPosition() - c.enemy.GetPosition());
-                float distanceFromRange = distance - c.enemy.GetAttackRange();
-                Vector3 position = (direction * distanceFromRange) + c.enemy.GetPosition();
-                c.enemy.navMeshAgent.SetDestination(position);
+                float distance = Vector3.Distance(c.target.GetPosition(), c.enemy.GetPosition());
+                if (distance > c.enemy.GetAttackRange() || ensureMaxRange)
+                {
+                    Vector3 direction = Vector3.Normalize(c.target.GetPosition() - c.enemy.GetPosition());
+                    float distanceFromRange = distance - c.enemy.GetAttackRange();
+                    Vector3 position = (direction * distanceFromRange) + c.enemy.GetPosition();
+                    c.enemy.navMeshAgent.SetDestination(position);
+                }
             }
         }
     }

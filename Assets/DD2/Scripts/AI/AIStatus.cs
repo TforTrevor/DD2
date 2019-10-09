@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using MEC;
+using DD2.AI.Context;
+using Apex.AI.Components;
+using Apex.AI;
+using System;
 
 namespace DD2.AI
 {
-    public class AIStatus : Status
+    public class AIStatus : Status, IContextProvider
     {
         public Transform target;
         [HideInInspector] public NavMeshAgent navMeshAgent;
         [SerializeField] float distance;
         [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
+        public EnemyContext enemyContext;
 
         protected override void Awake()
         {
             base.Awake();
             navMeshAgent = GetComponent<NavMeshAgent>();
+            enemyContext = new EnemyContext(this);
         }
 
         public override void Ragdoll()
@@ -73,6 +79,11 @@ namespace DD2.AI
             {
                 SetGrounded(false);
             }
+        }
+
+        public IAIContext GetContext(Guid aiId)
+        {
+            return enemyContext;
         }
     }
 }
