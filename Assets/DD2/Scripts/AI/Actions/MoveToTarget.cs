@@ -1,26 +1,30 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Apex.AI;
+using Apex.Serialization;
+using DD2.AI.Context;
 
-//namespace DD2.AI.Actions
-//{
-//    [CreateAssetMenu(menuName = "Scriptable Objects/AI/Actions/Move To Target")]
-//    public class MoveToTarget : Action
-//    {
-//        [SerializeField] bool ensureMaxRange;
-//        public override void Act(StateController controller)
-//        {
-//            if (controller.status.target != null)
-//            {
-//                float distance = Vector3.Distance(controller.status.target.position, controller.transform.position);
-//                if (distance > controller.status.stats.GetAttackRange() || ensureMaxRange)
-//                {
-//                    Vector3 direction = Vector3.Normalize(controller.status.target.position - controller.transform.position);
-//                    float distanceFromRange = distance - controller.status.stats.GetAttackRange();
-//                    Vector3 position = (direction * distanceFromRange) + controller.transform.position;
-//                    controller.status.navMeshAgent.SetDestination(position);
-//                }
-//            }
-//        }
-//    }
-//}
+namespace DD2.AI.Actions
+{
+    public class MoveToTarget : ActionBase
+    {
+        [ApexSerialization] bool ensureMaxRange;
+        public override void Execute(IAIContext context)
+        {
+            AIContext c = (AIContext)context;
+
+            if (c.target)
+            {
+                float distance = Vector3.Distance(c.target.GetPosition(), c.entity.GetPosition());
+                if (distance > c.entity.GetAttackRange() || ensureMaxRange)
+                {
+                    Vector3 direction = Vector3.Normalize(c.target.GetPosition() - c.entity.GetPosition());
+                    float distanceFromRange = distance - c.entity.GetAttackRange();
+                    Vector3 position = (direction * distanceFromRange) + c.entity.GetPosition();
+                    c.entity.navMeshAgent.SetDestination(position);
+                }
+            }
+        }
+    }
+}

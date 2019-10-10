@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 7208647071186915107}
   - component: {fileID: 6649532046169169781}
   - component: {fileID: 864047157}
-  - component: {fileID: 864047158}
+  - component: {fileID: 1741060853}
   m_Layer: 11
   m_Name: TestTower
   m_TagString: Untagged
@@ -320,10 +320,11 @@ MonoBehaviour:
   target: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distance: 0
+  offset: {x: 0, y: 0, z: 0}
   groundedMask:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &864047158
+--- !u!114 &1741060853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,14 +333,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4457593369233793390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5256028ec872943b4f96fd2f54de00, type: 3}
+  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 62906068ba020274b9b08fc254a426a6, type: 2}
-  destroyState: {fileID: 11400000, guid: 96030b80a01e659448c8f0d4750db979, type: 2}
-  remainState: {fileID: 11400000, guid: add0053284cd61a49a5f65ef8af34060, type: 2}
-  updateRate: 0.5
-  status: {fileID: 0}
+  aiConfigs:
+  - aiId: 4ec1ca6a-6d5e-49a8-9af1-9ec96734ebc5
+    intervalMin: 0.5
+    intervalMax: 0.5
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
 --- !u!1 &4457593369721433214
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +432,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Test Projectile Ability
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: abilityEffects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: abilityEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 45e1feda8d48eb14d8c4f1faf60d6f4c,
+        type: 2}
+    - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 5120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949355031069859308, guid: 0be748b6f57715641a99156bc079eeff,
+        type: 3}
+      propertyPath: multiTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4285924794078333588, guid: 0be748b6f57715641a99156bc079eeff,
         type: 3}
