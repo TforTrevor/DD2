@@ -33,8 +33,9 @@ MonoBehaviour:
     ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":af0fc77f4ff844b08d4828a9744b7861}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI"}}]}'
   editorConfiguration: '{"offset":{"@x":-18,"@y":48},"zoom":1,"SelectorView":{"ViewArea":{"@left":82,"@top":148,"@width":200,"@height":160},"Name":"Get
-    Target","QualifierView":{"ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
-    for Targets"}}},"SelectorView":{"ViewArea":{"@left":642,"@top":148,"@width":200,"@height":100},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Use
+    Target","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":642,"@top":148,"@width":200,"@height":100},"Name":"Use
+    Ability","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Use
     Ability"}}},"SelectorView":{"ViewArea":{"@left":362,"@top":148,"@width":200,"@height":220},"Name":"Check
-    Target","QualifierView":{"Name":"Clear Target Score","ActionView":{"@connectorType":"Composite"}},"QualifierView":{"Name":"Keep
-    Target Score","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{}}}'
+    Target","QualifierView":{"Name":"Clear Target Score","ActionView":{"@connectorType":"Composite","Name":"Clear
+    Target"}},"QualifierView":{"Name":"Keep Target Score","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{}}}'
