@@ -12,7 +12,7 @@ namespace DD2.AI.Scorers
         [ApexSerialization] bool not;
         public override float Score(IAIContext context)
         {
-            EnemyContext c = (EnemyContext)context;
+            AIContext c = (AIContext)context;
             if (c.target == null)
             {
                 return not ? score : 0;

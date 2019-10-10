@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1719459976, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: Basic Tower
+  m_EditorClassIdentifier: 
+  description: 
+  version: 16779010
+  aiId: 4ec1ca6a-6d5e-49a8-9af1-9ec96734ebc5
+  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":7689d5d4058c4e21a225577856cb7ada,"_id":4ec1ca6a6d5e49a89af19ec96734ebc5,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":7689d5d4058c4e21a225577856cb7ada,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":0e5da587218442f49b4d7bc0244b834f},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
+    Assembly-CSharp","not":false,"score":2}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.TargetScanner,
+    Assembly-CSharp","layerMasks":4096},{"@type":"DD2.AI.Actions.SelectBestTarget,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.PresenceOption,
+    Assembly-CSharp","multiplier":1}]}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":af0fc77f4ff844b08d4828a9744b7861,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.UseAbility,
+    Assembly-CSharp","index":0,"enable":true}]}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":0e5da587218442f49b4d7bc0244b834f,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.UseAbility,
+    Assembly-CSharp","index":0,"enable":false},{"@type":"DD2.AI.Actions.ClearTarget,
+    Assembly-CSharp"}]},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget, Assembly-CSharp","not":true,"checkCone":false,"rangeCheck":Attack,"score":3},{"@type":"DD2.AI.Scorers.RangeCheckTarget,
+    Assembly-CSharp","not":true,"checkCone":false,"rangeCheck":Search,"score":3}]},{"@type":"Apex.AI.FixedScoreQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":af0fc77f4ff844b08d4828a9744b7861}}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI"}}]}'
+  editorConfiguration: '{"offset":{"@x":-18,"@y":48},"zoom":1,"SelectorView":{"ViewArea":{"@left":82,"@top":148,"@width":200,"@height":160},"Name":"Get
+    Target","QualifierView":{"ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":642,"@top":148,"@width":200,"@height":100},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Use
+    Ability"}}},"SelectorView":{"ViewArea":{"@left":362,"@top":148,"@width":200,"@height":220},"Name":"Check
+    Target","QualifierView":{"Name":"Clear Target Score","ActionView":{"@connectorType":"Composite"}},"QualifierView":{"Name":"Keep
+    Target Score","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{}}}'

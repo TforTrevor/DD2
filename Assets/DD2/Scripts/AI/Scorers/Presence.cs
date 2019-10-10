@@ -7,15 +7,24 @@ using DD2.AI.Context;
 
 namespace DD2.AI.Scorers
 {
-    public class Presence : OptionScorerBase<Status>
+    public class PresenceOption : OptionScorerBase<Status>
     {
         [ApexSerialization] float multiplier = 1;
 
         public override float Score(IAIContext context, Status status)
         {
-            EnemyContext c = (EnemyContext)context;
+            AIContext c = (AIContext)context;
             float score = status.GetPresence() * multiplier;
             return score;
+        }
+    }
+
+    public class Presence : ContextualScorerBase
+    {
+        public override float Score(IAIContext context)
+        {
+            AIContext c = (AIContext)context;
+            return c.target.GetPresence() * score;
         }
     }
 }

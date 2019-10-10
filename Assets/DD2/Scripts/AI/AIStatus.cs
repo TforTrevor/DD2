@@ -17,13 +17,13 @@ namespace DD2.AI
         [SerializeField] float distance;
         [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
-        public EnemyContext enemyContext;
+        public AIContext enemyContext;
 
         protected override void Awake()
         {
             base.Awake();
             navMeshAgent = GetComponent<NavMeshAgent>();
-            enemyContext = new EnemyContext(this);
+            enemyContext = new AIContext(this);
         }
 
         public override void Ragdoll()

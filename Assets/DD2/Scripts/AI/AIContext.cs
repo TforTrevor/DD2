@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI;
+using DD2.Abilities;
 
 namespace DD2.AI.Context
 {
-    public class EnemyContext : IAIContext
+    public class AIContext : IAIContext
     {
-        public EnemyContext(AIStatus status)
+        public AIContext(AIStatus status)
         {
-            enemy = status;
+            entity = status;
             targetList = new List<Status>();
         }
 
-        public AIStatus enemy;
+        public AIStatus entity;
         public List<Status> targetList;
         public Status target;
     }

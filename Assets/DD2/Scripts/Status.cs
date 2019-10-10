@@ -139,5 +139,15 @@ namespace DD2
         {
             return stats.GetAttackRange();
         }
+
+        public float GetSearchRange()
+        {
+            return stats.GetSearchRange();
+        }
+
+        public float GetSearchAngle()
+        {
+            return stats.GetSearchAngle();
+        }
     }
 }

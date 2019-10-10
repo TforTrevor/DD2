@@ -10,7 +10,7 @@ namespace DD2.AI.Actions
     {
         public override void Execute(IAIContext context)
         {
-            EnemyContext c = (EnemyContext)context;
+            AIContext c = (AIContext)context;
 
             Status best = GetBest(context, c.targetList);
             c.target = best;

@@ -21,7 +21,7 @@ MonoBehaviour:
     Assembly-CSharp","not":false,"score":10}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.TargetScanner,
     Assembly-CSharp","layerMasks":1024},{"@type":"DD2.AI.Actions.SelectBestTarget,
-    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.Presence, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.Distance,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.PresenceOption,
     Assembly-CSharp","multiplier":1}]}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":ef91fde56a6f41aab7268e268e78333f,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.MoveToTarget,
     Assembly-CSharp","ensureMaxRange":true}]}}}]}'

@@ -160,5 +160,10 @@ namespace DD2.Abilities
         }
         protected virtual void StartEffects() { }
         protected virtual void EndEffects() { }
+
+        public bool GetToggleState()
+        {
+            return toggleState;
+        }
     }
 }

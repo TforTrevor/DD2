@@ -13,7 +13,7 @@ namespace DD2.AI.Scorers
 
         public override float Score(IAIContext context, Status status)
         {
-            EnemyContext c = (EnemyContext)context;
+            AIContext c = (AIContext)context;
             float score = status.GetCurrentHealth() / status.GetMaxHealth() * multiplier;
             return score;
         }
