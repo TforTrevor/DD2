@@ -689,7 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: ecac71d5b6eeaa0419166f1a63d947a5, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 1713111491}
+  m_SkySettings: {fileID: 2041208816}
   m_SkySettingsFromProfile: {fileID: -8637867899953461897, guid: ecac71d5b6eeaa0419166f1a63d947a5,
     type: 2}
 --- !u!1001 &1181489056
@@ -1234,7 +1234,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1713111491
+--- !u!114 &2041208816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1375,6 +1375,11 @@ PrefabInstance:
     - target: {fileID: 4457593369233793385, guid: 3f62256095b38494b9f94066f5274bbe,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393092326826140726, guid: 3f62256095b38494b9f94066f5274bbe,
+        type: 3}
+      propertyPath: bufferInput
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
