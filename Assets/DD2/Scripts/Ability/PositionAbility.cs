@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using MEC;
-using RoboRyanTron.SearchableEnum;
 using DD2.Util;
 using UnityEngine.AI;
 
@@ -58,7 +56,7 @@ namespace DD2.Abilities
                 }
                 else
                 {
-                    Collider collider = Utilities.GetClosestToPoint(hitColliders, position);
+                    Collider collider = Util.Utilities.GetClosestToPoint(hitColliders, position);
                     if (collider)
                     {
                         CreateProjectile(collider.transform);

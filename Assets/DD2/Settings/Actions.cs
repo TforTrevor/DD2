@@ -1,5 +1,6 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/DD2/Settings/Actions.inputactions'
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -7,10 +8,10 @@ using UnityEngine.InputSystem.Utilities;
 
 namespace DD2.Input
 {
-    public class Actions : IInputActionCollection
+    public class @Actions : IInputActionCollection, IDisposable
     {
         private InputActionAsset asset;
-        public Actions()
+        public @Actions()
         {
             asset = InputActionAsset.FromJson(@"{
     ""name"": ""Actions"",
@@ -171,7 +172,7 @@ namespace DD2.Input
             m_Standard_ConfirmBuild = m_Standard.FindAction("ConfirmBuild", throwIfNotFound: true);
         }
 
-        ~Actions()
+        public void Dispose()
         {
             UnityEngine.Object.Destroy(asset);
         }
@@ -224,8 +225,8 @@ namespace DD2.Input
         private readonly InputAction m_Standard_ConfirmBuild;
         public struct StandardActions
         {
-            private Actions m_Wrapper;
-            public StandardActions(Actions wrapper) { m_Wrapper = wrapper; }
+            private @Actions m_Wrapper;
+            public StandardActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Standard_Move;
             public InputAction @Look => m_Wrapper.m_Standard_Look;
             public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
@@ -239,34 +240,34 @@ namespace DD2.Input
             {
                 if (m_Wrapper.m_StandardActionsCallbackInterface != null)
                 {
-                    Move.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    Move.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    Move.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    Look.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    Look.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    Look.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    BuildTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    BuildTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    BuildTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    ConfirmBuild.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
-                    ConfirmBuild.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
-                    ConfirmBuild.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
+                    @Move.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
+                    @Look.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
+                    @Look.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
+                    @Look.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
+                    @BuildTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
+                    @BuildTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
+                    @BuildTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
+                    @ConfirmBuild.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
+                    @ConfirmBuild.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
+                    @ConfirmBuild.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
                 {
-                    Move.started += instance.OnMove;
-                    Move.performed += instance.OnMove;
-                    Move.canceled += instance.OnMove;
-                    Look.started += instance.OnLook;
-                    Look.performed += instance.OnLook;
-                    Look.canceled += instance.OnLook;
-                    BuildTower.started += instance.OnBuildTower;
-                    BuildTower.performed += instance.OnBuildTower;
-                    BuildTower.canceled += instance.OnBuildTower;
-                    ConfirmBuild.started += instance.OnConfirmBuild;
-                    ConfirmBuild.performed += instance.OnConfirmBuild;
-                    ConfirmBuild.canceled += instance.OnConfirmBuild;
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Look.started += instance.OnLook;
+                    @Look.performed += instance.OnLook;
+                    @Look.canceled += instance.OnLook;
+                    @BuildTower.started += instance.OnBuildTower;
+                    @BuildTower.performed += instance.OnBuildTower;
+                    @BuildTower.canceled += instance.OnBuildTower;
+                    @ConfirmBuild.started += instance.OnConfirmBuild;
+                    @ConfirmBuild.performed += instance.OnConfirmBuild;
+                    @ConfirmBuild.canceled += instance.OnConfirmBuild;
                 }
             }
         }
