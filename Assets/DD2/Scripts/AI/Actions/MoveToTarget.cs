@@ -12,17 +12,18 @@ namespace DD2.AI.Actions
         [ApexSerialization] bool ensureMaxRange;
         public override void Execute(IAIContext context)
         {
-            AIContext c = (AIContext)context;
+            AIContext ctx = (AIContext)context;
+            Enemy enemy = (Enemy)ctx.entity;
 
-            if (c.target)
+            if (ctx.target)
             {
-                float distance = Vector3.Distance(c.target.GetPosition(), c.entity.GetPosition());
-                if (distance > c.entity.GetAttackRange() || ensureMaxRange)
+                float distance = Vector3.Distance(ctx.target.GetPosition(), enemy.GetPosition());
+                if (distance > enemy.GetAttackRange() || ensureMaxRange)
                 {
-                    Vector3 direction = Vector3.Normalize(c.target.GetPosition() - c.entity.GetPosition());
-                    float distanceFromRange = distance - c.entity.GetAttackRange();
-                    Vector3 position = (direction * distanceFromRange) + c.entity.GetPosition();
-                    c.entity.navMeshAgent.SetDestination(position);
+                    Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - enemy.GetPosition());
+                    float distanceFromRange = distance - enemy.GetAttackRange();
+                    Vector3 position = (direction * distanceFromRange) + enemy.GetPosition();
+                    enemy.navMeshAgent.SetDestination(position);
                 }
             }
         }

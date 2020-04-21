@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SmartData.SmartEvent;
-using SmartData.SmartVector3;
+using DD2.SOArchitecture;
 
 public class PlayerTower : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class PlayerTower : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     [SerializeField] LayerMask towerMask;
 
-    [SerializeField] Vector3Reader lookInput;
+    [SerializeField] Vector3Variable lookInput;
     [SerializeField] float rotationSensitivity;
 
     PlayerStats playerStats;
@@ -89,7 +88,7 @@ public class PlayerTower : MonoBehaviour
     void BuildRotation()
     {
         Quaternion rotation = tower.rotation; 
-        rotation *= Quaternion.Euler(Vector3.up * lookInput.value.x * rotationSensitivity * Time.deltaTime);
+        rotation *= Quaternion.Euler(Vector3.up * lookInput.Value.x * rotationSensitivity * Time.deltaTime);
         tower.rotation = rotation;
     }
 

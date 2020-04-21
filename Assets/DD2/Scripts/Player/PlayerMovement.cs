@@ -1,36 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SmartData.SmartVector3;
+using DD2.SOArchitecture;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Vector3Reader moveInput;
-    [SerializeField] Vector3Reader lookInput;
+    [SerializeField] Vector3Variable moveInput;
+    [SerializeField] Vector3Variable lookInput;
     [SerializeField] float sensitivity;
     [SerializeField] float maxSpeed;
     [SerializeField] float acceleration;
     [SerializeField] Vector2 direction;
+    [SerializeField] Transform cameraParent;
 
     Rigidbody rb;
+    float xRot;
 
-    void Start()
+    public bool enableMovement = true;
+    public bool enableLook = true;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        Rotate();
-        Move();
+        if (enableLook)
+            Rotate();
+        if (enableMovement)
+            Move();
         rb.AddForce(Vector3.down * 9.81f);
     }
 
     void Move()
     {
-        if (Mathf.Abs(moveInput.value.x) > 0)
+        if (Mathf.Abs(moveInput.Value.x) > 0)
         {
-            direction.x += moveInput.value.x * (1 / acceleration) * Time.deltaTime;
+            direction.x += moveInput.Value.x * (1 / acceleration) * Time.deltaTime;
             direction.x = Mathf.Clamp(direction.x, -1, 1);
         }
         else
@@ -44,9 +51,9 @@ public class PlayerMovement : MonoBehaviour
                 direction.x -= Mathf.Sign(direction.x) * (1 / acceleration) * Time.deltaTime;
             }
         }
-        if (Mathf.Abs(moveInput.value.y) > 0)
+        if (Mathf.Abs(moveInput.Value.y) > 0)
         {
-            direction.y += moveInput.value.y * (1 / acceleration) * Time.deltaTime;
+            direction.y += moveInput.Value.y * (1 / acceleration) * Time.deltaTime;
             direction.y = Mathf.Clamp(direction.y, -1, 1);
         }
         else
@@ -67,8 +74,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotate()
     {
-        Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.value.x * sensitivity * Time.deltaTime, Vector3.up);
+        Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.Value.x * sensitivity * Time.deltaTime, Vector3.up);
         rb.MoveRotation(rb.rotation * deltaRotation);
+
+        Vector3 v = cameraParent.localEulerAngles;
+        v.x += lookInput.Value.y * sensitivity * Time.deltaTime;
+        cameraParent.localEulerAngles = v;
         //transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
     }
 }

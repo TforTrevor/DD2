@@ -8,14 +8,14 @@ namespace DD2.AI.Context
 {
     public class AIContext : IAIContext
     {
-        public AIContext(AIStatus status)
-        {
-            entity = status;
-            targetList = new List<Status>();
-        }
+        public EntityAI entity;
+        public List<Entity> targetList;
+        public Entity target;
 
-        public AIStatus entity;
-        public List<Status> targetList;
-        public Status target;
+        public AIContext(EntityAI entity)
+        {
+            this.entity = entity;
+            targetList = new List<Entity>();
+        }
     }
 }

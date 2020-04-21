@@ -6,13 +6,13 @@ using DD2.AI.Context;
 
 namespace DD2.AI.Actions
 {
-    public class SelectBestTarget : ActionWithOptions<Status>
+    public class SelectBestTarget : ActionWithOptions<Entity>
     {
         public override void Execute(IAIContext context)
         {
             AIContext c = (AIContext)context;
 
-            Status best = GetBest(context, c.targetList);
+            Entity best = GetBest(context, c.targetList);
             c.target = best;
         }
     }

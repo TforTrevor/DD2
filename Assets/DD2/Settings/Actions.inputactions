@@ -36,6 +36,38 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "cd81f375-4d5a-4848-adbd-08e3703df000",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Ability1",
+                    "type": "Button",
+                    "id": "e770327e-f883-455d-b37b-73146efcd76d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SecondaryFire",
+                    "type": "Button",
+                    "id": "c206c827-8ecb-479d-a661-4388133be1bd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PrimaryFire",
+                    "type": "Button",
+                    "id": "95ee6682-b7d3-40a9-8b52-8fc72ca06a94",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -126,6 +158,50 @@
                     "action": "ConfirmBuild",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7b14872-17a7-40f2-bf4d-e1d50aa9c1d3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50d9e7ee-3a69-4d9a-adb5-f31a07452759",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d45fc395-283d-4ca7-a9f7-74b23be53f97",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "91115c7d-90b0-43b6-b135-aa29386890b5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -133,7 +209,6 @@
     "controlSchemes": [
         {
             "name": "Keyboard and Mouse",
-            "basedOn": "",
             "bindingGroup": "Keyboard and Mouse",
             "devices": [
                 {

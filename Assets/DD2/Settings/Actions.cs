@@ -10,7 +10,7 @@ namespace DD2.Input
 {
     public class @Actions : IInputActionCollection, IDisposable
     {
-        private InputActionAsset asset;
+        public InputActionAsset asset { get; }
         public @Actions()
         {
             asset = InputActionAsset.FromJson(@"{
@@ -48,6 +48,38 @@ namespace DD2.Input
                     ""name"": ""ConfirmBuild"",
                     ""type"": ""Button"",
                     ""id"": ""9b2529f8-8161-4bb8-ade3-9a6a9b94de03"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd81f375-4d5a-4848-adbd-08e3703df000"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ability1"",
+                    ""type"": ""Button"",
+                    ""id"": ""e770327e-f883-455d-b37b-73146efcd76d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SecondaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""c206c827-8ecb-479d-a661-4388133be1bd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PrimaryFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""95ee6682-b7d3-40a9-8b52-8fc72ca06a94"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -141,6 +173,50 @@ namespace DD2.Input
                     ""action"": ""ConfirmBuild"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7b14872-17a7-40f2-bf4d-e1d50aa9c1d3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50d9e7ee-3a69-4d9a-adb5-f31a07452759"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d45fc395-283d-4ca7-a9f7-74b23be53f97"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91115c7d-90b0-43b6-b135-aa29386890b5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrimaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -170,6 +246,10 @@ namespace DD2.Input
             m_Standard_Look = m_Standard.FindAction("Look", throwIfNotFound: true);
             m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
             m_Standard_ConfirmBuild = m_Standard.FindAction("ConfirmBuild", throwIfNotFound: true);
+            m_Standard_Jump = m_Standard.FindAction("Jump", throwIfNotFound: true);
+            m_Standard_Ability1 = m_Standard.FindAction("Ability1", throwIfNotFound: true);
+            m_Standard_SecondaryFire = m_Standard.FindAction("SecondaryFire", throwIfNotFound: true);
+            m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -223,6 +303,10 @@ namespace DD2.Input
         private readonly InputAction m_Standard_Look;
         private readonly InputAction m_Standard_BuildTower;
         private readonly InputAction m_Standard_ConfirmBuild;
+        private readonly InputAction m_Standard_Jump;
+        private readonly InputAction m_Standard_Ability1;
+        private readonly InputAction m_Standard_SecondaryFire;
+        private readonly InputAction m_Standard_PrimaryFire;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -231,6 +315,10 @@ namespace DD2.Input
             public InputAction @Look => m_Wrapper.m_Standard_Look;
             public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
             public InputAction @ConfirmBuild => m_Wrapper.m_Standard_ConfirmBuild;
+            public InputAction @Jump => m_Wrapper.m_Standard_Jump;
+            public InputAction @Ability1 => m_Wrapper.m_Standard_Ability1;
+            public InputAction @SecondaryFire => m_Wrapper.m_Standard_SecondaryFire;
+            public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -252,6 +340,18 @@ namespace DD2.Input
                     @ConfirmBuild.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
                     @ConfirmBuild.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
                     @ConfirmBuild.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
+                    @Jump.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
+                    @Ability1.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
+                    @Ability1.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
+                    @Ability1.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
+                    @SecondaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
+                    @SecondaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
+                    @SecondaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
+                    @PrimaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
+                    @PrimaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
+                    @PrimaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -268,6 +368,18 @@ namespace DD2.Input
                     @ConfirmBuild.started += instance.OnConfirmBuild;
                     @ConfirmBuild.performed += instance.OnConfirmBuild;
                     @ConfirmBuild.canceled += instance.OnConfirmBuild;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
+                    @Ability1.started += instance.OnAbility1;
+                    @Ability1.performed += instance.OnAbility1;
+                    @Ability1.canceled += instance.OnAbility1;
+                    @SecondaryFire.started += instance.OnSecondaryFire;
+                    @SecondaryFire.performed += instance.OnSecondaryFire;
+                    @SecondaryFire.canceled += instance.OnSecondaryFire;
+                    @PrimaryFire.started += instance.OnPrimaryFire;
+                    @PrimaryFire.performed += instance.OnPrimaryFire;
+                    @PrimaryFire.canceled += instance.OnPrimaryFire;
                 }
             }
         }
@@ -287,6 +399,10 @@ namespace DD2.Input
             void OnLook(InputAction.CallbackContext context);
             void OnBuildTower(InputAction.CallbackContext context);
             void OnConfirmBuild(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnAbility1(InputAction.CallbackContext context);
+            void OnSecondaryFire(InputAction.CallbackContext context);
+            void OnPrimaryFire(InputAction.CallbackContext context);
         }
     }
 }

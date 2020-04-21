@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SmartData.SmartFloat;
 using DD2;
 public class PlayerStats : MonoBehaviour
 {
@@ -20,7 +19,7 @@ public class PlayerStats : MonoBehaviour
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

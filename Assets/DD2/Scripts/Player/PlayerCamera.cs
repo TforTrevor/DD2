@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SmartData.SmartVector3;
+using DD2.SOArchitecture;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] Vector3Reader lookInput;
+    [SerializeField] Vector3Variable lookInput;
     [SerializeField] float sensitivity;
     [SerializeField] float maxRot;
     [SerializeField] float minRot;
@@ -18,6 +18,6 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.right, -lookInput.value.y * sensitivity * Time.deltaTime);
+        transform.Rotate(Vector3.right, -lookInput.Value.y * sensitivity * Time.deltaTime);
     }
 }

@@ -13,15 +13,16 @@ namespace DD2.AI.Actions
         [ApexSerialization] bool enable;
         public override void Execute(IAIContext context)
         {
-            AIContext c = (AIContext)context;
+            AIContext ctx = (AIContext)context;
+            Entity entity = ctx.entity;
 
-            if (!c.entity.GetAbility(index).GetToggleState() && enable)
+            if (!entity.GetAbility(index).GetToggleState() && enable)
             {
-                c.entity.GetAbility(index).UseAbility(c.target.transform);
+                entity.GetAbility(index).UseAbility(ctx.target.transform);
             }
-            else if (c.entity.GetAbility(index).GetToggleState() && !enable)
+            else if (entity.GetAbility(index).GetToggleState() && !enable)
             {
-                c.entity.GetAbility(index).UseAbility(c.target.transform);
+                entity.GetAbility(index).UseAbility(ctx.target.transform);
             }
         }
     }
