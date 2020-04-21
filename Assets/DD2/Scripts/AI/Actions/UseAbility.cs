@@ -1,15 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Apex.AI;
+using Apex.Serialization;
+using DD2.AI.Context;
 
 namespace DD2.AI.Actions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/AI/Actions/Use Ability")]
-    public class UseAbility : Action
+    public class UseAbility : ActionBase
     {
-        public override void Act(StateController controller)
+        [ApexSerialization] int index;
+        [ApexSerialization] bool enable;
+        public override void Execute(IAIContext context)
         {
-            controller.status.GetAbility(0).UseAbility(controller.status.target);
+            AIContext ctx = (AIContext)context;
+            Entity entity = ctx.entity;
+
+            if (!entity.GetAbility(index).GetToggleState() && enable)
+            {
+                entity.GetAbility(index).UseAbility(ctx.target.transform);
+            }
+            else if (entity.GetAbility(index).GetToggleState() && !enable)
+            {
+                entity.GetAbility(index).UseAbility(ctx.target.transform);
+            }
         }
     }
 }

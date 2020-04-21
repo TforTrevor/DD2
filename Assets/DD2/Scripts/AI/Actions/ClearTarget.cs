@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Apex.AI;
+using Apex.Serialization;
+using DD2.AI.Context;
 
 namespace DD2.AI.Actions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/AI/Actions/Clear Target")]
-    public class ClearTarget : Action
+    public class ClearTarget : ActionBase
     {
-        public override void Act(StateController controller)
+        public override void Execute(IAIContext context)
         {
-            controller.status.target = null;
+            AIContext c = (AIContext)context;
+            c.target = null;
         }
     }
 }

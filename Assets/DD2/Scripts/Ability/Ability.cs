@@ -4,6 +4,7 @@ using UnityEngine;
 using MEC;
 using NaughtyAttributes;
 using RoboRyanTron.SearchableEnum;
+using DD2.Actions;
 
 namespace DD2.Abilities
 {
@@ -11,7 +12,7 @@ namespace DD2.Abilities
     {
         //Effects
         [SerializeField] [ReorderableList] [Expandable]
-        protected Effect[] abilityEffects;
+        protected Action[] abilityEffects;
         //Cooldown
         [SerializeField] [MinValue(0)] [BoxGroup("Cooldown")]
         protected float cooldown;
@@ -47,7 +48,7 @@ namespace DD2.Abilities
         [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         
-        Status status;
+        Entity status;
 
         public virtual void UseAbility(Transform transform)
         {
@@ -117,7 +118,7 @@ namespace DD2.Abilities
             StartEffects();
             for (int i = 0; i < abilityEffects.Length; i++)
             {
-                abilityEffects[i].ApplyEffect(target, target.GetComponent<Status>(), position);
+                abilityEffects[i].DoAction(target, target.GetComponent<Entity>(), position);
             }
             EndEffects();
         }
@@ -127,7 +128,7 @@ namespace DD2.Abilities
             return status.GetFirePosition();
         }
 
-        public void SetStatus(Status status)
+        public void SetEntity(Entity status)
         {
             this.status = status;
         }
@@ -160,5 +161,10 @@ namespace DD2.Abilities
         }
         protected virtual void StartEffects() { }
         protected virtual void EndEffects() { }
+
+        public bool GetToggleState()
+        {
+            return toggleState;
+        }
     }
 }

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1719459976, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: Basic Enemy
+  m_EditorClassIdentifier: 
+  description: 
+  version: 16779010
+  aiId: b84a18f4-e411-4811-a7dc-c5cf5372e71b
+  configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":3cb09a8eaa4141629485cb110e2949a9,"_id":b84a18f4e4114811a7dcc5cf5372e71b,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":3cb09a8eaa4141629485cb110e2949a9,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":ef91fde56a6f41aab7268e268e78333f},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
+    Assembly-CSharp","not":false,"score":10}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.TargetScanner,
+    Assembly-CSharp","layerMasks":1024},{"@type":"DD2.AI.Actions.SelectBestTarget,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.PresenceOption,
+    Assembly-CSharp","multiplier":1}]}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":ef91fde56a6f41aab7268e268e78333f,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.MoveToTarget,
+    Assembly-CSharp","ensureMaxRange":true}]}}}]}'
+  editorConfiguration: '{"offset":{"@x":-34,"@y":76},"zoom":1,"SelectorView":{"ViewArea":{"@left":166,"@top":216,"@width":200,"@height":160},"Name":"Scan
+    for Targets","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
+    for Targets","Description":"Scans for targets and adds their Status to a list
+    in the EnemyContext"}}},"SelectorView":{"ViewArea":{"@left":446,"@top":216,"@width":200,"@height":100},"Name":"Pursue
+    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'
