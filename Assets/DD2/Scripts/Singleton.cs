@@ -4,22 +4,9 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
+    [SerializeField] static bool destroyOnLoad;
+    static T instance;
 
-    #region Fields
-
-    /// <summary>
-    /// The instance.
-    /// </summary>
-    private static T instance;
-
-    #endregion
-
-    #region Properties
-
-    /// <summary>
-    /// Gets the instance.
-    /// </summary>
-    /// <value>The instance.</value>
     public static T Instance
     {
         get
@@ -38,26 +25,19 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component
         }
     }
 
-    #endregion
-
-    #region Methods
-
-    /// <summary>
-    /// Use this for initialization.
-    /// </summary>
     protected virtual void Awake()
     {
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            if (!destroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }            
         }
         else
         {
             Destroy(gameObject);
         }
     }
-
-    #endregion
-
 }

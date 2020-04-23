@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] GameEvent ability1;
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
+    [SerializeField] GameEvent menu;
 
     void OnMove(InputValue value)
     {
@@ -25,33 +26,28 @@ public class PlayerInput : MonoBehaviour
         lookVector.Value = value.Get<Vector2>();
     }
 
-    void OnBuildTower()
-    {
-        buildTower.Raise();
-    }
-
-    void OnConfirmBuild()
-    {
-        confirmBuild.Raise();
-    }
-
     void OnJump()
     {
-        jumpEvent.Raise();
+        jumpEvent?.Raise();
     }
 
     void OnAbility1()
     {
-        ability1.Raise();
+        ability1?.Raise();
     }
 
     void OnSecondaryFire()
     {
-        secondaryFire.Raise();
+        secondaryFire?.Raise();
     }
 
     void OnPrimaryFire()
     {
-        primaryFire.Raise();
+        primaryFire?.Raise();
+    }
+
+    void OnMenu()
+    {
+        menu?.Raise();
     }
 }

@@ -10,7 +10,7 @@ namespace DD2
     {
         [SerializeField] float maxHealth;
         [SerializeField] float attackRange;
-        [SerializeField] float attackCone;
+        [SerializeField] float attackAngle;
         [SerializeField] float searchRange;
         [SerializeField] float searchAngle;
         [SerializeField] float presence;
@@ -18,6 +18,7 @@ namespace DD2
         [SerializeField] float speed;
         [SerializeField] float attackRate;
         [SerializeField] float ragdollTime;
+        [SerializeField] float radius;
 
         public float GetMaxHealth()
         {
@@ -32,6 +33,11 @@ namespace DD2
         public float GetAttackRange()
         {
             return attackRange;
+        }
+
+        public float GetAttackAngle()
+        {
+            return attackAngle;
         }
 
         public float GetSearchRange()
@@ -57,6 +63,11 @@ namespace DD2
         public float GetRagdollTime()
         {
             return ragdollTime;
+        }
+
+        public float GetRadius()
+        {
+            return radius;
         }
     }
 }

@@ -50,8 +50,9 @@ namespace DD2.Abilities
                 {
                     foreach (Collider hitCollider in hitColliders)
                     {
+                        Entity hitEntity = hitCollider.GetComponent<Entity>();
                         CreateProjectile(hitCollider.transform);
-                        ApplyEffects(hitCollider.transform, position);
+                        ApplyEffects(hitEntity, position);
                     }
                 }
                 else
@@ -59,8 +60,9 @@ namespace DD2.Abilities
                     Collider collider = Util.Utilities.GetClosestToPoint(hitColliders, position);
                     if (collider)
                     {
+                        Entity hitEntity = collider.GetComponent<Entity>();
                         CreateProjectile(collider.transform);
-                        ApplyEffects(collider.transform, position);
+                        ApplyEffects(hitEntity, position);
                     }
                 }
                 yield return Timing.WaitForSeconds(hitboxTickRate);

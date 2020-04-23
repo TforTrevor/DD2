@@ -12,37 +12,37 @@ namespace DD2.Actions
         [SerializeField] [SearchableEnum] DamageType damageType;
         [SerializeField] float damage;
 
-        public override void DoAction(Transform target, Entity status, Vector3 position)
+        public override void DoAction(Entity target, Entity caller, object payload)
         {
             switch (damageType)
             {
                 case DamageType.PercentMaxHealth:
-                    PercentMaxHealth(status);
+                    PercentMaxHealth(target, caller);
                     break;
                 case DamageType.PercentCurrentHealth:
-                    PercentCurrentHealth(status);
+                    PercentCurrentHealth(target, caller);
                     break;
                 default:
-                    Flat(status);
+                    Flat(target, caller);
                     break;
             }
         }
 
-        void Flat(Entity hitStatus)
+        void Flat(Entity target, Entity caller)
         {
-            hitStatus.Damage(damage);
+            target.Damage(caller, damage);
         }
 
-        void PercentMaxHealth(Entity hitStatus)
+        void PercentMaxHealth(Entity target, Entity caller)
         {
-            float damage = hitStatus.stats.GetMaxHealth() * this.damage;
-            hitStatus.Damage(damage);
+            float damage = target.GetStats().GetMaxHealth() * this.damage;
+            target.Damage(caller, damage);
         }
 
-        void PercentCurrentHealth(Entity hitStatus)
+        void PercentCurrentHealth(Entity target, Entity caller)
         {
-            float damage = hitStatus.GetCurrentHealth() * this.damage;
-            hitStatus.Damage(damage);
+            float damage = target.GetCurrentHealth() * this.damage;
+            target.Damage(caller, damage);
         }
 
         enum DamageType

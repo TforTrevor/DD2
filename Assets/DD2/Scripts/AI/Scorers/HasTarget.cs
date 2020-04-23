@@ -10,14 +10,31 @@ namespace DD2.AI.Scorers
     public class HasTarget : ContextualScorerBase
     {
         [ApexSerialization] bool not;
+        [ApexSerialization] bool targetList;
+        [ApexSerialization] LayerMask layerMask;
+
         public override float Score(IAIContext context)
         {
             AIContext ctx = (AIContext)context;
-            if (ctx.target == null)
+            if (targetList)
             {
+                foreach (Entity entity in ctx.targetList)
+                {
+                    if (Util.Utilities.IsInLayer(entity.gameObject, layerMask))
+                    {
+                        return not ? 0 : score;
+                    }
+                }
                 return not ? score : 0;
             }
-            return not ? 0 : score;
+            else
+            {
+                if (ctx.target != null && Util.Utilities.IsInLayer(ctx.target.gameObject, layerMask))
+                {
+                    return not ? 0 : score;
+                }
+                return not ? score : 0;
+            }            
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DD2.Actions
     {
         [SerializeField] string message;
 
-        public override void DoAction(Transform target, Entity status, Vector3 position)
+        public override void DoAction(Entity target, Entity caller, object payload)
         {
             if (!string.IsNullOrWhiteSpace(message))
             {

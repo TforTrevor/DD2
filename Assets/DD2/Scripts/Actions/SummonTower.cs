@@ -19,17 +19,17 @@ namespace DD2.Actions
         GameObject instance;
         CoroutineHandle handle;
 
-        public override void DoAction(Transform target, Entity entity, Vector3 position)
+        public override void DoAction(Entity target, Entity caller, object payload)
         {
-            if (entity == target)
+            if (caller == target)
             {
                 stage = Stage.none;
             }
             if (stage == Stage.none)
             {
                 stage = Stage.position;
-                Position(target, entity, position);
-                Player player = (Player)entity;
+                Position(target, caller);
+                Player player = (Player)caller;
                 player.SetPrimaryFire(this);
                 cancelAction.action = this;
                 player.SetSecondaryFire(cancelAction);
@@ -39,13 +39,13 @@ namespace DD2.Actions
             {
                 stage = Stage.rotation;
                 Timing.KillCoroutines(handle);
-                Rotation(target, entity, position);
+                Rotation(target, caller);
             }
             else if (stage == Stage.rotation)
             {
                 stage = Stage.build;
                 Timing.KillCoroutines(handle);
-                Build(target, entity, position);
+                Build(target, caller);
             }
             else if (stage == Stage.build)
             {
@@ -53,9 +53,9 @@ namespace DD2.Actions
             }
         }
 
-        public override void Cancel(Transform target, Entity entity, Vector3 position)
+        public override void Cancel(Entity target, Entity caller, object payload)
         {
-            Player player = (Player)entity;
+            Player player = (Player)caller;
             Timing.KillCoroutines(handle);
             Destroy(instance);
             player.SetPrimaryFire(null);
@@ -69,24 +69,24 @@ namespace DD2.Actions
             stage = Stage.none;
         }
 
-        private void Position(Transform target, Entity entity, Vector3 position)
+        private void Position(Entity target, Entity caller)
         {
-            Player player = (Player)entity;
+            Player player = (Player)caller;
             instance = Instantiate(tower.gameObject);
-            handle = Timing.RunCoroutine(MoveRoutine(target));
+            handle = Timing.RunCoroutine(MoveRoutine(target.transform));
         }
 
-        private void Rotation(Transform target, Entity entity, Vector3 position)
+        private void Rotation(Entity target, Entity caller)
         {
-            Player player = (Player)entity;
+            Player player = (Player)caller;
             player.ToggleLook(false);
             player.ToggleMovement(false);
             handle = Timing.RunCoroutine(RotateRoutine(player.GetLookInput()));
         }
 
-        private void Build(Transform target, Entity entity, Vector3 position)
+        private void Build(Entity target, Entity caller)
         {
-            Player player = (Player)entity;
+            Player player = (Player)caller;
             instance.GetComponent<Tower>().Build();
             player.SetPrimaryFire(null);
             player.SetSecondaryFire(null);

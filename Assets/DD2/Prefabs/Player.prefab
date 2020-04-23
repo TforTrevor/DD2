@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1604891324}
   - component: {fileID: 1604891323}
   - component: {fileID: 1604891322}
+  - component: {fileID: 537350847}
   m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
@@ -188,6 +189,25 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
+--- !u!114 &537350847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604891320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f659a6cf71631489efdf567f588360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  currentHealth: 0
+  fireTransform: {fileID: 0}
+  grounded: 0
+  ragdolled: 0
+  actions: []
+  abilities: []
 --- !u!1 &936374265691688859
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,8 +290,8 @@ MonoBehaviour:
           m_MethodName: DoAbility1
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 1604891321}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+            m_ObjectArgument: {fileID: 537350847}
+            m_ObjectArgumentAssemblyTypeName: DD2.Entity, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -298,6 +318,21 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3180383434907916282}
           m_MethodName: DoPrimaryFire
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: 4e7a1348399c47e4c89ae01dc229e5a6, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1505551297}
+          m_MethodName: ToggleCursorLock
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -340,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae78809ab5619b41b5349da2074eda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 6b3201fd8285bc24a845db6df3518144, type: 2}
+  stats: {fileID: 11400000, guid: 8cc69f47008ec2a43857b42740d77c89, type: 2}
   currentHealth: 0
   fireTransform: {fileID: 0}
   grounded: 0
@@ -371,6 +406,7 @@ MonoBehaviour:
   ability1: {fileID: 11400000, guid: f486f5c91b26dd54abff8b3c1c510478, type: 2}
   secondaryFire: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}
   primaryFire: {fileID: 11400000, guid: c83d9601a9efeb74b816475ead59642c, type: 2}
+  menu: {fileID: 11400000, guid: 4e7a1348399c47e4c89ae01dc229e5a6, type: 2}
 --- !u!114 &5629349538429733945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +574,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -548,17 +584,17 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -15.5
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -568,7 +604,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -578,7 +614,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -593,7 +629,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}

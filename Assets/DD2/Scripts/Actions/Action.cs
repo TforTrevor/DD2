@@ -6,8 +6,12 @@ namespace DD2.Actions
 {
     public abstract class Action : ScriptableObject
     {
-        public abstract void DoAction(Transform target, Entity entity, Vector3 position);
-        public virtual void Cancel(Transform target, Entity entity, Vector3 position)
+        public void DoAction(Entity target, Entity caller)
+        {
+            DoAction(target, caller, null);
+        }
+        public abstract void DoAction(Entity target, Entity caller, object payload);
+        public virtual void Cancel(Entity target, Entity caller, object payload)
         {
 
         }

@@ -10,10 +10,10 @@ namespace DD2.AI.Actions
     {
         public override void Execute(IAIContext context)
         {
-            AIContext c = (AIContext)context;
+            AIContext ctx = (AIContext)context;
 
-            Entity best = GetBest(context, c.targetList);
-            c.target = best;
+            Entity best = GetBest(context, ctx.targetList);
+            ctx.target = best;
         }
     }
 }

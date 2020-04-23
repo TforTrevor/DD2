@@ -37,22 +37,6 @@ namespace DD2.Input
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""BuildTower"",
-                    ""type"": ""Button"",
-                    ""id"": ""cce43130-1ba2-4bb2-97bb-22fe1ccb46d7"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ConfirmBuild"",
-                    ""type"": ""Button"",
-                    ""id"": ""9b2529f8-8161-4bb8-ade3-9a6a9b94de03"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""cd81f375-4d5a-4848-adbd-08e3703df000"",
@@ -80,6 +64,14 @@ namespace DD2.Input
                     ""name"": ""PrimaryFire"",
                     ""type"": ""Button"",
                     ""id"": ""95ee6682-b7d3-40a9-8b52-8fc72ca06a94"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""498a5b4d-94a8-42ae-bf71-9ed37e76d2e5"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -154,28 +146,6 @@ namespace DD2.Input
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4b928016-5683-41cd-8a52-2ba45eaa187f"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""BuildTower"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2c17d20d-25d5-46ae-b43f-71c71b56640b"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""ConfirmBuild"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a7b14872-17a7-40f2-bf4d-e1d50aa9c1d3"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -191,7 +161,7 @@ namespace DD2.Input
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Ability1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -202,7 +172,7 @@ namespace DD2.Input
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""SecondaryFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -213,8 +183,19 @@ namespace DD2.Input
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""PrimaryFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a090313e-d725-457b-95f7-e2c80075ee8f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -244,12 +225,11 @@ namespace DD2.Input
             m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
             m_Standard_Move = m_Standard.FindAction("Move", throwIfNotFound: true);
             m_Standard_Look = m_Standard.FindAction("Look", throwIfNotFound: true);
-            m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
-            m_Standard_ConfirmBuild = m_Standard.FindAction("ConfirmBuild", throwIfNotFound: true);
             m_Standard_Jump = m_Standard.FindAction("Jump", throwIfNotFound: true);
             m_Standard_Ability1 = m_Standard.FindAction("Ability1", throwIfNotFound: true);
             m_Standard_SecondaryFire = m_Standard.FindAction("SecondaryFire", throwIfNotFound: true);
             m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
+            m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -301,24 +281,22 @@ namespace DD2.Input
         private IStandardActions m_StandardActionsCallbackInterface;
         private readonly InputAction m_Standard_Move;
         private readonly InputAction m_Standard_Look;
-        private readonly InputAction m_Standard_BuildTower;
-        private readonly InputAction m_Standard_ConfirmBuild;
         private readonly InputAction m_Standard_Jump;
         private readonly InputAction m_Standard_Ability1;
         private readonly InputAction m_Standard_SecondaryFire;
         private readonly InputAction m_Standard_PrimaryFire;
+        private readonly InputAction m_Standard_Menu;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
             public StandardActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Standard_Move;
             public InputAction @Look => m_Wrapper.m_Standard_Look;
-            public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
-            public InputAction @ConfirmBuild => m_Wrapper.m_Standard_ConfirmBuild;
             public InputAction @Jump => m_Wrapper.m_Standard_Jump;
             public InputAction @Ability1 => m_Wrapper.m_Standard_Ability1;
             public InputAction @SecondaryFire => m_Wrapper.m_Standard_SecondaryFire;
             public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
+            public InputAction @Menu => m_Wrapper.m_Standard_Menu;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -334,12 +312,6 @@ namespace DD2.Input
                     @Look.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
                     @Look.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
                     @Look.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    @BuildTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @BuildTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @BuildTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @ConfirmBuild.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
-                    @ConfirmBuild.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
-                    @ConfirmBuild.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnConfirmBuild;
                     @Jump.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
                     @Jump.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
                     @Jump.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
@@ -352,6 +324,9 @@ namespace DD2.Input
                     @PrimaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
                     @PrimaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
                     @PrimaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
+                    @Menu.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Menu.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Menu.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -362,12 +337,6 @@ namespace DD2.Input
                     @Look.started += instance.OnLook;
                     @Look.performed += instance.OnLook;
                     @Look.canceled += instance.OnLook;
-                    @BuildTower.started += instance.OnBuildTower;
-                    @BuildTower.performed += instance.OnBuildTower;
-                    @BuildTower.canceled += instance.OnBuildTower;
-                    @ConfirmBuild.started += instance.OnConfirmBuild;
-                    @ConfirmBuild.performed += instance.OnConfirmBuild;
-                    @ConfirmBuild.canceled += instance.OnConfirmBuild;
                     @Jump.started += instance.OnJump;
                     @Jump.performed += instance.OnJump;
                     @Jump.canceled += instance.OnJump;
@@ -380,6 +349,9 @@ namespace DD2.Input
                     @PrimaryFire.started += instance.OnPrimaryFire;
                     @PrimaryFire.performed += instance.OnPrimaryFire;
                     @PrimaryFire.canceled += instance.OnPrimaryFire;
+                    @Menu.started += instance.OnMenu;
+                    @Menu.performed += instance.OnMenu;
+                    @Menu.canceled += instance.OnMenu;
                 }
             }
         }
@@ -397,12 +369,11 @@ namespace DD2.Input
         {
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
-            void OnBuildTower(InputAction.CallbackContext context);
-            void OnConfirmBuild(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnAbility1(InputAction.CallbackContext context);
             void OnSecondaryFire(InputAction.CallbackContext context);
             void OnPrimaryFire(InputAction.CallbackContext context);
+            void OnMenu(InputAction.CallbackContext context);
         }
     }
 }

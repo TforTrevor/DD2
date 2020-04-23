@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD2.SOArchitecture;
 
-public class PlayerCamera : MonoBehaviour
+namespace DD2
 {
-    [SerializeField] Vector3Variable lookInput;
-    [SerializeField] float sensitivity;
-    [SerializeField] float maxRot;
-    [SerializeField] float minRot;
-
-    void Start()
+    public class PlayerCamera : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        [SerializeField] Vector3Variable lookInput;
+        [SerializeField] float sensitivity;
+        [SerializeField] float maxRot;
+        [SerializeField] float minRot;
 
-    void Update()
-    {
-        transform.Rotate(Vector3.right, -lookInput.Value.y * sensitivity * Time.deltaTime);
+        void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

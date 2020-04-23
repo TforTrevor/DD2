@@ -48,48 +48,49 @@ namespace DD2.Abilities
         [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         
-        Entity status;
+        Entity entity;
 
         public virtual void UseAbility(Transform transform)
         {
-            if (onCooldown || isUsing)
+            ////Input buffering
+            //if (onCooldown || isUsing)
+            //{
+            //    if (bufferInput)
+            //    {
+            //        isBuffered = true;
+            //        Timing.KillCoroutines(bufferHandle);
+            //        bufferHandle = Timing.CallDelayed(bufferTime, () =>
+            //        {
+            //            isBuffered = false;
+            //        });
+            //    }
+            //}
+
+            if (!onCooldown)
             {
-                if (bufferInput)
+                //Toggle ability
+                if (isToggle)
                 {
-                    isBuffered = true;
-                    Timing.KillCoroutines(bufferHandle);
-                    bufferHandle = Timing.CallDelayed(bufferTime, () =>
+                    if (isUsing)
                     {
-                        isBuffered = false;
-                    });
+                        toggleState = false;
+                    }
+                    else
+                    {
+                        toggleState = !toggleState;
+                    }
+                    if (toggleState)
+                    {
+                        Timing.RunCoroutine(ToggleRoutine(transform));
+                    }
                 }
-                if (onCooldown)
-                    return;
-            }
-            //Toggle ability
-            if (isToggle)
-            {
-                if (isUsing)
+                //Non-toggle ability
+                else if (!isUsing)
                 {
-                    toggleState = false;
+                    isUsing = true;
+                    StartAbility(transform);
                 }
-                else
-                {
-                    toggleState = !toggleState;
-                }
-                if (toggleState)
-                {
-                    Timing.RunCoroutine(ToggleRoutine(transform));
-                }
-                return;
-            }
-            //Non-toggle ability
-            if (isUsing)
-            {
-                return;
-            }
-            isUsing = true;
-            StartAbility(transform);
+            }            
         }
 
         protected IEnumerator<float> ToggleRoutine(Transform transform)
@@ -113,24 +114,24 @@ namespace DD2.Abilities
             EndCooldown(transform);
         }
 
-        protected void ApplyEffects(Transform target, Vector3 position)
+        protected void ApplyEffects(Entity target, object payload)
         {
             StartEffects();
             for (int i = 0; i < abilityEffects.Length; i++)
             {
-                abilityEffects[i].DoAction(target, target.GetComponent<Entity>(), position);
+                abilityEffects[i].DoAction(target, entity, payload);
             }
             EndEffects();
         }
 
         protected Vector3 GetFirePosition()
         {
-            return status.GetFirePosition();
+            return entity.GetFirePosition();
         }
 
-        public void SetEntity(Entity status)
+        public void SetEntity(Entity entity)
         {
-            this.status = status;
+            this.entity = entity;
         }
 
         //Events

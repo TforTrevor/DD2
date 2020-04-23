@@ -23,7 +23,7 @@ namespace DD2
 
         public void DoPrimaryFire()
         {
-            primaryFire?.DoAction(transform, this, GetPosition());
+            primaryFire?.DoAction(null, this, null);
         }
 
         public void SetPrimaryFire(Action action)
@@ -33,7 +33,7 @@ namespace DD2
 
         public void DoSecondaryFire()
         {
-            secondaryFire?.DoAction(transform, this, GetPosition());
+            secondaryFire?.DoAction(null, this, null);
         }
 
         public void SetSecondaryFire(Action action)
@@ -43,12 +43,12 @@ namespace DD2
 
         public void DoAbility1()
         {
-            ability1?.DoAction(transform, this, GetPosition());
+            ability1?.DoAction(null, this, null);
         }
 
-        public void DoAbility1(Transform target)
+        public void DoAbility1(Entity target)
         {
-            ability1?.DoAction(target, this, GetPosition());
+            ability1?.DoAction(target, this, null);
         }
 
         public void SetAbility1(Action action)

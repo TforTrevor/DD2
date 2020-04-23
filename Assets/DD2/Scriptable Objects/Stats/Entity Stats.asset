@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   attackRange: 5
-  attackCone: 90
+  attackAngle: 90
   searchRange: 5
   searchAngle: 90
-  presence: 0
+  presence: 3.76
   elementType: 0
   speed: 0
   attackRate: 0
   ragdollTime: 0
+  radius: 0

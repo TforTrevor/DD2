@@ -22,22 +22,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "BuildTower",
-                    "type": "Button",
-                    "id": "cce43130-1ba2-4bb2-97bb-22fe1ccb46d7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "ConfirmBuild",
-                    "type": "Button",
-                    "id": "9b2529f8-8161-4bb8-ade3-9a6a9b94de03",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "cd81f375-4d5a-4848-adbd-08e3703df000",
@@ -65,6 +49,14 @@
                     "name": "PrimaryFire",
                     "type": "Button",
                     "id": "95ee6682-b7d3-40a9-8b52-8fc72ca06a94",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "498a5b4d-94a8-42ae-bf71-9ed37e76d2e5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -139,28 +131,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4b928016-5683-41cd-8a52-2ba45eaa187f",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "BuildTower",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2c17d20d-25d5-46ae-b43f-71c71b56640b",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "ConfirmBuild",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a7b14872-17a7-40f2-bf4d-e1d50aa9c1d3",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -176,7 +146,7 @@
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard and Mouse",
                     "action": "Ability1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -187,7 +157,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard and Mouse",
                     "action": "SecondaryFire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -198,8 +168,19 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard and Mouse",
                     "action": "PrimaryFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a090313e-d725-457b-95f7-e2c80075ee8f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

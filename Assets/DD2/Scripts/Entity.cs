@@ -9,10 +9,10 @@ namespace DD2
 {
     public class Entity : MonoBehaviour
     {
-        public Stats stats;
-        [SerializeField] float currentHealth;
+        [SerializeField] protected Stats stats;
+        [SerializeField] protected float currentHealth;
 
-        [SerializeField] Transform fireTransform;
+        [SerializeField] protected Transform fireTransform;
         [ReadOnly] [SerializeField] protected bool grounded;
         [ReadOnly] [SerializeField] protected bool ragdolled;
         [SerializeField] [ReorderableList] protected Action[] actions;
@@ -36,12 +36,25 @@ namespace DD2
 
         void Initialize()
         {
-            currentHealth = stats.GetMaxHealth();
+            if (stats != null)
+            {
+                currentHealth = stats.GetMaxHealth();
+            }
         }
 
-        public void Damage(float damage)
+        public void Damage(Entity entity, float damage)
         {
             currentHealth -= damage;
+            if (currentHealth < 0)
+            {
+                Die(entity);
+            }
+        }
+
+        protected virtual void Die(Entity entity)
+        {
+            Debug.Log(entity.name + " killed " + name);
+            Destroy(gameObject);
         }
 
         public virtual void Ragdoll()
@@ -92,22 +105,22 @@ namespace DD2
 
         public void DoAction()
         {
-            actions[0]?.DoAction(transform, this, transform.position);
+            actions[0]?.DoAction(null, this, null);
         }
 
         public void DoAction(int index)
         {
-            actions[index]?.DoAction(transform, this, transform.position);
+            actions[index]?.DoAction(null, this, null);
         }
 
-        public void DoAction(Transform target)
+        public void DoAction(Entity target)
         {
-            actions[0]?.DoAction(target, this, transform.position);
+            actions[0]?.DoAction(target, this, null);
         }
 
-        public void DoAction(int index, Transform target)
+        public void DoAction(int index, Entity target)
         {
-            actions[index]?.DoAction(target, this, transform.position);
+            actions[index]?.DoAction(target, this, null);
         }
 
 
@@ -159,6 +172,11 @@ namespace DD2
             return stats.GetAttackRange();
         }
 
+        public float GetAttackAngle()
+        {
+            return stats.GetAttackAngle();
+        }
+
         public float GetSearchRange()
         {
             return stats.GetSearchRange();
@@ -167,6 +185,11 @@ namespace DD2
         public float GetSearchAngle()
         {
             return stats.GetSearchAngle();
+        }
+
+        public Stats GetStats()
+        {
+            return stats;
         }
     }
 }

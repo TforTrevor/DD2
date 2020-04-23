@@ -24,6 +24,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Update()
     {
         if (enableLook)
@@ -81,5 +87,19 @@ public class PlayerMovement : MonoBehaviour
         v.x += lookInput.Value.y * sensitivity * Time.deltaTime;
         cameraParent.localEulerAngles = v;
         //transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
+    }
+
+    public void ToggleCursorLock()
+    {
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }        
     }
 }

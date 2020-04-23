@@ -16,12 +16,13 @@ namespace DD2.Actions
         [SerializeField] [SearchableEnum] ForceMode forceMode;
         [SerializeField] bool cancelForce;
 
-        public override void DoAction(Transform target, Entity status, Vector3 position)
+        public override void DoAction(Entity target, Entity caller, object payload)
         {
+            Vector3 position = (Vector3)payload;
             Vector3 vector;
             if (cancelForce)
             {
-                status.ClearVelocity(true, true, true);
+                caller.ClearVelocity(true, true, true);
             }
             if (relativeToPosition)
             {
@@ -38,7 +39,7 @@ namespace DD2.Actions
             {
                 vector = direction.normalized;
             }
-            status.AddForce(vector * force, forceMode);
+            caller.AddForce(vector * force, forceMode);
         }
     }
 }

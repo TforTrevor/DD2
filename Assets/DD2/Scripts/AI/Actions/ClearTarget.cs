@@ -9,10 +9,30 @@ namespace DD2.AI.Actions
 {
     public class ClearTarget : ActionBase
     {
+        [ApexSerialization] bool clearTarget;
+        [ApexSerialization] bool clearTargetList;
+        [ApexSerialization] LayerMask layerMask;
+
         public override void Execute(IAIContext context)
         {
-            AIContext c = (AIContext)context;
-            c.target = null;
+            AIContext ctx = (AIContext)context;
+
+            if (clearTarget && Util.Utilities.IsInLayer(ctx.target.gameObject, layerMask))
+            {
+                ctx.target = null;
+            }
+            if (clearTargetList)
+            {
+                List<Entity> entities = new List<Entity>();
+                foreach (Entity entity in ctx.targetList)
+                {
+                    if (!Util.Utilities.IsInLayer(entity.gameObject, layerMask))
+                    {
+                        entities.Add(entity);
+                    }
+                }
+                ctx.targetList = entities;
+            }
         }
     }
 }

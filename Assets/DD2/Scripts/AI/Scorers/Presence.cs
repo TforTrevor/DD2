@@ -11,10 +11,9 @@ namespace DD2.AI.Scorers
     {
         [ApexSerialization] float multiplier = 1;
 
-        public override float Score(IAIContext context, Entity status)
+        public override float Score(IAIContext context, Entity entity)
         {
-            AIContext c = (AIContext)context;
-            float score = status.GetPresence() * multiplier;
+            float score = entity.GetStats().GetPresence() * multiplier;
             return score;
         }
     }
@@ -23,8 +22,8 @@ namespace DD2.AI.Scorers
     {
         public override float Score(IAIContext context)
         {
-            AIContext c = (AIContext)context;
-            return c.target.GetPresence() * score;
+            AIContext ctx = (AIContext)context;
+            return ctx.target.GetStats().GetPresence() * score;
         }
     }
 }

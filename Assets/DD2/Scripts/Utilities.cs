@@ -80,5 +80,10 @@ namespace DD2.Util
 
             return closestTransform;
         }
+
+        public static bool IsInLayer(GameObject gameObject, LayerMask mask)
+        {
+            return mask == (mask | (1 << gameObject.layer));
+        }
     }
 }

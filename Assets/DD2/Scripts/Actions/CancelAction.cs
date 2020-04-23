@@ -9,9 +9,9 @@ namespace DD2.Actions
     {
         public Action action;
 
-        public override void DoAction(Transform target, Entity entity, Vector3 position)
+        public override void DoAction(Entity target, Entity caller, object payload)
         {
-            action.Cancel(target, entity, position);
+            action.Cancel(target, caller, payload);
         }
     }
 }

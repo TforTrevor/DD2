@@ -11,33 +11,34 @@ namespace DD2.AI.Scorers
     public class DistanceOption : OptionScorerBase<Entity>
     {
         [ApexSerialization] float multiplier = 1;
+        [ApexSerialization] bool includeRadius = true;
+        [ApexSerialization] bool includeTargetRadius = true;
 
-        public override float Score(IAIContext context, Entity status)
+        public override float Score(IAIContext context, Entity target)
         {
-            AIContext c = (AIContext)context;
-            float score = Vector3.Distance(c.entity.GetPosition(), status.GetPosition()) * multiplier;
-            return score;
+            AIContext ctx = (AIContext)context;
+            Entity entity = ctx.entity;
+            float score = Vector3.Distance(entity.GetPosition(), target.GetPosition())
+                            - (includeRadius ? entity.GetStats().GetRadius() : 0)
+                            - (includeTargetRadius ? target.GetStats().GetRadius() : 0);
+            return score * multiplier;
         }
     }
+
     public class Distance : ContextualScorerBase
     {
-        [ApexSerialization] bool subtractRange;
-        [ApexSerialization] Range range;
+        [ApexSerialization] bool includeRadius = true;
+        [ApexSerialization] bool includeTargetRadius = true;
 
         public override float Score(IAIContext context)
         {
-            AIContext c = (AIContext)context;
-            float distance;
-            if (subtractRange)
-            {
-                distance = Vector3.Distance(c.entity.GetPosition(), c.target.GetPosition()) - (range == Range.Attack ? c.entity.GetAttackRange() : c.entity.GetSearchRange());
-                distance = Mathf.Max(0, distance);
-            }
-            else
-            {
-                distance = Vector3.Distance(c.entity.GetPosition(), c.target.GetPosition());
-            }
-            return distance  * score;
+            AIContext ctx = (AIContext)context;
+            Entity entity = ctx.entity;
+            Entity target = ctx.target;
+            float distance = Vector3.Distance(entity.GetPosition(), target.GetPosition())
+                            - (includeRadius ? entity.GetStats().GetRadius() : 0)
+                            - (includeTargetRadius ? target.GetStats().GetRadius() : 0);
+            return distance * score;
         }
     }
 }

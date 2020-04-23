@@ -10,6 +10,7 @@ namespace DD2.AI.Actions
     public class MoveToTarget : ActionBase
     {
         [ApexSerialization] bool ensureMaxRange;
+
         public override void Execute(IAIContext context)
         {
             AIContext ctx = (AIContext)context;
@@ -17,11 +18,11 @@ namespace DD2.AI.Actions
 
             if (ctx.target)
             {
-                float distance = Vector3.Distance(ctx.target.GetPosition(), enemy.GetPosition());
+                float distance = Vector3.Distance(ctx.target.GetPosition(), enemy.GetPosition()) - ctx.target.GetStats().GetRadius();
                 if (distance > enemy.GetAttackRange() || ensureMaxRange)
                 {
                     Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - enemy.GetPosition());
-                    float distanceFromRange = distance - enemy.GetAttackRange();
+                    float distanceFromRange = distance - enemy.GetAttackRange() + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + enemy.GetPosition();
                     enemy.navMeshAgent.SetDestination(position);
                 }
