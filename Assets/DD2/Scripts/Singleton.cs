@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : Component
 {
-    [SerializeField] static bool destroyOnLoad;
+    [SerializeField] protected bool destroyOnLoad;
     static T instance;
 
     public static T Instance

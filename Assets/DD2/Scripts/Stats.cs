@@ -69,5 +69,10 @@ namespace DD2
         {
             return radius;
         }
+
+        public float GetSpeed()
+        {
+            return speed;
+        }
     }
 }

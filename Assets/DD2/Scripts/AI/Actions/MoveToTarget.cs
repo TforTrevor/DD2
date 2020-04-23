@@ -24,7 +24,7 @@ namespace DD2.AI.Actions
                     Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - enemy.GetPosition());
                     float distanceFromRange = distance - enemy.GetAttackRange() + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + enemy.GetPosition();
-                    enemy.navMeshAgent.SetDestination(position);
+                    enemy.MoveToPosition(position);
                 }
             }
         }

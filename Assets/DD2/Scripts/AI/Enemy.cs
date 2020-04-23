@@ -9,15 +9,19 @@ namespace DD2.AI
     public class Enemy : EntityAI
     {
         public Transform target;
-        [HideInInspector] public NavMeshAgent navMeshAgent;
         [SerializeField] float distance;
         [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
+
+        NavMeshAgent navMeshAgent;
+        NavMeshObstacle navMeshObstacle;
+        CoroutineHandle moveRoutine;
 
         protected override void Awake()
         {
             base.Awake();
             navMeshAgent = GetComponent<NavMeshAgent>();
+            navMeshObstacle = GetComponent<NavMeshObstacle>();
         }
 
         public override void Ragdoll()
@@ -53,12 +57,49 @@ namespace DD2.AI
             }
         }
 
+        protected override void Die(Entity entity)
+        {
+            Debug.Log(entity.name + " killed " + name);
+            EntityPool.Instance.ReturnObject("Enemy", this);
+        }
+
         void SetAgentActive(bool value)
         {
             navMeshAgent.updatePosition = value;
             navMeshAgent.updateRotation = value;
             navMeshAgent.updateUpAxis = value;
             rb.isKinematic = value;
+        }
+
+        public void MoveToPosition(Vector3 position)
+        {
+            navMeshObstacle.enabled = false;
+            navMeshAgent.enabled = true;
+            NavMeshPath path = new NavMeshPath();
+            if (navMeshAgent.isOnNavMesh)
+            {
+                navMeshAgent.CalculatePath(position, path);
+            }            
+            Vector3[] corners = path.corners;
+            navMeshAgent.enabled = false;
+            navMeshObstacle.enabled = true;
+            Timing.KillCoroutines(moveRoutine);
+            moveRoutine = Timing.RunCoroutine(MoveRoutine(corners));
+        }
+
+        IEnumerator<float> MoveRoutine(Vector3[] corners)
+        {
+            for (int i = 0; i < corners.Length; i++)
+            {
+                Vector3 corner = corners[i];
+                corner.y += navMeshAgent.height / 2;
+                transform.LookAt(corner);
+                while (Vector3.Distance(transform.position, corner) > 0.1f)
+                {
+                    transform.position += transform.forward * GetStats().GetSpeed() * Time.deltaTime;
+                    yield return Timing.WaitForOneFrame;
+                }
+            }
         }
 
         void FixedUpdate()

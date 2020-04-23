@@ -17,7 +17,7 @@ namespace DD2.AI.Actions
         {
             AIContext ctx = (AIContext)context;
 
-            if (clearTarget && Util.Utilities.IsInLayer(ctx.target.gameObject, layerMask))
+            if (clearTarget && ctx.target != null && Util.Utilities.IsInLayer(ctx.target.gameObject, layerMask))
             {
                 ctx.target = null;
             }

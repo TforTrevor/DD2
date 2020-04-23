@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9414edec6cbdcb45970bcabbe817d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnLoad: 1
   pools:
   - tag: Projectile
     prefab: {fileID: 8613999063513529128, guid: f8062a305ccfda4418b2d47da9c501da,

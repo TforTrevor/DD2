@@ -22,7 +22,7 @@ namespace DD2.AI.Scorers
 
             float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) 
                                 - (includeRadius ? entity.GetStats().GetRadius() : 0)
-                                - (includeTargetRadius ? entity.GetStats().GetRadius() : 0);
+                                - (includeTargetRadius ? ctx.target.GetStats().GetRadius() : 0);
 
             if (rangeCheck == Range.Attack ? distance <= entity.GetAttackRange() : distance <= entity.GetSearchRange())
             {
