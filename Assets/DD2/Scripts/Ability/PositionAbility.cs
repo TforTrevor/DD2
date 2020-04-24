@@ -77,7 +77,7 @@ namespace DD2.Abilities
                 else
                 {
                     Collider collider = Util.Utilities.GetClosestToPoint(hitColliders, position);
-                    if (collider)
+                    if (collider != null)
                     {
                         Entity hitEntity = collider.GetComponent<Entity>();
                         CreateProjectile(collider.transform);

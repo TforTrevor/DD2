@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
-  m_Name: Tower Stats
+  m_Name: Tower
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackRange: 5
-  attackCone: 90
-  searchRange: 5
-  searchAngle: 90
+  maxHealth: 100000
+  attackRange: 10
+  attackAngle: 150
+  searchRange: 0
+  searchAngle: 0
   presence: 0
   elementType: 0
   speed: 0
-  attackRate: 1
+  attackRate: 0
   ragdollTime: 0
+  radius: 0

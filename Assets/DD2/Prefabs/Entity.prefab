@@ -46,6 +46,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 6b3201fd8285bc24a845db6df3518144, type: 2}
   currentHealth: 0
   fireTransform: {fileID: 0}
-  actions: []
   grounded: 0
   ragdolled: 0
+  actions: []
+  abilities: []

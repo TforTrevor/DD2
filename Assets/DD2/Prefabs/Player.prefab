@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 537350847}
   m_Layer: 10
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f659a6cf71631489efdf567f588360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 6b3201fd8285bc24a845db6df3518144, type: 2}
   currentHealth: 0
   fireTransform: {fileID: 0}
   grounded: 0

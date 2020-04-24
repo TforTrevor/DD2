@@ -1,23 +1,83 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD2.Actions;
+using NaughtyAttributes;
+using MEC;
 
 namespace DD2
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] string key;
-        [SerializeField] int amount;
+        [SerializeField] [ReorderableList] List<Spawn> spawns;
 
         void Start()
         {
-            for (int i = 0; i < amount; i++)
+            foreach (Spawn spawn in spawns)
             {
-                Entity entity = EntityPool.Instance.GetObject(key);
-                entity.transform.position = transform.position;
-                entity.gameObject.SetActive(true);
+                if (spawn.IsBatch())
+                {
+                    for (int i = 0; i < spawn.GetAmount(); i++)
+                    {
+                        SpawnEntity(spawn);
+                    }
+                }
+                else
+                {
+                    Timing.RunCoroutine(SpawnRoutine(spawn));
+                }                
             }
+        }
+
+        IEnumerator<float> SpawnRoutine(Spawn spawn)
+        {
+            yield return Timing.WaitForSeconds(spawn.GetDelay());
+            for (int i = 0; i < spawn.GetAmount(); i++)
+            {
+                SpawnEntity(spawn);
+                yield return Timing.WaitForSeconds(spawn.GetRate());
+            }
+        }
+
+        void SpawnEntity(Spawn spawn)
+        {
+            Entity entity = EntityPool.Instance.GetObject(spawn.GetKey());
+            entity.transform.position = transform.position;
+            entity.gameObject.SetActive(true);
+        }
+    }
+
+    [System.Serializable]
+    public class Spawn
+    {
+        [SerializeField] string key;
+        [SerializeField] int amount;
+        [SerializeField] float rate;
+        [SerializeField] bool batch;
+        [SerializeField] float delay;
+
+        public string GetKey()
+        {
+            return key;
+        }
+
+        public int GetAmount()
+        {
+            return amount;
+        }
+
+        public float GetRate()
+        {
+            return rate;
+        }
+
+        public bool IsBatch()
+        {
+            return batch;
+        }
+
+        public float GetDelay()
+        {
+            return delay;
         }
     }
 }

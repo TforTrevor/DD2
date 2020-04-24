@@ -49,16 +49,16 @@ MonoBehaviour:
     ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":true},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,
     Assembly-CSharp","not":false,"checkCone":false,"rangeCheck":Attack,"includeRadius":true,"includeTargetRadius":true,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":false}}}]}'
-  editorConfiguration: '{"offset":{"@x":-764,"@y":117},"zoom":1,"SelectorView":{"ViewArea":{"@left":-464,"@top":137,"@width":200,"@height":100},"Name":"Scan
+  editorConfiguration: '{"offset":{"@x":-384,"@y":144},"zoom":1,"SelectorView":{"ViewArea":{"@left":-84,"@top":164,"@width":200,"@height":100},"Name":"Scan
     for Targets","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
-    for Targets"}}},"SelectorView":{"ViewArea":{"@left":596,"@top":257,"@width":240,"@height":100},"Name":"Pursue
-    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Move"}}},"SelectorView":{"ViewArea":{"@left":-224,"@top":137,"@width":280,"@height":160},"Name":"Choose
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":976,"@top":284,"@width":240,"@height":100},"Name":"Pursue
+    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Move"}}},"SelectorView":{"ViewArea":{"@left":156,"@top":164,"@width":280,"@height":160},"Name":"Choose
     Target","QualifierView":{"Name":"Has Player/Tower in List","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Target
-    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":96,"@top":97,"@width":200,"@height":160},"Name":"Choose
+    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":476,"@top":124,"@width":200,"@height":160},"Name":"Choose
     Target","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Doesn''t
-    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":356,"@top":97,"@width":200,"@height":160},"Name":"Search
+    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":736,"@top":124,"@width":200,"@height":160},"Name":"Search
     Range Check","QualifierView":{"Name":"Passed Check","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed
     Check","ActionView":{"@connectorType":"Composite","Name":"Stop Ability/Clear
-    Target"}}},"SelectorView":{"ViewArea":{"@left":876,"@top":97,"@width":200,"@height":160},"Name":"Attack
+    Target"}}},"SelectorView":{"ViewArea":{"@left":1256,"@top":124,"@width":200,"@height":160},"Name":"Attack
     Range Check","QualifierView":{"Name":"Passed Check","ActionView":{}},"DefaultQualifier":{"ActionView":{"Name":"Cancel
     Ability"}}}}'

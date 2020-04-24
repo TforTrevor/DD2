@@ -18,6 +18,10 @@ namespace DD2
         [SerializeField] [ReorderableList] protected Action[] actions;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
+        public static event System.Action<Entity> EntityEnabled = delegate { };
+        public static event System.Action<Entity> EntityDisabled = delegate { };
+        public delegate void UpdateHealthHandler(float amount);
+        public event UpdateHealthHandler healthUpdated;
         protected Rigidbody rb;
 
         protected virtual void Awake()
@@ -29,22 +33,29 @@ namespace DD2
             }
         }
 
-        void Start()
-        {
-            Initialize();
-        }
-
-        void Initialize()
+        protected virtual void Start()
         {
             if (stats != null)
             {
                 currentHealth = stats.GetMaxHealth();
+                healthUpdated?.Invoke(currentHealth);
             }
+        }
+
+        protected virtual void OnEnable()
+        {
+            EntityEnabled?.Invoke(this);
+        }
+
+        protected virtual void OnDisable()
+        {
+            EntityDisabled?.Invoke(this);
         }
 
         public void Damage(Entity entity, float damage)
         {
             currentHealth -= damage;
+            healthUpdated?.Invoke(-damage);
             if (currentHealth < 0)
             {
                 Die(entity);

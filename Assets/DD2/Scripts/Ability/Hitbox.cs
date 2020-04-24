@@ -14,8 +14,7 @@ namespace DD2.Abilities
         [SerializeField] float duration;
         [SerializeField] float repeatDelay;
         [SerializeField] int maxCollisions = 100;
-        Collider[] repeatList;
-        int repeatListCount;
+        List<Collider> repeatList = new List<Collider>();
         Collider[] hitColliders;
         int hitCollidersCount;
         Collider[] results;
@@ -32,7 +31,7 @@ namespace DD2.Abilities
             results = new Collider[maxCollisions];
             hitColliders = new Collider[maxCollisions];
             returnResults = new Collider[maxCollisions];
-            repeatList = new Collider[maxCollisions];
+            //repeatList.Capacity = maxCollisions;
         }
 
         void Initialize()
@@ -83,7 +82,7 @@ namespace DD2.Abilities
             {
                 for (int i = 0; i < hitCollidersCount; i++)
                 {
-                    if (!Util.Utilities.ArrayContains(repeatList, hitColliders[i]) && hitColliders[i] != null)
+                    if (!repeatList.Contains(hitColliders[i]) && hitColliders[i] != null)
                     {
                         this.returnResults[returnResultsCount] = hitColliders[i];
                         returnResultsCount++;
@@ -93,8 +92,7 @@ namespace DD2.Abilities
                 {
                     for (int i = 0; i < returnResultsCount; i++)
                     {
-                        repeatList[repeatListCount] = this.returnResults[i];
-                        repeatListCount++;
+                        repeatList.Add(this.returnResults[i]);
                         Timing.RunCoroutine(RemoveRoutine(this.returnResults, returnResultsCount));
                     }
                 }
@@ -119,8 +117,7 @@ namespace DD2.Abilities
             yield return Timing.WaitForSeconds(repeatDelay);
             for (int i = 0; i < count; i++)
             {
-                Util.Utilities.RemoveFromArray(repeatList, colliders[i]);
-                repeatListCount--;
+                repeatList.Remove(colliders[i]);
             }
         }
 

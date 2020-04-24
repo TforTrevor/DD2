@@ -6,24 +6,24 @@ using NaughtyAttributes;
 namespace DD2
 {
     [System.Serializable]
-    public class Pool
+    public class Pool<T>
     {
         public string tag;
-        public GameObject prefab;
+        public T prefab;
         public int size;
         public bool canExpand;
     }
 
     public class ComponentPool<T> : Singleton<ComponentPool<T>> where T : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] List<Pool> pools;
+        [SerializeField] [ReorderableList] List<Pool<T>> pools;
         Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
         Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
 
         protected override void Awake()
         {
             base.Awake();
-            foreach (Pool pool in pools)
+            foreach (Pool<T> pool in pools)
             {
                 GameObject poolParent = new GameObject();
                 parentDictionary.Add(pool.tag, poolParent);
@@ -34,8 +34,8 @@ namespace DD2
 
                 for (int i = 0; i < pool.size; i++)
                 {
-                    GameObject poolObject = Instantiate(pool.prefab, poolParent.transform);
-                    poolObject.SetActive(false);
+                    T poolObject = Instantiate(pool.prefab, poolParent.transform);
+                    poolObject.gameObject.SetActive(false);
                     T poolComponent = poolObject.GetComponent<T>();
                     if (poolComponent != null)
                     {
@@ -56,11 +56,11 @@ namespace DD2
 
             if (poolDictionary[key].Count == 0)
             {
-                Pool pool = pools.Find(x => x.tag == key);
+                Pool<T> pool = pools.Find(x => x.tag == key);
                 if (pool.canExpand)
                 {
-                    GameObject poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
-                    poolObject.SetActive(false);
+                    T poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
+                    poolObject.gameObject.SetActive(false);
                     T poolComponent = poolObject.GetComponent<T>();
                     return poolComponent;
                 }

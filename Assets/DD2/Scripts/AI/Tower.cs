@@ -18,8 +18,9 @@ namespace DD2.AI
             aiComponent = GetComponent<UtilityAIComponent>();
         }
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
             aiComponent.enabled = false;
