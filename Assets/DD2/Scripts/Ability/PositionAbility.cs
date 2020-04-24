@@ -39,14 +39,14 @@ namespace DD2.Abilities
             foreach (Hitbox hitbox in hitboxes)
             {
                 hitbox.hitboxObject.transform.position = position;
-                hitbox.hitboxObject.SetActive(true);
+                //hitbox.hitboxObject.SetActive(true);
 
                 yield return Timing.WaitForSeconds(hitbox.GetDelay());
                 CoroutineHandle hitboxHandle = Timing.RunCoroutine(HitboxRoutine(hitbox, hitColliders, position));
                 yield return Timing.WaitForSeconds(hitbox.GetDuration());
                 Timing.KillCoroutines(hitboxHandle);
 
-                hitbox.hitboxObject.SetActive(false);
+                //hitbox.hitboxObject.SetActive(false);
             }
             if (!isToggle)
             {

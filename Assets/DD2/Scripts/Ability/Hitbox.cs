@@ -19,6 +19,7 @@ namespace DD2.Abilities
         Collider[] hitColliders;
         int hitCollidersCount;
         Collider[] results;
+        int resultsCount;
         Collider[] returnResults;
         int returnResultsCount;
 
@@ -52,9 +53,9 @@ namespace DD2.Abilities
 
         public int GetCollisionNonAlloc(Vector3 position, LayerMask layerMask, Collider[] returnResults)
         {
-            Util.Utilities.ClearArray(this.returnResults);
-            Util.Utilities.ClearArray(results);
-            Util.Utilities.ClearArray(hitColliders);
+            Util.Utilities.ClearArray(this.returnResults, returnResultsCount);
+            Util.Utilities.ClearArray(results, resultsCount);
+            Util.Utilities.ClearArray(hitColliders, hitCollidersCount);
             hitCollidersCount = 0;
             returnResultsCount = 0;
 
@@ -65,7 +66,7 @@ namespace DD2.Abilities
                     Initialize();
                 }
                 
-                Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, results, layerMask);
+                resultsCount = Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, results, layerMask);
                 for (int i = 0; i < results.Length; i++)
                 {
                     if (results[i] != null)
@@ -93,12 +94,13 @@ namespace DD2.Abilities
                     for (int i = 0; i < returnResultsCount; i++)
                     {
                         repeatList[repeatListCount] = this.returnResults[i];
+                        repeatListCount++;
                         Timing.RunCoroutine(RemoveRoutine(this.returnResults, returnResultsCount));
                     }
                 }
             }
 
-            Util.Utilities.ClearArray(returnResults);
+            Util.Utilities.ClearArray(returnResults, returnResultsCount);
             int tempCount = 0;
             for (int i = 0; i < returnResultsCount; i++)
             {
@@ -118,7 +120,7 @@ namespace DD2.Abilities
             for (int i = 0; i < count; i++)
             {
                 Util.Utilities.RemoveFromArray(repeatList, colliders[i]);
-                count--;
+                repeatListCount--;
             }
         }
 

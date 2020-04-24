@@ -86,9 +86,9 @@ namespace DD2.Util
             return mask == (mask | (1 << gameObject.layer));
         }
 
-        public static void ClearArray(object[] array)
+        public static void ClearArray(object[] array, int count)
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 array[i] = null;
             }
