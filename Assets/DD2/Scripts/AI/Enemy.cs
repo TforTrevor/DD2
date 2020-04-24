@@ -16,6 +16,7 @@ namespace DD2.AI
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;
         CoroutineHandle moveRoutine;
+        Vector3 previousPosition;
 
         protected override void Awake()
         {
@@ -73,18 +74,20 @@ namespace DD2.AI
 
         public void MoveToPosition(Vector3 position)
         {
-            navMeshObstacle.enabled = false;
-            navMeshAgent.enabled = true;
-            NavMeshPath path = new NavMeshPath();
-            if (navMeshAgent.isOnNavMesh)
-            {
-                navMeshAgent.CalculatePath(position, path);
-            }            
-            Vector3[] corners = path.corners;
-            navMeshAgent.enabled = false;
-            navMeshObstacle.enabled = true;
-            Timing.KillCoroutines(moveRoutine);
-            moveRoutine = Timing.RunCoroutine(MoveRoutine(corners));
+            //previousPosition = position;
+            //navMeshObstacle.enabled = false;
+            //navMeshAgent.enabled = true;
+            //NavMeshPath path = new NavMeshPath();
+            //if (navMeshAgent.isOnNavMesh)
+            //{
+            //    navMeshAgent.CalculatePath(position, path);
+            //}
+            //Vector3[] corners = path.corners;
+            //navMeshAgent.enabled = false;
+            //navMeshObstacle.enabled = true;
+            //Timing.KillCoroutines(moveRoutine);
+            //moveRoutine = Timing.RunCoroutine(MoveRoutine(corners));
+            navMeshAgent.SetDestination(position);
         }
 
         IEnumerator<float> MoveRoutine(Vector3[] corners)
@@ -104,16 +107,19 @@ namespace DD2.AI
 
         void FixedUpdate()
         {
-            RaycastHit hit;
-            Debug.DrawRay(transform.position + offset, Vector3.down * distance, Color.cyan, 2);
-            if (Physics.Raycast(transform.position + offset, Vector3.down, out hit, distance, groundedMask))
+            if (ragdolled)
             {
-                SetGrounded(true);
-            }
-            else
-            {
-                SetGrounded(false);
-            }
+                RaycastHit hit;
+                Debug.DrawRay(transform.position + offset, Vector3.down * distance, Color.cyan, 2);
+                if (Physics.Raycast(transform.position + offset, Vector3.down, out hit, distance, groundedMask))
+                {
+                    SetGrounded(true);
+                }
+                else
+                {
+                    SetGrounded(false);
+                }
+            }            
         }
     }
 }

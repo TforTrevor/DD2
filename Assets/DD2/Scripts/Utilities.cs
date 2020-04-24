@@ -85,5 +85,49 @@ namespace DD2.Util
         {
             return mask == (mask | (1 << gameObject.layer));
         }
+
+        public static void ClearArray(object[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = null;
+            }
+        }
+
+        public static bool ArrayContains(object[] array, object obj)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == obj)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static void RemoveFromArray(object[] array, object obj)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == obj)
+                {
+                    array[i] = null;
+                    for (int j = i + 1; j < array.Length; j++)
+                    {
+                        if (array[j] == null)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            object temp = array[j - 1];
+                            array[j - 1] = array[j];
+                            array[j] = temp;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

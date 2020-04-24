@@ -45,10 +45,17 @@ namespace DD2.Abilities
         //Hitboxes
         [SerializeField] [BoxGroup("Hitboxes")]
         protected float hitboxTickRate;
+        //[SerializeField] [BoxGroup("Hitboxes")]
+        //protected bool showHitbox;
         [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         
         Entity entity;
+
+        protected virtual void Awake()
+        {
+
+        }
 
         public virtual void UseAbility(Transform transform)
         {

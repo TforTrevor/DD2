@@ -10,6 +10,21 @@ namespace DD2.Abilities
     {
         [SerializeField] float radius;
         [SerializeField] string objectKey;
+        Collider[] collisions;
+        int maxCollisions = 0;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            foreach(Hitbox hitbox in hitboxes)
+            {
+                if (hitbox.GetMaxCollisions() > maxCollisions)
+                {
+                    maxCollisions = hitbox.GetMaxCollisions();
+                }
+            }
+            collisions = new Collider[maxCollisions];
+        }
 
         protected override void StartAbility(Transform transform)
         {
@@ -44,7 +59,11 @@ namespace DD2.Abilities
             while(true)
             {
                 hitColliders.Clear();
-                hitColliders.AddRange(hitbox.GetCollision(position, layerMask));
+                int tempCount = hitbox.GetCollisionNonAlloc(position, layerMask, collisions);
+                for (int i = 0; i < tempCount; i++)
+                {
+                    hitColliders.Add(collisions[i]);
+                }
                 
                 if (multiTarget)
                 {

@@ -13,11 +13,26 @@ namespace DD2.Abilities
         [SerializeField] float delay;
         [SerializeField] float duration;
         [SerializeField] float repeatDelay;
-        List<Collider> repeatList = new List<Collider>();
+        [SerializeField] int maxCollisions = 100;
+        Collider[] repeatList;
+        int repeatListCount;
+        Collider[] hitColliders;
+        int hitCollidersCount;
+        Collider[] results;
+        Collider[] returnResults;
+        int returnResultsCount;
 
         SphereCollider sphereCollider;
         BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
+
+        Hitbox()
+        {
+            results = new Collider[maxCollisions];
+            hitColliders = new Collider[maxCollisions];
+            returnResults = new Collider[maxCollisions];
+            repeatList = new Collider[maxCollisions];
+        }
 
         void Initialize()
         {
@@ -35,44 +50,75 @@ namespace DD2.Abilities
             }
         }
 
-        public List<Collider> GetCollision(Vector3 position, LayerMask layerMask)
+        public int GetCollisionNonAlloc(Vector3 position, LayerMask layerMask, Collider[] returnResults)
         {
-            List<Collider> hitColliders = new List<Collider>();
-            List<Collider> colliders = new List<Collider>();
+            Util.Utilities.ClearArray(this.returnResults);
+            Util.Utilities.ClearArray(results);
+            Util.Utilities.ClearArray(hitColliders);
+            hitCollidersCount = 0;
+            returnResultsCount = 0;
+
             if (hitboxShape == Shape.Sphere)
             {
                 if (sphereCollider == null)
                 {
                     Initialize();
                 }
-                hitColliders.AddRange(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
-            }
-
-            if (hitColliders.Count > 0)
-            {
-                foreach (Collider collider in hitColliders)
+                
+                Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, results, layerMask);
+                for (int i = 0; i < results.Length; i++)
                 {
-                    if (!repeatList.Contains(collider))
+                    if (results[i] != null)
                     {
-                        colliders.Add(collider);
+                        hitColliders[hitCollidersCount] = results[i];
+                        hitCollidersCount++;
                     }
                 }
-                if (colliders.Count > 0)
+                //hitColliders.AddRange(results);
+                //hitColliders.AddRange(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
+            }
+
+            if (hitCollidersCount > 0)
+            {
+                for (int i = 0; i < hitCollidersCount; i++)
                 {
-                    repeatList.AddRange(colliders);
-                    Timing.RunCoroutine(RemoveRoutine(colliders));
+                    if (!Util.Utilities.ArrayContains(repeatList, hitColliders[i]) && hitColliders[i] != null)
+                    {
+                        this.returnResults[returnResultsCount] = hitColliders[i];
+                        returnResultsCount++;
+                    }
+                }
+                if (returnResultsCount > 0)
+                {
+                    for (int i = 0; i < returnResultsCount; i++)
+                    {
+                        repeatList[repeatListCount] = this.returnResults[i];
+                        Timing.RunCoroutine(RemoveRoutine(this.returnResults, returnResultsCount));
+                    }
                 }
             }
 
-            return colliders;
+            Util.Utilities.ClearArray(returnResults);
+            int tempCount = 0;
+            for (int i = 0; i < returnResultsCount; i++)
+            {
+                if (this.returnResults[i] != null)
+                {
+                    returnResults[tempCount] = this.returnResults[i];
+                    tempCount++;
+                }
+            }
+
+            return tempCount;
         }
 
-        IEnumerator<float> RemoveRoutine(List<Collider> colliders)
+        IEnumerator<float> RemoveRoutine(Collider[] colliders, int count)
         {
             yield return Timing.WaitForSeconds(repeatDelay);
-            foreach(Collider collider in colliders)
+            for (int i = 0; i < count; i++)
             {
-                repeatList.Remove(collider);
+                Util.Utilities.RemoveFromArray(repeatList, colliders[i]);
+                count--;
             }
         }
 
@@ -84,6 +130,11 @@ namespace DD2.Abilities
         public float GetDuration()
         {
             return duration;
+        }
+
+        public int GetMaxCollisions()
+        {
+            return maxCollisions;
         }
     }
 }
