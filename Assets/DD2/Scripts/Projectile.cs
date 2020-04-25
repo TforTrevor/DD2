@@ -1,29 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MEC;
 
 namespace DD2
 {
     public class Projectile : MonoBehaviour
     {
         [SerializeField] float speed;
-        [SerializeField] float destroyDistance;
-        public Transform target;
+        [SerializeField] float endDistance;
 
-        void Update()
+        public void Initialize(Entity target, string key)
         {
-            if (target == null)
+            gameObject.SetActive(true);
+            Timing.RunCoroutine(MoveRoutine(target, key));
+        }
+
+        IEnumerator<float> MoveRoutine(Entity target, string key)
+        {
+            while (Vector3.Distance(transform.position, target.transform.position) > endDistance)
             {
-                return;
+                Vector3 direction = Vector3.Normalize(target.transform.position - transform.position);
+                transform.position += direction * speed * Time.deltaTime;
+                transform.LookAt(target.transform);
+
+                yield return Timing.WaitForOneFrame;
             }
 
-            Vector3 direction = Vector3.Normalize(target.position - transform.position);
-            transform.position += direction * speed * Time.deltaTime;
-
-            if (Vector3.Distance(transform.position, target.position) < destroyDistance)
-            {
-                ProjectilePool.Instance.ReturnObject("Projectile", this);
-            }
+            ProjectilePool.Instance.ReturnObject(key, this);
         }
     }
 }

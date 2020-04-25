@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 using UnityEngine.AI;
+using DD2.Abilities;
 
 namespace DD2.AI
 {
@@ -56,12 +57,6 @@ namespace DD2.AI
                     }
                 });
             }
-        }
-
-        protected override void Die(Entity entity)
-        {
-            Debug.Log(entity.name + " killed " + name);
-            EntityPool.Instance.ReturnObject("Enemy", this);
         }
 
         void SetAgentActive(bool value)

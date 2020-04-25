@@ -19,10 +19,10 @@ namespace DD2.AI.Actions
             if (ctx.target)
             {
                 float distance = Vector3.Distance(ctx.target.GetPosition(), enemy.GetPosition()) - ctx.target.GetStats().GetRadius();
-                if (distance > enemy.GetAttackRange() || ensureMaxRange)
+                if (distance > enemy.GetStats().GetAttackRange() || ensureMaxRange)
                 {
                     Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - enemy.GetPosition());
-                    float distanceFromRange = distance - enemy.GetAttackRange() + 0.1f;
+                    float distanceFromRange = distance - enemy.GetStats().GetAttackRange() + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + enemy.GetPosition();
                     enemy.MoveToPosition(position);
                 }

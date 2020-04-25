@@ -26,13 +26,13 @@ namespace DD2.Abilities
             collisions = new Collider[maxCollisions];
         }
 
-        protected override void StartAbility(Transform transform)
+        protected override void StartAbility(Entity target, object payload)
         {
-            base.StartAbility(transform);
-            Timing.RunCoroutine(AbilityRoutine(transform));
+            base.StartAbility(target, payload);
+            Timing.RunCoroutine(AbilityRoutine(target, payload));
         }
 
-        IEnumerator<float> AbilityRoutine(Transform transform)
+        IEnumerator<float> AbilityRoutine(Entity target, object payload)
         {
             List<Collider> hitColliders = new List<Collider>();
             Vector3 position = transform.position;
@@ -50,7 +50,7 @@ namespace DD2.Abilities
             }
             if (!isToggle)
             {
-                EndAbility(transform);
+                EndAbility(target, payload);
             }
         }
 
@@ -70,7 +70,7 @@ namespace DD2.Abilities
                     foreach (Collider hitCollider in hitColliders)
                     {
                         Entity hitEntity = hitCollider.GetComponent<Entity>();
-                        CreateProjectile(hitCollider.transform);
+                        CreateProjectile(hitEntity);
                         ApplyEffects(hitEntity, position);
                     }
                 }
@@ -80,7 +80,7 @@ namespace DD2.Abilities
                     if (collider != null)
                     {
                         Entity hitEntity = collider.GetComponent<Entity>();
-                        CreateProjectile(collider.transform);
+                        CreateProjectile(hitEntity);
                         ApplyEffects(hitEntity, position);
                     }
                 }
@@ -88,19 +88,18 @@ namespace DD2.Abilities
             }
         }
 
-        protected override void Tick(Transform transform)
+        protected override void Tick(Entity target, object payload)
         {
-            Timing.RunCoroutine(AbilityRoutine(transform));
+            Timing.RunCoroutine(AbilityRoutine(target, payload));
         }
 
-        void CreateProjectile(Transform target)
+        void CreateProjectile(Entity target)
         {
             Projectile projectile = ProjectilePool.Instance.GetObject(objectKey);
             if (projectile != null)
             {
                 projectile.transform.position = GetFirePosition();
-                projectile.target = target;
-                projectile.gameObject.SetActive(true);
+                projectile.Initialize(target, objectKey);
             }
         }
     }

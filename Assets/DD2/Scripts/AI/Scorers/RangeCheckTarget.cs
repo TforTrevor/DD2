@@ -24,19 +24,22 @@ namespace DD2.AI.Scorers
                                 - (includeRadius ? entity.GetStats().GetRadius() : 0)
                                 - (includeTargetRadius ? ctx.target.GetStats().GetRadius() : 0);
 
-            if (rangeCheck == Range.Attack ? distance <= entity.GetAttackRange() : distance <= entity.GetSearchRange())
+            if (rangeCheck == Range.Attack ? distance <= entity.GetStats().GetAttackRange() : distance <= entity.GetStats().GetSearchRange())
             {
-                return not ? 0 : score;
-            }
-            if (checkCone)
-            {
-                float enemyDot = Vector3.Dot(entity.GetForward(), Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition()));
-                float desiredDot = Mathf.Cos(Mathf.Deg2Rad * (rangeCheck == Range.Attack ? entity.GetAttackAngle() : entity.GetSearchAngle()) / 2f);
-                if (enemyDot > desiredDot)
+                if (checkCone)
+                {
+                    float enemyDot = Vector3.Dot(entity.GetForward(), Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition()));
+                    float desiredDot = Mathf.Cos(Mathf.Deg2Rad * (rangeCheck == Range.Attack ? entity.GetStats().GetAttackAngle() : entity.GetStats().GetSearchAngle()) / 2f);
+                    if (enemyDot > desiredDot)
+                    {
+                        return not ? 0 : score;
+                    }
+                }
+                else
                 {
                     return not ? 0 : score;
                 }
-            }
+            }            
             return not ? score : 0;
         }
     }

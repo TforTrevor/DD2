@@ -17,7 +17,7 @@ MonoBehaviour:
   aiId: 4ec1ca6a-6d5e-49a8-9af1-9ec96734ebc5
   configuration: '{"@type":"Apex.AI.UtilityAI, ApexAI","_rootSelectorId":7689d5d4058c4e21a225577856cb7ada,"_id":4ec1ca6a6d5e49a89af19ec96734ebc5,"_selectors":[{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":7689d5d4058c4e21a225577856cb7ada,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":eca59cde824848e89f6fda097c2fec47},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":49c9984ca4c341a3b4da7922f2910504},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
     Assembly-CSharp","not":false,"targetList":false,"layerMask":4096,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":false,"clearTargetList":true,"layerMask":4096},{"@type":"DD2.AI.Actions.TargetScanner,
@@ -26,12 +26,20 @@ MonoBehaviour:
     ApexAI","_id":eca59cde824848e89f6fda097c2fec47,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":true},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,
     Assembly-CSharp","not":false,"checkCone":true,"rangeCheck":Attack,"includeRadius":false,"includeTargetRadius":true,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":2fc62ee0901e43e69306b48bf7dab4e4}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":49c9984ca4c341a3b4da7922f2910504,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":eca59cde824848e89f6fda097c2fec47},"_scorers":[{"@type":"DD2.AI.Scorers.TargetAlive,
+    Assembly-CSharp","not":false,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":2fc62ee0901e43e69306b48bf7dab4e4}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":2fc62ee0901e43e69306b48bf7dab4e4,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.UseAbility,
     Assembly-CSharp","index":0,"enable":false},{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":true,"clearTargetList":false,"layerMask":4096}]}}}]}'
   editorConfiguration: '{"offset":{"@x":-18,"@y":48},"zoom":1,"SelectorView":{"ViewArea":{"@left":82,"@top":148,"@width":200,"@height":160},"Name":"Get
     Target","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
-    for Targets"}}},"SelectorView":{"ViewArea":{"@left":342,"@top":148,"@width":200,"@height":160},"Name":"Range
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":602,"@top":148,"@width":200,"@height":160},"Name":"Range
     Check","QualifierView":{"Name":"Passed Check","ActionView":{}},"DefaultQualifier":{"Name":"Failed
-    Check","ActionView":{"@connectorType":"Composite","Name":"Stop Ability/Clear
-    Target"}}}}'
+    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":342,"@top":148,"@width":200,"@height":160},"Name":"Alive
+    Check","QualifierView":{"Name":"Passed Check","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed
+    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":842,"@top":348,"@width":200,"@height":100},"Name":"Stop
+    Ability/Clear Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'

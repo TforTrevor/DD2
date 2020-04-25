@@ -50,14 +50,14 @@ namespace DD2.Abilities
         [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         
-        Entity entity;
+        protected Entity entity;
 
         protected virtual void Awake()
         {
 
         }
 
-        public virtual void UseAbility(Transform transform)
+        public virtual void UseAbility(Entity target, object payload)
         {
             ////Input buffering
             //if (onCooldown || isUsing)
@@ -88,37 +88,37 @@ namespace DD2.Abilities
                     }
                     if (toggleState)
                     {
-                        Timing.RunCoroutine(ToggleRoutine(transform));
+                        Timing.RunCoroutine(ToggleRoutine(target, payload));
                     }
                 }
                 //Non-toggle ability
                 else if (!isUsing)
                 {
                     isUsing = true;
-                    StartAbility(transform);
+                    StartAbility(target, payload);
                 }
             }            
         }
 
-        protected IEnumerator<float> ToggleRoutine(Transform transform)
+        protected IEnumerator<float> ToggleRoutine(Entity target, object payload)
         {
             isUsing = true;
             while (toggleState)
             {
-                Tick(transform);
+                Tick(target, payload);
 
                 yield return Timing.WaitForSeconds(toggleTickRate);
             }
-            EndAbility(transform);
+            EndAbility(target, payload);
         }
 
-        protected IEnumerator<float> CooldownRoutine(Transform transform)
+        protected IEnumerator<float> CooldownRoutine(Entity target, object payload)
         {
             onCooldown = true;
             StartCooldown();
             yield return Timing.WaitForSeconds(cooldown);
             onCooldown = false;
-            EndCooldown(transform);
+            EndCooldown(target, payload);
         }
 
         protected void ApplyEffects(Entity target, object payload)
@@ -142,27 +142,28 @@ namespace DD2.Abilities
         }
 
         //Events
-        protected virtual void StartAbility(Transform transform) {
+        protected virtual void StartAbility(Entity target, object payload) 
+        {
             if (beforeEnd)
             {
-                Timing.RunCoroutine(CooldownRoutine(transform));
+                Timing.RunCoroutine(CooldownRoutine(target, payload));
             }
         }
-        protected virtual void EndAbility(Transform transform)
+        protected virtual void EndAbility(Entity target, object payload)
         {
             isUsing = false;
             if (!beforeEnd)
             {
-                Timing.RunCoroutine(CooldownRoutine(transform));
+                Timing.RunCoroutine(CooldownRoutine(target, payload));
             }
         }
-        protected virtual void Tick(Transform transform) { }
+        protected virtual void Tick(Entity target, object payload) { }
         protected virtual void StartCooldown() { }
-        protected virtual void EndCooldown(Transform transform)
+        protected virtual void EndCooldown(Entity target, object payload)
         {
             if (isBuffered)
             {
-                UseAbility(transform);
+                UseAbility(target, payload);
                 isBuffered = false;
                 Timing.KillCoroutines(bufferHandle);
             }

@@ -18,11 +18,11 @@ namespace DD2.AI.Actions
 
             if (!entity.GetAbility(index).GetToggleState() && enable)
             {
-                entity.GetAbility(index).UseAbility(ctx.target.transform);
+                entity.GetAbility(index).UseAbility(ctx.target, null);
             }
             else if (entity.GetAbility(index).GetToggleState() && !enable)
             {
-                entity.GetAbility(index).UseAbility(ctx.target.transform);
+                entity.GetAbility(index).UseAbility(ctx.target, null);
             }
         }
     }

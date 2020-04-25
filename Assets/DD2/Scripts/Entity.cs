@@ -9,8 +9,10 @@ namespace DD2
 {
     public class Entity : MonoBehaviour
     {
+        [SerializeField] protected string objectPoolKey;
         [SerializeField] protected Stats stats;
         [SerializeField] protected float currentHealth;
+        [ReadOnly] [SerializeField] protected bool alive;
 
         [SerializeField] protected Transform fireTransform;
         [ReadOnly] [SerializeField] protected bool grounded;
@@ -18,8 +20,6 @@ namespace DD2
         [SerializeField] [ReorderableList] protected Action[] actions;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
-        public static event System.Action<Entity> EntityEnabled = delegate { };
-        public static event System.Action<Entity> EntityDisabled = delegate { };
         public delegate void UpdateHealthHandler(float amount);
         public event UpdateHealthHandler healthUpdated;
         protected Rigidbody rb;
@@ -35,37 +35,41 @@ namespace DD2
 
         protected virtual void Start()
         {
-            if (stats != null)
-            {
-                currentHealth = stats.GetMaxHealth();
-                healthUpdated?.Invoke(currentHealth);
-            }
-        }
-
-        protected virtual void OnEnable()
-        {
-            EntityEnabled?.Invoke(this);
-        }
-
-        protected virtual void OnDisable()
-        {
-            EntityDisabled?.Invoke(this);
+            Respawn();
         }
 
         public void Damage(Entity entity, float damage)
         {
             currentHealth -= damage;
             healthUpdated?.Invoke(-damage);
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 Die(entity);
             }
         }
 
+        public virtual void Respawn()
+        {
+            if (stats != null)
+            {
+                currentHealth = stats.GetMaxHealth();
+                healthUpdated?.Invoke(currentHealth);
+            }
+            alive = true;
+        }
+
         protected virtual void Die(Entity entity)
         {
+            foreach (Ability ability in abilities)
+            {
+                if (ability.GetToggleState())
+                {
+                    ability.UseAbility(null, null);
+                }
+            }
             Debug.Log(entity.name + " killed " + name);
-            Destroy(gameObject);
+            alive = false;
+            EntityPool.Instance.ReturnObject(objectPoolKey, this);
         }
 
         public virtual void Ragdoll()
@@ -143,9 +147,9 @@ namespace DD2
             return currentHealth;
         }
 
-        public float GetMaxHealth()
+        public bool IsAlive()
         {
-            return stats.GetMaxHealth();
+            return alive;
         }
 
         public Ability GetAbility(int index)
@@ -173,34 +177,14 @@ namespace DD2
             return fireTransform.position;
         }
 
-        public float GetPresence()
-        {
-            return stats.GetPresence();
-        }
-
-        public float GetAttackRange()
-        {
-            return stats.GetAttackRange();
-        }
-
-        public float GetAttackAngle()
-        {
-            return stats.GetAttackAngle();
-        }
-
-        public float GetSearchRange()
-        {
-            return stats.GetSearchRange();
-        }
-
-        public float GetSearchAngle()
-        {
-            return stats.GetSearchAngle();
-        }
-
         public Stats GetStats()
         {
             return stats;
+        }
+
+        public string GetObjectPoolKey()
+        {
+            return objectPoolKey;
         }
     }
 }

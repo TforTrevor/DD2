@@ -8,35 +8,18 @@ namespace DD2.Abilities
 {
     public class TargetAbility : Ability
     {
-        [SerializeField] string objectKey;
-        ComponentPool<Projectile> objectPool;
+        [SerializeField] string projectileKey;
 
-        void Awake()
+        protected override void Tick(Entity target, object payload)
         {
-            objectPool = GetComponent<ComponentPool<Projectile>>();
-        }
-
-        /*public override void UseAbility(Vector3 position)
-        {
-            base.UseAbility(position);
-
-            if (objectPool != null)
+            base.Tick(target, payload);
+            Projectile projectile = ProjectilePool.Instance.GetObject(projectileKey);
+            if (projectile != null)
             {
-                Projectile projectile = objectPool.GetObject(objectKey);
-                if (projectile != null)
-                {
-                    projectile.transform.position = status.GetFirePosition();
-                    projectile.target = status.target;
-                    projectile.objectPool = objectPool;
-                    projectile.gameObject.SetActive(true);
-                }
-            }
-
-            ApplyEffects(status.target);
-
-            cooldownRoutine = Timing.RunCoroutine(CooldownRoutine());
-
-            EndAbility();
-        }*/
+                projectile.transform.position = entity.GetFirePosition();
+                projectile.Initialize(target, projectileKey);
+            }            
+            ApplyEffects(target, payload);
+        }
     }
 }

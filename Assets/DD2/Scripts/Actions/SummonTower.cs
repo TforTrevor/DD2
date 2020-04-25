@@ -10,13 +10,13 @@ namespace DD2.Actions
     [CreateAssetMenu(menuName = "Scriptable Objects/Actions/Summon Tower")]
     public class SummonTower : Action
     {
-        [SerializeField] Tower tower;
+        [SerializeField] Tower towerPrefab;
         [SerializeField] LayerMask mask;
         [SerializeField] CancelAction cancelAction;
         [SerializeField] Stage stage;
         [SerializeField] float sensitivity;
 
-        GameObject instance;
+        Tower instance;
         CoroutineHandle handle;
 
         public override void DoAction(Entity target, Entity caller, object payload)
@@ -27,13 +27,7 @@ namespace DD2.Actions
             }
             if (stage == Stage.none)
             {
-                stage = Stage.position;
                 Position(target, caller);
-                Player player = (Player)caller;
-                player.SetPrimaryFire(this);
-                cancelAction.action = this;
-                player.SetSecondaryFire(cancelAction);
-                player.SetAbility1(null);
             }
             else if (stage == Stage.position)
             {
@@ -57,7 +51,7 @@ namespace DD2.Actions
         {
             Player player = (Player)caller;
             Timing.KillCoroutines(handle);
-            Destroy(instance);
+            EntityPool.Instance.ReturnObject(towerPrefab.GetObjectPoolKey(), instance);
             player.SetPrimaryFire(null);
             player.SetSecondaryFire(null);
             player.SetAbility1(this);
@@ -71,9 +65,20 @@ namespace DD2.Actions
 
         private void Position(Entity target, Entity caller)
         {
-            Player player = (Player)caller;
-            instance = Instantiate(tower.gameObject);
-            handle = Timing.RunCoroutine(MoveRoutine(target.transform));
+            instance = (Tower)EntityPool.Instance.GetObject(towerPrefab.GetObjectPoolKey());
+            if (instance != null)
+            {
+                stage = Stage.position;
+                Player player = (Player)caller;
+                player.SetPrimaryFire(this);
+                cancelAction.action = this;
+                player.SetSecondaryFire(cancelAction);
+                player.SetAbility1(null);
+
+                instance.gameObject.SetActive(true);
+                handle = Timing.RunCoroutine(MoveRoutine(target.transform, player));
+            }
+            
         }
 
         private void Rotation(Entity target, Entity caller)
@@ -87,16 +92,17 @@ namespace DD2.Actions
         private void Build(Entity target, Entity caller)
         {
             Player player = (Player)caller;
-            instance.GetComponent<Tower>().Build();
+            instance.Build();
             player.SetPrimaryFire(null);
             player.SetSecondaryFire(null);
             player.SetAbility1(this);
             player.ToggleLook(true);
             player.ToggleMovement(true);
             stage = Stage.none;
+            instance = null;
         }
 
-        IEnumerator<float> MoveRoutine(Transform camera)
+        IEnumerator<float> MoveRoutine(Transform camera, Entity player)
         {
             while (true)
             {
@@ -105,6 +111,7 @@ namespace DD2.Actions
                 {
                     instance.transform.position = hit.point;
                 }
+                instance.transform.localEulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
                 yield return Timing.WaitForOneFrame;
             }       
         }
