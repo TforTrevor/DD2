@@ -134,5 +134,23 @@ namespace DD2.Util
         {
             return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
         }
+
+        public static float GetLargestDimension(Vector3 vector)
+        {
+            float largest = 0;
+            if (vector.x > largest)
+            {
+                largest = vector.x;
+            }
+            if (vector.y > largest)
+            {
+                largest = vector.y;
+            }
+            if (vector.z > largest)
+            {
+                largest = vector.z;
+            }
+            return largest;
+        }
     }
 }

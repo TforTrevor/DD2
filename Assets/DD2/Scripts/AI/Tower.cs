@@ -10,12 +10,20 @@ namespace DD2.AI
         [SerializeField] Transform towerGraphics;
         [SerializeField] Transform towerVertical;
         [SerializeField] Transform towerSummonGraphics;
+        [SerializeField] Color errorColor = Color.red;
+        [SerializeField] Light summonLight;
+        [SerializeField] MeshRenderer summonRenderer;
         UtilityAIComponent aiComponent;
+        Color defaultColor;
 
         protected override void Awake()
         {
             base.Awake();
             aiComponent = GetComponent<UtilityAIComponent>();
+            if (summonRenderer != null)
+            {
+                defaultColor = summonRenderer.material.GetColor("_Color");
+            }
         }
 
         public override void Respawn()
@@ -51,6 +59,28 @@ namespace DD2.AI
                 towerGraphics.forward = transform.forward;
                 towerVertical.forward = transform.forward;
             }
+        }
+
+        public void SetColor(Color color)
+        {
+            if (summonLight != null)
+            {
+                summonLight.color = color;
+            }
+            if (summonRenderer != null)
+            {
+                summonRenderer.material.SetColor("_Color", color);
+            }
+        }
+
+        public Color GetDefaultColor()
+        {
+            return defaultColor;
+        }
+
+        public Color GetErrorColor()
+        {
+            return errorColor;
         }
     }
 }

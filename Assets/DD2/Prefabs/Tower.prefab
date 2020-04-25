@@ -546,6 +546,7 @@ MonoBehaviour:
   towerGraphics: {fileID: 5721898464044627794}
   towerVertical: {fileID: 1557267556808604506}
   towerSummonGraphics: {fileID: 5771713530179302098}
+  errorColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6320886620070764834
 GameObject:
   m_ObjectHideFlags: 0

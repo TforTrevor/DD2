@@ -41,6 +41,7 @@ namespace DD2
                 {
                     T poolObject = Instantiate(pool.prefab, poolParent.transform);
                     poolObject.gameObject.SetActive(false);
+                    poolObject.transform.position = new Vector3(0, -1000, 0);
                     if (poolObject != null)
                     {
                         queue.Enqueue(poolObject);
@@ -81,6 +82,7 @@ namespace DD2
             }
 
             poolComponent.gameObject.SetActive(false);
+            poolComponent.transform.position = new Vector3(0, -1000, 0);
             poolDictionary[key].Enqueue(poolComponent);
         }
     }

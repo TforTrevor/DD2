@@ -15,35 +15,45 @@ namespace DD2.Actions
         [SerializeField] CancelAction cancelAction;
         [SerializeField] Stage stage;
         [SerializeField] float sensitivity;
+        [SerializeField] LayerMask overlapMask;
+        [SerializeField] bool enableBuild = true;
 
         Tower instance;
+        Collider instanceCollider;
         CoroutineHandle handle;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            if (caller == target)
-            {
-                stage = Stage.none;
-            }
             if (stage == Stage.none)
             {
-                Position(target, caller);
+                enableBuild = true;
             }
-            else if (stage == Stage.position)
+            if (enableBuild)
             {
-                stage = Stage.rotation;
-                Timing.KillCoroutines(handle);
-                Rotation(target, caller);
-            }
-            else if (stage == Stage.rotation)
-            {
-                stage = Stage.build;
-                Timing.KillCoroutines(handle);
-                Build(target, caller);
-            }
-            else if (stage == Stage.build)
-            {
-                
+                if (caller == target)
+                {
+                    stage = Stage.none;
+                }
+                if (stage == Stage.none)
+                {
+                    Position(target, caller);
+                }
+                else if (stage == Stage.position)
+                {
+                    stage = Stage.rotation;
+                    Timing.KillCoroutines(handle);
+                    Rotation(target, caller);
+                }
+                else if (stage == Stage.rotation)
+                {
+                    stage = Stage.build;
+                    Timing.KillCoroutines(handle);
+                    Build(target, caller);
+                }
+                else if (stage == Stage.build)
+                {
+
+                }
             }
         }
 
@@ -66,6 +76,7 @@ namespace DD2.Actions
         private void Position(Entity target, Entity caller)
         {
             instance = (Tower)EntityPool.Instance.GetObject(towerPrefab.GetObjectPoolKey());
+            instanceCollider = instance.GetComponent<Collider>();
             if (instance != null)
             {
                 stage = Stage.position;
@@ -110,6 +121,13 @@ namespace DD2.Actions
                 if (Physics.Raycast(camera.position, camera.forward, out hit, 5, mask))
                 {
                     instance.transform.position = hit.point;
+                    CollisionCheck();
+                }
+                else
+                {
+                    instance.transform.position = camera.position + camera.forward * 5;
+                    instance.SetColor(instance.GetErrorColor());
+                    enableBuild = false;
                 }
                 instance.transform.localEulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
                 yield return Timing.WaitForOneFrame;
@@ -121,8 +139,25 @@ namespace DD2.Actions
             while (true)
             {
                 instance.transform.Rotate(Vector3.up, mouseInput.Value.x * Time.deltaTime * sensitivity);
+                CollisionCheck();
                 yield return Timing.WaitForOneFrame;
             }
+        }
+
+        void CollisionCheck()
+        {
+            Collider[] colliders = Physics.OverlapSphere(instanceCollider.bounds.center, Util.Utilities.GetLargestDimension(instanceCollider.bounds.extents), overlapMask);
+            foreach(Collider collider in colliders)
+            {
+                if (collider != instanceCollider && instanceCollider.bounds.Intersects(collider.bounds))
+                {
+                    instance.SetColor(instance.GetErrorColor());
+                    enableBuild = false;
+                    return;
+                }
+            }
+            instance.SetColor(instance.GetDefaultColor());
+            enableBuild = true;
         }
 
         void OnEnable()
