@@ -20,3 +20,7 @@ MonoBehaviour:
   cancelAction: {fileID: 11400000, guid: b191148ffc0029d488725aacb8221f3d, type: 2}
   stage: 0
   sensitivity: 30
+  overlapMask:
+    serializedVersion: 2
+    m_Bits: 15360
+  enableBuild: 1

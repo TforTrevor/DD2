@@ -76,9 +76,9 @@ namespace DD2.Actions
         private void Position(Entity target, Entity caller)
         {
             instance = (Tower)EntityPool.Instance.GetObject(towerPrefab.GetObjectPoolKey());
-            instanceCollider = instance.GetComponent<Collider>();
             if (instance != null)
             {
+                instanceCollider = instance.GetComponent<Collider>();
                 stage = Stage.position;
                 Player player = (Player)caller;
                 player.SetPrimaryFire(this);
