@@ -13,6 +13,7 @@ namespace DD2
         [SerializeField] string poolKey;
 
         Dictionary<Entity, HealthBar> healthBars = new Dictionary<Entity, HealthBar>();
+        Dictionary<Entity, HealthBar> temp = new Dictionary<Entity, HealthBar>();
 
         void Awake()
         {
@@ -47,31 +48,33 @@ namespace DD2
                 Entity entity = entry.Key;
                 HealthBar healthBar = entry.Value;
 
-                Vector3 pos = Camera.main.WorldToScreenPoint(entity.GetPosition() + Vector3.up * healthBar.GetHeightOffset());
-                if (pos.z > maxDistance || pos.z < 0)
+                if (healthBar == null)
                 {
-                    if (healthBar != null)
-                    {
-                        healthBar.GetCanvas().enabled = false;
-                        HealthBarPool.Instance.ReturnObject(poolKey, healthBar);
-                    }                    
+                    healthBar = HealthBarPool.Instance.GetObject(poolKey);
+                    healthBar.SetEntity(entity);
                 }
-                else
+                if (healthBar != null)
                 {
-                    if (healthBar == null)
+                    Vector3 pos = Camera.main.WorldToScreenPoint(entity.GetPosition() + Vector3.up * healthBar.GetHeightOffset());
+                    if (pos.z > maxDistance || pos.z < 0)
                     {
-                        healthBar = HealthBarPool.Instance.GetObject(poolKey);
+                        HealthBarPool.Instance.ReturnObject(poolKey, healthBar);
                     }
-                    if (healthBar != null)
-                    {
-                        healthBar.GetCanvas().enabled = true;
+                    else
+                    {             
                         healthBar.GetCanvas().sortingOrder = (int)(pos.z * -10);
                         healthBar.transform.position = pos;
                         float ratio = Util.Utilities.Remap(pos.z, maxDistance, maxSizeDistance, 0, 1);
                         healthBar.transform.localScale = new Vector3(ratio, ratio, 1);
-                    }                    
+                    }
+                    temp.Add(entity, healthBar);
                 }
             }
+            foreach (KeyValuePair<Entity, HealthBar> entry in temp)
+            {
+                healthBars[entry.Key] = entry.Value;
+            }
+            temp.Clear();
         }
 
         void OnDestroy()

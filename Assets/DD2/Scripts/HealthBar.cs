@@ -37,7 +37,10 @@ namespace DD2
 
         void OnDestroy()
         {
-            entity.healthUpdated -= UpdateHealth;
+            if (entity != null)
+            {
+                entity.healthUpdated -= UpdateHealth;
+            }            
         }
 
         public float GetHeightOffset()

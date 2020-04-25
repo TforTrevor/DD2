@@ -16,13 +16,18 @@ namespace DD2
 
     public class ComponentPool<T> : Singleton<ComponentPool<T>> where T : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] List<Pool<T>> pools;
-        Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
-        Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
+        [SerializeField] [ReorderableList] protected List<Pool<T>> pools;
+        protected Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
+        protected Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
 
         protected override void Awake()
         {
             base.Awake();
+            CreatePool();
+        }
+
+        protected virtual void CreatePool()
+        {
             foreach (Pool<T> pool in pools)
             {
                 GameObject poolParent = new GameObject();
@@ -36,10 +41,9 @@ namespace DD2
                 {
                     T poolObject = Instantiate(pool.prefab, poolParent.transform);
                     poolObject.gameObject.SetActive(false);
-                    T poolComponent = poolObject.GetComponent<T>();
-                    if (poolComponent != null)
+                    if (poolObject != null)
                     {
-                        queue.Enqueue(poolComponent);
+                        queue.Enqueue(poolObject);
                     }
                 }
 
@@ -47,7 +51,7 @@ namespace DD2
             }
         }
 
-        public T GetObject(string key)
+        public virtual T GetObject(string key)
         {
             if (!poolDictionary.ContainsKey(key))
             {
@@ -61,15 +65,14 @@ namespace DD2
                 {
                     T poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
                     poolObject.gameObject.SetActive(false);
-                    T poolComponent = poolObject.GetComponent<T>();
-                    return poolComponent;
+                    return poolObject;
                 }
                 return null;
             }
             return poolDictionary[key].Dequeue();
         }
 
-        public void ReturnObject(string key, T poolComponent)
+        public virtual void ReturnObject(string key, T poolComponent)
         {
             if (!poolDictionary.ContainsKey(key))
             {
