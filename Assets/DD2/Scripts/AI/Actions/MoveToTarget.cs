@@ -4,27 +4,34 @@ using UnityEngine;
 using Apex.AI;
 using Apex.Serialization;
 using DD2.AI.Context;
+using DD2.AI.Scorers;
 
 namespace DD2.AI.Actions
 {
     public class MoveToTarget : ActionBase
     {
         [ApexSerialization] bool ensureMaxRange;
+        [ApexSerialization] Range range;
+        [ApexSerialization] bool includeRadius = true;
+        [ApexSerialization] bool includeTargetRadius = true;
 
         public override void Execute(IAIContext context)
         {
             AIContext ctx = (AIContext)context;
-            Enemy enemy = (Enemy)ctx.entity;
+            Enemy entity = (Enemy)ctx.entity;
 
             if (ctx.target)
             {
-                float distance = Vector3.Distance(ctx.target.GetPosition(), enemy.GetPosition()) - ctx.target.GetStats().GetRadius();
-                if (distance > enemy.GetStats().GetAttackRange() || ensureMaxRange)
+                float range = this.range == Range.Attack ? entity.GetStats().GetAttackRange() : entity.GetStats().GetSearchRange();
+                float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition())
+                                    - (includeRadius ? entity.GetStats().GetRadius() : 0)
+                                    - (includeTargetRadius ? ctx.target.GetStats().GetRadius() : 0);
+                if (distance > range || ensureMaxRange)
                 {
-                    Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - enemy.GetPosition());
-                    float distanceFromRange = distance - enemy.GetStats().GetAttackRange() + 0.1f;
-                    Vector3 position = (direction * distanceFromRange) + enemy.GetPosition();
-                    enemy.MoveToPosition(position);
+                    Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
+                    float distanceFromRange = distance - range + 0.1f;
+                    Vector3 position = (direction * distanceFromRange) + entity.GetPosition();
+                    entity.MoveToPosition(position);
                 }
             }
         }

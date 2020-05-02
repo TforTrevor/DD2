@@ -19,34 +19,27 @@ MonoBehaviour:
     ApexAI","_id":3cb09a8eaa4141629485cb110e2949a9,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":false,"clearTargetList":true,"layerMask":11264},{"@type":"DD2.AI.Actions.TargetCore,
-    Assembly-CSharp"},{"@type":"DD2.AI.Actions.TargetScanner, Assembly-CSharp","layerMasks":3072,"useCone":false,"range":Search}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
+    Assembly-CSharp"},{"@type":"DD2.AI.Actions.TargetScanner, Assembly-CSharp","layerMasks":3072,"useCone":false,"range":Search,"includeRadius":true,"includeTargetRadius":true}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
     ApexAI","_selectorId":d4593a468f214f818619aac5dcfc95c8}}}},{"@type":"Apex.AI.ScoreSelector,
-    ApexAI","_id":ef91fde56a6f41aab7268e268e78333f,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.MoveToTarget,
-    Assembly-CSharp","ensureMaxRange":true}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
-    ApexAI","_selectorId":168545a8bf6a4b0abf02c4ee50cfe36b}}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":d4593a468f214f818619aac5dcfc95c8,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":5f5daf294ac9423298165216ef769540},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
     Assembly-CSharp","not":false,"targetList":true,"layerMask":3072,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":false,"clearTargetList":true,"layerMask":3072},{"@type":"DD2.AI.Actions.SelectBestTarget,
-    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":1,"includeRadius":true,"includeTargetRadius":true}]}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
-    ApexAI","_selectorId":ef91fde56a6f41aab7268e268e78333f}}}},{"@type":"Apex.AI.ScoreSelector,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":1,"includeRadius":true,"includeTargetRadius":true}]},{"@type":"DD2.AI.Actions.MoveToTarget,
+    Assembly-CSharp","ensureMaxRange":true,"range":Attack,"includeRadius":true,"includeTargetRadius":true}]}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":5f5daf294ac9423298165216ef769540,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":6750791617bf4a62b094c02b9f879412},"_scorers":[{"@type":"DD2.AI.Scorers.HasTarget,
     Assembly-CSharp","not":false,"targetList":false,"layerMask":3072,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":true,"clearTargetList":true,"layerMask":8192},{"@type":"DD2.AI.Actions.SelectBestTarget,
-    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.PresenceOption, Assembly-CSharp","multiplier":1}]}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
+    Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.PresenceOption, Assembly-CSharp","multiplier":1},{"@type":"DD2.AI.Scorers.DistanceOption,
+    Assembly-CSharp","multiplier":-1,"includeRadius":true,"includeTargetRadius":true}]}],"_connectorAction":{"@type":"Apex.AI.SelectorAction,
     ApexAI","_selectorId":6750791617bf4a62b094c02b9f879412}}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":4b4b6ad7f1624ff0b7831095f2832020,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":ef91fde56a6f41aab7268e268e78333f},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,
-    Assembly-CSharp","not":false,"checkCone":false,"rangeCheck":Search,"includeRadius":true,"includeTargetRadius":true,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":c4d4947ba26244fda74a5871a1b4504a}}},{"@type":"Apex.AI.ScoreSelector,
-    ApexAI","_id":168545a8bf6a4b0abf02c4ee50cfe36b,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
-    ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":true},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":fe3911779bb44d098d126be4f725d7d7},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,
     Assembly-CSharp","not":false,"checkCone":false,"rangeCheck":Attack,"includeRadius":true,"includeTargetRadius":true,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":false}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":c4d4947ba26244fda74a5871a1b4504a}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":6750791617bf4a62b094c02b9f879412,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"Apex.AI.SelectorAction, ApexAI","_selectorId":4b4b6ad7f1624ff0b7831095f2832020},"_scorers":[{"@type":"DD2.AI.Scorers.TargetAlive,
     Assembly-CSharp","not":false,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
@@ -54,18 +47,20 @@ MonoBehaviour:
     ApexAI","_id":c4d4947ba26244fda74a5871a1b4504a,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.UseAbility,
     Assembly-CSharp","index":0,"enable":false},{"@type":"DD2.AI.Actions.ClearTarget,
-    Assembly-CSharp","clearTarget":true,"clearTargetList":false,"layerMask":11264}]}}}]}'
-  editorConfiguration: '{"offset":{"@x":-260,"@y":206},"zoom":0.94999999,"SelectorView":{"ViewArea":{"@left":25,"@top":225,"@width":190,"@height":95},"Name":"Scan
+    Assembly-CSharp","clearTarget":true,"clearTargetList":false,"layerMask":11264}]}}},{"@type":"Apex.AI.ScoreSelector,
+    ApexAI","_id":fe3911779bb44d098d126be4f725d7d7,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.MoveToTarget,
+    Assembly-CSharp","ensureMaxRange":true,"range":Attack,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Actions.UseAbility,
+    Assembly-CSharp","index":0,"enable":true}]}}}]}'
+  editorConfiguration: '{"offset":{"@x":-339,"@y":264},"zoom":0.89999998,"SelectorView":{"ViewArea":{"@left":-69,"@top":282,"@width":180,"@height":90},"Name":"Scan
     for Targets","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
-    for Targets"}}},"SelectorView":{"ViewArea":{"@left":1032,"@top":358,"@width":228,"@height":95},"Name":"Pursue
-    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Move"}}},"SelectorView":{"ViewArea":{"@left":253,"@top":225,"@width":266,"@height":152},"Name":"Choose
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":147,"@top":282,"@width":252,"@height":144},"Name":"Choose
     Target","QualifierView":{"Name":"Has Player/Tower in List","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Target
-    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":557,"@top":187,"@width":190,"@height":152},"Name":"Choose
+    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":435,"@top":246,"@width":180,"@height":144},"Name":"Choose
     Target","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Doesn''t
-    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":785,"@top":187,"@width":190,"@height":152},"Name":"Search
+    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":651,"@top":246,"@width":180,"@height":144},"Name":"Search
     Range Check","QualifierView":{"Name":"Passed Check","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed
-    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1317,"@top":187,"@width":190,"@height":152},"Name":"Attack
-    Range Check","QualifierView":{"Name":"Passed Check","ActionView":{}},"DefaultQualifier":{"ActionView":{"Name":"Cancel
-    Ability"}}},"SelectorView":{"ViewArea":{"@left":785,"@top":-3,"@width":190,"@height":152},"Name":"Alive
-    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1051,"@top":111,"@width":190,"@height":95},"Name":"Stop
-    Ability/Clear Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'
+    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":651,"@top":66,"@width":180,"@height":144},"Name":"Alive
+    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":903,"@top":174,"@width":180,"@height":90},"Name":"Stop
+    Ability/Clear Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":903,"@top":300,"@width":180,"@height":90},"Name":"Use
+    Ability","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'

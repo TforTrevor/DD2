@@ -9,17 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
-  m_Name: Stats
+  m_Script: {fileID: 11500000, guid: a85cc67d182444e4a8b462006f82c883, type: 3}
+  m_Name: Ability 2
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  attackRange: 0.25
-  attackAngle: 0
-  searchRange: 5
-  searchAngle: 40
-  presence: 0
-  elementType: 0
-  speed: 3
-  attackRate: 0
-  ragdollTime: 1
-  radius: 0.5
+  description: 

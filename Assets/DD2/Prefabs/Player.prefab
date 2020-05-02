@@ -1,5 +1,202 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &257032694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 257032695}
+  - component: {fileID: 257032699}
+  - component: {fileID: 257032698}
+  - component: {fileID: 257032697}
+  - component: {fileID: 257032696}
+  m_Layer: 10
+  m_Name: Build Tower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &257032695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257032694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1510504437}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &257032699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257032694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5284e7f0ff0649b4698e3c2a30d6faba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefabs:
+  - {fileID: 8445031935164854481, guid: 5d447892f71dd084db75fae8306abc28, type: 3}
+  - {fileID: 7371816269212124518, guid: 21a9a275bb4664c4181c3e1a56a01dd2, type: 3}
+  mask:
+    serializedVersion: 2
+    m_Bits: 512
+  stage: 0
+  rotSensitivity: 3
+  overlapMask:
+    serializedVersion: 2
+    m_Bits: 7168
+  enableBuild: 0
+  isUsing: 0
+--- !u!114 &257032698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257032694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f130de4425e7f542b225e954f92b701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - Event: {fileID: 11400000, guid: f486f5c91b26dd54abff8b3c1c510478, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 257032699}
+          m_TargetAssemblyTypeName: DD2.BuildTower, Assembly-CSharp
+          m_MethodName: Begin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 257032697}
+            m_ObjectArgumentAssemblyTypeName: DD2.BuildTowerInfo, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: 4cb185c351cbc3f4d80d74b2e4740521, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 257032699}
+          m_TargetAssemblyTypeName: DD2.BuildTower, Assembly-CSharp
+          m_MethodName: Begin
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 257032696}
+            m_ObjectArgumentAssemblyTypeName: DD2.BuildTowerInfo, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: c83d9601a9efeb74b816475ead59642c, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 257032699}
+          m_TargetAssemblyTypeName: DD2.BuildTower, Assembly-CSharp
+          m_MethodName: Continue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Event: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 257032699}
+          m_TargetAssemblyTypeName: DD2.BuildTower, Assembly-CSharp
+          m_MethodName: Cancel
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &257032697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257032694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3909ff5fe11e7449cb297d84226bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1604891321}
+  player: {fileID: 3180383434907916282}
+  index: 0
+--- !u!114 &257032696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257032694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3909ff5fe11e7449cb297d84226bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 1604891321}
+  player: {fileID: 3180383434907916282}
+  index: 1
+--- !u!1 &1510504436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510504437}
+  m_Layer: 10
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510504437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510504436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 257032695}
+  m_Father: {fileID: 3342988195871786058}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604891320
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +256,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -201,8 +398,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f659a6cf71631489efdf567f588360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 6b3201fd8285bc24a845db6df3518144, type: 2}
+  objectPoolKey: 
+  stats: {fileID: 0}
   currentHealth: 0
+  alive: 0
   fireTransform: {fileID: 0}
   grounded: 0
   ragdolled: 0
@@ -232,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936374265691688859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.5}
+  m_LocalPosition: {x: 0.49999982, y: 0.5, z: 1.5000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1604891321}
@@ -282,56 +481,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvents:
-  - Event: {fileID: 11400000, guid: f486f5c91b26dd54abff8b3c1c510478, type: 2}
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3180383434907916282}
-          m_MethodName: DoAbility1
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 537350847}
-            m_ObjectArgumentAssemblyTypeName: DD2.Entity, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Event: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3180383434907916282}
-          m_MethodName: DoSecondaryFire
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - Event: {fileID: 11400000, guid: c83d9601a9efeb74b816475ead59642c, type: 2}
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3180383434907916282}
-          m_MethodName: DoPrimaryFire
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - Event: {fileID: 11400000, guid: 4e7a1348399c47e4c89ae01dc229e5a6, type: 2}
     Response:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1505551297}
+          m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
           m_MethodName: ToggleCursorLock
           m_Mode: 1
           m_Arguments:
@@ -375,8 +530,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae78809ab5619b41b5349da2074eda0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectPoolKey: Player
   stats: {fileID: 11400000, guid: 8cc69f47008ec2a43857b42740d77c89, type: 2}
   currentHealth: 0
+  alive: 0
   fireTransform: {fileID: 0}
   grounded: 0
   ragdolled: 0
@@ -384,7 +541,8 @@ MonoBehaviour:
   abilities: []
   primaryFire: {fileID: 0}
   secondaryFire: {fileID: 0}
-  ability1: {fileID: 11400000, guid: d0ac664527427874f89a8572b3098bc6, type: 2}
+  ability1: {fileID: 0}
+  ability2: {fileID: 0}
   lookInput: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
 --- !u!114 &3774765070087462770
 MonoBehaviour:
@@ -404,6 +562,7 @@ MonoBehaviour:
   confirmBuild: {fileID: 0}
   jumpEvent: {fileID: 0}
   ability1: {fileID: 11400000, guid: f486f5c91b26dd54abff8b3c1c510478, type: 2}
+  ability2: {fileID: 11400000, guid: 4cb185c351cbc3f4d80d74b2e4740521, type: 2}
   secondaryFire: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}
   primaryFire: {fileID: 11400000, guid: c83d9601a9efeb74b816475ead59642c, type: 2}
   menu: {fileID: 11400000, guid: 4e7a1348399c47e4c89ae01dc229e5a6, type: 2}
@@ -524,6 +683,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -548,6 +708,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &4864931274030757873
 PrefabInstance:
   m_ObjectHideFlags: 0

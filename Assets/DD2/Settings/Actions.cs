@@ -75,6 +75,14 @@ namespace DD2.Input
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ability2"",
+                    ""type"": ""Button"",
+                    ""id"": ""f23f0d7e-b920-487d-bc27-28b63033e5d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -198,6 +206,17 @@ namespace DD2.Input
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe73ab6b-341f-4c4c-8ad1-8aae5729a3b0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,6 +249,7 @@ namespace DD2.Input
             m_Standard_SecondaryFire = m_Standard.FindAction("SecondaryFire", throwIfNotFound: true);
             m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
             m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
+            m_Standard_Ability2 = m_Standard.FindAction("Ability2", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -286,6 +306,7 @@ namespace DD2.Input
         private readonly InputAction m_Standard_SecondaryFire;
         private readonly InputAction m_Standard_PrimaryFire;
         private readonly InputAction m_Standard_Menu;
+        private readonly InputAction m_Standard_Ability2;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -297,6 +318,7 @@ namespace DD2.Input
             public InputAction @SecondaryFire => m_Wrapper.m_Standard_SecondaryFire;
             public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
             public InputAction @Menu => m_Wrapper.m_Standard_Menu;
+            public InputAction @Ability2 => m_Wrapper.m_Standard_Ability2;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -327,6 +349,9 @@ namespace DD2.Input
                     @Menu.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
                     @Menu.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
                     @Menu.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Ability2.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
+                    @Ability2.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
+                    @Ability2.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -352,6 +377,9 @@ namespace DD2.Input
                     @Menu.started += instance.OnMenu;
                     @Menu.performed += instance.OnMenu;
                     @Menu.canceled += instance.OnMenu;
+                    @Ability2.started += instance.OnAbility2;
+                    @Ability2.performed += instance.OnAbility2;
+                    @Ability2.canceled += instance.OnAbility2;
                 }
             }
         }
@@ -374,6 +402,7 @@ namespace DD2.Input
             void OnSecondaryFire(InputAction.CallbackContext context);
             void OnPrimaryFire(InputAction.CallbackContext context);
             void OnMenu(InputAction.CallbackContext context);
+            void OnAbility2(InputAction.CallbackContext context);
         }
     }
 }

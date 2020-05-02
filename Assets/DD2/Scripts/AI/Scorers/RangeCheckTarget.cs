@@ -39,7 +39,10 @@ namespace DD2.AI.Scorers
                 {
                     return not ? 0 : score;
                 }
-            }            
+            }
+            Vector3 dir = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
+            Vector3 startPos = entity.GetPosition() + dir * entity.GetStats().GetRadius();
+            Debug.DrawRay(startPos, dir * distance, Color.green, 0.5f);
             return not ? score : 0;
         }
     }

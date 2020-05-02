@@ -12,6 +12,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] GameEvent confirmBuild;
     [SerializeField] GameEvent jumpEvent;
     [SerializeField] GameEvent ability1;
+    [SerializeField] GameEvent ability2;
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
     [SerializeField] GameEvent menu;
@@ -34,6 +35,11 @@ public class PlayerInput : MonoBehaviour
     void OnAbility1()
     {
         ability1?.Raise();
+    }
+
+    void OnAbility2()
+    {
+        ability2?.Raise();
     }
 
     void OnSecondaryFire()

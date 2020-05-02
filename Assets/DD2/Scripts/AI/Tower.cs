@@ -15,6 +15,7 @@ namespace DD2.AI
         [SerializeField] MeshRenderer summonRenderer;
         UtilityAIComponent aiComponent;
         Color defaultColor;
+        Color currentColor;
 
         protected override void Awake()
         {
@@ -63,14 +64,18 @@ namespace DD2.AI
 
         public void SetColor(Color color)
         {
-            if (summonLight != null)
+            if (color != currentColor)
             {
-                summonLight.color = color;
-            }
-            if (summonRenderer != null)
-            {
-                summonRenderer.material.SetColor("_Color", color);
-            }
+                if (summonLight != null)
+                {
+                    summonLight.color = color;
+                }
+                if (summonRenderer != null)
+                {
+                    summonRenderer.material.SetColor("_Color", color);
+                }
+                currentColor = color;
+            }            
         }
 
         public Color GetDefaultColor()

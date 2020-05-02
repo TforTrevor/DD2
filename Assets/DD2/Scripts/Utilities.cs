@@ -6,6 +6,27 @@ namespace DD2.Util
 {
     public static class Utilities
     {
+        static Dictionary<Vector3, float> viewDirections = new Dictionary<Vector3, float>();
+
+        static Utilities()
+        {
+            float numViewDirections = 200;
+            float goldenRatio = (1 + Mathf.Sqrt(5)) / 2;
+            float angleIncrement = Mathf.PI * 2 * goldenRatio;
+
+            for (int i = 0; i < numViewDirections; i++)
+            {
+                float t = (float)i / numViewDirections;
+                float inclination = Mathf.Acos(1 - 2 * t);
+                float azimuth = angleIncrement * i;
+
+                float x = Mathf.Sin(inclination) * Mathf.Cos(azimuth);
+                float y = Mathf.Sin(inclination) * Mathf.Sin(azimuth);
+                float z = Mathf.Cos(inclination);
+                viewDirections.Add(new Vector3(x, y, z), Vector3.Dot(Vector3.forward, new Vector3(x, y, z)));
+            }
+        }
+
         public static Collider GetClosestToPoint(Collider[] colliders, Vector3 position)
         {
             Collider closestCollider = null;
@@ -151,6 +172,34 @@ namespace DD2.Util
                 largest = vector.z;
             }
             return largest;
+        }
+
+        public static bool IsColliderInCone(Collider collider, Transform transform, float angle, float range, LayerMask layerMask)
+        {
+            Vector3 center = collider.bounds.center;
+            float desiredDot = Mathf.Cos(Mathf.Deg2Rad * angle / 2f);
+            float dot = Vector3.Dot(transform.forward, Vector3.Normalize(center - transform.position));
+
+            if (dot > desiredDot)
+            {
+                return true;
+            }
+            else
+            {
+                foreach (KeyValuePair<Vector3, float> entry in viewDirections)
+                {
+                    if (entry.Value > desiredDot)
+                    {
+                        Vector3 dir = transform.TransformDirection(entry.Key);
+                        Debug.DrawRay(transform.position, dir * range, Color.red, 10f);
+                        if (Physics.Raycast(transform.position, dir, range, layerMask))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
     }
 }
