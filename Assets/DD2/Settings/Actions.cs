@@ -83,6 +83,14 @@ namespace DD2.Input
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RepairTower"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e0e8b46-9e4c-4a1b-a522-9e18af5bf1c0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -217,6 +225,17 @@ namespace DD2.Input
                     ""action"": ""Ability2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8196f3c-10c9-4ff1-9f72-b676c59add94"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RepairTower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +269,7 @@ namespace DD2.Input
             m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
             m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
             m_Standard_Ability2 = m_Standard.FindAction("Ability2", throwIfNotFound: true);
+            m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -307,6 +327,7 @@ namespace DD2.Input
         private readonly InputAction m_Standard_PrimaryFire;
         private readonly InputAction m_Standard_Menu;
         private readonly InputAction m_Standard_Ability2;
+        private readonly InputAction m_Standard_RepairTower;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -319,6 +340,7 @@ namespace DD2.Input
             public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
             public InputAction @Menu => m_Wrapper.m_Standard_Menu;
             public InputAction @Ability2 => m_Wrapper.m_Standard_Ability2;
+            public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -352,6 +374,9 @@ namespace DD2.Input
                     @Ability2.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
                     @Ability2.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
                     @Ability2.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
+                    @RepairTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
+                    @RepairTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
+                    @RepairTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -380,6 +405,9 @@ namespace DD2.Input
                     @Ability2.started += instance.OnAbility2;
                     @Ability2.performed += instance.OnAbility2;
                     @Ability2.canceled += instance.OnAbility2;
+                    @RepairTower.started += instance.OnRepairTower;
+                    @RepairTower.performed += instance.OnRepairTower;
+                    @RepairTower.canceled += instance.OnRepairTower;
                 }
             }
         }
@@ -403,6 +431,7 @@ namespace DD2.Input
             void OnPrimaryFire(InputAction.CallbackContext context);
             void OnMenu(InputAction.CallbackContext context);
             void OnAbility2(InputAction.CallbackContext context);
+            void OnRepairTower(InputAction.CallbackContext context);
         }
     }
 }

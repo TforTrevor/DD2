@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
     [SerializeField] GameEvent menu;
+    [SerializeField] GameEvent repairTower;
 
     void OnMove(InputValue value)
     {
@@ -55,5 +56,10 @@ public class PlayerInput : MonoBehaviour
     void OnMenu()
     {
         menu?.Raise();
+    }
+
+    void OnRepairTower()
+    {
+        repairTower?.Raise();
     }
 }

@@ -13,13 +13,32 @@ namespace DD2
         [SerializeField] Action ability1;
         [SerializeField] Action ability2;
         [SerializeField] Vector3Variable lookInput;
+        [SerializeField] PlayerMovement movement;
+        [SerializeField] new PlayerCamera camera;
+        [SerializeField] float manaOrbRadius;
+        [SerializeField] LayerMask manaOrbLayerMask;
 
-        PlayerMovement movement;
+        Collider[] manaOrbs;
+        int manaOrbsCount;
 
         protected override void Awake()
         {
             base.Awake();
-            movement = GetComponent<PlayerMovement>();
+            manaOrbs = new Collider[100];
+        }
+
+        protected virtual void FixedUpdate()
+        {
+            Util.Utilities.ClearArray(manaOrbs, manaOrbsCount);
+            manaOrbsCount = Physics.OverlapSphereNonAlloc(GetPosition(), manaOrbRadius, manaOrbs);
+            for (int i = 0; i < manaOrbsCount; i++)
+            {
+                ManaOrb orb = manaOrbs[i].GetComponent<ManaOrb>();
+                if (orb != null && currentMana + orb.GetAmount() <= GetStats().GetMaxMana())
+                {
+                    orb.PickUp(this);
+                }                            
+            }
         }
 
         public void DoPrimaryFire()
@@ -79,12 +98,13 @@ namespace DD2
 
         public void ToggleMovement(bool value)
         {
-            movement.enableMovement = value;
+            movement.ToggleMovement(value);
         }
 
         public void ToggleLook(bool value)
         {
-            movement.enableLook = value;
+            movement.ToggleLook(value);
+            camera.ToggleLook(value);
         }
     }
 }

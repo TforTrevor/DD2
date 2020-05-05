@@ -7,6 +7,7 @@ namespace DD2.AI
 {
     public class Tower : EntityAI
     {
+        [SerializeField] int manaCost;
         [SerializeField] Transform towerGraphics;
         [SerializeField] Transform towerVertical;
         [SerializeField] Transform towerSummonGraphics;
@@ -86,6 +87,11 @@ namespace DD2.AI
         public Color GetErrorColor()
         {
             return errorColor;
+        }
+
+        public int GetManaCost()
+        {
+            return manaCost;
         }
     }
 }

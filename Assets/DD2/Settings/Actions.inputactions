@@ -68,6 +68,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RepairTower",
+                    "type": "Button",
+                    "id": "2e0e8b46-9e4c-4a1b-a522-9e18af5bf1c0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -200,6 +208,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8196f3c-10c9-4ff1-9f72-b676c59add94",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "RepairTower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

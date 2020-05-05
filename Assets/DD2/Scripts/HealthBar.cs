@@ -32,7 +32,7 @@ namespace DD2
         void UpdateHealth(float amount)
         {
             healthSlider.value = entity.GetCurrentHealth();
-            healthNumber.text = entity.GetCurrentHealth() + "/" + entity.GetStats().GetMaxHealth();
+            healthNumber.text = (int)entity.GetCurrentHealth() + "/" + entity.GetStats().GetMaxHealth();
         }
 
         void OnDestroy()

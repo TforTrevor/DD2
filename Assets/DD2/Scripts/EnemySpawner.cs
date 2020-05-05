@@ -8,6 +8,7 @@ namespace DD2
 {
     public class EnemySpawner : MonoBehaviour
     {
+        [SerializeField] float randomPosition;
         [SerializeField] [ReorderableList] List<Spawn> spawns;
 
         void Start()
@@ -41,7 +42,9 @@ namespace DD2
         void SpawnEntity(Spawn spawn)
         {
             Entity entity = EntityPool.Instance.GetObject(spawn.GetKey());
-            entity.transform.position = transform.position;
+            float randomX = Random.Range(-randomPosition, randomPosition);
+            float randomZ = Random.Range(-randomPosition, randomPosition);
+            entity.transform.position = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
             entity.gameObject.SetActive(true);
         }
     }

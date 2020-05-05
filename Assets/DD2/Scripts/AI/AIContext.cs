@@ -12,6 +12,8 @@ namespace DD2.AI.Context
         public List<Entity> targetList;
         public Entity target;
 
+        public Entity pathTarget;
+
         public AIContext(EntityAI entity)
         {
             this.entity = entity;

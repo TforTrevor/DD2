@@ -9,6 +9,7 @@ namespace DD2
     public class Stats : ScriptableObject
     {
         [SerializeField] float maxHealth;
+        [SerializeField] int maxMana;
         [SerializeField] float attackRange;
         [SerializeField] float attackAngle;
         [SerializeField] float searchRange;
@@ -23,6 +24,11 @@ namespace DD2
         public float GetMaxHealth()
         {
             return maxHealth;
+        }
+
+        public int GetMaxMana()
+        {
+            return maxMana;
         }
 
         public float GetPresence()

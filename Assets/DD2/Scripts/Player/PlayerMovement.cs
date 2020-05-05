@@ -11,26 +11,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxSpeed;
     [SerializeField] float acceleration;
     [SerializeField] Vector2 direction;
-    [SerializeField] Transform cameraParent;
 
     Rigidbody rb;
-    float xRot;
 
-    public bool enableMovement = true;
-    public bool enableLook = true;
+    bool enableMovement = true;
+    bool enableLook = true;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void Update()
+    void FixedUpdate()
     {
         if (enableLook)
             Rotate();
@@ -83,23 +75,16 @@ public class PlayerMovement : MonoBehaviour
         Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.Value.x * sensitivity * Time.deltaTime, Vector3.up);
         rb.MoveRotation(rb.rotation * deltaRotation);
 
-        Vector3 v = cameraParent.localEulerAngles;
-        v.x += lookInput.Value.y * sensitivity * Time.deltaTime;
-        cameraParent.localEulerAngles = v;
         //transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
     }
 
-    public void ToggleCursorLock()
+    public void ToggleMovement(bool value)
     {
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }        
+        enableMovement = value;
+    }
+
+    public void ToggleLook(bool value)
+    {
+        enableLook = value;
     }
 }

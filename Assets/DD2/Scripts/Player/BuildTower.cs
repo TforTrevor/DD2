@@ -10,25 +10,25 @@ namespace DD2
 {
     public class BuildTower : MonoBehaviour
     {
+        [SerializeField] Player player;
         [SerializeField] [ReorderableList] List<Tower> towerPrefabs;
         [SerializeField] LayerMask mask;
         [SerializeField] Stage stage;
         [SerializeField] float rotSensitivity;
         [SerializeField] LayerMask overlapMask;
-        [SerializeField] bool enableBuild;
-        [SerializeField] bool isUsing;
 
+        bool enableBuild;
+        bool isUsing;
         Tower instance;
         Collider instanceCollider;
         CoroutineHandle handle;
 
         new Transform camera;
-        Player player;
         int index;
 
         public void Begin(BuildTowerInfo info)
         {
-            if (!isUsing)
+            if (!isUsing && towerPrefabs[info.index].GetManaCost() <= info.player.GetCurrentMana())
             {
                 camera = info.camera;
                 player = info.player;
@@ -105,6 +105,7 @@ namespace DD2
             instance.Build();
             player.ToggleLook(true);
             player.ToggleMovement(true);
+            player.SpendMana(towerPrefabs[index].GetManaCost());
             instance = null;
             isUsing = false;
         }

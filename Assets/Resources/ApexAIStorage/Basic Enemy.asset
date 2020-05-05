@@ -49,18 +49,18 @@ MonoBehaviour:
     Assembly-CSharp","index":0,"enable":false},{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":true,"clearTargetList":false,"layerMask":11264}]}}},{"@type":"Apex.AI.ScoreSelector,
     ApexAI","_id":fe3911779bb44d098d126be4f725d7d7,"_qualifiers":[],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
-    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.MoveToTarget,
-    Assembly-CSharp","ensureMaxRange":true,"range":Attack,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Actions.UseAbility,
-    Assembly-CSharp","index":0,"enable":true}]}}}]}'
-  editorConfiguration: '{"offset":{"@x":-339,"@y":264},"zoom":0.89999998,"SelectorView":{"ViewArea":{"@left":-69,"@top":282,"@width":180,"@height":90},"Name":"Scan
+    ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.UseAbility,
+    Assembly-CSharp","index":0,"enable":true},{"@type":"DD2.AI.Actions.MoveToTarget,
+    Assembly-CSharp","ensureMaxRange":true,"range":Attack,"includeRadius":true,"includeTargetRadius":true}]}}}]}'
+  editorConfiguration: '{"offset":{"@x":-450,"@y":247},"zoom":0.89999998,"SelectorView":{"ViewArea":{"@left":-180,"@top":265,"@width":180,"@height":90},"Name":"Scan
     for Targets","DefaultQualifier":{"ActionView":{"@connectorType":"Composite","Name":"Scan
-    for Targets"}}},"SelectorView":{"ViewArea":{"@left":147,"@top":282,"@width":252,"@height":144},"Name":"Choose
+    for Targets"}}},"SelectorView":{"ViewArea":{"@left":36,"@top":265,"@width":252,"@height":144},"Name":"Choose
     Target","QualifierView":{"Name":"Has Player/Tower in List","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Target
-    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":435,"@top":246,"@width":180,"@height":144},"Name":"Choose
+    Core","ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":324,"@top":229,"@width":180,"@height":144},"Name":"Choose
     Target","QualifierView":{"Name":"Has Target","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Doesn''t
-    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":651,"@top":246,"@width":180,"@height":144},"Name":"Search
+    Have Target","ActionView":{"@connectorType":"Composite","Name":"Select Best Target"}}},"SelectorView":{"ViewArea":{"@left":540,"@top":229,"@width":180,"@height":144},"Name":"Attack
     Range Check","QualifierView":{"Name":"Passed Check","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed
-    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":651,"@top":66,"@width":180,"@height":144},"Name":"Alive
-    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":903,"@top":174,"@width":180,"@height":90},"Name":"Stop
-    Ability/Clear Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":903,"@top":300,"@width":180,"@height":90},"Name":"Use
+    Check","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":540,"@top":49,"@width":180,"@height":144},"Name":"Alive
+    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":792,"@top":157,"@width":180,"@height":90},"Name":"Stop
+    Ability/Clear Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":792,"@top":283,"@width":180,"@height":90},"Name":"Use
     Ability","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'

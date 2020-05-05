@@ -12,16 +12,17 @@ namespace DD2
         [SerializeField] protected string objectPoolKey;
         [SerializeField] protected Stats stats;
         [SerializeField] protected float currentHealth;
+        [SerializeField] protected int currentMana;
         [ReadOnly] [SerializeField] protected bool alive;
 
         [SerializeField] protected Transform fireTransform;
         [ReadOnly] [SerializeField] protected bool grounded;
         [ReadOnly] [SerializeField] protected bool ragdolled;
-        [SerializeField] [ReorderableList] protected Action[] actions;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
         public delegate void UpdateHealthHandler(float amount);
         public event UpdateHealthHandler healthUpdated;
+        public event UpdateHealthHandler manaUpdated;
         protected Rigidbody rb;
 
         protected virtual void Awake()
@@ -48,12 +49,43 @@ namespace DD2
             }
         }
 
+        public void Heal(Entity entity, float amount)
+        {
+            currentHealth += amount;
+            if (currentHealth > stats.GetMaxHealth())
+            {
+                currentHealth = stats.GetMaxHealth();
+            }
+            healthUpdated?.Invoke(amount);
+        }
+
+        public void GiveMana(int amount)
+        {
+            currentMana += amount;
+            if (currentMana > GetStats().GetMaxMana())
+            {
+                currentMana = GetStats().GetMaxMana();
+            }
+            manaUpdated?.Invoke(amount);
+        }
+
+        public void SpendMana(int amount)
+        {
+            currentMana -= amount;
+            if (currentMana < 0)
+            {
+                currentMana = 0;
+            }
+            manaUpdated?.Invoke(amount);
+        }
+
         public virtual void Respawn()
         {
             if (stats != null)
             {
                 currentHealth = stats.GetMaxHealth();
                 healthUpdated?.Invoke(currentHealth);
+                manaUpdated?.Invoke(currentMana);
             }
             alive = true;
         }
@@ -66,6 +98,14 @@ namespace DD2
                 {
                     ability.UseAbility(null, null);
                 }
+            }
+            List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(currentMana);
+            foreach (ManaOrb orb in manaOrbs)
+            {
+                orb.transform.position = GetPosition() + Vector3.up;
+                orb.gameObject.SetActive(true);
+                Vector3 direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-0.2f, 0.2f), Random.Range(-1f, 1f));
+                orb.GetRigidbody().AddForce(direction.normalized * Random.Range(0f, 3f), ForceMode.Impulse);
             }
             Debug.Log(entity.name + " killed " + name);
             alive = false;
@@ -118,33 +158,17 @@ namespace DD2
             
         }
 
-        public void DoAction()
-        {
-            actions[0]?.DoAction(null, this, null);
-        }
-
-        public void DoAction(int index)
-        {
-            actions[index]?.DoAction(null, this, null);
-        }
-
-        public void DoAction(Entity target)
-        {
-            actions[0]?.DoAction(target, this, null);
-        }
-
-        public void DoAction(int index, Entity target)
-        {
-            actions[index]?.DoAction(target, this, null);
-        }
-
-
 
         //ACCESSORS
 
         public float GetCurrentHealth()
         {
             return currentHealth;
+        }
+
+        public int GetCurrentMana()
+        {
+            return currentMana;
         }
 
         public bool IsAlive()

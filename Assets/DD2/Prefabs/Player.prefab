@@ -166,6 +166,85 @@ MonoBehaviour:
   camera: {fileID: 1604891321}
   player: {fileID: 3180383434907916282}
   index: 1
+--- !u!1 &333590149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 333590150}
+  - component: {fileID: 333590151}
+  - component: {fileID: 333590152}
+  m_Layer: 10
+  m_Name: Repair Tower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &333590150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333590149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1510504437}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &333590151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333590149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4328a6699166a6459477c76957fd3ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3180383434907916282}
+  camera: {fileID: 1604891321}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  healAmount: 30
+--- !u!114 &333590152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333590149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f130de4425e7f542b225e954f92b701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - Event: {fileID: 11400000, guid: 0e505bc7f2401014787c007c72dde572, type: 2}
+    Response:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 333590151}
+          m_TargetAssemblyTypeName: DD2.RepairTower, Assembly-CSharp
+          m_MethodName: Begin
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1510504436
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +273,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 257032695}
+  - {fileID: 333590150}
   m_Father: {fileID: 3342988195871786058}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -209,7 +289,7 @@ GameObject:
   - component: {fileID: 1604891324}
   - component: {fileID: 1604891323}
   - component: {fileID: 1604891322}
-  - component: {fileID: 537350847}
+  - component: {fileID: 6359965987124488650}
   m_Layer: 10
   m_Name: Camera
   m_TagString: MainCamera
@@ -386,7 +466,7 @@ MonoBehaviour:
       data1: 0
       data2: 0
   defaultFrameSettings: 0
---- !u!114 &537350847
+--- !u!114 &6359965987124488650
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,18 +475,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1604891320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f659a6cf71631489efdf567f588360, type: 3}
+  m_Script: {fileID: 11500000, guid: 22835b793b61b40428dd572fa048b827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPoolKey: 
-  stats: {fileID: 0}
-  currentHealth: 0
-  alive: 0
-  fireTransform: {fileID: 0}
-  grounded: 0
-  ragdolled: 0
-  actions: []
-  abilities: []
+  lookInput: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
+  sensitivity: 3
+  maxPitch: 80
+  minPitch: -80
 --- !u!1 &936374265691688859
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,8 +505,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936374265691688859}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49999982, y: 0.5, z: 1.5000002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: 1.5000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1604891321}
@@ -515,9 +590,6 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 0.1
   direction: {x: 0, y: 0}
-  cameraParent: {fileID: 4860008751442067480}
-  enableMovement: 1
-  enableLook: 1
 --- !u!114 &3180383434907916282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,17 +605,23 @@ MonoBehaviour:
   objectPoolKey: Player
   stats: {fileID: 11400000, guid: 8cc69f47008ec2a43857b42740d77c89, type: 2}
   currentHealth: 0
+  currentMana: 0
   alive: 0
   fireTransform: {fileID: 0}
   grounded: 0
   ragdolled: 0
-  actions: []
   abilities: []
   primaryFire: {fileID: 0}
   secondaryFire: {fileID: 0}
   ability1: {fileID: 0}
   ability2: {fileID: 0}
   lookInput: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
+  movement: {fileID: 1505551297}
+  camera: {fileID: 6359965987124488650}
+  manaOrbRadius: 5
+  manaOrbLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!114 &3774765070087462770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +644,7 @@ MonoBehaviour:
   secondaryFire: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}
   primaryFire: {fileID: 11400000, guid: c83d9601a9efeb74b816475ead59642c, type: 2}
   menu: {fileID: 11400000, guid: 4e7a1348399c47e4c89ae01dc229e5a6, type: 2}
+  repairTower: {fileID: 11400000, guid: 0e505bc7f2401014787c007c72dde572, type: 2}
 --- !u!114 &5629349538429733945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,15 +879,15 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7919328407858033572, guid: 73bc88534bb5f2842921913f787d6630, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 73bc88534bb5f2842921913f787d6630, type: 3}
---- !u!1 &3342988195871786068 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
-    type: 3}
-  m_PrefabInstance: {fileID: 4864931274030757873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3342988195871786058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
+    type: 3}
+  m_PrefabInstance: {fileID: 4864931274030757873}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3342988195871786068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
     type: 3}
   m_PrefabInstance: {fileID: 4864931274030757873}
   m_PrefabAsset: {fileID: 0}

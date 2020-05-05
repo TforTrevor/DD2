@@ -26,6 +26,12 @@ namespace DD2.AI
             navMeshObstacle = GetComponent<NavMeshObstacle>();
         }
 
+        protected override void Start()
+        {
+            base.Start();
+            currentMana = GetStats().GetMaxMana();
+        }
+
         public override void Ragdoll()
         {
             base.Ragdoll();
