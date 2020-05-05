@@ -104,8 +104,7 @@ namespace DD2
             {
                 orb.transform.position = GetPosition() + Vector3.up;
                 orb.gameObject.SetActive(true);
-                Vector3 direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-0.2f, 0.2f), Random.Range(-1f, 1f));
-                orb.GetRigidbody().AddForce(direction.normalized * Random.Range(0f, 3f), ForceMode.Impulse);
+                orb.Burst(3f);
             }
             Debug.Log(entity.name + " killed " + name);
             alive = false;

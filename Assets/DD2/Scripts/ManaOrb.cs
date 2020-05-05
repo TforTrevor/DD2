@@ -35,6 +35,12 @@ namespace DD2
             }            
         }
 
+        public void Burst(float strength)
+        {
+            Vector3 direction = new Vector3(Random.Range(-1f, 1f), Random.Range(-0.2f, 0.2f), Random.Range(-1f, 1f));
+            rb.AddForce(direction.normalized * Random.Range(0f, strength), ForceMode.Impulse);
+        }
+
         IEnumerator<float> PickUpRoutine(Entity entity)
         {
             while (true)
@@ -59,6 +65,11 @@ namespace DD2
                 }                
                 yield return Timing.WaitForOneFrame;
             }
+        }
+
+        public void SetIsPickedUp(bool value)
+        {
+            isPickedUp = value;
         }
 
         public Rigidbody GetRigidbody()
