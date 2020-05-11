@@ -45,7 +45,7 @@ namespace DD2
         {
             while (true)
             {
-                if (entity.GetCurrentMana() < entity.Stats.MaxMana)
+                if (entity.CurrentMana < entity.Stats.MaxMana)
                 {
                     Vector3 direction = Vector3.Normalize(entity.GetPosition() - transform.position);
                     transform.position += direction * pickUpSpeed * Time.deltaTime;

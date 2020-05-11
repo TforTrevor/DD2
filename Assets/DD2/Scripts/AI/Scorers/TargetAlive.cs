@@ -14,7 +14,7 @@ namespace DD2.AI.Scorers
         public override float Score(IAIContext context)
         {
             AIContext ctx = (AIContext)context;
-            if (ctx.target.IsAlive())
+            if (ctx.target.IsAlive)
             {
                 return not ? 0 : score;
             }

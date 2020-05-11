@@ -46,7 +46,7 @@ namespace DD2
             for (int i = 0; i < manaOrbsCount; i++)
             {
                 ManaOrb orb = manaOrbs[i].GetComponent<ManaOrb>();
-                if (orb != null && currentMana + orb.GetAmount() <= Stats.MaxMana)
+                if (orb != null && CurrentMana + orb.GetAmount() <= Stats.MaxMana)
                 {
                     orb.PickUp(this);
                 }                            

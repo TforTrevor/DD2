@@ -28,7 +28,7 @@ namespace DD2
 
         public void Begin(BuildTowerInfo info)
         {
-            if (!isUsing && towerPrefabs[info.index].GetManaCost() <= info.player.GetCurrentMana())
+            if (!isUsing && towerPrefabs[info.index].GetManaCost() <= info.player.CurrentMana)
             {
                 camera = info.camera;
                 player = info.player;
@@ -67,7 +67,7 @@ namespace DD2
             if (isUsing && instance != null)
             {
                 Timing.KillCoroutines(handle);
-                EntityPool.Instance.ReturnObject(instance.GetObjectPoolKey(), instance);
+                EntityPool.Instance.ReturnObject(instance.ObjectPoolKey, instance);
                 if (stage == Stage.rotation)
                 {
                     player.ToggleLook(true);
@@ -82,7 +82,7 @@ namespace DD2
 
         void Position()
         {
-            instance = (Tower)EntityPool.Instance.GetObject(towerPrefabs[index].GetObjectPoolKey());
+            instance = (Tower)EntityPool.Instance.GetObject(towerPrefabs[index].ObjectPoolKey);
             if (instance != null)
             {
                 instanceCollider = instance.GetComponent<Collider>();

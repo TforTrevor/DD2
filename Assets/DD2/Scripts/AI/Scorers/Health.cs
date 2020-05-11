@@ -14,7 +14,7 @@ namespace DD2.AI.Scorers
         public override float Score(IAIContext context, Entity entity)
         {
             AIContext ctx = (AIContext)context;
-            float score = entity.GetCurrentHealth() / entity.Stats.MaxHealth * multiplier;
+            float score = entity.CurrentHealth / entity.Stats.MaxHealth * multiplier;
             return score;
         }
     }

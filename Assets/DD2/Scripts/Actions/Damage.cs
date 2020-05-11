@@ -46,7 +46,7 @@ namespace DD2.Actions
 
         void PercentCurrentHealth(Entity target, Entity caller)
         {
-            float damage = target.GetCurrentHealth() * this.damage / 100 * GetDamageMultiplier(target.Stats);
+            float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
             target.Damage(caller, damage);
         }
 

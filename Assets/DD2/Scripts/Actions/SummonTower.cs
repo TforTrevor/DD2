@@ -61,7 +61,7 @@ namespace DD2.Actions
         {
             Player player = (Player)caller;
             Timing.KillCoroutines(handle);
-            EntityPool.Instance.ReturnObject(towerPrefab.GetObjectPoolKey(), instance);
+            EntityPool.Instance.ReturnObject(towerPrefab.ObjectPoolKey, instance);
             player.SetPrimaryFire(null);
             player.SetSecondaryFire(null);
             player.SetAbility1(this);
@@ -75,7 +75,7 @@ namespace DD2.Actions
 
         private void Position(Entity target, Entity caller)
         {
-            instance = (Tower)EntityPool.Instance.GetObject(towerPrefab.GetObjectPoolKey());
+            instance = (Tower)EntityPool.Instance.GetObject(towerPrefab.ObjectPoolKey);
             if (instance != null)
             {
                 instanceCollider = instance.GetComponent<Collider>();

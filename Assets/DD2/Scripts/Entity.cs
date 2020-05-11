@@ -10,12 +10,12 @@ namespace DD2
 {
     public class Entity : MonoBehaviour
     {
-        [SerializeField] protected string objectPoolKey;
+        [SerializeField] private string objectPoolKey;
         [SerializeField] private Stats stats;
-        [SerializeField] protected float currentHealth;
-        [SerializeField] protected int currentMana;
-        [SerializeField] protected float radius;
-        [ReadOnly] [SerializeField] protected bool alive;
+        [SerializeField] private float currentHealth;
+        [SerializeField] private int currentMana;
+        [SerializeField] private float radius;
+        [ReadOnly] [SerializeField] private bool isAlive;
 
         [SerializeField] protected Transform fireTransform;
         [ReadOnly] [SerializeField] protected bool grounded;
@@ -27,8 +27,12 @@ namespace DD2
         public event EventHandler<Entity> onDeath;
         protected Rigidbody rb;
 
-        public float Radius { get => radius; private set => radius = value; }
-        public Stats Stats { get => stats; private set => stats = value; }
+        public float Radius { get => radius; protected set => radius = value; }
+        public Stats Stats { get => stats; protected set => stats = value; }
+        public string ObjectPoolKey { get => objectPoolKey; protected set => objectPoolKey = value; }
+        public bool IsAlive { get => isAlive; protected set => isAlive = value; }
+        public float CurrentHealth { get => currentHealth; protected set => currentHealth = value; }
+        public int CurrentMana { get => currentMana; protected set => currentMana = value; }
 
         protected virtual void Awake()
         {
@@ -46,11 +50,11 @@ namespace DD2
 
         public void Damage(Entity entity, float damage)
         {
-            if (alive)
+            if (IsAlive)
             {
-                currentHealth -= damage;
+                CurrentHealth -= damage;
                 healthUpdated?.Invoke(this, -damage);
-                if (currentHealth <= 0)
+                if (CurrentHealth <= 0)
                 {
                     Die(entity);
                 }
@@ -59,30 +63,30 @@ namespace DD2
 
         public void Heal(Entity entity, float amount)
         {
-            currentHealth += amount;
-            if (currentHealth > Stats.MaxHealth)
+            CurrentHealth += amount;
+            if (CurrentHealth > Stats.MaxHealth)
             {
-                currentHealth = Stats.MaxHealth;
+                CurrentHealth = Stats.MaxHealth;
             }
             healthUpdated?.Invoke(this, amount);
         }
 
         public void GiveMana(int amount)
         {
-            currentMana += amount;
-            if (currentMana > Stats.MaxMana)
+            CurrentMana += amount;
+            if (CurrentMana > Stats.MaxMana)
             {
-                currentMana = Stats.MaxMana;
+                CurrentMana = Stats.MaxMana;
             }
             manaUpdated?.Invoke(this, amount);
         }
 
         public void SpendMana(int amount)
         {
-            currentMana -= amount;
-            if (currentMana < 0)
+            CurrentMana -= amount;
+            if (CurrentMana < 0)
             {
-                currentMana = 0;
+                CurrentMana = 0;
             }
             manaUpdated?.Invoke(this, amount);
         }
@@ -91,11 +95,11 @@ namespace DD2
         {
             if (Stats != null)
             {
-                currentHealth = Stats.MaxHealth;
-                healthUpdated?.Invoke(this, currentHealth);
-                manaUpdated?.Invoke(this, currentMana);
+                CurrentHealth = Stats.MaxHealth;
+                healthUpdated?.Invoke(this, CurrentHealth);
+                manaUpdated?.Invoke(this, CurrentMana);
             }
-            alive = true;
+            IsAlive = true;
         }
 
         protected virtual void Die(Entity entity)
@@ -107,7 +111,7 @@ namespace DD2
                     ability.UseAbility(null, null);
                 }
             }
-            List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(currentMana);
+            List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(CurrentMana);
             foreach (ManaOrb orb in manaOrbs)
             {
                 orb.transform.position = GetPosition() + Vector3.up;
@@ -122,9 +126,9 @@ namespace DD2
             {
                 Debug.Log("null killed " + name);
             }            
-            alive = false;
+            IsAlive = false;
             onDeath?.Invoke(this, this);
-            EntityPool.Instance.ReturnObject(objectPoolKey, this);
+            EntityPool.Instance.ReturnObject(ObjectPoolKey, this);
         }
 
         public virtual void Ragdoll()
@@ -176,21 +180,6 @@ namespace DD2
 
         //ACCESSORS
 
-        public float GetCurrentHealth()
-        {
-            return currentHealth;
-        }
-
-        public int GetCurrentMana()
-        {
-            return currentMana;
-        }
-
-        public bool IsAlive()
-        {
-            return alive;
-        }
-
         public Ability GetAbility(int index)
         {
             return abilities[index];
@@ -214,11 +203,6 @@ namespace DD2
         public Vector3 GetFirePosition()
         {
             return fireTransform.position;
-        }
-
-        public string GetObjectPoolKey()
-        {
-            return objectPoolKey;
         }
     }
 }

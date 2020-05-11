@@ -30,7 +30,7 @@ namespace DD2.AI
         protected override void Start()
         {
             base.Start();
-            currentMana = Stats.MaxMana;
+            CurrentMana = Stats.MaxMana;
             navMeshAgent.speed = Stats.MoveSpeed;
         }
 

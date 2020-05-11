@@ -34,7 +34,7 @@ namespace DD2.AI
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
             aiComponent.enabled = false;
-            alive = false;
+            IsAlive = false;
         }
 
         public void Build()
@@ -42,7 +42,7 @@ namespace DD2.AI
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
             aiComponent.enabled = true;
-            alive = true;
+            IsAlive = true;
         }
 
         void Update()

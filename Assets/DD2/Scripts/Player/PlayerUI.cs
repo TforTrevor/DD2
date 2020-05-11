@@ -27,14 +27,14 @@ namespace DD2
 
         void UpdateHealth(object sender, float amount)
         {
-            healthSlider.value = player.GetCurrentHealth();
-            healthText.text = player.GetCurrentHealth() + "/" + player.Stats.MaxHealth;
+            healthSlider.value = player.CurrentHealth;
+            healthText.text = player.CurrentHealth + "/" + player.Stats.MaxHealth;
         }
 
         void UpdateMana(object sender, float amount)
         {
-            manaSlider.value = player.GetCurrentMana();
-            manaText.text = player.GetCurrentMana() + "/" + player.Stats.MaxMana;
+            manaSlider.value = player.CurrentMana;
+            manaText.text = player.CurrentMana + "/" + player.Stats.MaxMana;
         }
 
         void UpdateEnemyCount(object sender, Wave wave)
