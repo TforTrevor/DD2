@@ -4,15 +4,17 @@ using UnityEngine;
 using NaughtyAttributes;
 using DD2.Abilities;
 using DD2.Actions;
+using System;
 
 namespace DD2
 {
     public class Entity : MonoBehaviour
     {
         [SerializeField] protected string objectPoolKey;
-        [SerializeField] protected Stats stats;
+        [SerializeField] private Stats stats;
         [SerializeField] protected float currentHealth;
         [SerializeField] protected int currentMana;
+        [SerializeField] protected float radius;
         [ReadOnly] [SerializeField] protected bool alive;
 
         [SerializeField] protected Transform fireTransform;
@@ -20,10 +22,13 @@ namespace DD2
         [ReadOnly] [SerializeField] protected bool ragdolled;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
-        public delegate void UpdateHealthHandler(float amount);
-        public event UpdateHealthHandler healthUpdated;
-        public event UpdateHealthHandler manaUpdated;
+        public event EventHandler<float> healthUpdated;
+        public event EventHandler<float> manaUpdated;
+        public event EventHandler<Entity> onDeath;
         protected Rigidbody rb;
+
+        public float Radius { get => radius; private set => radius = value; }
+        public Stats Stats { get => stats; private set => stats = value; }
 
         protected virtual void Awake()
         {
@@ -41,32 +46,35 @@ namespace DD2
 
         public void Damage(Entity entity, float damage)
         {
-            currentHealth -= damage;
-            healthUpdated?.Invoke(-damage);
-            if (currentHealth <= 0)
+            if (alive)
             {
-                Die(entity);
-            }
+                currentHealth -= damage;
+                healthUpdated?.Invoke(this, -damage);
+                if (currentHealth <= 0)
+                {
+                    Die(entity);
+                }
+            }            
         }
 
         public void Heal(Entity entity, float amount)
         {
             currentHealth += amount;
-            if (currentHealth > stats.GetMaxHealth())
+            if (currentHealth > Stats.MaxHealth)
             {
-                currentHealth = stats.GetMaxHealth();
+                currentHealth = Stats.MaxHealth;
             }
-            healthUpdated?.Invoke(amount);
+            healthUpdated?.Invoke(this, amount);
         }
 
         public void GiveMana(int amount)
         {
             currentMana += amount;
-            if (currentMana > GetStats().GetMaxMana())
+            if (currentMana > Stats.MaxMana)
             {
-                currentMana = GetStats().GetMaxMana();
+                currentMana = Stats.MaxMana;
             }
-            manaUpdated?.Invoke(amount);
+            manaUpdated?.Invoke(this, amount);
         }
 
         public void SpendMana(int amount)
@@ -76,16 +84,16 @@ namespace DD2
             {
                 currentMana = 0;
             }
-            manaUpdated?.Invoke(amount);
+            manaUpdated?.Invoke(this, amount);
         }
 
         public virtual void Respawn()
         {
-            if (stats != null)
+            if (Stats != null)
             {
-                currentHealth = stats.GetMaxHealth();
-                healthUpdated?.Invoke(currentHealth);
-                manaUpdated?.Invoke(currentMana);
+                currentHealth = Stats.MaxHealth;
+                healthUpdated?.Invoke(this, currentHealth);
+                manaUpdated?.Invoke(this, currentMana);
             }
             alive = true;
         }
@@ -106,8 +114,16 @@ namespace DD2
                 orb.gameObject.SetActive(true);
                 orb.Burst(3f);
             }
-            Debug.Log(entity.name + " killed " + name);
+            if (entity != null)
+            {
+                Debug.Log(entity.name + " killed " + name);
+            }
+            else
+            {
+                Debug.Log("null killed " + name);
+            }            
             alive = false;
+            onDeath?.Invoke(this, this);
             EntityPool.Instance.ReturnObject(objectPoolKey, this);
         }
 
@@ -198,11 +214,6 @@ namespace DD2
         public Vector3 GetFirePosition()
         {
             return fireTransform.position;
-        }
-
-        public Stats GetStats()
-        {
-            return stats;
         }
 
         public string GetObjectPoolKey()

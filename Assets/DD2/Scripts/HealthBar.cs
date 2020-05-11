@@ -25,14 +25,14 @@ namespace DD2
         {
             this.entity = entity;
             this.entity.healthUpdated += UpdateHealth;
-            healthSlider.maxValue = this.entity.GetStats().GetMaxHealth();
-            UpdateHealth(0);
+            healthSlider.maxValue = this.entity.Stats.MaxHealth;
+            UpdateHealth(null, 0);
         }
 
-        void UpdateHealth(float amount)
+        void UpdateHealth(object sender, float amount)
         {
             healthSlider.value = entity.GetCurrentHealth();
-            healthNumber.text = (int)entity.GetCurrentHealth() + "/" + entity.GetStats().GetMaxHealth();
+            healthNumber.text = (int)entity.GetCurrentHealth() + "/" + entity.Stats.MaxHealth;
         }
 
         void OnDestroy()

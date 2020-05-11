@@ -13,6 +13,7 @@ namespace DD2.AI
         [SerializeField] float distance;
         [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
+        [SerializeField] float ragdollTime;
 
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;
@@ -29,7 +30,8 @@ namespace DD2.AI
         protected override void Start()
         {
             base.Start();
-            currentMana = GetStats().GetMaxMana();
+            currentMana = Stats.MaxMana;
+            navMeshAgent.speed = Stats.MoveSpeed;
         }
 
         public override void Ragdoll()
@@ -53,7 +55,7 @@ namespace DD2.AI
             base.OnGrounded();
             if (ragdolled)
             {
-                Timing.CallDelayed(stats.GetRagdollTime(), () =>
+                Timing.CallDelayed(ragdollTime, () =>
                 {
                     if (grounded)
                     {
@@ -100,7 +102,7 @@ namespace DD2.AI
                 transform.LookAt(corner);
                 while (Vector3.Distance(transform.position, corner) > 0.1f)
                 {
-                    transform.position += transform.forward * GetStats().GetSpeed() * Time.deltaTime;
+                    transform.position += transform.forward * Stats.MoveSpeed * Time.deltaTime;
                     yield return Timing.WaitForOneFrame;
                 }
             }

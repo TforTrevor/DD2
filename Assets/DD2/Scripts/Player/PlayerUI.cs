@@ -13,25 +13,35 @@ namespace DD2
         [SerializeField] TextMeshProUGUI healthText;
         [SerializeField] Slider manaSlider;
         [SerializeField] TextMeshProUGUI manaText;
+        [SerializeField] Slider enemyCountSlider;
+        [SerializeField] TextMeshProUGUI enemyCountText;
 
-        void Awake()
+        void Start()
         {
-            healthSlider.maxValue = player.GetStats().GetMaxHealth();
-            manaSlider.maxValue = player.GetStats().GetMaxMana();
+            healthSlider.maxValue = player.Stats.MaxHealth;
+            manaSlider.maxValue = player.Stats.MaxMana;
             player.healthUpdated += UpdateHealth;
             player.manaUpdated += UpdateMana;
+            LevelManager.Instance.waveUpdated += UpdateEnemyCount;
         }
 
-        void UpdateHealth(float amount)
+        void UpdateHealth(object sender, float amount)
         {
             healthSlider.value = player.GetCurrentHealth();
-            healthText.text = player.GetCurrentHealth() + "/" + player.GetStats().GetMaxHealth();
+            healthText.text = player.GetCurrentHealth() + "/" + player.Stats.MaxHealth;
         }
 
-        void UpdateMana(float amount)
+        void UpdateMana(object sender, float amount)
         {
             manaSlider.value = player.GetCurrentMana();
-            manaText.text = player.GetCurrentMana() + "/" + player.GetStats().GetMaxMana();
+            manaText.text = player.GetCurrentMana() + "/" + player.Stats.MaxMana;
+        }
+
+        void UpdateEnemyCount(object sender, Wave wave)
+        {
+            enemyCountSlider.maxValue = wave.MaxCount;
+            enemyCountSlider.value = wave.CurrentCount;
+            enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
         }
     }
 }

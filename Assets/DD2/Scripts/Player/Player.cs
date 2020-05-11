@@ -27,6 +27,18 @@ namespace DD2
             manaOrbs = new Collider[100];
         }
 
+        protected override void Die(Entity entity)
+        {
+            if (entity != null)
+            {
+                Debug.Log(entity.name + " killed " + name);
+            }
+            else
+            {
+                Debug.Log("null killed " + name);
+            }
+        }
+
         protected virtual void FixedUpdate()
         {
             Util.Utilities.ClearArray(manaOrbs, manaOrbsCount);
@@ -34,7 +46,7 @@ namespace DD2
             for (int i = 0; i < manaOrbsCount; i++)
             {
                 ManaOrb orb = manaOrbs[i].GetComponent<ManaOrb>();
-                if (orb != null && currentMana + orb.GetAmount() <= GetStats().GetMaxMana())
+                if (orb != null && currentMana + orb.GetAmount() <= Stats.MaxMana)
                 {
                     orb.PickUp(this);
                 }                            

@@ -429,7 +429,7 @@ MonoBehaviour:
   volumeAnchorOverride: {fileID: 0}
   antialiasing: 3
   SMAAQuality: 2
-  dithering: 0
+  dithering: 1
   stopNaNs: 0
   taaSharpenStrength: 0
   physicalParameters:
@@ -583,10 +583,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ab718c16f7c954abbaf6b391e88c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 8cc69f47008ec2a43857b42740d77c89, type: 2}
   moveInput: {fileID: 11400000, guid: b70eb413548663e48a65b14ff1cbccf1, type: 2}
   lookInput: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
   sensitivity: 3
-  maxSpeed: 5
   acceleration: 0.1
   direction: {x: 0, y: 0}
 --- !u!114 &3180383434907916282
@@ -605,6 +605,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 8cc69f47008ec2a43857b42740d77c89, type: 2}
   currentHealth: 0
   currentMana: 0
+  radius: 0.5
   alive: 0
   fireTransform: {fileID: 0}
   grounded: 0
@@ -635,9 +636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveVector: {fileID: 11400000, guid: b70eb413548663e48a65b14ff1cbccf1, type: 2}
   lookVector: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
-  buildTower: {fileID: 0}
-  confirmBuild: {fileID: 0}
-  jumpEvent: {fileID: 0}
   ability1: {fileID: 11400000, guid: f486f5c91b26dd54abff8b3c1c510478, type: 2}
   ability2: {fileID: 11400000, guid: 4cb185c351cbc3f4d80d74b2e4740521, type: 2}
   secondaryFire: {fileID: 11400000, guid: cb4d987b246225c439db62b9f42e870e, type: 2}

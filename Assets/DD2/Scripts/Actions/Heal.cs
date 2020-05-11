@@ -24,7 +24,7 @@ namespace DD2.Actions
 
         void PercentMaxHealth(Entity target, Entity caller, object payload)
         {
-            float amount = target.GetStats().GetMaxHealth() * this.amount;
+            float amount = target.Stats.MaxHealth * this.amount;
             target.Heal(caller, amount);
         }
 

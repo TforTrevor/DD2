@@ -202,16 +202,14 @@ namespace DD2.Util
             return false;
         }
 
-        public static int LayerMaskToLayer(LayerMask layerMask)
+        public static bool HasLayer(int layer, LayerMask layerMask)
         {
-            int layerNumber = 0;
-            int layer = layerMask.value;
-            while (layer > 0)
+            if (layerMask == (layerMask | (1 << layer)))
             {
-                layer = layer >> 1;
-                layerNumber++;
+                return true;
             }
-            return layerNumber - 1;
+
+            return false;
         }
     }
 }

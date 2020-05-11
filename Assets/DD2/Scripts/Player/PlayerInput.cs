@@ -8,15 +8,13 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Vector3Variable moveVector;
     [SerializeField] Vector3Variable lookVector;
-    [SerializeField] GameEvent buildTower;
-    [SerializeField] GameEvent confirmBuild;
-    [SerializeField] GameEvent jumpEvent;
     [SerializeField] GameEvent ability1;
     [SerializeField] GameEvent ability2;
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
     [SerializeField] GameEvent menu;
     [SerializeField] GameEvent repairTower;
+    [SerializeField] GameEvent ready;
 
     void OnMove(InputValue value)
     {
@@ -26,11 +24,6 @@ public class PlayerInput : MonoBehaviour
     void OnLook(InputValue value)
     {
         lookVector.Value = value.Get<Vector2>();
-    }
-
-    void OnJump()
-    {
-        jumpEvent?.Raise();
     }
 
     void OnAbility1()
@@ -61,5 +54,10 @@ public class PlayerInput : MonoBehaviour
     void OnRepairTower()
     {
         repairTower?.Raise();
+    }
+
+    void OnReady()
+    {
+        ready?.Raise();
     }
 }

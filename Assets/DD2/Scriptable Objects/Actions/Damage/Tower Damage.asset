@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementType: 0
   damageType: 0
-  damage: 100
+  damage: 50

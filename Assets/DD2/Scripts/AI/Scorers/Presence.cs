@@ -13,7 +13,7 @@ namespace DD2.AI.Scorers
 
         public override float Score(IAIContext context, Entity entity)
         {
-            float score = entity.GetStats().GetPresence() * multiplier;
+            float score = entity.Stats.Presence * multiplier;
             return score;
         }
     }
@@ -23,7 +23,7 @@ namespace DD2.AI.Scorers
         public override float Score(IAIContext context)
         {
             AIContext ctx = (AIContext)context;
-            return ctx.target.GetStats().GetPresence() * score;
+            return ctx.target.Stats.Presence * score;
         }
     }
 }

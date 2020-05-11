@@ -20,7 +20,7 @@ namespace DD2
 
         void OnTriggerEnter(Collider collider)
         {
-            if (!isUsed && collider.gameObject.layer == Util.Utilities.LayerMaskToLayer(layerMask))
+            if (!isUsed && Util.Utilities.HasLayer(collider.gameObject.layer, layerMask))
             {
                 List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(manaAmount);
                 foreach (ManaOrb orb in manaOrbs)

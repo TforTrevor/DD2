@@ -46,7 +46,7 @@ namespace DD2
 
         IEnumerator<float> RepairRoutine(Tower tower)
         {
-            while (tower.GetCurrentHealth() < tower.GetStats().GetMaxHealth())
+            while (tower.GetCurrentHealth() < tower.Stats.MaxHealth)
             {
                 if (player.GetCurrentMana() >= healAmount * Time.deltaTime)
                 {

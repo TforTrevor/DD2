@@ -30,7 +30,7 @@ namespace DD2
         {
             if (shoulderView)
             {
-                pitch += lookInput.Value.y * sensitivity * Time.deltaTime;
+                pitch -= lookInput.Value.y * sensitivity * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
                 cameraParent.localEulerAngles = new Vector3(pitch, 0, 0);
             }            

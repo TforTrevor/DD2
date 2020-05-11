@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6635896054950298341
 Transform:
   m_ObjectHideFlags: 0
@@ -407,6 +407,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 516c2c29631b5bc428853d62e23f8164, type: 2}
   currentHealth: 0
   currentMana: 0
+  radius: 0.8
   alive: 0
   fireTransform: {fileID: 4993670199648463880}
   grounded: 0

@@ -21,16 +21,16 @@ namespace DD2.AI.Actions
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
 
-            float range = this.range == Range.Attack ? entity.GetStats().GetAttackRange() : entity.GetStats().GetSearchRange();                            
-            float angle = this.range == Range.Attack ? entity.GetStats().GetAttackAngle() : entity.GetStats().GetSearchAngle();
+            float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;                            
+            float angle = this.range == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
 
             Collider[] colliders = Physics.OverlapSphere(entity.GetPosition(), range, layerMasks);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Entity temp = colliders[i].GetComponent<Entity>();
                 float enemyDistance = Vector3.Distance(entity.GetPosition(), temp.GetPosition())
-                                        - (includeRadius ? entity.GetStats().GetRadius() : 0)
-                                        - (includeTargetRadius ? temp.GetStats().GetRadius() : 0);
+                                        - (includeRadius ? entity.Radius : 0)
+                                        - (includeTargetRadius ? temp.Radius : 0);
                 if (enemyDistance < range)
                 {
                     if (useCone)

@@ -12,15 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  elementType: 0
   maxHealth: 100000000
   maxMana: 1000
+  attackDamage: 0
+  attackSpeed: 0
+  moveSpeed: 5
+  presence: 0
+  physicalResist: 0
+  fireResist: 0
+  lightningResist: 0
+  energyResist: 0
+  waterResist: 0
   attackRange: 0
   attackAngle: 0
   searchRange: 0
   searchAngle: 0
-  presence: 0
-  elementType: 0
-  speed: 0
-  attackRate: 0
-  ragdollTime: 0
-  radius: 0.5

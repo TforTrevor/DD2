@@ -13,8 +13,7 @@ namespace DD2.AI.Actions
         {
             AIContext ctx = (AIContext)context;
 
-            List<Core> cores = LevelManager.Instance.GetCores();
-            ctx.targetList.AddRange(cores);
+            ctx.targetList.AddRange(LevelManager.Instance.Cores);
         }
     }
 }

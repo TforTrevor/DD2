@@ -21,15 +21,15 @@ namespace DD2.AI.Scorers
             Entity entity = ctx.entity;
 
             float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) 
-                                - (includeRadius ? entity.GetStats().GetRadius() : 0)
-                                - (includeTargetRadius ? ctx.target.GetStats().GetRadius() : 0);
+                                - (includeRadius ? entity.Radius : 0)
+                                - (includeTargetRadius ? ctx.target.Radius : 0);
 
-            if (rangeCheck == Range.Attack ? distance <= entity.GetStats().GetAttackRange() : distance <= entity.GetStats().GetSearchRange())
+            if (rangeCheck == Range.Attack ? distance <= entity.Stats.AttackRange : distance <= entity.Stats.SearchRange)
             {
                 if (checkCone)
                 {
                     float enemyDot = Vector3.Dot(entity.GetForward(), Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition()));
-                    float desiredDot = Mathf.Cos(Mathf.Deg2Rad * (rangeCheck == Range.Attack ? entity.GetStats().GetAttackAngle() : entity.GetStats().GetSearchAngle()) / 2f);
+                    float desiredDot = Mathf.Cos(Mathf.Deg2Rad * (rangeCheck == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle) / 2f);
                     if (enemyDot > desiredDot)
                     {
                         return not ? 0 : score;
@@ -41,7 +41,7 @@ namespace DD2.AI.Scorers
                 }
             }
             Vector3 dir = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
-            Vector3 startPos = entity.GetPosition() + dir * entity.GetStats().GetRadius();
+            Vector3 startPos = entity.GetPosition() + dir * entity.Radius;
             Debug.DrawRay(startPos, dir * distance, Color.green, 0.5f);
             return not ? score : 0;
         }

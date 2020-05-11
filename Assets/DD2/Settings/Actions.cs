@@ -91,6 +91,14 @@ namespace DD2.Input
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -236,6 +244,17 @@ namespace DD2.Input
                     ""action"": ""RepairTower"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dfe5875-e80b-4a7c-bab2-cc6a201f2c15"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -270,6 +289,7 @@ namespace DD2.Input
             m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
             m_Standard_Ability2 = m_Standard.FindAction("Ability2", throwIfNotFound: true);
             m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
+            m_Standard_Ready = m_Standard.FindAction("Ready", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -328,6 +348,7 @@ namespace DD2.Input
         private readonly InputAction m_Standard_Menu;
         private readonly InputAction m_Standard_Ability2;
         private readonly InputAction m_Standard_RepairTower;
+        private readonly InputAction m_Standard_Ready;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -341,6 +362,7 @@ namespace DD2.Input
             public InputAction @Menu => m_Wrapper.m_Standard_Menu;
             public InputAction @Ability2 => m_Wrapper.m_Standard_Ability2;
             public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
+            public InputAction @Ready => m_Wrapper.m_Standard_Ready;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -377,6 +399,9 @@ namespace DD2.Input
                     @RepairTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
                     @RepairTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
                     @RepairTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
+                    @Ready.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
+                    @Ready.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
+                    @Ready.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -408,6 +433,9 @@ namespace DD2.Input
                     @RepairTower.started += instance.OnRepairTower;
                     @RepairTower.performed += instance.OnRepairTower;
                     @RepairTower.canceled += instance.OnRepairTower;
+                    @Ready.started += instance.OnReady;
+                    @Ready.performed += instance.OnReady;
+                    @Ready.canceled += instance.OnReady;
                 }
             }
         }
@@ -432,6 +460,7 @@ namespace DD2.Input
             void OnMenu(InputAction.CallbackContext context);
             void OnAbility2(InputAction.CallbackContext context);
             void OnRepairTower(InputAction.CallbackContext context);
+            void OnReady(InputAction.CallbackContext context);
         }
     }
 }

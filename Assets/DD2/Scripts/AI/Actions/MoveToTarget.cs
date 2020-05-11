@@ -22,10 +22,10 @@ namespace DD2.AI.Actions
 
             if (ctx.target && ctx.pathTarget != ctx.target)
             {
-                float range = this.range == Range.Attack ? entity.GetStats().GetAttackRange() : entity.GetStats().GetSearchRange();
+                float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
                 float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition())
-                                    - (includeRadius ? entity.GetStats().GetRadius() : 0)
-                                    - (includeTargetRadius ? ctx.target.GetStats().GetRadius() : 0);
+                                    - (includeRadius ? entity.Radius : 0)
+                                    - (includeTargetRadius ? ctx.target.Radius : 0);
                 if (distance > range || ensureMaxRange)
                 {
                     Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());

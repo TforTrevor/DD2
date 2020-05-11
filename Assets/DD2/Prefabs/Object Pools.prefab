@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3263159460197688783}
   m_Layer: 0
-  m_Name: PoolManager
+  m_Name: Object Pools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
   pools:
+  - tag: 500
+    prefab: {fileID: 2055583630070657422, guid: 8840bc05a0c42a0488e56093ca0b0205,
+      type: 3}
+    size: 1000
+    canExpand: 0
+  - tag: 100
+    prefab: {fileID: 2790883106701681483, guid: 0b9055e531436544b9c26a70e8a0e926,
+      type: 3}
+    size: 1000
+    canExpand: 0
+  - tag: 50
+    prefab: {fileID: 230856589310616481, guid: a0cfa665620706740a3303f99c834882, type: 3}
+    size: 1000
+    canExpand: 0
+  - tag: 10
+    prefab: {fileID: 7647804090984360606, guid: c51aa930dc85af841928d40d6aaeab58,
+      type: 3}
+    size: 1000
+    canExpand: 0
   - tag: 5
+    prefab: {fileID: 8684473208001432255, guid: 694efd91971b5d049ba8f39e3c904b0d,
+      type: 3}
+    size: 1000
+    canExpand: 0
+  - tag: 1
     prefab: {fileID: 2840351637921178541, guid: 63904ed0c2a3f994cb14bb34af57ce23,
       type: 3}
     size: 1000

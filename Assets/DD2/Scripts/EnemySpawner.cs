@@ -8,16 +8,17 @@ namespace DD2
 {
     public class EnemySpawner : MonoBehaviour
     {
+        [SerializeField] Wave wave;
         [SerializeField] float randomPosition;
         [SerializeField] [ReorderableList] List<Spawn> spawns;
 
-        void Start()
+        public void SpawnEnemies()
         {
             foreach (Spawn spawn in spawns)
             {
-                if (spawn.IsBatch())
+                if (spawn.IsBatch)
                 {
-                    for (int i = 0; i < spawn.GetAmount(); i++)
+                    for (int i = 0; i < spawn.Amount; i++)
                     {
                         SpawnEntity(spawn);
                     }
@@ -25,27 +26,44 @@ namespace DD2
                 else
                 {
                     Timing.RunCoroutine(SpawnRoutine(spawn));
-                }                
+                }
             }
         }
 
         IEnumerator<float> SpawnRoutine(Spawn spawn)
         {
-            yield return Timing.WaitForSeconds(spawn.GetDelay());
-            for (int i = 0; i < spawn.GetAmount(); i++)
+            yield return Timing.WaitForSeconds(spawn.Delay);
+            for (int i = 0; i < spawn.Amount; i++)
             {
                 SpawnEntity(spawn);
-                yield return Timing.WaitForSeconds(spawn.GetRate());
+                yield return Timing.WaitForSeconds(spawn.Rate);
             }
         }
 
         void SpawnEntity(Spawn spawn)
         {
-            Entity entity = EntityPool.Instance.GetObject(spawn.GetKey());
+            Entity entity = EntityPool.Instance.GetObject(spawn.Key);
             float randomX = Random.Range(-randomPosition, randomPosition);
             float randomZ = Random.Range(-randomPosition, randomPosition);
             entity.transform.position = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+            entity.transform.forward = transform.forward;
             entity.gameObject.SetActive(true);
+            entity.onDeath += DecrementCount;
+        }
+
+        void DecrementCount(object sender, Entity entity)
+        {
+            wave.DecrementCount(sender, entity);
+        }
+
+        public int GetEnemyCount()
+        {
+            int count = 0;
+            foreach (Spawn spawn in spawns)
+            {
+                count += spawn.Amount;
+            }
+            return count;
         }
     }
 
@@ -55,32 +73,13 @@ namespace DD2
         [SerializeField] string key;
         [SerializeField] int amount;
         [SerializeField] float rate;
-        [SerializeField] bool batch;
+        [SerializeField] bool isBatch;
         [SerializeField] float delay;
 
-        public string GetKey()
-        {
-            return key;
-        }
-
-        public int GetAmount()
-        {
-            return amount;
-        }
-
-        public float GetRate()
-        {
-            return rate;
-        }
-
-        public bool IsBatch()
-        {
-            return batch;
-        }
-
-        public float GetDelay()
-        {
-            return delay;
-        }
+        public string Key { get => key; private set => key = value; }
+        public int Amount { get => amount; private set => amount = value; }
+        public float Rate { get => rate; private set => rate = value; }
+        public bool IsBatch { get => isBatch; private set => isBatch = value; }
+        public float Delay { get => delay; private set => delay = value; }
     }
 }
