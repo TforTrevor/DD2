@@ -26,7 +26,7 @@ namespace DD2.Abilities
         [SerializeField] [BoxGroup("Toggle")]
         protected bool isToggle;
         [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
-        protected float toggleTickRate;
+        private float toggleTickRate;
         [ReadOnly] [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
         protected bool toggleState;
         //Input buffering
@@ -42,15 +42,10 @@ namespace DD2.Abilities
         protected LayerMask layerMask;
         [SerializeField] [BoxGroup("Targetting")]
         protected bool multiTarget;
-        //Hitboxes
-        [SerializeField] [BoxGroup("Hitboxes")]
-        protected float hitboxTickRate;
-        //[SerializeField] [BoxGroup("Hitboxes")]
-        //protected bool showHitbox;
-        [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
-        protected Hitbox[] hitboxes;
         
         protected Entity entity;
+
+        public float ToggleTickRate { get => toggleTickRate; set => toggleTickRate = value; }
 
         protected virtual void Awake()
         {
@@ -107,7 +102,7 @@ namespace DD2.Abilities
             {
                 Tick(target, payload);
 
-                yield return Timing.WaitForSeconds(toggleTickRate);
+                yield return Timing.WaitForSeconds(ToggleTickRate);
             }
             EndAbility(target, payload);
         }
@@ -121,7 +116,7 @@ namespace DD2.Abilities
             EndCooldown(target, payload);
         }
 
-        protected void ApplyEffects(Entity target, object payload)
+        protected virtual void ApplyEffects(Entity target, object payload)
         {
             StartEffects();
             for (int i = 0; i < abilityEffects.Length; i++)

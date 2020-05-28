@@ -34,12 +34,15 @@ namespace DD2
                 RaycastHit hit;
                 if (Physics.Raycast(camera.transform.position, camera.forward, out hit, 5f, layerMask))
                 {
-                    Tower tower = hit.transform.GetComponent<Tower>();
-                    if (tower != null)
+                    if (!hit.collider.isTrigger)
                     {
-                        handle = Timing.RunCoroutine(RepairRoutine(tower));
-                        isRepairing = true;
-                    }
+                        Tower tower = hit.transform.GetComponent<Tower>();
+                        if (tower != null)
+                        {
+                            handle = Timing.RunCoroutine(RepairRoutine(tower));
+                            isRepairing = true;
+                        }
+                    }                    
                 }
             }            
         }

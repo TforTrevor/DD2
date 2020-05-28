@@ -18,29 +18,34 @@ namespace DD2
         [ReadOnly] [SerializeField] private bool isAlive;
 
         [SerializeField] protected Transform fireTransform;
-        [ReadOnly] [SerializeField] protected bool grounded;
-        [ReadOnly] [SerializeField] protected bool ragdolled;
+        [ReadOnly] [SerializeField] private bool isGrounded;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
         public event EventHandler<float> healthUpdated;
         public event EventHandler<float> manaUpdated;
         public event EventHandler<Entity> onDeath;
         protected Rigidbody rb;
+        private Collider[] colliders;
+        protected InstancedStats instancedStats;
 
         public float Radius { get => radius; protected set => radius = value; }
-        public Stats Stats { get => stats; protected set => stats = value; }
+        public InstancedStats Stats { get => instancedStats; protected set => instancedStats = value; }
         public string ObjectPoolKey { get => objectPoolKey; protected set => objectPoolKey = value; }
         public bool IsAlive { get => isAlive; protected set => isAlive = value; }
         public float CurrentHealth { get => currentHealth; protected set => currentHealth = value; }
         public int CurrentMana { get => currentMana; protected set => currentMana = value; }
+        public bool IsGrounded { get => isGrounded; protected set => isGrounded = value; }
+        public Collider[] Colliders { get => colliders; protected set => colliders = value; }
 
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            Colliders = GetComponents<Collider>();
             for (int i = 0; i < abilities.Length; i++)
             {
                 abilities[i].SetEntity(this);
             }
+            Stats = new InstancedStats(stats);
         }
 
         protected virtual void Start()
@@ -58,7 +63,12 @@ namespace DD2
                 {
                     Die(entity);
                 }
-            }            
+            }
+        }
+
+        protected virtual void OnKilledEntity(Entity entity)
+        {
+
         }
 
         public void Heal(Entity entity, float amount)
@@ -128,12 +138,8 @@ namespace DD2
             }            
             IsAlive = false;
             onDeath?.Invoke(this, this);
+            entity?.OnKilledEntity(this);
             EntityPool.Instance.ReturnObject(ObjectPoolKey, this);
-        }
-
-        public virtual void Ragdoll()
-        {
-
         }
 
         public virtual void AddForce(Vector3 force, ForceMode forceMode)
@@ -161,14 +167,14 @@ namespace DD2
 
         public void SetGrounded(bool value)
         {
-            if (value && !grounded)
+            if (value && !IsGrounded)
             {
-                grounded = value;
+                IsGrounded = value;
                 OnGrounded();
             } 
             else
             {
-                grounded = value;
+                IsGrounded = value;
             }
         }
 

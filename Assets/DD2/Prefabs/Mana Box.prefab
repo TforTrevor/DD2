@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36985e9c27512cd449efa8526283a8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaAmount: 79
+  manaAmount: 100
   dropPosition: {fileID: 9093947178405509215}
   layerMask:
     serializedVersion: 2

@@ -8,15 +8,20 @@ namespace DD2.AI
     public class Tower : EntityAI
     {
         [SerializeField] int manaCost;
-        [SerializeField] Transform towerGraphics;
+        [SerializeField] protected Transform towerGraphics;
         [SerializeField] Transform towerVertical;
-        [SerializeField] Transform towerSummonGraphics;
+        [SerializeField] protected Transform towerSummonGraphics;
         [SerializeField] Color errorColor = Color.red;
         [SerializeField] Light summonLight;
-        [SerializeField] MeshRenderer summonRenderer;
-        UtilityAIComponent aiComponent;
+        [SerializeField] protected MeshRenderer summonRenderer;
+        protected UtilityAIComponent aiComponent;
         Color defaultColor;
         Color currentColor;
+
+        public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
+        public Color CurrentColor { get => currentColor; private set => currentColor = value; }
+        public Color ErrorColor { get => errorColor; private set => errorColor = value; }
+        public int ManaCost { get => manaCost; private set => manaCost = value; }
 
         protected override void Awake()
         {
@@ -24,7 +29,7 @@ namespace DD2.AI
             aiComponent = GetComponent<UtilityAIComponent>();
             if (summonRenderer != null)
             {
-                defaultColor = summonRenderer.material.GetColor("_Color");
+                DefaultColor = summonRenderer.material.GetColor("_Color");
             }
         }
 
@@ -33,19 +38,31 @@ namespace DD2.AI
             base.Respawn();
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
-            aiComponent.enabled = false;
+            if (aiComponent != null)
+                aiComponent.enabled = false;
             IsAlive = false;
         }
 
-        public void Build()
+        public override void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            
+        }
+
+        public override void ClearVelocity(bool x, bool y, bool z)
+        {
+            
+        }
+
+        public virtual void Build()
         {
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
-            aiComponent.enabled = true;
+            if (aiComponent != null)
+                aiComponent.enabled = true;
             IsAlive = true;
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if (context != null && context.target != null)
             {
@@ -65,7 +82,7 @@ namespace DD2.AI
 
         public void SetColor(Color color)
         {
-            if (color != currentColor)
+            if (color != CurrentColor)
             {
                 if (summonLight != null)
                 {
@@ -75,23 +92,8 @@ namespace DD2.AI
                 {
                     summonRenderer.material.SetColor("_Color", color);
                 }
-                currentColor = color;
+                CurrentColor = color;
             }            
-        }
-
-        public Color GetDefaultColor()
-        {
-            return defaultColor;
-        }
-
-        public Color GetErrorColor()
-        {
-            return errorColor;
-        }
-
-        public int GetManaCost()
-        {
-            return manaCost;
         }
     }
 }

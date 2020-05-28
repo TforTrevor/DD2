@@ -119,7 +119,7 @@ MonoBehaviour:
   poolKey: HealthBar
   layerMask:
     serializedVersion: 2
-    m_Bits: 14336
+    m_Bits: 79872
   maxHealthBars: 100
 --- !u!114 &4475002502327752549
 MonoBehaviour:

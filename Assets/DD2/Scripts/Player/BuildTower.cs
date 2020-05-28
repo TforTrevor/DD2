@@ -15,12 +15,13 @@ namespace DD2
         [SerializeField] LayerMask mask;
         [SerializeField] Stage stage;
         [SerializeField] float rotSensitivity;
-        [SerializeField] LayerMask overlapMask;
+        [SerializeField] LayerMask towerCollisionMask;
+        [SerializeField] LayerMask trapCollisionMask;
 
         bool enableBuild;
         bool isUsing;
         Tower instance;
-        Collider instanceCollider;
+        List<Collider> instanceColliders = new List<Collider>();
         CoroutineHandle handle;
 
         new Transform camera;
@@ -28,7 +29,7 @@ namespace DD2
 
         public void Begin(BuildTowerInfo info)
         {
-            if (!isUsing && towerPrefabs[info.index].GetManaCost() <= info.player.CurrentMana)
+            if (!isUsing && towerPrefabs[info.index].ManaCost <= info.player.CurrentMana)
             {
                 camera = info.camera;
                 player = info.player;
@@ -85,7 +86,8 @@ namespace DD2
             instance = (Tower)EntityPool.Instance.GetObject(towerPrefabs[index].ObjectPoolKey);
             if (instance != null)
             {
-                instanceCollider = instance.GetComponent<Collider>();
+                instanceColliders.Clear();
+                instanceColliders.AddRange(instance.GetComponents<Collider>());
 
                 instance.gameObject.SetActive(true);
                 handle = Timing.RunCoroutine(MoveRoutine());
@@ -105,7 +107,7 @@ namespace DD2
             instance.Build();
             player.ToggleLook(true);
             player.ToggleMovement(true);
-            player.SpendMana(towerPrefabs[index].GetManaCost());
+            player.SpendMana(towerPrefabs[index].ManaCost);
             instance = null;
             isUsing = false;
         }
@@ -123,7 +125,7 @@ namespace DD2
                 else
                 {
                     instance.transform.position = camera.position + camera.forward * 5;
-                    instance.SetColor(instance.GetErrorColor());
+                    instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                 }
                 instance.transform.localEulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
@@ -143,17 +145,22 @@ namespace DD2
 
         void CollisionCheck()
         {
-            Collider[] colliders = Physics.OverlapSphere(instanceCollider.bounds.center, Util.Utilities.GetLargestDimension(instanceCollider.bounds.extents), overlapMask);
+            LayerMask mask = towerCollisionMask;
+            if (instance.GetType() == typeof(Trap))
+            {
+                mask = trapCollisionMask;
+            }
+            Collider[] colliders = Physics.OverlapSphere(instanceColliders[0].bounds.center, Util.Utilities.GetLargestDimension(instanceColliders[0].bounds.extents), mask);
             foreach (Collider collider in colliders)
             {
-                if (collider != instanceCollider && instanceCollider.bounds.Intersects(collider.bounds))
+                if (!instanceColliders.Contains(collider) && instanceColliders[0].bounds.Intersects(collider.bounds))
                 {
-                    instance.SetColor(instance.GetErrorColor());
+                    instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                     return;
                 }
             }
-            instance.SetColor(instance.GetDefaultColor());
+            instance.SetColor(instance.DefaultColor);
             enableBuild = true;
         }
 

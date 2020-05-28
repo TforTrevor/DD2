@@ -56,6 +56,23 @@ namespace DD2
             wave.DecrementCount(sender, entity);
         }
 
+        public Dictionary<string, int> GetEnemies()
+        {
+            Dictionary<string, int> list = new Dictionary<string, int>();
+            foreach (Spawn spawn in spawns)
+            {
+                if (list.ContainsKey(spawn.Key))
+                {
+                    list[spawn.Key] += spawn.Amount;
+                }
+                else
+                {
+                    list.Add(spawn.Key, spawn.Amount);
+                }
+            }
+            return list;
+        }
+
         public int GetEnemyCount()
         {
             int count = 0;

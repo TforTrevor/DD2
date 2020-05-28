@@ -39,6 +39,11 @@ namespace DD2
             }
         }
 
+        public override void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            base.AddForce(force, forceMode);
+        }
+
         protected virtual void FixedUpdate()
         {
             Util.Utilities.ClearArray(manaOrbs, manaOrbsCount);

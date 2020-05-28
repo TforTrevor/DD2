@@ -38,14 +38,17 @@ namespace DD2
                     if (healthBars.ContainsKey(entity))
                     {
                         HealthBar h = healthBars[entity];
-                        if (h != null)
+                        if (h != null && !overlap.ContainsKey(entity))
                         {
                             overlap.Add(entity, h);
                         }
                     }
                     else
                     {
-                        overlap.Add(entity, null);
+                        if (!overlap.ContainsKey(entity))
+                        {
+                            overlap.Add(entity, null);
+                        }                        
                     }
                 }                           
             }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace DD2.Abilities
 {
-    public class PositionAbility : Ability
+    public class PositionAbility : HitboxAbility
     {
         [SerializeField] float radius;
         [SerializeField] string objectKey;
@@ -18,9 +18,9 @@ namespace DD2.Abilities
             base.Awake();
             foreach(Hitbox hitbox in hitboxes)
             {
-                if (hitbox.GetMaxCollisions() > maxCollisions)
+                if (hitbox.MaxCollisions > maxCollisions)
                 {
-                    maxCollisions = hitbox.GetMaxCollisions();
+                    maxCollisions = hitbox.MaxCollisions;
                 }
             }
             collisions = new Collider[maxCollisions];
@@ -38,12 +38,12 @@ namespace DD2.Abilities
             Vector3 position = transform.position;
             foreach (Hitbox hitbox in hitboxes)
             {
-                hitbox.hitboxObject.transform.position = position;
+                hitbox.HitboxObject.transform.position = position;
                 //hitbox.hitboxObject.SetActive(true);
 
-                yield return Timing.WaitForSeconds(hitbox.GetDelay());
+                yield return Timing.WaitForSeconds(hitbox.Delay);
                 CoroutineHandle hitboxHandle = Timing.RunCoroutine(HitboxRoutine(hitbox, hitColliders, position));
-                yield return Timing.WaitForSeconds(hitbox.GetDuration());
+                yield return Timing.WaitForSeconds(hitbox.Duration);
                 Timing.KillCoroutines(hitboxHandle);
 
                 //hitbox.hitboxObject.SetActive(false);

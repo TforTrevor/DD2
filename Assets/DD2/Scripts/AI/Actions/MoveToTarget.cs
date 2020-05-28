@@ -20,7 +20,7 @@ namespace DD2.AI.Actions
             AIContext ctx = (AIContext)context;
             Enemy entity = (Enemy)ctx.entity;
 
-            if (ctx.target && ctx.pathTarget != ctx.target)
+            if (ctx.target && ctx.pathTarget != ctx.target && entity.IsGrounded && !entity.IsRagdolled)
             {
                 float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
                 float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition())
@@ -32,7 +32,7 @@ namespace DD2.AI.Actions
                     float distanceFromRange = distance - range + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + entity.GetPosition();
                     entity.MoveToPosition(position);
-                    ctx.pathTarget = ctx.target;
+                    //ctx.pathTarget = ctx.target;
                 }
             }
         }

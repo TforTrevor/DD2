@@ -14,7 +14,12 @@ namespace DD2
         [SerializeField] [ReadOnly] bool waveInProgress;
 
         public List<Core> Cores { get => cores; private set => cores = value; }
+        public int WaveCount { get => waves.Count; }
+        public int CurrentWave { get => currentWave; private set => currentWave = value; }
+
         public event EventHandler<Wave> waveUpdated;
+        public event EventHandler<int> waveStarted;
+        public event EventHandler<int> waveEnded;
 
         protected override void Awake()
         {
@@ -39,7 +44,7 @@ namespace DD2
         
         void Start()
         {
-            currentWave = 0;
+            CurrentWave = 0;
             waveInProgress = false;
         }
 
@@ -47,8 +52,9 @@ namespace DD2
         {
             if (!waveInProgress)
             {
-                waves[currentWave].StartWave();
+                waves[CurrentWave].StartWave();
                 waveInProgress = true;
+                waveStarted?.Invoke(this, CurrentWave);
             }            
         }
 
@@ -59,8 +65,14 @@ namespace DD2
 
         public void EndWave()
         {
-            currentWave++;
+            CurrentWave++;
             waveInProgress = false;
+            waveEnded?.Invoke(this, CurrentWave);
+        }
+
+        public Wave GetWave(int index)
+        {
+            return waves[index];
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using MEC;
 using UnityEngine.AI;
 using DD2.Abilities;
+using UnityEditor.Animations;
 
 namespace DD2.AI
 {
@@ -14,17 +15,23 @@ namespace DD2.AI
         [SerializeField] Vector3 offset;
         [SerializeField] LayerMask groundedMask;
         [SerializeField] float ragdollTime;
+        [SerializeField] bool isRagdolled;
+        [SerializeField] Animator animator;
 
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;
         CoroutineHandle moveRoutine;
         Vector3 previousPosition;
+        CoroutineHandle ragdollHandle;
+
+        public bool IsRagdolled { get => isRagdolled; protected set => isRagdolled = value; }
 
         protected override void Awake()
         {
             base.Awake();
             navMeshAgent = GetComponent<NavMeshAgent>();
             navMeshObstacle = GetComponent<NavMeshObstacle>();
+            RandomizeStats();
         }
 
         protected override void Start()
@@ -32,36 +39,63 @@ namespace DD2.AI
             base.Start();
             CurrentMana = Stats.MaxMana;
             navMeshAgent.speed = Stats.MoveSpeed;
+            IsGrounded = true;
         }
 
-        public override void Ragdoll()
+        void RandomizeStats()
         {
-            base.Ragdoll();
-            navMeshAgent.ResetPath();
-            Vector3 velocity = navMeshAgent.velocity;
-            SetAgentActive(false);
-            rb.velocity = velocity;
-            ragdolled = true;
+            //Stats.MaxHealth += Random.Range(-10, 10);
+            if (Random.value > 0.5f)
+            {
+                Stats.LightningResist = 1000;
+            }
+            else
+            {
+                Stats.LightningResist = 0;
+            }
+        }
+
+        public virtual void Ragdoll()
+        {
+            if (IsRagdolled)
+            {
+                Timing.KillCoroutines(ragdollHandle);
+            }
+            else
+            {
+                navMeshAgent.ResetPath();
+                Vector3 velocity = navMeshAgent.velocity;
+                SetAgentActive(false);
+                //rb.velocity = velocity;
+                IsRagdolled = true;
+            }            
         }
 
         public override void AddForce(Vector3 force, ForceMode forceMode)
         {
-            Ragdoll();
-            base.AddForce(force, forceMode);
+            if (IsAlive)
+            {
+                Ragdoll();
+                base.AddForce(force, forceMode);
+            }            
         }
 
         protected override void OnGrounded()
         {
             base.OnGrounded();
-            if (ragdolled)
+            if (IsRagdolled)
             {
-                Timing.CallDelayed(ragdollTime, () =>
+                ragdollHandle = Timing.CallDelayed(ragdollTime, () =>
                 {
-                    if (grounded)
+                    if (IsGrounded)
                     {
                         navMeshAgent.nextPosition = transform.position;
                         SetAgentActive(true);
-                        ragdolled = false;
+                        IsRagdolled = false;
+                        if (!navMeshAgent.isOnNavMesh)
+                        {
+                            Debug.Log("Not on mesh");
+                        }
                     }
                 });
             }
@@ -110,7 +144,7 @@ namespace DD2.AI
 
         void FixedUpdate()
         {
-            if (ragdolled)
+            if (IsRagdolled)
             {
                 RaycastHit hit;
                 Debug.DrawRay(transform.position + offset, Vector3.down * distance, Color.cyan, 2);
@@ -123,6 +157,11 @@ namespace DD2.AI
                     SetGrounded(false);
                 }
             }            
+        }
+
+        void Update()
+        {
+            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
         }
     }
 }

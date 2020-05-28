@@ -15,6 +15,7 @@ namespace DD2
         [SerializeField] TextMeshProUGUI manaText;
         [SerializeField] Slider enemyCountSlider;
         [SerializeField] TextMeshProUGUI enemyCountText;
+        [SerializeField] TextMeshProUGUI waveCountText;
 
         void Start()
         {
@@ -23,6 +24,18 @@ namespace DD2
             player.healthUpdated += UpdateHealth;
             player.manaUpdated += UpdateMana;
             LevelManager.Instance.waveUpdated += UpdateEnemyCount;
+            LevelManager.Instance.waveStarted += UpdateWaveCount;
+            LevelManager.Instance.waveEnded += UpdateWaveCount;
+            LevelManager.Instance.waveStarted += (sender, amount) =>
+            {
+                enemyCountSlider.gameObject.SetActive(true);
+            };
+            LevelManager.Instance.waveEnded += (sender, amount) =>
+            {
+                enemyCountSlider.gameObject.SetActive(false);
+            };
+            enemyCountSlider.gameObject.SetActive(false);
+            UpdateWaveCount(this, LevelManager.Instance.CurrentWave);
         }
 
         void UpdateHealth(object sender, float amount)
@@ -42,6 +55,11 @@ namespace DD2
             enemyCountSlider.maxValue = wave.MaxCount;
             enemyCountSlider.value = wave.CurrentCount;
             enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
+        }
+
+        void UpdateWaveCount(object sender, int count)
+        {
+            waveCountText.text = count + 1 + "/" + LevelManager.Instance.WaveCount;
         }
     }
 }

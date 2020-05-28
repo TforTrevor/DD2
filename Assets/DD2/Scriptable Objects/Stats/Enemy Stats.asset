@@ -16,14 +16,14 @@ MonoBehaviour:
   maxMana: 20
   attackDamage: 0
   attackSpeed: 0
-  moveSpeed: 1
+  moveSpeed: 1.5
   presence: 5
   physicalResist: 0
-  fireResist: 0
+  fireResist: 100
   lightningResist: 0
   energyResist: 0
   waterResist: 0
-  attackRange: 0.25
+  attackRange: 1
   attackAngle: 0
   searchRange: 5
   searchAngle: 40

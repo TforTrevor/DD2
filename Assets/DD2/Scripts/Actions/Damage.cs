@@ -9,21 +9,32 @@ namespace DD2.Actions
     {
         [SerializeField] ElementType elementType;
         [SerializeField] DamageType damageType;
+        [SerializeField] bool ignoreStats;
+        [SerializeField] bool swapTargetAndCaller;
         [SerializeField] float damage;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            switch (damageType)
+            if (damageType == DamageType.Flat)
             {
-                case DamageType.PercentMaxHealth:
-                    PercentMaxHealth(target, caller);
-                    break;
-                case DamageType.PercentCurrentHealth:
-                    PercentCurrentHealth(target, caller);
-                    break;
-                default:
+                if (swapTargetAndCaller)
+                    Flat(caller, target);
+                else
                     Flat(target, caller);
-                    break;
+            }
+            else if (damageType == DamageType.PercentMaxHealth)
+            {
+                if (swapTargetAndCaller)
+                    PercentMaxHealth(caller, target);
+                else
+                    PercentMaxHealth(target, caller);
+            }
+            else if (damageType == DamageType.PercentCurrentHealth)
+            {
+                if (swapTargetAndCaller)
+                    PercentCurrentHealth(caller, target);
+                else
+                    PercentCurrentHealth(target, caller);
             }
         }
 
@@ -34,23 +45,44 @@ namespace DD2.Actions
             {
                 multiplier = 1 + caller.Stats.AttackDamage / 50;
             }
-            float damage = this.damage * multiplier * GetDamageMultiplier(target.Stats);
-            target.Damage(caller, damage);
+            if (ignoreStats)
+            {
+                target.Damage(caller, damage);
+            }
+            else
+            {
+                float damage = this.damage * multiplier * GetDamageMultiplier(target.Stats);
+                target.Damage(caller, damage);
+            }            
         }
 
         void PercentMaxHealth(Entity target, Entity caller)
         {
-            float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
-            target.Damage(caller, damage);
+            if (ignoreStats)
+            {
+                target.Damage(caller, damage);
+            }
+            else
+            {
+                float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
+                target.Damage(caller, damage);
+            }            
         }
 
         void PercentCurrentHealth(Entity target, Entity caller)
         {
-            float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
-            target.Damage(caller, damage);
+            if (ignoreStats)
+            {
+                target.Damage(caller, damage);
+            }
+            else
+            {
+                float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
+                target.Damage(caller, damage);
+            }            
         }
 
-        float GetDamageMultiplier(Stats targetStats)
+        float GetDamageMultiplier(InstancedStats targetStats)
         {
             switch (elementType)
             {

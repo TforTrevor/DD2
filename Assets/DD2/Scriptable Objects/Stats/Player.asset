@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  elementType: 0
   maxHealth: 100000000
   maxMana: 1000
   attackDamage: 0

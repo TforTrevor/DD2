@@ -13,11 +13,12 @@ namespace DD2
 
         public int CurrentCount { get => currentCount; private set => currentCount = value; }
         public int MaxCount { get => maxCount; private set => maxCount = value; }
+        public List<EnemySpawner> Spawners { get => spawners; private set => spawners = value; }
 
         public void StartWave()
         {
             CurrentCount = 0;
-            foreach (EnemySpawner spawner in spawners)
+            foreach (EnemySpawner spawner in Spawners)
             {
                 spawner.SpawnEnemies();
                 MaxCount += spawner.GetEnemyCount();

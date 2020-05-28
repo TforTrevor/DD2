@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccb0f834ea95c34e88a8b7684d67943, type: 3}
   m_Name: Apply Force
   m_EditorClassIdentifier: 
-  elementType: 0
-  force: 10
+  force: 5
   direction: {x: 0, y: 0, z: 0}
-  relativeToPosition: 0
+  relativeToPosition: 1
   forceMode: 1
-  cancelForce: 1
+  clearVelocity: 0

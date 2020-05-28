@@ -9,7 +9,7 @@ namespace DD2.Abilities
     {
         enum Shape { Sphere, Box, Capsule };
         [SerializeField] Shape hitboxShape;
-        public GameObject hitboxObject;
+        [SerializeField] GameObject hitboxObject;
         [SerializeField] float delay;
         [SerializeField] float duration;
         [SerializeField] float repeatDelay;
@@ -26,11 +26,16 @@ namespace DD2.Abilities
         BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
 
+        public int MaxCollisions { get => maxCollisions; private set => maxCollisions = value; }
+        public GameObject HitboxObject { get => hitboxObject; private set => hitboxObject = value; }
+        public float Delay { get => delay; private set => delay = value; }
+        public float Duration { get => duration; private set => duration = value; }
+
         Hitbox()
         {
-            results = new Collider[maxCollisions];
-            hitColliders = new Collider[maxCollisions];
-            returnResults = new Collider[maxCollisions];
+            results = new Collider[MaxCollisions];
+            hitColliders = new Collider[MaxCollisions];
+            returnResults = new Collider[MaxCollisions];
             //repeatList.Capacity = maxCollisions;
         }
 
@@ -38,15 +43,15 @@ namespace DD2.Abilities
         {
             if (hitboxShape == Shape.Sphere)
             {
-                sphereCollider = hitboxObject.GetComponent<SphereCollider>();
+                sphereCollider = HitboxObject.GetComponent<SphereCollider>();
             }
             else if (hitboxShape == Shape.Box)
             {
-                boxCollider = hitboxObject.GetComponent<BoxCollider>();
+                boxCollider = HitboxObject.GetComponent<BoxCollider>();
             }
             else if (hitboxShape == Shape.Capsule)
             {
-                capsuleCollider = hitboxObject.GetComponent<CapsuleCollider>();
+                capsuleCollider = HitboxObject.GetComponent<CapsuleCollider>();
             }
         }
 
@@ -65,7 +70,7 @@ namespace DD2.Abilities
                     Initialize();
                 }
                 
-                resultsCount = Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, results, layerMask);
+                resultsCount = Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * HitboxObject.transform.lossyScale.x, results, layerMask);
                 for (int i = 0; i < results.Length; i++)
                 {
                     if (results[i] != null)
@@ -119,21 +124,6 @@ namespace DD2.Abilities
             {
                 repeatList.Remove(colliders[i]);
             }
-        }
-
-        public float GetDelay()
-        {
-            return delay;
-        }
-
-        public float GetDuration()
-        {
-            return duration;
-        }
-
-        public int GetMaxCollisions()
-        {
-            return maxCollisions;
         }
     }
 }
