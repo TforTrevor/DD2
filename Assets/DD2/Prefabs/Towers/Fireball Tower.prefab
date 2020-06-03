@@ -141,8 +141,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3798314036121989531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.25}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4787692965857814013}
   m_RootOrder: 0
@@ -352,6 +352,7 @@ MonoBehaviour:
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 2883186535015136886}
   summonRenderer: {fileID: 3200667261570169068}
+  collider: {fileID: 5613189003723327719}
 --- !u!1 &5312015312721352768
 GameObject:
   m_ObjectHideFlags: 0

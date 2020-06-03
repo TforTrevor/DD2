@@ -11,7 +11,6 @@ namespace DD2
     public class BuildTower : MonoBehaviour
     {
         [SerializeField] Player player;
-        [SerializeField] new Transform camera;
         [SerializeField] LayerMask mask;
         [SerializeField] Stage stage;
         [SerializeField] float rotSensitivity;
@@ -112,14 +111,14 @@ namespace DD2
             while (true)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(camera.position, camera.forward, out hit, 5, mask))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, mask))
                 {
                     instance.transform.position = hit.point;
                     CollisionCheck();
                 }
                 else
                 {
-                    instance.transform.position = camera.position + camera.forward * 5;
+                    instance.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
                     instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                 }

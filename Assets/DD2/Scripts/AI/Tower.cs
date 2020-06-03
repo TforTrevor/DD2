@@ -14,7 +14,8 @@ namespace DD2.AI
         [SerializeField] Color errorColor = Color.red;
         [SerializeField] Light summonLight;
         [SerializeField] protected MeshRenderer summonRenderer;
-        protected UtilityAIComponent aiComponent;
+        [SerializeField] new Collider collider;
+        protected UtilityAIComponent aiComponent;        
         Color defaultColor;
         Color currentColor;
 
@@ -33,13 +34,24 @@ namespace DD2.AI
             }
         }
 
+        protected override void Start()
+        {
+            base.Start();
+            if (collider != null)
+            {
+                collider.isTrigger = true;
+            }            
+        }
+
         public override void Respawn()
         {
             base.Respawn();
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
             if (aiComponent != null)
+            {
                 aiComponent.enabled = false;
+            }
             IsAlive = false;
         }
 
@@ -57,8 +69,14 @@ namespace DD2.AI
         {
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
+            if (collider != null)
+            {
+                collider.isTrigger = false;
+            }            
             if (aiComponent != null)
+            {
                 aiComponent.enabled = true;
+            }                
             IsAlive = true;
         }
 

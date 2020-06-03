@@ -375,6 +375,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1 &2435850808861389492
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +542,7 @@ MonoBehaviour:
   radius: 0.5
   isAlive: 0
   fireTransform: {fileID: 522014266}
-  grounded: 0
+  isGrounded: 0
   abilities:
   - {fileID: 2701457161805265544}
   manaCost: 50
@@ -550,6 +552,7 @@ MonoBehaviour:
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 7342326754161417903}
   summonRenderer: {fileID: 7029274877072496693}
+  collider: {fileID: 510240830}
 --- !u!1 &6320886620070764834
 GameObject:
   m_ObjectHideFlags: 0

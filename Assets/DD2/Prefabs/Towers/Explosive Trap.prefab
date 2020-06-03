@@ -10177,6 +10177,7 @@ MonoBehaviour:
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 8848302446680366108}
   summonRenderer: {fileID: 441076044599383990}
+  collider: {fileID: 3419165450066065032}
   trigger: {fileID: 8418364080866687474}
   triggerLayerMask:
     serializedVersion: 2
@@ -10504,6 +10505,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1 &8848302446843441588
 GameObject:
   m_ObjectHideFlags: 0

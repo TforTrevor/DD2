@@ -201,6 +201,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1 &1319620231183350408
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,10 +410,9 @@ MonoBehaviour:
   currentHealth: 0
   currentMana: 0
   radius: 0.8
-  alive: 0
+  isAlive: 0
   fireTransform: {fileID: 4993670199648463880}
-  grounded: 0
-  ragdolled: 0
+  isGrounded: 0
   abilities: []
   manaCost: 30
   towerGraphics: {fileID: 6635896054950298341}
@@ -420,6 +421,7 @@ MonoBehaviour:
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 8546173290096519960}
   summonRenderer: {fileID: 4503334246509781787}
+  collider: {fileID: 4571618255341315653}
 --- !u!1 &5267178685551948537
 GameObject:
   m_ObjectHideFlags: 0

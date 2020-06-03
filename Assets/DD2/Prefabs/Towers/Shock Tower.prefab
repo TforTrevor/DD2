@@ -507,6 +507,7 @@ MonoBehaviour:
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 1953677883262167230}
   summonRenderer: {fileID: 7478407285194973972}
+  collider: {fileID: 5666926096487236138}
   trigger: {fileID: 1514245324792515920}
   triggerLayerMask:
     serializedVersion: 2
@@ -597,7 +598,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ca173d58d8cf9040bb6e4e221dc6909, type: 2}
+  - {fileID: 2100000, guid: e10a3b3d9e0e55a4f90be2c28f0a2881, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

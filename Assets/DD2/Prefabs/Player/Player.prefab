@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3180383434907916282}
-  camera: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 512
@@ -348,7 +347,7 @@ MonoBehaviour:
   ability2: {fileID: 0}
   lookInput: {fileID: 11400000, guid: eac64470069ce7e46a87052bc0ccc626, type: 2}
   movement: {fileID: 1505551297}
-  camera: {fileID: 0}
+  camera: {fileID: 2706639252815613831}
   manaOrbRadius: 3
   manaOrbLayerMask:
     serializedVersion: 2
