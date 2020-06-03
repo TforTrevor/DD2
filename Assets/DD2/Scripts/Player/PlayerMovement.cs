@@ -24,10 +24,14 @@ namespace DD2
             rb = GetComponent<Rigidbody>();
         }
 
-        void FixedUpdate()
+        void Update()
         {
             if (enableLook)
                 Rotate();
+        }
+
+        void FixedUpdate()
+        {
             if (enableMovement)
                 Move();
             rb.AddForce(Vector3.down * 9.81f);
@@ -74,10 +78,10 @@ namespace DD2
 
         void Rotate()
         {
-            Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.Value.x * sensitivity * Time.deltaTime, Vector3.up);
-            rb.MoveRotation(rb.rotation * deltaRotation);
+            //Quaternion deltaRotation = Quaternion.AngleAxis(lookInput.Value.x * sensitivity * Time.deltaTime, Vector3.up);
+            //rb.MoveRotation(rb.rotation * deltaRotation);
 
-            //transform.Rotate(Vector3.up, lookInput.value.x * sensitivity * Time.deltaTime);
+            transform.Rotate(Vector3.up, lookInput.Value.x * sensitivity * Time.deltaTime);
         }
 
         public void ToggleMovement(bool value)

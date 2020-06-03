@@ -12,7 +12,6 @@ namespace DD2
         [SerializeField] float maxPitch;
         [SerializeField] float minPitch;
 
-        Transform cameraParent;
         bool shoulderView;
         bool enableLook;
         float pitch;
@@ -21,7 +20,6 @@ namespace DD2
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            cameraParent = transform.parent;
             shoulderView = true;
             enableLook = true;
         }
@@ -32,7 +30,7 @@ namespace DD2
             {
                 pitch -= lookInput.Value.y * sensitivity * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
-                cameraParent.localEulerAngles = new Vector3(pitch, 0, 0);
+                transform.localEulerAngles = new Vector3(pitch, 0, 0);
             }            
         }
 
