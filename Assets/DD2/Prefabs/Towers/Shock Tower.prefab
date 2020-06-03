@@ -282,6 +282,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1 &1953677883501708566
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +508,9 @@ MonoBehaviour:
   summonLight: {fileID: 1953677883262167230}
   summonRenderer: {fileID: 7478407285194973972}
   trigger: {fileID: 1514245324792515920}
+  triggerLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!135 &1514245324792515920
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -766,6 +771,7 @@ MonoBehaviour:
     maxCollisions: 100
   oneTimeActions:
   - {fileID: 11400000, guid: 253723c39e5c34f4689b9f28587ec9e2, type: 2}
+  particleSystems: []
 --- !u!1 &7921932536720842655
 GameObject:
   m_ObjectHideFlags: 0

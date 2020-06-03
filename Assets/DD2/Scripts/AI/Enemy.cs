@@ -161,7 +161,10 @@ namespace DD2.AI
 
         void Update()
         {
-            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
+            }            
         }
     }
 }

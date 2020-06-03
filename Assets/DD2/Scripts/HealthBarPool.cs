@@ -38,7 +38,7 @@ namespace DD2
                 Pool<HealthBar> pool = pools.Find(x => x.tag == key);
                 if (pool.canExpand)
                 {
-                    HealthBar poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
+                    HealthBar poolObject = Instantiate(pool.prefab);
                     poolObject.transform.localScale = Vector3.zero;
                     return poolObject;
                 }

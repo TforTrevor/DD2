@@ -11,7 +11,7 @@ namespace DD2
     public class BuildTower : MonoBehaviour
     {
         [SerializeField] Player player;
-        [SerializeField] [ReorderableList] List<Tower> towerPrefabs;
+        [SerializeField] new Transform camera;
         [SerializeField] LayerMask mask;
         [SerializeField] Stage stage;
         [SerializeField] float rotSensitivity;
@@ -23,20 +23,16 @@ namespace DD2
         Tower instance;
         List<Collider> instanceColliders = new List<Collider>();
         CoroutineHandle handle;
+        Tower tower;
 
-        new Transform camera;
-        int index;
-
-        public void Begin(BuildTowerInfo info)
+        public void Begin(Tower tower)
         {
-            if (!isUsing && towerPrefabs[info.index].ManaCost <= info.player.CurrentMana)
+            if (!isUsing && tower.ManaCost <= player.CurrentMana)
             {
-                camera = info.camera;
-                player = info.player;
-                index = info.index;
                 stage = Stage.position;
                 isUsing = true;
                 enableBuild = true;
+                this.tower = tower;
                 Continue();
             }         
         }
@@ -74,16 +70,14 @@ namespace DD2
                     player.ToggleLook(true);
                     player.ToggleMovement(true);
                 }
-                camera = null;
-                player = null;
-                index = 0;
                 isUsing = false;
+                tower = null;
             }
         }
 
         void Position()
         {
-            instance = (Tower)EntityPool.Instance.GetObject(towerPrefabs[index].ObjectPoolKey);
+            instance = (Tower)EntityPool.Instance.GetObject(tower.ObjectPoolKey);
             if (instance != null)
             {
                 instanceColliders.Clear();
@@ -107,9 +101,10 @@ namespace DD2
             instance.Build();
             player.ToggleLook(true);
             player.ToggleMovement(true);
-            player.SpendMana(towerPrefabs[index].ManaCost);
+            player.SpendMana(tower.ManaCost);
             instance = null;
             isUsing = false;
+            tower = null;
         }
 
         IEnumerator<float> MoveRoutine()

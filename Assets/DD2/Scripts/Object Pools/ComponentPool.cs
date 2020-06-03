@@ -19,7 +19,6 @@ namespace DD2
     {
         [SerializeField] [ReorderableList] protected List<Pool<T>> pools;
         protected Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
-        protected Dictionary<string, GameObject> parentDictionary = new Dictionary<string, GameObject>();
 
         protected override void Awake()
         {
@@ -31,16 +30,12 @@ namespace DD2
         {
             foreach (Pool<T> pool in pools)
             {
-                GameObject poolParent = new GameObject();
-                parentDictionary.Add(pool.tag, poolParent);
-                poolParent.transform.SetParent(transform);
-                poolParent.name = pool.tag;
-
                 Queue<T> queue = new Queue<T>();
 
                 for (int i = 0; i < pool.size; i++)
                 {
-                    T poolObject = Instantiate(pool.prefab, poolParent.transform);
+                    T poolObject = Instantiate(pool.prefab);
+                    poolObject.name = "Object Pool/" + name + "/" + pool.prefab.name + " (" + i + ")";
                     poolObject.gameObject.SetActive(false);
                     poolObject.transform.position = new Vector3(0, -1000, 0);
                     if (poolObject != null)
@@ -65,7 +60,7 @@ namespace DD2
                 Pool<T> pool = pools.Find(x => x.tag == key);
                 if (pool.canExpand)
                 {
-                    T poolObject = Instantiate(pool.prefab, parentDictionary[pool.tag].transform);
+                    T poolObject = Instantiate(pool.prefab);
                     poolObject.gameObject.SetActive(false);
                     return poolObject;
                 }
