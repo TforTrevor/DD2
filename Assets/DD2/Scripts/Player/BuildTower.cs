@@ -24,7 +24,7 @@ namespace DD2
         CoroutineHandle handle;
         Tower tower;
 
-        public void Begin(Tower tower)
+        public bool Begin(Tower tower)
         {
             if (!isUsing && tower.ManaCost <= player.CurrentMana)
             {
@@ -33,7 +33,9 @@ namespace DD2
                 enableBuild = true;
                 this.tower = tower;
                 Continue();
-            }         
+                return true;
+            }
+            return false;
         }
 
         public void Continue()
@@ -111,14 +113,14 @@ namespace DD2
             while (true)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 5, mask))
+                if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5, mask))
                 {
                     instance.transform.position = hit.point;
                     CollisionCheck();
                 }
                 else
                 {
-                    instance.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+                    instance.transform.position = LevelManager.Instance.Camera.transform.position + LevelManager.Instance.Camera.transform.forward * 5;
                     instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                 }

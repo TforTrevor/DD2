@@ -30,14 +30,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Ability1",
-                    "type": "Button",
-                    "id": "e770327e-f883-455d-b37b-73146efcd76d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "SecondaryFire",
                     "type": "Button",
                     "id": "c206c827-8ecb-479d-a661-4388133be1bd",
@@ -62,10 +54,34 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Ready",
+                    "type": "Button",
+                    "id": "f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Ability1",
+                    "type": "Button",
+                    "id": "e770327e-f883-455d-b37b-73146efcd76d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Ability2",
                     "type": "Button",
                     "id": "f23f0d7e-b920-487d-bc27-28b63033e5d7",
                     "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "BuildTower",
+                    "type": "Button",
+                    "id": "aed07601-49e3-4925-a46c-cede2ef1b67f",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -78,9 +94,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Ready",
+                    "name": "SellTower",
                     "type": "Button",
-                    "id": "f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8",
+                    "id": "6d4c44b7-37f4-4a28-8c2e-f1a4d1f3fb2a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -166,17 +182,6 @@
                 },
                 {
                     "name": "",
-                    "id": "50d9e7ee-3a69-4d9a-adb5-f31a07452759",
-                    "path": "<Keyboard>/1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Ability1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d45fc395-283d-4ca7-a9f7-74b23be53f97",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -210,6 +215,28 @@
                 },
                 {
                     "name": "",
+                    "id": "9dfe5875-e80b-4a7c-bab2-cc6a201f2c15",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50d9e7ee-3a69-4d9a-adb5-f31a07452759",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Ability1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fe73ab6b-341f-4c4c-8ad1-8aae5729a3b0",
                     "path": "<Keyboard>/2",
                     "interactions": "",
@@ -232,12 +259,23 @@
                 },
                 {
                     "name": "",
-                    "id": "9dfe5875-e80b-4a7c-bab2-cc6a201f2c15",
-                    "path": "<Keyboard>/g",
+                    "id": "922f3f92-2433-478c-a97b-9f8673ff383b",
+                    "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Ready",
+                    "action": "BuildTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93a69c23-2bc8-479c-b5ac-0f81bec673f1",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "SellTower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

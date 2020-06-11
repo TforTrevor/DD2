@@ -8,13 +8,15 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Vector3Variable moveVector;
     [SerializeField] Vector3Variable lookVector;
-    [SerializeField] GameEvent ability1;
-    [SerializeField] GameEvent ability2;
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
     [SerializeField] GameEvent menu;
-    [SerializeField] GameEvent repairTower;
     [SerializeField] GameEvent ready;
+    [SerializeField] GameEvent ability1;
+    [SerializeField] GameEvent ability2;
+    [SerializeField] GameEvent buildTower;
+    [SerializeField] GameEvent repairTower;
+    [SerializeField] GameEvent sellTower;
 
     void OnMove(InputValue value)
     {
@@ -59,5 +61,15 @@ public class PlayerInput : MonoBehaviour
     void OnReady()
     {
         ready?.Raise();
+    }
+
+    void OnBuildTower()
+    {
+        buildTower?.Raise();
+    }
+
+    void OnSellTower()
+    {
+        sellTower?.Raise();
     }
 }

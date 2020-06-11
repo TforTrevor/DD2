@@ -4,14 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DD2
+namespace DD2.UI
 {
-    public class HealthBar : MonoBehaviour
+    public class HealthBar : FloatingUI
     {
         [SerializeField] Slider healthSlider;
         [SerializeField] TextMeshProUGUI healthNumber;
-        [SerializeField] Canvas canvas;
-        [SerializeField] float heightOffset = 2;
 
         Entity entity;
 
@@ -41,16 +39,6 @@ namespace DD2
             {
                 entity.healthUpdated -= UpdateHealth;
             }            
-        }
-
-        public float GetHeightOffset()
-        {
-            return heightOffset;
-        }
-
-        public Canvas GetCanvas()
-        {
-            return canvas;
         }
     }
 }

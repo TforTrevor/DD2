@@ -10,7 +10,6 @@ namespace DD2
     public class RepairTower : MonoBehaviour
     {
         [SerializeField] Player player;
-        [SerializeField] new Transform camera;
         [SerializeField] LayerMask layerMask;
         [SerializeField] float healAmount;
 
@@ -32,7 +31,7 @@ namespace DD2
             else
             {
                 RaycastHit hit;
-                if (Physics.Raycast(camera.transform.position, camera.forward, out hit, 5f, layerMask))
+                if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5f, layerMask))
                 {
                     if (!hit.collider.isTrigger)
                     {

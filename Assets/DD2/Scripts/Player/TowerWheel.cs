@@ -33,10 +33,12 @@ namespace DD2
                 towerButtons.Add(temp);
                 temp.Button.onClick.AddListener(() =>
                 {
-                    buildTower.Begin(tower);
-                    canvas.enabled = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    if (buildTower.Begin(tower))
+                    {
+                        canvas.enabled = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
+                    }                    
                 });
             }
         }
@@ -46,6 +48,13 @@ namespace DD2
             canvas.enabled = true;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+        }
+
+        public void Cancel()
+        {
+            canvas.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

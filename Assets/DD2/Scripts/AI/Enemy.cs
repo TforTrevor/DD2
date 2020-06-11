@@ -4,7 +4,6 @@ using UnityEngine;
 using MEC;
 using UnityEngine.AI;
 using DD2.Abilities;
-using UnityEditor.Animations;
 
 namespace DD2.AI
 {
@@ -159,12 +158,12 @@ namespace DD2.AI
             }            
         }
 
-        void Update()
-        {
-            if (animator != null)
-            {
-                animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
-            }            
-        }
+        //void Update()
+        //{
+        //    if (animator != null)
+        //    {
+        //        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
+        //    }            
+        //}
     }
 }

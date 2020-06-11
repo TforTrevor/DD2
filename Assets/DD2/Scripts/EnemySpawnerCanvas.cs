@@ -54,7 +54,7 @@ namespace DD2
                     EnemySpawner spawner = pair.Key;
                     EnemySpawnerUI spawnerUI = pair.Value;
 
-                    Vector3 pos = Camera.main.WorldToScreenPoint(spawner.transform.position + Vector3.up * uiOffset);
+                    Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(spawner.transform.position + Vector3.up * uiOffset);
                     if (pos.z > 0 && pos.z < 15)
                     {
                         spawnerUI.ToggleVisibility(true);

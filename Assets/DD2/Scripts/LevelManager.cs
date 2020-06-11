@@ -8,6 +8,7 @@ namespace DD2
 {
     public class LevelManager : Singleton<LevelManager>
     {
+        [SerializeField] new Camera camera;
         [SerializeField] [ReorderableList] List<Core> cores;
         [SerializeField] [ReorderableList] List<Wave> waves;
         [SerializeField] int currentWave = 0;
@@ -16,6 +17,7 @@ namespace DD2
         public List<Core> Cores { get => cores; private set => cores = value; }
         public int WaveCount { get => waves.Count; }
         public int CurrentWave { get => currentWave; private set => currentWave = value; }
+        public Camera Camera { get => camera; set => camera = value; }
 
         public event EventHandler<Wave> waveUpdated;
         public event EventHandler<int> waveStarted;

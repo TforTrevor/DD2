@@ -65,6 +65,12 @@ namespace DD2.AI
             
         }
 
+        public virtual void Sell(Player player)
+        {
+            player.GiveMana(Mathf.CeilToInt(CurrentHealth / Stats.MaxHealth * manaCost));
+            Die(null);
+        }
+
         public virtual void Build()
         {
             towerSummonGraphics.gameObject.SetActive(false);

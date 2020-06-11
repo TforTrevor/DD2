@@ -81,5 +81,10 @@ namespace DD2
             poolComponent.transform.position = new Vector3(0, -1000, 0);
             poolDictionary[key].Enqueue(poolComponent);
         }
+
+        public virtual int GetCount(string key)
+        {
+            return poolDictionary[key] != null ? poolDictionary[key].Count : 0;
+        }
     }
 }
