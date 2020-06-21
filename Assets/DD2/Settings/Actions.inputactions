@@ -30,17 +30,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SecondaryFire",
+                    "name": "PrimaryFire",
                     "type": "Button",
-                    "id": "c206c827-8ecb-479d-a661-4388133be1bd",
-                    "expectedControlType": "",
+                    "id": "95ee6682-b7d3-40a9-8b52-8fc72ca06a94",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "PrimaryFire",
+                    "name": "SecondaryFire",
                     "type": "Button",
-                    "id": "95ee6682-b7d3-40a9-8b52-8fc72ca06a94",
+                    "id": "c206c827-8ecb-479d-a661-4388133be1bd",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -193,17 +193,6 @@
                 },
                 {
                     "name": "",
-                    "id": "91115c7d-90b0-43b6-b135-aa29386890b5",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "PrimaryFire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a090313e-d725-457b-95f7-e2c80075ee8f",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -276,6 +265,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "SellTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "91115c7d-90b0-43b6-b135-aa29386890b5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "PrimaryFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

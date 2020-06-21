@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Vector3Variable moveVector;
     [SerializeField] Vector3Variable lookVector;
+    [SerializeField] GameEvent jump;
     [SerializeField] GameEvent secondaryFire;
     [SerializeField] GameEvent primaryFire;
     [SerializeField] GameEvent menu;
@@ -28,6 +29,11 @@ public class PlayerInput : MonoBehaviour
         lookVector.Value = value.Get<Vector2>();
     }
 
+    void OnJump(InputValue value)
+    {
+        jump.Raise();
+    }
+
     void OnAbility1()
     {
         ability1?.Raise();
@@ -43,7 +49,7 @@ public class PlayerInput : MonoBehaviour
         secondaryFire?.Raise();
     }
 
-    void OnPrimaryFire()
+    void OnPrimaryFire(InputValue value)
     {
         primaryFire?.Raise();
     }

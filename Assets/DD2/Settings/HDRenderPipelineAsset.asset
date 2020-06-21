@@ -190,9 +190,9 @@ MonoBehaviour:
     materialQuality: 0
   m_RenderPipelineSettings:
     supportShadowMask: 1
-    supportSSR: 1
+    supportSSR: 0
     supportSSAO: 1
-    supportSubsurfaceScattering: 1
+    supportSubsurfaceScattering: 0
     increaseSssSampleCount: 0
     supportVolumetrics: 1
     increaseResolutionOfVolumetrics: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
     lightLayerName5: Light Layer 5
     lightLayerName6: Light Layer 6
     lightLayerName7: Light Layer 7
-    supportDistortion: 1
+    supportDistortion: 0
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
     supportTransparentDepthPostpass: 1

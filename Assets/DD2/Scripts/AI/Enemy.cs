@@ -15,7 +15,6 @@ namespace DD2.AI
         [SerializeField] LayerMask groundedMask;
         [SerializeField] float ragdollTime;
         [SerializeField] bool isRagdolled;
-        [SerializeField] Animator animator;
 
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;
@@ -43,15 +42,18 @@ namespace DD2.AI
 
         void RandomizeStats()
         {
-            //Stats.MaxHealth += Random.Range(-10, 10);
-            if (Random.value > 0.5f)
+            if (Stats != null)
             {
-                Stats.LightningResist = 1000;
-            }
-            else
-            {
-                Stats.LightningResist = 0;
-            }
+                //Stats.MaxHealth += Random.Range(-10, 10);
+                if (Random.value > 0.5f)
+                {
+                    Stats.LightningResist = 1000;
+                }
+                else
+                {
+                    Stats.LightningResist = 0;
+                }
+            }            
         }
 
         public virtual void Ragdoll()

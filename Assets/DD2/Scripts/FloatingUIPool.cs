@@ -16,7 +16,8 @@ namespace DD2
                 for (int i = 0; i < pool.size; i++)
                 {
                     FloatingUI poolObject = Instantiate(pool.prefab, transform);
-                    poolObject.transform.localScale = Vector3.zero;
+                    //poolObject.transform.localScale = Vector3.zero;
+                    poolObject.ToggleCanvas(false);
                     if (poolObject != null)
                     {
                         queue.Enqueue(poolObject);
@@ -56,8 +57,11 @@ namespace DD2
                 return;
             }
 
-            poolComponent.transform.localScale = Vector3.zero;
-            poolDictionary[key].Enqueue(poolComponent);
+            //poolComponent.transform.localScale = Vector3.zero;
+            poolComponent.ToggleCanvas(false, () =>
+            {
+                poolDictionary[key].Enqueue(poolComponent);
+            });            
         }
     }
 }

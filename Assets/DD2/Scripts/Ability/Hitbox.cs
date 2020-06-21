@@ -15,12 +15,12 @@ namespace DD2.Abilities
         [SerializeField] float repeatDelay;
         [SerializeField] int maxCollisions = 100;
         List<Collider> repeatList = new List<Collider>();
-        Collider[] hitColliders;
-        int hitCollidersCount;
         Collider[] results;
         int resultsCount;
         Collider[] returnResults;
         int returnResultsCount;
+        Collider[] removeResults;
+        int removeResultsCount;
 
         SphereCollider sphereCollider;
         BoxCollider boxCollider;
@@ -34,8 +34,8 @@ namespace DD2.Abilities
         Hitbox()
         {
             results = new Collider[MaxCollisions];
-            hitColliders = new Collider[MaxCollisions];
             returnResults = new Collider[MaxCollisions];
+            removeResults = new Collider[MaxCollisions];
             //repeatList.Capacity = maxCollisions;
         }
 
@@ -59,8 +59,6 @@ namespace DD2.Abilities
         {
             Util.Utilities.ClearArray(this.returnResults, returnResultsCount);
             Util.Utilities.ClearArray(results, resultsCount);
-            Util.Utilities.ClearArray(hitColliders, hitCollidersCount);
-            hitCollidersCount = 0;
             returnResultsCount = 0;
 
             if (hitboxShape == Shape.Sphere)
@@ -71,35 +69,27 @@ namespace DD2.Abilities
                 }
                 
                 resultsCount = Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * HitboxObject.transform.lossyScale.x, results, layerMask);
-                for (int i = 0; i < results.Length; i++)
-                {
-                    if (results[i] != null)
-                    {
-                        hitColliders[hitCollidersCount] = results[i];
-                        hitCollidersCount++;
-                    }
-                }
-                //hitColliders.AddRange(results);
-                //hitColliders.AddRange(Physics.OverlapSphere(position, sphereCollider.radius * hitboxObject.transform.lossyScale.x, layerMask));
             }
 
-            if (hitCollidersCount > 0)
+            if (resultsCount > 0)
             {
-                for (int i = 0; i < hitCollidersCount; i++)
+                for (int i = 0; i < resultsCount; i++)
                 {
-                    if (!repeatList.Contains(hitColliders[i]) && hitColliders[i] != null)
+                    if (!repeatList.Contains(results[i]) && results[i] != null)
                     {
-                        this.returnResults[returnResultsCount] = hitColliders[i];
+                        this.returnResults[returnResultsCount] = results[i];
                         returnResultsCount++;
                     }
                 }
                 if (returnResultsCount > 0)
                 {
+                    repeatList.AddRange(this.returnResults);
                     for (int i = 0; i < returnResultsCount; i++)
                     {
-                        repeatList.Add(this.returnResults[i]);
-                        Timing.RunCoroutine(RemoveRoutine(this.returnResults, returnResultsCount));
+                        removeResults[removeResultsCount] = this.returnResults[i];
+                        removeResultsCount++;
                     }
+                    Timing.RunCoroutine(RemoveRoutine(removeResults, returnResultsCount));
                 }
             }
 
@@ -124,6 +114,20 @@ namespace DD2.Abilities
             {
                 repeatList.Remove(colliders[i]);
             }
+            int newCount = 0;
+            int index = 0;
+            while (count + index < removeResultsCount && colliders[count + index] != null)
+            {
+                colliders[index] = colliders[count + index];
+                colliders[count + index] = null;
+                newCount++;
+                index++;
+            }
+            for (int i = index; i < count; i++)
+            {
+                colliders[i] = null;
+            }
+            removeResultsCount = newCount;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace DD2
 
         [SerializeField] protected Transform fireTransform;
         [ReadOnly] [SerializeField] private bool isGrounded;
+        [SerializeField] Animator animator;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
 
         public event EventHandler<float> healthUpdated;
@@ -36,6 +37,7 @@ namespace DD2
         public int CurrentMana { get => currentMana; protected set => currentMana = value; }
         public bool IsGrounded { get => isGrounded; protected set => isGrounded = value; }
         public Collider[] Colliders { get => colliders; protected set => colliders = value; }
+        public Animator Animator { get => animator; private set => animator = value; }
 
         protected virtual void Awake()
         {
@@ -45,7 +47,8 @@ namespace DD2
             {
                 abilities[i].SetEntity(this);
             }
-            Stats = new InstancedStats(stats);
+            if (stats != null)
+                Stats = new InstancedStats(stats);
         }
 
         protected virtual void Start()

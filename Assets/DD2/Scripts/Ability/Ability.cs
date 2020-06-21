@@ -45,7 +45,7 @@ namespace DD2.Abilities
         
         protected Entity entity;
 
-        public float ToggleTickRate { get => toggleTickRate; set => toggleTickRate = value; }
+        public float ToggleTickRate { get => toggleTickRate; private set => toggleTickRate = value; }
 
         protected virtual void Awake()
         {
@@ -54,20 +54,6 @@ namespace DD2.Abilities
 
         public virtual void UseAbility(Entity target, object payload)
         {
-            ////Input buffering
-            //if (onCooldown || isUsing)
-            //{
-            //    if (bufferInput)
-            //    {
-            //        isBuffered = true;
-            //        Timing.KillCoroutines(bufferHandle);
-            //        bufferHandle = Timing.CallDelayed(bufferTime, () =>
-            //        {
-            //            isBuffered = false;
-            //        });
-            //    }
-            //}
-
             if (!onCooldown)
             {
                 //Toggle ability
@@ -79,7 +65,7 @@ namespace DD2.Abilities
                     }
                     else
                     {
-                        toggleState = !toggleState;
+                        toggleState = true;
                     }
                     if (toggleState)
                     {
@@ -91,8 +77,10 @@ namespace DD2.Abilities
                 {
                     isUsing = true;
                     StartAbility(target, payload);
+                    Tick(target, payload);
+                    EndAbility(target, payload);
                 }
-            }            
+            }
         }
 
         protected IEnumerator<float> ToggleRoutine(Entity target, object payload)

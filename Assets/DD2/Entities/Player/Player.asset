@@ -16,7 +16,7 @@ MonoBehaviour:
   maxMana: 1000
   attackDamage: 0
   attackSpeed: 0
-  moveSpeed: 5
+  moveSpeed: 4
   presence: 0
   physicalResist: 0
   fireResist: 0

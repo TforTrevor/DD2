@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD2.Actions;
 using DD2.SOArchitecture;
+using DD2.Abilities;
 
 namespace DD2
 {
     public class Player : Entity
     {
-        [SerializeField] Action primaryFire;
+        [SerializeField] Ability primaryFire;
         [SerializeField] Action secondaryFire;
         [SerializeField] Action ability1;
         [SerializeField] Action ability2;
@@ -58,14 +59,9 @@ namespace DD2
             }
         }
 
-        public void DoPrimaryFire()
+        public void DoPrimaryFire(bool value)
         {
-            primaryFire?.DoAction(null, this, null);
-        }
-
-        public void SetPrimaryFire(Action action)
-        {
-            primaryFire = action;
+            primaryFire?.UseAbility(this, null);
         }
 
         public void DoSecondaryFire()
@@ -123,6 +119,14 @@ namespace DD2
             movement.ToggleLook(value);
             camera.ToggleLook(value);
         }
+
+        void Update()
+        {
+            Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
+            Animator.SetFloat("Blend_X", velocity.x / Stats.MoveSpeed);
+            Animator.SetFloat("Blend_Y", velocity.z / Stats.MoveSpeed);
+            Animator.SetBool("Is_Moving", movement.IsMoving);
+            Animator.SetBool("Is_Grounded", movement.IsGrounded);
+        }
     }
 }
-

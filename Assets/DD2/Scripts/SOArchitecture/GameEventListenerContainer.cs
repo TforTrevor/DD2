@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace DD2.SOArchitecture {
+namespace DD2.SOArchitecture 
+{
     [System.Serializable]
     public class GameEventListenerContainer
     {

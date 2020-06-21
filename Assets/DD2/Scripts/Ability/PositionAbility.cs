@@ -9,7 +9,7 @@ namespace DD2.Abilities
     public class PositionAbility : HitboxAbility
     {
         [SerializeField] float radius;
-        [SerializeField] string objectKey;
+        [SerializeField] Projectile projectile;
         Collider[] collisions;
         int maxCollisions = 0;
 
@@ -95,11 +95,11 @@ namespace DD2.Abilities
 
         void CreateProjectile(Entity target)
         {
-            Projectile projectile = ProjectilePool.Instance.GetObject(objectKey);
+            Projectile projectile = ProjectilePool.Instance.GetObject(this.projectile.PoolKey);
             if (projectile != null)
             {
                 projectile.transform.position = GetFirePosition();
-                projectile.Initialize(target, objectKey);
+                projectile.Initialize(target.transform, null);
             }
         }
     }

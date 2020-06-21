@@ -7,10 +7,8 @@ namespace DD2.UI
 {
     public class FloatingUICanvas : MonoBehaviour
     {
-        [SerializeField] HealthBar healthBarPrefab;
+        [SerializeField] protected string poolKey;
         [SerializeField] float maxDistance;
-        [SerializeField] float maxSizeDistance;
-        [SerializeField] string poolKey;
         [SerializeField] LayerMask layerMask;
 
         Dictionary<Transform, FloatingUI> floatingUI = new Dictionary<Transform, FloatingUI>();
@@ -80,32 +78,21 @@ namespace DD2.UI
                 Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(transform.position + Vector3.up * floating.HeightOffset);
                 if (pos.z > maxDistance || pos.z < 0)
                 {
-                    floating.Canvas.enabled = false;
+                    floating.ToggleCanvas(false);
                 }
                 else
                 {
-                    floating.Canvas.enabled = true;
-                    floating.Canvas.sortingOrder = (int)(pos.z * -10);
+                    floating.ToggleCanvas(true);
+                    floating.SortingGroup.sortingOrder = (int)(pos.z * -10);
+                    //floating.Canvas.sortingOrder = (int)(pos.z * -10);
                     floating.transform.position = pos;
-                    float ratio = Util.Utilities.Remap(pos.z, maxDistance, maxSizeDistance, 0, 1);
-                    floating.transform.localScale = new Vector3(ratio, ratio, 1);
                 }
             }
         }
 
         protected virtual FloatingUI GetFloatingUI(Transform transform)
         {
-            Entity entity = transform.GetComponent<Entity>();
-            if (entity != null)
-            {
-                HealthBar healthbar = (HealthBar)FloatingUIPool.Instance.GetObject(poolKey);
-                if (healthbar != null)
-                {
-                    healthbar.SetEntity(entity);
-                    return healthbar;
-                }                
-            }
-            return null;
+            return FloatingUIPool.Instance.GetObject(poolKey);
         }
 
         void OnDestroy()
