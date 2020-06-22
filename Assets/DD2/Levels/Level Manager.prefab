@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7088168222625471301}
   - component: {fileID: 806832901}
+  - component: {fileID: 2830449629586393168}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -44,7 +45,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  camera: {fileID: 0}
   cores:
   - {fileID: 0}
   waves:
   - {fileID: 0}
+  currentWave: 0
+  waveInProgress: 0
+--- !u!114 &2830449629586393168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: StartWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: c35f358c2c5f4be4ab2cdf5fe7f52cd1, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}

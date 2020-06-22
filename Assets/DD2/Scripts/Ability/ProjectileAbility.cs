@@ -14,8 +14,8 @@ namespace DD2.Abilities
             Projectile projectile = ProjectilePool.Instance.GetObject(this.projectile.PoolKey);
             if (projectile != null)
             {
-                projectile.transform.position = entity.GetFirePosition();
-                projectile.Initialize(entity.GetForward(), () =>
+                projectile.transform.position = entity.FireTransform.position;
+                projectile.Initialize(entity.FireTransform.forward, () =>
                 {
                     hitbox.UseAbility(projectile.Entity, payload);
                 });

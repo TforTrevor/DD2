@@ -170,7 +170,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   multiTarget: 0
-  projectileKey: Projectile
+  projectile: {fileID: 2256803108965906256, guid: 08aa87522ce98b54badbdd4a5c837586,
+    type: 3}
 --- !u!54 &8703945622503889140
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   isAlive: 0
   fireTransform: {fileID: 1453842552}
   isGrounded: 0
+  animator: {fileID: 269391033449375477}
   abilities:
   - {fileID: 4260507562098545740}
   target: {fileID: 0}
@@ -230,7 +232,6 @@ MonoBehaviour:
     m_Bits: 512
   ragdollTime: 1
   isRagdolled: 0
-  animator: {fileID: 269391033449375477}
 --- !u!114 &4281914593746860931
 MonoBehaviour:
   m_ObjectHideFlags: 0

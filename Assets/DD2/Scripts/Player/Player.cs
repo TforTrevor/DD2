@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DD2.Actions;
-using DD2.SOArchitecture;
 using DD2.Abilities;
+using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
@@ -13,11 +13,12 @@ namespace DD2
         [SerializeField] Action secondaryFire;
         [SerializeField] Action ability1;
         [SerializeField] Action ability2;
-        [SerializeField] Vector3Variable lookInput;
         [SerializeField] PlayerMovement movement;
         [SerializeField] new PlayerCamera camera;
         [SerializeField] float manaOrbRadius;
         [SerializeField] LayerMask manaOrbLayerMask;
+        [SerializeField] BoolVariable enableMove;
+        [SerializeField] BoolVariable enableLook;
 
         Collider[] manaOrbs;
         int manaOrbsCount;
@@ -111,20 +112,14 @@ namespace DD2
             ability2 = action;
         }
 
-        public Vector3Variable GetLookInput()
-        {
-            return lookInput;
-        }
-
         public void ToggleMovement(bool value)
         {
-            movement.ToggleMovement(value);
+            enableMove.Value = value;
         }
 
         public void ToggleLook(bool value)
         {
-            movement.ToggleLook(value);
-            camera.ToggleLook(value);
+            enableLook.Value = value;
         }
 
         void Update()

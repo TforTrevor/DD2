@@ -98,7 +98,7 @@ namespace DD2.Abilities
             Projectile projectile = ProjectilePool.Instance.GetObject(this.projectile.PoolKey);
             if (projectile != null)
             {
-                projectile.transform.position = GetFirePosition();
+                projectile.transform.position = entity.FireTransform.position;
                 projectile.Initialize(target.transform, null);
             }
         }

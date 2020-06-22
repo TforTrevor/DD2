@@ -4,7 +4,7 @@ using UnityEngine;
 using DD2.AI;
 using NaughtyAttributes;
 using MEC;
-using DD2.SOArchitecture;
+using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
@@ -16,6 +16,7 @@ namespace DD2
         [SerializeField] float rotSensitivity;
         [SerializeField] LayerMask towerCollisionMask;
         [SerializeField] LayerMask trapCollisionMask;
+        [SerializeField] Vector2Variable lookInput;
 
         bool enableBuild;
         bool isUsing;
@@ -94,7 +95,7 @@ namespace DD2
         {
             player.ToggleLook(false);
             player.ToggleMovement(false);
-            handle = Timing.RunCoroutine(RotateRoutine(player.GetLookInput()));
+            handle = Timing.RunCoroutine(RotateRoutine());
         }
 
         void Build()
@@ -129,11 +130,11 @@ namespace DD2
             }
         }
 
-        IEnumerator<float> RotateRoutine(Vector3Variable mouseInput)
+        IEnumerator<float> RotateRoutine()
         {
             while (true)
             {
-                instance.transform.Rotate(Vector3.up, mouseInput.Value.x * Time.deltaTime * rotSensitivity);
+                instance.transform.Rotate(Vector3.up, lookInput.Value.x * Time.deltaTime * rotSensitivity);
                 CollisionCheck();
                 yield return Timing.WaitForOneFrame;
             }

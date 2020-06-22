@@ -17,7 +17,7 @@ namespace DD2
         [SerializeField] private float radius;
         [ReadOnly] [SerializeField] private bool isAlive;
 
-        [SerializeField] protected Transform fireTransform;
+        [SerializeField] private Transform fireTransform;
         [ReadOnly] [SerializeField] private bool isGrounded;
         [SerializeField] Animator animator;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
@@ -38,6 +38,7 @@ namespace DD2
         public bool IsGrounded { get => isGrounded; protected set => isGrounded = value; }
         public Collider[] Colliders { get => colliders; protected set => colliders = value; }
         public Animator Animator { get => animator; private set => animator = value; }
+        public Transform FireTransform { get => fireTransform; private set => fireTransform = value; }
 
         protected virtual void Awake()
         {
@@ -207,11 +208,6 @@ namespace DD2
         public virtual Vector3 GetForward()
         {
             return transform.forward;
-        }
-
-        public Vector3 GetFirePosition()
-        {
-            return fireTransform.position;
         }
     }
 }

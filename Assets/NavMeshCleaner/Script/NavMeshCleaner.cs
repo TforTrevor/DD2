@@ -24,7 +24,10 @@ public class NavMeshCleaner : MonoBehaviour
 
     void Reset()
     {
-        Undo.RecordObject(this, "Reset");
+        if (this != null)
+        {
+            Undo.RecordObject(this, "Reset");
+        }        
 
         for (int i = 0; i < m_Child.Count; i++)
         {
@@ -94,8 +97,8 @@ public class NavMeshCleaner : MonoBehaviour
 
         while (m_Child.Count > m.Length)
         {
-            Undo.DestroyObjectImmediate(m_Child[m_Child.Count-1]);
-            m_Child.RemoveAt(m_Child.Count-1);
+            Undo.DestroyObjectImmediate(m_Child[m_Child.Count - 1]);
+            m_Child.RemoveAt(m_Child.Count - 1);
         }
     }
 
@@ -450,6 +453,11 @@ public class NavMeshCleaner : MonoBehaviour
             Undo.undoRedoPerformed -= OnUndoOrRedo;
         }
 
+        void OnDestroy()
+        {
+            m_Target.Reset();
+        }
+
         void OnUndoOrRedo()
         {
             Repaint();
@@ -482,6 +490,7 @@ public class NavMeshCleaner : MonoBehaviour
 
             if (GUILayout.Button(t.HasMesh() ? "Recalculate" : "Calculate", GUILayout.Height(30.0f)))
             {
+                //t.Reset();
                 t.Build();
                 t.SetMeshVisible(true);
                 SceneView.RepaintAll();

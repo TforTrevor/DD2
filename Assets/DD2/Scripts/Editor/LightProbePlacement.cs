@@ -87,7 +87,7 @@ public class LightProbePlacement : EditorWindow {
                         for (int i = 1; i < layers; i++)
                         {
                             Vector3 temp = newProbe;
-                            temp += Vector3.up * layerHeight;
+                            temp += Vector3.up * layerHeight * i;
                             mergedProbes.Add(temp);
                         }
 

@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD2.SOArchitecture;
+using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] Stats stats;
-        [SerializeField] Vector3Variable moveInput;
-        [SerializeField] Vector3Variable lookInput;
+        [SerializeField] Vector2Variable moveInput;
+        [SerializeField] Vector2Variable lookInput;
+        [SerializeField] BoolVariable enableMove;
+        [SerializeField] BoolVariable enableLook;
         [SerializeField] float sensitivity;
         [SerializeField] float acceleration;
         [SerializeField] float jumpForce;
@@ -21,9 +23,6 @@ namespace DD2
         Rigidbody rb;
         bool isMoving;
         bool isGrounded;
-
-        bool enableMovement = true;
-        bool enableLook = true;
 
         public bool IsMoving { get => isMoving; private set => isMoving = value; }
         public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
@@ -41,11 +40,11 @@ namespace DD2
 
         void FixedUpdate()
         {
-            if (enableLook)
+            if (enableLook.Value)
             {
                 Rotate();
             }
-            if (enableMovement)
+            if (enableMove.Value)
             {
                 Move();
             }
@@ -125,16 +124,6 @@ namespace DD2
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
-        }
-
-        public void ToggleMovement(bool value)
-        {
-            enableMovement = value;
-        }
-
-        public void ToggleLook(bool value)
-        {
-            enableLook = value;
         }
     }
 }

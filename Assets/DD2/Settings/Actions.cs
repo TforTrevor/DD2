@@ -61,22 +61,6 @@ namespace DD2.Input
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""498a5b4d-94a8-42ae-bf71-9ed37e76d2e5"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Ready"",
-                    ""type"": ""Button"",
-                    ""id"": ""f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Ability1"",
                     ""type"": ""Button"",
                     ""id"": ""e770327e-f883-455d-b37b-73146efcd76d"",
@@ -89,6 +73,22 @@ namespace DD2.Input
                     ""type"": ""Button"",
                     ""id"": ""f23f0d7e-b920-487d-bc27-28b63033e5d7"",
                     ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""498a5b4d-94a8-42ae-bf71-9ed37e76d2e5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -188,7 +188,7 @@ namespace DD2.Input
                     ""name"": """",
                     ""id"": ""a7b14872-17a7-40f2-bf4d-e1d50aa9c1d3"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Jump"",
@@ -199,7 +199,7 @@ namespace DD2.Input
                     ""name"": """",
                     ""id"": ""d45fc395-283d-4ca7-a9f7-74b23be53f97"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""SecondaryFire"",
@@ -225,28 +225,6 @@ namespace DD2.Input
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Ready"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""50d9e7ee-3a69-4d9a-adb5-f31a07452759"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Ability1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fe73ab6b-341f-4c4c-8ad1-8aae5729a3b0"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Ability2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -293,6 +271,28 @@ namespace DD2.Input
                     ""action"": ""PrimaryFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50d9e7ee-3a69-4d9a-adb5-f31a07452759"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ability1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe73ab6b-341f-4c4c-8ad1-8aae5729a3b0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Ability2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -323,10 +323,10 @@ namespace DD2.Input
             m_Standard_Jump = m_Standard.FindAction("Jump", throwIfNotFound: true);
             m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
             m_Standard_SecondaryFire = m_Standard.FindAction("SecondaryFire", throwIfNotFound: true);
-            m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
-            m_Standard_Ready = m_Standard.FindAction("Ready", throwIfNotFound: true);
             m_Standard_Ability1 = m_Standard.FindAction("Ability1", throwIfNotFound: true);
             m_Standard_Ability2 = m_Standard.FindAction("Ability2", throwIfNotFound: true);
+            m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
+            m_Standard_Ready = m_Standard.FindAction("Ready", throwIfNotFound: true);
             m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
             m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
             m_Standard_SellTower = m_Standard.FindAction("SellTower", throwIfNotFound: true);
@@ -384,10 +384,10 @@ namespace DD2.Input
         private readonly InputAction m_Standard_Jump;
         private readonly InputAction m_Standard_PrimaryFire;
         private readonly InputAction m_Standard_SecondaryFire;
-        private readonly InputAction m_Standard_Menu;
-        private readonly InputAction m_Standard_Ready;
         private readonly InputAction m_Standard_Ability1;
         private readonly InputAction m_Standard_Ability2;
+        private readonly InputAction m_Standard_Menu;
+        private readonly InputAction m_Standard_Ready;
         private readonly InputAction m_Standard_BuildTower;
         private readonly InputAction m_Standard_RepairTower;
         private readonly InputAction m_Standard_SellTower;
@@ -400,10 +400,10 @@ namespace DD2.Input
             public InputAction @Jump => m_Wrapper.m_Standard_Jump;
             public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
             public InputAction @SecondaryFire => m_Wrapper.m_Standard_SecondaryFire;
-            public InputAction @Menu => m_Wrapper.m_Standard_Menu;
-            public InputAction @Ready => m_Wrapper.m_Standard_Ready;
             public InputAction @Ability1 => m_Wrapper.m_Standard_Ability1;
             public InputAction @Ability2 => m_Wrapper.m_Standard_Ability2;
+            public InputAction @Menu => m_Wrapper.m_Standard_Menu;
+            public InputAction @Ready => m_Wrapper.m_Standard_Ready;
             public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
             public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
             public InputAction @SellTower => m_Wrapper.m_Standard_SellTower;
@@ -431,18 +431,18 @@ namespace DD2.Input
                     @SecondaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
                     @SecondaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
                     @SecondaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
-                    @Menu.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Menu.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Menu.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Ready.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
-                    @Ready.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
-                    @Ready.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
                     @Ability1.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
                     @Ability1.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
                     @Ability1.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
                     @Ability2.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
                     @Ability2.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
                     @Ability2.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
+                    @Menu.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Menu.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Menu.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
+                    @Ready.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
+                    @Ready.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
+                    @Ready.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
                     @BuildTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
                     @BuildTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
                     @BuildTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
@@ -471,18 +471,18 @@ namespace DD2.Input
                     @SecondaryFire.started += instance.OnSecondaryFire;
                     @SecondaryFire.performed += instance.OnSecondaryFire;
                     @SecondaryFire.canceled += instance.OnSecondaryFire;
-                    @Menu.started += instance.OnMenu;
-                    @Menu.performed += instance.OnMenu;
-                    @Menu.canceled += instance.OnMenu;
-                    @Ready.started += instance.OnReady;
-                    @Ready.performed += instance.OnReady;
-                    @Ready.canceled += instance.OnReady;
                     @Ability1.started += instance.OnAbility1;
                     @Ability1.performed += instance.OnAbility1;
                     @Ability1.canceled += instance.OnAbility1;
                     @Ability2.started += instance.OnAbility2;
                     @Ability2.performed += instance.OnAbility2;
                     @Ability2.canceled += instance.OnAbility2;
+                    @Menu.started += instance.OnMenu;
+                    @Menu.performed += instance.OnMenu;
+                    @Menu.canceled += instance.OnMenu;
+                    @Ready.started += instance.OnReady;
+                    @Ready.performed += instance.OnReady;
+                    @Ready.canceled += instance.OnReady;
                     @BuildTower.started += instance.OnBuildTower;
                     @BuildTower.performed += instance.OnBuildTower;
                     @BuildTower.canceled += instance.OnBuildTower;
@@ -512,10 +512,10 @@ namespace DD2.Input
             void OnJump(InputAction.CallbackContext context);
             void OnPrimaryFire(InputAction.CallbackContext context);
             void OnSecondaryFire(InputAction.CallbackContext context);
-            void OnMenu(InputAction.CallbackContext context);
-            void OnReady(InputAction.CallbackContext context);
             void OnAbility1(InputAction.CallbackContext context);
             void OnAbility2(InputAction.CallbackContext context);
+            void OnMenu(InputAction.CallbackContext context);
+            void OnReady(InputAction.CallbackContext context);
             void OnBuildTower(InputAction.CallbackContext context);
             void OnRepairTower(InputAction.CallbackContext context);
             void OnSellTower(InputAction.CallbackContext context);

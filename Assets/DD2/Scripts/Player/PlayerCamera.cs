@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DD2.SOArchitecture;
+using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] Vector3Variable lookInput;
+        [SerializeField] Vector2Variable lookInput;
+        [SerializeField] BoolVariable enableLook;
         [SerializeField] float sensitivity;
         [SerializeField] float maxPitch;
         [SerializeField] float minPitch;
 
         bool shoulderView;
-        bool enableLook;
         float pitch;
 
         void Start()
@@ -21,12 +21,11 @@ namespace DD2
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             shoulderView = true;
-            enableLook = true;
         }
 
         void Update()
         {
-            if (shoulderView)
+            if (shoulderView && enableLook.Value)
             {
                 pitch -= lookInput.Value.y * sensitivity * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
@@ -58,11 +57,6 @@ namespace DD2
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-        }
-
-        public void ToggleLook(bool value)
-        {
-            enableLook = value;
         }
     }
 }

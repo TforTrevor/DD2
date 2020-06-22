@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using DD2.SOArchitecture;
+using UnityAtoms.BaseAtoms;
 
 public class PlayerInput : MonoBehaviour
 {
-    [SerializeField] Vector3Variable moveVector;
-    [SerializeField] Vector3Variable lookVector;
-    [SerializeField] GameEvent jump;
-    [SerializeField] GameEvent secondaryFire;
-    [SerializeField] UnityAtoms.BaseAtoms.BoolVariable primaryFire;
-    [SerializeField] GameEvent menu;
-    [SerializeField] GameEvent ready;
-    [SerializeField] GameEvent ability1;
-    [SerializeField] GameEvent ability2;
-    [SerializeField] GameEvent buildTower;
-    [SerializeField] GameEvent repairTower;
-    [SerializeField] GameEvent sellTower;
+    [SerializeField] Vector2Variable moveVector;
+    [SerializeField] Vector2Variable lookVector;
+    [SerializeField] BoolVariable jump;
+    [SerializeField] BoolVariable primaryFire;
+    [SerializeField] BoolVariable secondaryFire;
+    [SerializeField] BoolVariable ability1;
+    [SerializeField] BoolVariable ability2;
+    [SerializeField] VoidEvent buildTower;
+    [SerializeField] VoidEvent repairTower;
+    [SerializeField] VoidEvent sellTower;
+    [SerializeField] VoidEvent menu;
+    [SerializeField] VoidEvent ready;
 
     void OnMove(InputValue value)
     {
@@ -31,28 +31,27 @@ public class PlayerInput : MonoBehaviour
 
     void OnJump(InputValue value)
     {
-        jump.Raise();
-    }
-
-    void OnAbility1()
-    {
-        ability1?.Raise();
-    }
-
-    void OnAbility2()
-    {
-        ability2?.Raise();
-    }
-
-    void OnSecondaryFire()
-    {
-        secondaryFire?.Raise();
+        jump.Value = value.isPressed;
     }
 
     void OnPrimaryFire(InputValue value)
     {
         primaryFire.Value = value.isPressed;
-        //primaryFire?.Raise();
+    }
+
+    void OnSecondaryFire(InputValue value)
+    {
+        secondaryFire.Value = value.isPressed;
+    }
+
+    void OnAbility1(InputValue value)
+    {
+        ability1.Value = value.isPressed;
+    }
+
+    void OnAbility2(InputValue value)
+    {
+        ability2.Value = value.isPressed;
     }
 
     void OnMenu()

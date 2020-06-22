@@ -115,11 +115,6 @@ namespace DD2.Abilities
             EndEffects();
         }
 
-        protected Vector3 GetFirePosition()
-        {
-            return entity.GetFirePosition();
-        }
-
         public void SetEntity(Entity entity)
         {
             this.entity = entity;
