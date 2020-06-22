@@ -28,7 +28,7 @@ namespace DD2.Abilities
         [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
         private float toggleTickRate;
         [ReadOnly] [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
-        protected bool toggleState;
+        private bool toggleState;
         //Input buffering
         [SerializeField] [BoxGroup("Input Buffering")]
         protected bool bufferInput;
@@ -46,6 +46,7 @@ namespace DD2.Abilities
         protected Entity entity;
 
         public float ToggleTickRate { get => toggleTickRate; private set => toggleTickRate = value; }
+        public bool ToggleState { get => toggleState; private set => toggleState = value; }
 
         protected virtual void Awake()
         {
@@ -61,13 +62,13 @@ namespace DD2.Abilities
                 {
                     if (isUsing)
                     {
-                        toggleState = false;
+                        ToggleState = false;
                     }
                     else
                     {
-                        toggleState = true;
+                        ToggleState = true;
                     }
-                    if (toggleState)
+                    if (ToggleState)
                     {
                         Timing.RunCoroutine(ToggleRoutine(target, payload));
                     }
@@ -86,7 +87,7 @@ namespace DD2.Abilities
         protected IEnumerator<float> ToggleRoutine(Entity target, object payload)
         {
             isUsing = true;
-            while (toggleState)
+            while (ToggleState)
             {
                 Tick(target, payload);
 
@@ -153,10 +154,5 @@ namespace DD2.Abilities
         }
         protected virtual void StartEffects() { }
         protected virtual void EndEffects() { }
-
-        public bool GetToggleState()
-        {
-            return toggleState;
-        }
     }
 }

@@ -67,11 +67,11 @@ namespace DD2.AI
 
         void UseAbility(bool value)
         {
-            if (!abilities[0].GetToggleState() && value)
+            if (!abilities[0].ToggleState && value)
             {
                 abilities[0].UseAbility(this, null);
             }
-            else if (abilities[0].GetToggleState() && !value)
+            else if (abilities[0].ToggleState && !value)
             {
                 abilities[0].UseAbility(this, null);
             }

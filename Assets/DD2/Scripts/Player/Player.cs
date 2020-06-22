@@ -61,7 +61,14 @@ namespace DD2
 
         public void DoPrimaryFire(bool value)
         {
-            primaryFire?.UseAbility(this, null);
+            if (!primaryFire.ToggleState && value)
+            {
+                primaryFire.UseAbility(this, null);
+            }
+            else if (primaryFire.ToggleState && !value)
+            {
+                primaryFire.UseAbility(this, null);
+            }
         }
 
         public void DoSecondaryFire()

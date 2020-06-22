@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] Vector3Variable lookVector;
     [SerializeField] GameEvent jump;
     [SerializeField] GameEvent secondaryFire;
-    [SerializeField] GameEvent primaryFire;
+    [SerializeField] UnityAtoms.BaseAtoms.BoolVariable primaryFire;
     [SerializeField] GameEvent menu;
     [SerializeField] GameEvent ready;
     [SerializeField] GameEvent ability1;
@@ -51,7 +51,8 @@ public class PlayerInput : MonoBehaviour
 
     void OnPrimaryFire(InputValue value)
     {
-        primaryFire?.Raise();
+        primaryFire.Value = value.isPressed;
+        //primaryFire?.Raise();
     }
 
     void OnMenu()

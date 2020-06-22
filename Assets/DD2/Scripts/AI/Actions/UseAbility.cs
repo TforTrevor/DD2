@@ -16,11 +16,11 @@ namespace DD2.AI.Actions
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
 
-            if (!entity.GetAbility(index).GetToggleState() && enable)
+            if (!entity.GetAbility(index).ToggleState && enable)
             {
                 entity.GetAbility(index).UseAbility(ctx.target, null);
             }
-            else if (entity.GetAbility(index).GetToggleState() && !enable)
+            else if (entity.GetAbility(index).ToggleState && !enable)
             {
                 entity.GetAbility(index).UseAbility(ctx.target, null);
             }

@@ -119,7 +119,7 @@ namespace DD2
         {
             foreach (Ability ability in abilities)
             {
-                if (ability.GetToggleState())
+                if (ability.ToggleState)
                 {
                     ability.UseAbility(null, null);
                 }
