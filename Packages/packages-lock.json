@@ -8,77 +8,77 @@
       "hash": "b46e9e8fde10448accd59ecabd09fbe296ef62f7"
     },
     "com.mambojambostudios.unity-atoms-base-atoms": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-core": {
-      "version": "4.2.0",
-      "depth": 0,
+      "version": "4.2.1",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-fsm": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0",
-        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1",
+        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-mobile": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-mono-hooks": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0",
-        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1",
+        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-scene-mgmt": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0",
-        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1",
+        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-tags": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0",
-        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1",
+        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },
     "com.mambojambostudios.unity-atoms-ui": {
-      "version": "4.2.0",
+      "version": "4.2.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.mambojambostudios.unity-atoms-core": "4.2.0",
-        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.0"
+        "com.mambojambostudios.unity-atoms-core": "4.2.1",
+        "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1"
       },
       "url": "https://registry.npmjs.org"
     },

@@ -44,15 +44,8 @@ namespace DD2.AI
         {
             if (Stats != null)
             {
-                //Stats.MaxHealth += Random.Range(-10, 10);
-                if (Random.value > 0.5f)
-                {
-                    Stats.LightningResist = 1000;
-                }
-                else
-                {
-                    Stats.LightningResist = 0;
-                }
+                Stats.RandomizeHealth(Stats.MaxHealth * 0.25f);
+                Stats.RandomizeResistances();
             }            
         }
 

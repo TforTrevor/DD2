@@ -24,14 +24,14 @@ namespace DD2
                 MaxCount += spawner.GetEnemyCount();
             }
             CurrentCount = MaxCount;
-            LevelManager.Instance.WaveUpdated(this);
+            LevelManager.Instance.UpdateWave();
         }
 
         public void DecrementCount(object sender, Entity entity)
         {
             CurrentCount--;
             entity.onDeath -= DecrementCount;
-            LevelManager.Instance.WaveUpdated(this);
+            LevelManager.Instance.UpdateWave();
             if (CurrentCount <= 0)
             {
                 LevelManager.Instance.EndWave();

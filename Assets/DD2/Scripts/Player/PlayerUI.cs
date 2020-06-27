@@ -23,19 +23,19 @@ namespace DD2
             manaSlider.maxValue = player.Stats.MaxMana;
             player.healthUpdated += UpdateHealth;
             player.manaUpdated += UpdateMana;
-            LevelManager.Instance.waveUpdated += UpdateEnemyCount;
-            LevelManager.Instance.waveStarted += UpdateWaveCount;
-            LevelManager.Instance.waveEnded += UpdateWaveCount;
-            LevelManager.Instance.waveStarted += (sender, amount) =>
-            {
-                enemyCountSlider.gameObject.SetActive(true);
-            };
-            LevelManager.Instance.waveEnded += (sender, amount) =>
-            {
-                enemyCountSlider.gameObject.SetActive(false);
-            };
+            //LevelManager.Instance.waveUpdated += UpdateEnemyCount;
+            //LevelManager.Instance.WaveStarted += UpdateWaveCount;
+            //LevelManager.Instance.WaveEnded += UpdateWaveCount;
+            //LevelManager.Instance.WaveStarted += (sender, amount) =>
+            //{
+            //    enemyCountSlider.gameObject.SetActive(true);
+            //};
+            //LevelManager.Instance.WaveEnded += (sender, amount) =>
+            //{
+            //    enemyCountSlider.gameObject.SetActive(false);
+            //};
             enemyCountSlider.gameObject.SetActive(false);
-            UpdateWaveCount(this, LevelManager.Instance.CurrentWave);
+            UpdateWaveCount();
         }
 
         void UpdateHealth(object sender, float amount)
@@ -50,16 +50,22 @@ namespace DD2
             manaText.text = player.CurrentMana + "/" + player.Stats.MaxMana;
         }
 
-        void UpdateEnemyCount(object sender, Wave wave)
+        public void ToggleEnemyCount(bool value)
         {
+            enemyCountSlider.gameObject.SetActive(value);
+        }
+
+        public void UpdateEnemyCount()
+        {
+            Wave wave = LevelManager.Instance.GetWave();
             enemyCountSlider.maxValue = wave.MaxCount;
             enemyCountSlider.value = wave.CurrentCount;
             enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
         }
 
-        void UpdateWaveCount(object sender, int count)
+        public void UpdateWaveCount()
         {
-            waveCountText.text = count + 1 + "/" + LevelManager.Instance.WaveCount;
+            waveCountText.text = LevelManager.Instance.CurrentWave + 1 + "/" + LevelManager.Instance.WaveCount;
         }
     }
 }

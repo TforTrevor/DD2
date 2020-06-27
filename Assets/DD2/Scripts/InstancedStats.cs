@@ -6,39 +6,23 @@ namespace DD2
 {
     public class InstancedStats
     {
-        float maxHealth;
-        int maxMana;
-        float attackDamage;
-        float attackSpeed;
-        float moveSpeed;
-        float presence;
+        public float MaxHealth;
+        public int MaxMana;
+        public float AttackDamage;
+        public float AttackSpeed;
+        public float MoveSpeed;
+        public float Presence;
 
-        float physicalResist;
-        float fireResist;
-        float lightningResist;
-        float energyResist;
-        float waterResist;
+        public float PhysicalResist;
+        public float FireResist;
+        public float LightningResist;
+        public float EnergyResist;
+        public float WaterResist;
 
-        float attackRange;
-        float attackAngle;
-        float searchRange;
-        float searchAngle;
-
-        public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-        public int MaxMana { get => maxMana; set => maxMana = value; }
-        public float AttackDamage { get => attackDamage; set => attackDamage = value; }
-        public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-        public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-        public float Presence { get => presence; set => presence = value; }
-        public float PhysicalResist { get => physicalResist; set => physicalResist = value; }
-        public float FireResist { get => fireResist; set => fireResist = value; }
-        public float LightningResist { get => lightningResist; set => lightningResist = value; }
-        public float EnergyResist { get => energyResist; set => energyResist = value; }
-        public float WaterResist { get => waterResist; set => waterResist = value; }
-        public float AttackRange { get => attackRange; set => attackRange = value; }
-        public float AttackAngle { get => attackAngle; set => attackAngle = value; }
-        public float SearchRange { get => searchRange; set => searchRange = value; }
-        public float SearchAngle { get => searchAngle; set => searchAngle = value; }
+        public float AttackRange;
+        public float AttackAngle;
+        public float SearchRange;
+        public float SearchAngle;
 
         public InstancedStats(Stats stats)
         {
@@ -57,6 +41,35 @@ namespace DD2
             AttackAngle = stats.AttackAngle;
             SearchRange = stats.SearchRange;
             SearchAngle = stats.SearchAngle;
+        }
+
+        public void RandomizeHealth(float range)
+        {
+            MaxHealth += Random.Range(-range, range);
+        }
+
+        public void RandomizeResistances()
+        {
+            int resistance = Random.Range(0, 16);
+            switch (resistance)
+            {
+                case 0:
+                    FireResist = 10000;
+                    break;
+                case 1:
+                    LightningResist = 10000;
+                    Debug.Log("Lightning");
+                    break;
+                case 2:
+                    EnergyResist = 10000;
+                    break;
+                case 3:
+                    WaterResist = 10000;
+                    break;
+                case 4:
+                    PhysicalResist = 10000;
+                    break;
+            }
         }
     }
 }

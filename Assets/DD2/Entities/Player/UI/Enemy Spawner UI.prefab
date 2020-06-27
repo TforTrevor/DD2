@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 3198099533774499845}
   - component: {fileID: 3198099533774499866}
   - component: {fileID: 1793741618}
+  - component: {fileID: 520819134277449289}
+  - component: {fileID: 4971542638870406022}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Enemy Spawner UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +77,7 @@ MonoBehaviour:
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -114,3 +116,79 @@ MonoBehaviour:
   spawnerUI: {fileID: 6266780263672654676, guid: 906c361678c533b4183cc3ad0a867b36,
     type: 3}
   uiOffset: 1
+--- !u!114 &520819134277449289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198099533774499864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1793741618}
+        m_TargetAssemblyTypeName: DD2.EnemySpawnerCanvas, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 5ffa5f0aa9e8a9f4fa6458b1e2b72517, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &4971542638870406022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198099533774499864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1793741618}
+        m_TargetAssemblyTypeName: DD2.EnemySpawnerCanvas, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: f3ec27885ab1e8a43b1fc5af4d46b8c6, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}

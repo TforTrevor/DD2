@@ -15,15 +15,15 @@ namespace DD2
 
         void Start()
         {
-            LevelManager.Instance.waveEnded += Show;
-            LevelManager.Instance.waveStarted += Hide;
-            Show(this, LevelManager.Instance.CurrentWave);
+            //LevelManager.Instance.WaveEnded += Show;
+            //LevelManager.Instance.WaveStarted += Hide;
+            Show();
         }
 
-        void Show(object sender, int waveIndex)
+        public void Show()
         {
             uiDictionary.Clear();
-            Wave wave = LevelManager.Instance.GetWave(waveIndex);
+            Wave wave = LevelManager.Instance.GetWave();
             foreach (EnemySpawner spawner in wave.Spawners)
             {
                 EnemySpawnerUI instance = Instantiate(spawnerUI, transform);
@@ -36,7 +36,7 @@ namespace DD2
             show = true;
         }
 
-        void Hide(object sender, int waveIndex)
+        public void Hide()
         {
             foreach (KeyValuePair<EnemySpawner, EnemySpawnerUI> pair in uiDictionary)
             {

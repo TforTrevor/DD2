@@ -154,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301605647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.000000029802322, y: 0.5, z: 0.25000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2857632314948048527}
@@ -479,6 +479,44 @@ MonoBehaviour:
     maxCollisions: 100
   oneTimeActions: []
   particleSystems: []
+--- !u!114 &29989543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444982270738377483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1444982270738377481}
+        m_TargetAssemblyTypeName: DD2.TowerWheel, Assembly-CSharp
+        m_MethodName: Build
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 5a407cd66159b0c41af652865147559b, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
 --- !u!114 &2591166049175459415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,25 +553,75 @@ MonoBehaviour:
     _eventInstancer: {fileID: 0}
     _variable: {fileID: 0}
     _variableInstancer: {fileID: 0}
---- !u!114 &4583212312677915585
+--- !u!114 &645805616086763740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444982270738377483}
+  m_GameObject: {fileID: 1444982271638110090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6ab7cbc45164d19b20476265c251c2, type: 3}
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _developerDescription: 
   _unityEventResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1444982270738377481}
-        m_TargetAssemblyTypeName: DD2.TowerWheel, Assembly-CSharp
-        m_MethodName: Build
+      - m_Target: {fileID: 3132772843747142235}
+        m_TargetAssemblyTypeName: DD2.PlayerUI, Assembly-CSharp
+        m_MethodName: UpdateWaveCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3132772843747142235}
+        m_TargetAssemblyTypeName: DD2.PlayerUI, Assembly-CSharp
+        m_MethodName: ToggleEnemyCount
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: f3ec27885ab1e8a43b1fc5af4d46b8c6, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &8959356858752165433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444982271638110090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3132772843747142235}
+        m_TargetAssemblyTypeName: DD2.PlayerUI, Assembly-CSharp
+        m_MethodName: UpdateEnemyCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -547,10 +635,50 @@ MonoBehaviour:
   _replayEventBufferOnRegister: 1
   _eventReference:
     _usage: 0
-    _event: {fileID: 11400000, guid: 97f5ec676989a6a41b017011e3e30b41, type: 2}
+    _event: {fileID: 11400000, guid: 9a5690a8b5725b74cbdcb86329f55106, type: 2}
     _eventInstancer: {fileID: 0}
-    _variable: {fileID: 0}
-    _variableInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &7520590109621452876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444982271638110090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3132772843747142235}
+        m_TargetAssemblyTypeName: DD2.PlayerUI, Assembly-CSharp
+        m_MethodName: ToggleEnemyCount
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 5ffa5f0aa9e8a9f4fa6458b1e2b72517, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
 --- !u!1 &1737770278620238964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1325,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a190f5a50ad1e9f44b70469966b7aa69, type: 3}
+--- !u!1 &1444982271638110090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 459180752402527293, guid: a190f5a50ad1e9f44b70469966b7aa69,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320343927519169463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3132772843747142235 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4119409940246176236, guid: a190f5a50ad1e9f44b70469966b7aa69,
+    type: 3}
+  m_PrefabInstance: {fileID: 1320343927519169463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444982271638110090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a2024c98a68fe45b6ac41c2f6384a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1444982271233479073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1271,15 +1417,15 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: dab03adc20e30e4429f27b873966d264, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b563d7b833f6ee6459a7adae777a2a8c, type: 3}
---- !u!4 &1407131639039309386 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b563d7b833f6ee6459a7adae777a2a8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1444982271233479073}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5000981380555566128 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: b563d7b833f6ee6459a7adae777a2a8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1444982271233479073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1407131639039309386 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b563d7b833f6ee6459a7adae777a2a8c,
     type: 3}
   m_PrefabInstance: {fileID: 1444982271233479073}
   m_PrefabAsset: {fileID: 0}
@@ -1433,12 +1579,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4508529016443494211, guid: 8eb269b529230004f82fa7855848922a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8eb269b529230004f82fa7855848922a, type: 3}
---- !u!1 &1444982270738377483 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4508529016443494210, guid: 8eb269b529230004f82fa7855848922a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3070356503664718921}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1444982270738377481 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4508529016443494208, guid: 8eb269b529230004f82fa7855848922a,
@@ -1451,6 +1591,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5da778707f41dd4b938d6b649766196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1444982270738377483 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4508529016443494210, guid: 8eb269b529230004f82fa7855848922a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3070356503664718921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4864931274030757873
 PrefabInstance:
   m_ObjectHideFlags: 0
