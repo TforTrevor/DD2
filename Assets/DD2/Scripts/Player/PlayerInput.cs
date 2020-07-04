@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] VoidEvent buildTower;
     [SerializeField] VoidEvent repairTower;
     [SerializeField] VoidEvent sellTower;
+    [SerializeField] VoidEvent upgradeTower;
     [SerializeField] VoidEvent menu;
     [SerializeField] VoidEvent ready;
 
@@ -77,5 +78,10 @@ public class PlayerInput : MonoBehaviour
     void OnSellTower()
     {
         sellTower?.Raise();
+    }
+
+    void OnUpgradeTower()
+    {
+        upgradeTower?.Raise();
     }
 }

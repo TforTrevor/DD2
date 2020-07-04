@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityAtoms.BaseAtoms;
+using Cinemachine;
 
 namespace DD2
 {
@@ -12,6 +13,8 @@ namespace DD2
         [SerializeField] float sensitivity;
         [SerializeField] float maxPitch;
         [SerializeField] float minPitch;
+        [SerializeField] CinemachineVirtualCamera shoulderCamera;
+        [SerializeField] CinemachineVirtualCamera topCamera;
 
         bool shoulderView;
         float pitch;
@@ -35,14 +38,22 @@ namespace DD2
 
         public void ShoulderView()
         {
-            transform.parent.localEulerAngles = Vector3.zero;
+            pitch = 0;
             shoulderView = true;
+            //transform.localEulerAngles = Vector3.zero;
+            shoulderCamera.Priority = 10;
+            topCamera.Priority = 0;
         }
 
-        public void BirdsEyeView()
+        public void TopView()
         {
-            transform.parent.localEulerAngles = new Vector3(0, 90, 0);
+            //pitch = 0;
             shoulderView = false;
+            //transform.localEulerAngles = new Vector3(0, 90, 0);
+            //transform.localEulerAngles = Vector3.zero;
+            topCamera.Priority = 10;
+            shoulderCamera.Priority = 0;
+            
         }
 
         public void ToggleCursorLock()

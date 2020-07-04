@@ -115,6 +115,14 @@ namespace DD2.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpgradeTower"",
+                    ""type"": ""Button"",
+                    ""id"": ""520f21c1-0f01-4883-9e0c-07e144503b67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -293,6 +301,17 @@ namespace DD2.Input
                     ""action"": ""Ability2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1630a0a0-f22c-4d13-991f-d9f13f769e78"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""UpgradeTower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -330,6 +349,7 @@ namespace DD2.Input
             m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
             m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
             m_Standard_SellTower = m_Standard.FindAction("SellTower", throwIfNotFound: true);
+            m_Standard_UpgradeTower = m_Standard.FindAction("UpgradeTower", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -391,6 +411,7 @@ namespace DD2.Input
         private readonly InputAction m_Standard_BuildTower;
         private readonly InputAction m_Standard_RepairTower;
         private readonly InputAction m_Standard_SellTower;
+        private readonly InputAction m_Standard_UpgradeTower;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -407,6 +428,7 @@ namespace DD2.Input
             public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
             public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
             public InputAction @SellTower => m_Wrapper.m_Standard_SellTower;
+            public InputAction @UpgradeTower => m_Wrapper.m_Standard_UpgradeTower;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -452,6 +474,9 @@ namespace DD2.Input
                     @SellTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
                     @SellTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
                     @SellTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
+                    @UpgradeTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
+                    @UpgradeTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
+                    @UpgradeTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -492,6 +517,9 @@ namespace DD2.Input
                     @SellTower.started += instance.OnSellTower;
                     @SellTower.performed += instance.OnSellTower;
                     @SellTower.canceled += instance.OnSellTower;
+                    @UpgradeTower.started += instance.OnUpgradeTower;
+                    @UpgradeTower.performed += instance.OnUpgradeTower;
+                    @UpgradeTower.canceled += instance.OnUpgradeTower;
                 }
             }
         }
@@ -519,6 +547,7 @@ namespace DD2.Input
             void OnBuildTower(InputAction.CallbackContext context);
             void OnRepairTower(InputAction.CallbackContext context);
             void OnSellTower(InputAction.CallbackContext context);
+            void OnUpgradeTower(InputAction.CallbackContext context);
         }
     }
 }

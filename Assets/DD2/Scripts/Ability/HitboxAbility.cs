@@ -12,7 +12,7 @@ namespace DD2.Abilities
         [SerializeField] [BoxGroup("Hitboxes")]
         protected float hitboxTickRate;
         [SerializeField] [BoxGroup("Hitboxes")]
-        protected bool showHitbox; 
+        protected bool showHitbox;
         [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
         protected Hitbox[] hitboxes;
         [SerializeField] [ReorderableList] [Expandable]
@@ -55,12 +55,14 @@ namespace DD2.Abilities
                 {
                     hitbox.HitboxObject.SetActive(true);
                     hitbox.HitboxObject.transform.position = target.GetPosition();
+                    hitbox.HitboxObject.transform.parent = null;
                 }
                 yield return Timing.WaitForSeconds(hitbox.Duration);
                 Timing.KillCoroutines(hitboxHandle);
                 if (showHitbox)
                 {
                     hitbox.HitboxObject.SetActive(false);
+                    hitbox.HitboxObject.transform.parent = transform;
                 }
             }
         }

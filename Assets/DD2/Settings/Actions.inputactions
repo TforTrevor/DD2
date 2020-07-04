@@ -100,6 +100,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "UpgradeTower",
+                    "type": "Button",
+                    "id": "520f21c1-0f01-4883-9e0c-07e144503b67",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -276,6 +284,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1630a0a0-f22c-4d13-991f-d9f13f769e78",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "UpgradeTower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI.Components;
+using UnityEngine.VFX;
 
 namespace DD2.AI
 {
@@ -15,7 +16,10 @@ namespace DD2.AI
         [SerializeField] Light summonLight;
         [SerializeField] protected MeshRenderer summonRenderer;
         [SerializeField] new Collider collider;
-        protected UtilityAIComponent aiComponent;        
+        [SerializeField] bool buildOnStart;
+        [SerializeField] VisualEffect upgradeEffect;
+        protected UtilityAIComponent aiComponent;
+        protected int level = 0;
         Color defaultColor;
         Color currentColor;
 
@@ -23,6 +27,7 @@ namespace DD2.AI
         public Color CurrentColor { get => currentColor; private set => currentColor = value; }
         public Color ErrorColor { get => errorColor; private set => errorColor = value; }
         public int ManaCost { get => manaCost; private set => manaCost = value; }
+        public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
 
         protected override void Awake()
         {
@@ -40,7 +45,11 @@ namespace DD2.AI
             if (collider != null)
             {
                 collider.isTrigger = true;
-            }            
+            }
+            if (buildOnStart)
+            {
+                Build();
+            }
         }
 
         public override void Respawn()
@@ -84,6 +93,12 @@ namespace DD2.AI
                 aiComponent.enabled = true;
             }                
             IsAlive = true;
+        }
+
+        public virtual void Upgrade()
+        {
+            Stats.TowerLevel();
+            level++;
         }
 
         protected virtual void Update()

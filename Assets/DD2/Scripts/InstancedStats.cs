@@ -58,7 +58,6 @@ namespace DD2
                     break;
                 case 1:
                     LightningResist = 10000;
-                    Debug.Log("Lightning");
                     break;
                 case 2:
                     EnergyResist = 10000;
@@ -70,6 +69,24 @@ namespace DD2
                     PhysicalResist = 10000;
                     break;
             }
+        }
+
+        public void TowerLevel()
+        {
+            float increase = 1.25f;
+            MaxHealth *= increase;
+            AttackDamage *= increase;
+            AttackSpeed *= increase;
+            Presence *= increase;
+            PhysicalResist *= increase;
+            FireResist *= increase;
+            LightningResist *= increase;
+            EnergyResist *= increase;
+            WaterResist *= increase;
+            AttackRange *= increase;
+            AttackAngle *= increase;
+            SearchRange *= increase;
+            SearchAngle *= increase;
         }
     }
 }
