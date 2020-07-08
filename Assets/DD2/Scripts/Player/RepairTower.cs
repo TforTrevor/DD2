@@ -7,43 +7,56 @@ using MEC;
 
 namespace DD2
 {
-    public class RepairTower : MonoBehaviour
+    public class RepairTower : TopDownCursor
     {
-        [SerializeField] Player player;
-        [SerializeField] LayerMask layerMask;
+        [SerializeField] LayerMask repairMask;
         [SerializeField] float healAmount;
 
-        CoroutineHandle handle;
+        CoroutineHandle repairHandle;
         bool isRepairing;
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             isRepairing = false;
         }
 
-        public void Begin()
+        protected override void Action()
         {
             if (isRepairing)
             {
-                Timing.KillCoroutines(handle);
+                Timing.KillCoroutines(repairHandle);
                 isRepairing = false;
             }
             else
             {
                 RaycastHit hit;
-                if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5f, layerMask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, repairMask))
                 {
                     if (!hit.collider.isTrigger)
                     {
                         Tower tower = hit.transform.GetComponent<Tower>();
                         if (tower != null)
                         {
-                            handle = Timing.RunCoroutine(RepairRoutine(tower));
+                            repairHandle = Timing.RunCoroutine(RepairRoutine(tower));
                             isRepairing = true;
+                            Cancel();
                         }
-                    }                    
+                    }
                 }
-            }            
+            }
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+            player.ToggleUpgrade(true);
+        }
+
+        protected override void Begin()
+        {
+            base.Begin();
+            player.ToggleUpgrade(false);
         }
 
         IEnumerator<float> RepairRoutine(Tower tower)

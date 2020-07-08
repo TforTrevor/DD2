@@ -5,32 +5,37 @@ using UnityEngine;
 
 namespace DD2
 {
-    public class SellTower : MonoBehaviour
+    public class SellTower : TopDownCursor
     {
-        [SerializeField] Player player;
-        [SerializeField] LayerMask layerMask;
+        [SerializeField] LayerMask sellMask;
 
-        bool enableRemove;
-
-        public void Begin()
+        protected override void Action()
         {
             RaycastHit hit;
-            if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5f, layerMask))
+            if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, sellMask))
             {
-                Tower tower = hit.collider.GetComponent<Tower>();
-                if (tower != null && tower.IsAlive)
+                if (!hit.collider.isTrigger)
                 {
-                    tower.Sell(player);
+                    Tower tower = hit.transform.GetComponent<Tower>();
+                    if (tower != null)
+                    {
+                        tower.Sell(player);
+                        Cancel();
+                    }
                 }
             }
         }
 
-        public void Continue()
+        public override void Cancel()
         {
-            if (enableRemove)
-            {
-                
-            }
+            base.Cancel();
+            player.ToggleRepair(true);
+        }
+
+        protected override void Begin()
+        {
+            base.Begin();
+            player.ToggleRepair(false);
         }
     }
 }

@@ -8,15 +8,13 @@ using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
-    public class BuildTower : MonoBehaviour
+    public class BuildTower : TopDownCursor
     {
-        [SerializeField] Player player;
-        [SerializeField] LayerMask mask;
+        [SerializeField] LayerMask buildMask;
         [SerializeField] Stage stage;
         [SerializeField] float rotSensitivity;
         [SerializeField] LayerMask towerCollisionMask;
         [SerializeField] LayerMask trapCollisionMask;
-        [SerializeField] Vector2Variable lookInput;
 
         bool enableBuild;
         bool isUsing;
@@ -29,19 +27,21 @@ namespace DD2
         {
             if (!isUsing && tower.ManaCost <= player.CurrentMana)
             {
+                Toggle();
                 stage = Stage.position;
                 isUsing = true;
                 enableBuild = true;
                 this.tower = tower;
-                Continue();
+                Continue(false);
                 return true;
             }
             return false;
         }
 
-        public void Continue()
+        public void Continue(bool value)
         {
-            if (enableBuild && isUsing)
+            //Only call on mouse up event
+            if (enableBuild && isUsing && !value)
             {
                 if (stage == Stage.position)
                 {
@@ -61,19 +61,18 @@ namespace DD2
             }
         }
 
-        public void Cancel()
+        public override void Cancel()
         {
+            base.Cancel();
             if (isUsing && instance != null)
             {
                 Timing.KillCoroutines(handle);
                 EntityPool.Instance.ReturnObject(instance.ObjectPoolKey, instance);
-                if (stage == Stage.rotation)
-                {
-                    player.ToggleLook(true);
-                    player.ToggleMovement(true);
-                }
+                player.ToggleLook(true);
+                player.ToggleMovement(true);
                 isUsing = false;
                 tower = null;
+                instance = null;
             }
         }
 
@@ -88,7 +87,6 @@ namespace DD2
                 instance.gameObject.SetActive(true);
                 handle = Timing.RunCoroutine(MoveRoutine());
             }
-
         }
 
         void Rotation()
@@ -101,12 +99,13 @@ namespace DD2
         void Build()
         {
             instance.Build();
+            player.SpendMana(tower.ManaCost);
             player.ToggleLook(true);
             player.ToggleMovement(true);
-            player.SpendMana(tower.ManaCost);
-            instance = null;
             isUsing = false;
             tower = null;
+            instance = null;
+            base.Cancel();
         }
 
         IEnumerator<float> MoveRoutine()
@@ -114,14 +113,14 @@ namespace DD2
             while (true)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5, mask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, buildMask))
                 {
                     instance.transform.position = hit.point;
                     CollisionCheck();
                 }
                 else
                 {
-                    instance.transform.position = LevelManager.Instance.Camera.transform.position + LevelManager.Instance.Camera.transform.forward * 5;
+                    //instance.transform.position = LevelManager.Instance.Camera.transform.position + LevelManager.Instance.Camera.transform.forward * 5;
                     instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                 }

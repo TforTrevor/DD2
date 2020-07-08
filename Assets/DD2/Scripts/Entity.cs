@@ -146,6 +146,11 @@ namespace DD2
             EntityPool.Instance.ReturnObject(ObjectPoolKey, this);
         }
 
+        public virtual Vector3 GetVelocity()
+        {
+            return rb.velocity;
+        }
+
         public virtual void AddForce(Vector3 force, ForceMode forceMode)
         {
             rb.AddForce(force, forceMode);

@@ -19,6 +19,8 @@ namespace DD2
         [SerializeField] LayerMask manaOrbLayerMask;
         [SerializeField] BoolVariable enableMove;
         [SerializeField] BoolVariable enableLook;
+        [SerializeField] BoolVariable enableUpgrade;
+        [SerializeField] BoolVariable enableRepair;
 
         Collider[] manaOrbs;
         int manaOrbsCount;
@@ -120,6 +122,16 @@ namespace DD2
         public void ToggleLook(bool value)
         {
             enableLook.Value = value;
+        }
+
+        public void ToggleUpgrade(bool value)
+        {
+            enableUpgrade.Value = value;
+        }
+
+        public void ToggleRepair(bool value)
+        {
+            enableRepair.Value = value;
         }
 
         void Update()

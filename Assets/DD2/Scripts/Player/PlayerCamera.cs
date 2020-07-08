@@ -21,6 +21,7 @@ namespace DD2
 
         void Start()
         {
+            shoulderCamera.transform.parent = null;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             shoulderView = true;

@@ -4,27 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using DD2.AI;
 using UnityEngine.VFX;
+using UnityAtoms.BaseAtoms;
 
 namespace DD2
 {
-    public class UpgradeTower : MonoBehaviour
+    public class UpgradeTower : TopDownCursor
     {
-        [SerializeField] Player player;
         [SerializeField] int manaCost;
         [SerializeField] float upgradeTime;
-        [SerializeField] LayerMask layerMask;
-        [SerializeField] VisualEffect upgradeEffect;
+        [SerializeField] LayerMask upgradeMask;
 
         CoroutineHandle upgradeHandle;
         bool isUpgrading;
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             isUpgrading = false;
         }
 
-        public void Begin()
+        protected override void Action()
         {
+            player.ToggleRepair(false);
             if (isUpgrading)
             {
                 Timing.KillCoroutines(upgradeHandle);
@@ -33,7 +34,7 @@ namespace DD2
             else if (player.CurrentMana >= manaCost)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward, out hit, 5f, layerMask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, upgradeMask))
                 {
                     if (!hit.collider.isTrigger)
                     {
@@ -42,10 +43,23 @@ namespace DD2
                         {
                             upgradeHandle = Timing.RunCoroutine(UpgradeRoutine(tower));
                             isUpgrading = true;
+                            Cancel();
                         }
                     }
                 }
             }
+        }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+            player.ToggleRepair(true);
+        }
+
+        protected override void Begin()
+        {
+            base.Begin();
+            player.ToggleRepair(false);
         }
 
         IEnumerator<float> UpgradeRoutine(Tower tower)
