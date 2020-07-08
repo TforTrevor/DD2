@@ -19,10 +19,13 @@ namespace DD2
         [SerializeField] LayerMask groundedMask;
         [SerializeField] float groundedOffset;
         [SerializeField] float groundedLength;
+        [SerializeField] float groundedRadius;
 
         Rigidbody rb;
         bool isMoving;
         bool isGrounded;
+        int currentJumps;
+        int maximumJumps = 1;
 
         public bool IsMoving { get => isMoving; private set => isMoving = value; }
         public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
@@ -50,11 +53,11 @@ namespace DD2
             }
             rb.AddForce(Vector3.down * 9.81f);
 
-            Debug.DrawRay(transform.position + Vector3.up * groundedOffset, Vector3.down * groundedLength, Color.red);
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + Vector3.up * groundedOffset, Vector3.down, out hit, groundedLength, groundedMask))
+            if (Physics.SphereCast(transform.position + new Vector3(0, groundedOffset, 0), groundedRadius, Vector3.down, out hit, groundedLength, groundedMask)) 
             {
                 IsGrounded = true;
+                currentJumps = 0;
             }
             else
             {
@@ -118,11 +121,13 @@ namespace DD2
             //transform.Rotate(Vector3.up, lookInput.Value.x * sensitivity * Time.deltaTime);
         }
 
-        public void Jump()
+        public void Jump(bool value)
         {
-            if (IsGrounded)
+            //Only call when jump is pressed down
+            if (IsGrounded && value && currentJumps < maximumJumps)
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                currentJumps++;
             }
         }
     }
