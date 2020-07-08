@@ -28,14 +28,24 @@ namespace DD2.AI.Actions
             for (int i = 0; i < colliders.Length; i++)
             {
                 Entity temp = colliders[i].GetComponent<Entity>();
-                float enemyDistance = Vector3.Distance(entity.GetPosition(), temp.GetPosition())
+                if (temp != null)
+                {
+                    float enemyDistance = Vector3.Distance(entity.GetPosition(), temp.GetPosition())
                                         - (includeRadius ? entity.Radius : 0)
                                         - (includeTargetRadius ? temp.Radius : 0);
-                if (enemyDistance < range)
-                {
-                    if (useCone)
+                    if (enemyDistance < range)
                     {
-                        if (Util.Utilities.IsColliderInCone(colliders[i], entity.transform, angle, range, layerMasks))
+                        if (useCone)
+                        {
+                            if (Util.Utilities.IsColliderInCone(colliders[i], entity.transform, angle, range, layerMasks))
+                            {
+                                if (temp != null)
+                                {
+                                    ctx.targetList.Add(temp);
+                                }
+                            }
+                        }
+                        else
                         {
                             if (temp != null)
                             {
@@ -43,14 +53,7 @@ namespace DD2.AI.Actions
                             }
                         }
                     }
-                    else
-                    {
-                        if (temp != null) 
-                        {
-                            ctx.targetList.Add(temp);
-                        }
-                    }                    
-                }
+                }                
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using UnityEngine.VFX;
 
 namespace DD2
 {
@@ -13,24 +14,38 @@ namespace DD2
         [SerializeField] float radius;
         [SerializeField] Entity entity;
         [SerializeField] LayerMask layerMask;
+        [SerializeField] VisualEffect vfx;
+        [SerializeField] Transform model;
+        [SerializeField] float vfxLingerTime;
 
         public string PoolKey { get => poolKey; private set => poolKey = value; }
         public Entity Entity { get => entity; private set => entity = value; }
 
-        public void Initialize(Transform target, System.Action callback)
+        CoroutineHandle vfxHandle;
+
+        void Initialize()
         {
             gameObject.SetActive(true);
+            model.gameObject.SetActive(true);
+            vfx.Play();
+            Timing.KillCoroutines(vfxHandle);
+        }
+
+        public void Initialize(Transform target, System.Action callback)
+        {
+            Initialize();
             Timing.RunCoroutine(MoveRoutine(target, callback));
         }
 
         public void Initialize(Vector3 direction, System.Action callback)
         {
-            gameObject.SetActive(true);
+            Initialize();
             Timing.RunCoroutine(MoveRoutine(direction, callback));
         }
 
         IEnumerator<float> MoveRoutine(Transform target, System.Action callback)
         {
+
             while (Vector3.Distance(transform.position, target.transform.position) > endDistance)
             {
                 Vector3 direction = Vector3.Normalize(target.transform.position - transform.position);
@@ -40,7 +55,12 @@ namespace DD2
                 yield return Timing.WaitForOneFrame;
             }
 
-            ProjectilePool.Instance.ReturnObject(PoolKey, this);
+            model.gameObject.SetActive(false);
+            vfx.Stop();
+            vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
+            {
+                ProjectilePool.Instance.ReturnObject(PoolKey, this);
+            });
         }
 
         IEnumerator<float> MoveRoutine(Vector3 direction, System.Action callback)
@@ -65,9 +85,13 @@ namespace DD2
                 yield return Timing.WaitForOneFrame;
             }
 
-            Vector3 position = transform.position;
-            ProjectilePool.Instance.ReturnObject(PoolKey, this);
-            entity.transform.position = position;
+            entity.transform.position = transform.position;
+            model.gameObject.SetActive(false);
+            vfx.Stop();
+            vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
+            {
+                ProjectilePool.Instance.ReturnObject(PoolKey, this);
+            });
         }
     }
 }

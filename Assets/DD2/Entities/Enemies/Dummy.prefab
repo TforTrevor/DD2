@@ -338,14 +338,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76abf17f922c31242ab403c5c78a8012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPoolKey: Enemy
-  stats: {fileID: 11400000, guid: 7f910af96db63254bb7b1a14f209b737, type: 2}
+  objectPoolKey: Dummy
+  stats: {fileID: 11400000, guid: f0e17a87cc1177043a57efdf1720beca, type: 2}
   currentHealth: 0
   currentMana: 0
   radius: 0.5
   isAlive: 0
   fireTransform: {fileID: 8557989318315396351}
   isGrounded: 0
+  animator: {fileID: 213547677975613825}
   abilities:
   - {fileID: 5612691286854138059}
   target: {fileID: 0}
@@ -356,7 +357,6 @@ MonoBehaviour:
     m_Bits: 512
   ragdollTime: 1
   isRagdolled: 0
-  animator: {fileID: 213547677975613825}
 --- !u!1 &9126154270801488365
 GameObject:
   m_ObjectHideFlags: 0

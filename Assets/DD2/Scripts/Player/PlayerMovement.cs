@@ -14,6 +14,7 @@ namespace DD2
         [SerializeField] BoolVariable enableLook;
         [SerializeField] float sensitivity;
         [SerializeField] float acceleration;
+        [SerializeField] float airAcceleration;
         [SerializeField] float jumpForce;
         [SerializeField] Vector2 direction;
         [SerializeField] LayerMask groundedMask;
@@ -76,9 +77,11 @@ namespace DD2
                 IsMoving = false;
             }
 
+            float tempAcceleration = IsGrounded ? acceleration : airAcceleration;
+
             if (Mathf.Abs(moveInput.Value.x) > 0)
             {
-                direction.x += moveInput.Value.x * (1 / acceleration) * Time.deltaTime;
+                direction.x += moveInput.Value.x * (tempAcceleration) * Time.deltaTime;
                 direction.x = Mathf.Clamp(direction.x, -1, 1);
             }
             else
@@ -89,12 +92,12 @@ namespace DD2
                 }
                 else
                 {
-                    direction.x -= Mathf.Sign(direction.x) * (1 / acceleration) * Time.deltaTime;
+                    direction.x -= Mathf.Sign(direction.x) * (tempAcceleration) * Time.deltaTime;
                 }
             }
             if (Mathf.Abs(moveInput.Value.y) > 0)
             {
-                direction.y += moveInput.Value.y * (1 / acceleration) * Time.deltaTime;
+                direction.y += moveInput.Value.y * (tempAcceleration) * Time.deltaTime;
                 direction.y = Mathf.Clamp(direction.y, -1, 1);
             }
             else
@@ -105,7 +108,7 @@ namespace DD2
                 }
                 else
                 {
-                    direction.y -= Mathf.Sign(direction.y) * (1 / acceleration) * Time.deltaTime;
+                    direction.y -= Mathf.Sign(direction.y) * (tempAcceleration) * Time.deltaTime;
                 }
             }
             Vector2 temp = Vector2.ClampMagnitude(direction, 1);
