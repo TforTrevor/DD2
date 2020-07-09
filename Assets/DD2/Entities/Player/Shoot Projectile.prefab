@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1373661324}
   - component: {fileID: 1373661323}
   m_Layer: 0
-  m_Name: Shoot Projectile
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +88,7 @@ VFXRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,12 +153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPoolKey: 
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 8ebaca3d89162eb43859d23d203602ce, type: 2}
   currentHealth: 0
   currentMana: 0
   radius: 0
   isAlive: 0
   fireTransform: {fileID: 0}
+  eyeTransform: {fileID: 0}
   isGrounded: 0
   animator: {fileID: 0}
   abilities: []
@@ -492,12 +494,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolKey: shootProjectile
   speed: 20
-  endDistance: 10
+  endDistance: 30
   radius: 0.1
   entity: {fileID: 22153233822194107}
-  layerMask:
+  hitMask:
     serializedVersion: 2
     m_Bits: 4608
+  penetrateMask:
+    serializedVersion: 2
+    m_Bits: 0
+  maxPenetrations: 0
+  vfx: {fileID: 1373661324}
+  vfxLight: {fileID: 4242700394150581728}
+  model: {fileID: 5612572474517775345}
+  vfxLingerTime: 2
 --- !u!1 &8290829416104979520
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,12 +18,15 @@ namespace DD2
         [SerializeField] LayerMask penetrateMask;
         [SerializeField] int maxPenetrations;
         [SerializeField] [BoxGroup("VFX")] VisualEffect vfx;
+        [SerializeField] [BoxGroup("VFX")] Light vfxLight;
         [SerializeField] [BoxGroup("VFX")] Transform model;
         [SerializeField] [BoxGroup("VFX")] float vfxLingerTime;
 
         public string PoolKey { get => poolKey; private set => poolKey = value; }
         public Entity Entity { get => entity; private set => entity = value; }
 
+        LTDescr lightHandle;
+        float lightIntensity;
         CoroutineHandle vfxHandle;
         int currentPenetrations;
 
@@ -31,8 +34,9 @@ namespace DD2
         {
             gameObject.SetActive(true);
             model.gameObject.SetActive(true);
-            vfx.Play();
             currentPenetrations = 0;
+            vfxLight.intensity = lightIntensity;
+            vfx?.Play();            
             Timing.KillCoroutines(vfxHandle);
         }
 
@@ -61,11 +65,10 @@ namespace DD2
             }
 
             model.gameObject.SetActive(false);
-            vfx.Stop();
-            vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
-            {
-                ProjectilePool.Instance.ReturnObject(PoolKey, this);
-            });
+            vfx?.Stop();
+            lightIntensity = vfxLight.intensity;
+            lightHandle = LeanTween.value(lightIntensity, 0, vfxLingerTime).setOnUpdate((value) => vfxLight.intensity = value);
+            vfxHandle = Timing.CallDelayed(vfxLingerTime, () => ProjectilePool.Instance.ReturnObject(PoolKey, this));
         }
 
         IEnumerator<float> MoveRoutine(Vector3 direction, System.Action<Entity> callback)
@@ -103,7 +106,7 @@ namespace DD2
 
             entity.transform.position = transform.position;
             model.gameObject.SetActive(false);
-            vfx.Stop();
+            vfx?.Stop();
             vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
             {
                 ProjectilePool.Instance.ReturnObject(PoolKey, this);
