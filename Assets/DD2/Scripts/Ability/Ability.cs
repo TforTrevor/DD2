@@ -42,6 +42,8 @@ namespace DD2.Abilities
         protected LayerMask layerMask;
         [SerializeField] [BoxGroup("Targetting")]
         protected bool multiTarget;
+        [SerializeField] [BoxGroup("Targetting")]
+        protected bool hitSelf;
         
         protected Entity entity;
 
@@ -107,12 +109,15 @@ namespace DD2.Abilities
 
         protected virtual void ApplyEffects(Entity target, object payload)
         {
-            StartEffects();
-            for (int i = 0; i < abilityEffects.Length; i++)
+            if (target != entity)
             {
-                abilityEffects[i].DoAction(target, entity, payload);
-            }
-            EndEffects();
+                StartEffects();
+                for (int i = 0; i < abilityEffects.Length; i++)
+                {
+                    abilityEffects[i].DoAction(target, entity, payload);
+                }
+                EndEffects();
+            }            
         }
 
         public void SetEntity(Entity entity)

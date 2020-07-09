@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 9
+  m_Version: 10
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -412,7 +412,9 @@ MonoBehaviour:
   radius: 0.8
   isAlive: 0
   fireTransform: {fileID: 4993670199648463880}
+  eyeTransform: {fileID: 4250314584543993347}
   isGrounded: 0
+  animator: {fileID: 0}
   abilities: []
   manaCost: 30
   towerGraphics: {fileID: 6635896054950298341}
@@ -422,6 +424,8 @@ MonoBehaviour:
   summonLight: {fileID: 8546173290096519960}
   summonRenderer: {fileID: 4503334246509781787}
   collider: {fileID: 4571618255341315653}
+  buildOnStart: 0
+  upgradeEffect: {fileID: 0}
 --- !u!1 &5267178685551948537
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +457,36 @@ Transform:
   - {fileID: 1405803582758950569}
   m_Father: {fileID: 4222570033474067101}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6163492113601321036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4250314584543993347}
+  m_Layer: 11
+  m_Name: Eye Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4250314584543993347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163492113601321036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4222570033474067101}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6171870853316569460
 GameObject:

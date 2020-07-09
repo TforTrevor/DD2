@@ -31,7 +31,7 @@ namespace DD2
 
         void Trigger(Collider collider)
         {
-            if (Util.Utilities.HasLayer(collider.gameObject.layer, layerMask))
+            if (Util.Utilities.IsInLayer(collider.gameObject, layerMask))
             {
                 Entity entity = collider.GetComponent<Entity>();
                 if (entity != null)

@@ -18,6 +18,7 @@ namespace DD2
         [ReadOnly] [SerializeField] private bool isAlive;
 
         [SerializeField] private Transform fireTransform;
+        [SerializeField] private Transform eyeTransform;
         [ReadOnly] [SerializeField] private bool isGrounded;
         [SerializeField] Animator animator;
         [SerializeField] [ReorderableList] protected Ability[] abilities;
@@ -39,6 +40,7 @@ namespace DD2
         public Collider[] Colliders { get => colliders; protected set => colliders = value; }
         public Animator Animator { get => animator; private set => animator = value; }
         public Transform FireTransform { get => fireTransform; private set => fireTransform = value; }
+        public Vector3 EyePosition { get => eyeTransform != null ? eyeTransform.position : transform.position; }
 
         protected virtual void Awake()
         {

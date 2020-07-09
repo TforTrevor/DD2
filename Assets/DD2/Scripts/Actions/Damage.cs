@@ -84,18 +84,25 @@ namespace DD2.Actions
 
         float GetDamageMultiplier(InstancedStats targetStats)
         {
-            switch (elementType)
+            if (targetStats != null)
             {
-                case ElementType.Fire:
-                    return ResistanceFormula(targetStats.FireResist);
-                case ElementType.Lightning:
-                    return ResistanceFormula(targetStats.LightningResist);
-                case ElementType.Energy:
-                    return ResistanceFormula(targetStats.EnergyResist);
-                case ElementType.Water:
-                    return ResistanceFormula(targetStats.WaterResist);
-                default:
-                    return ResistanceFormula(targetStats.PhysicalResist);
+                switch (elementType)
+                {
+                    case ElementType.Fire:
+                        return ResistanceFormula(targetStats.FireResist);
+                    case ElementType.Lightning:
+                        return ResistanceFormula(targetStats.LightningResist);
+                    case ElementType.Energy:
+                        return ResistanceFormula(targetStats.EnergyResist);
+                    case ElementType.Water:
+                        return ResistanceFormula(targetStats.WaterResist);
+                    default:
+                        return ResistanceFormula(targetStats.PhysicalResist);
+                }
+            }
+            else
+            {
+                return 1;
             }
         }
 

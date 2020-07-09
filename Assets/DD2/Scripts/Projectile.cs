@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 using UnityEngine.VFX;
+using NaughtyAttributes;
 
 namespace DD2
 {
@@ -13,21 +14,25 @@ namespace DD2
         [SerializeField] float endDistance;
         [SerializeField] float radius;
         [SerializeField] Entity entity;
-        [SerializeField] LayerMask layerMask;
-        [SerializeField] VisualEffect vfx;
-        [SerializeField] Transform model;
-        [SerializeField] float vfxLingerTime;
+        [SerializeField] LayerMask hitMask;
+        [SerializeField] LayerMask penetrateMask;
+        [SerializeField] int maxPenetrations;
+        [SerializeField] [BoxGroup("VFX")] VisualEffect vfx;
+        [SerializeField] [BoxGroup("VFX")] Transform model;
+        [SerializeField] [BoxGroup("VFX")] float vfxLingerTime;
 
         public string PoolKey { get => poolKey; private set => poolKey = value; }
         public Entity Entity { get => entity; private set => entity = value; }
 
         CoroutineHandle vfxHandle;
+        int currentPenetrations;
 
         void Initialize()
         {
             gameObject.SetActive(true);
             model.gameObject.SetActive(true);
             vfx.Play();
+            currentPenetrations = 0;
             Timing.KillCoroutines(vfxHandle);
         }
 
@@ -37,7 +42,7 @@ namespace DD2
             Timing.RunCoroutine(MoveRoutine(target, callback));
         }
 
-        public void Initialize(Vector3 direction, System.Action callback)
+        public void Initialize(Vector3 direction, System.Action<Entity> callback)
         {
             Initialize();
             Timing.RunCoroutine(MoveRoutine(direction, callback));
@@ -63,19 +68,30 @@ namespace DD2
             });
         }
 
-        IEnumerator<float> MoveRoutine(Vector3 direction, System.Action callback)
+        IEnumerator<float> MoveRoutine(Vector3 direction, System.Action<Entity> callback)
         {
             float distanceTraveled = 0;
 
             while (distanceTraveled < endDistance)
             {
                 RaycastHit hit;
-                if (Physics.SphereCast(transform.position, radius, direction, out hit, speed * Time.deltaTime, layerMask))
+                if (Physics.SphereCast(transform.position, radius, direction, out hit, speed * Time.deltaTime, hitMask))
                 {
                     transform.position += direction * speed * Time.deltaTime;
                     transform.forward = direction;
-                    callback?.Invoke();
-                    break;
+                    Entity entity = hit.transform.GetComponent<Entity>();
+                    callback?.Invoke(entity);
+
+                    if (Util.Utilities.IsInLayer(hit.transform.gameObject, penetrateMask))
+                    {
+                        currentPenetrations++;
+                        if (currentPenetrations > maxPenetrations)
+                            break;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 transform.position += direction * speed * Time.deltaTime;

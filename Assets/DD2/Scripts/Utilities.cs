@@ -202,14 +202,10 @@ namespace DD2.Util
             return false;
         }
 
-        public static bool HasLayer(int layer, LayerMask layerMask)
+        public static Vector3 DirectionTowards(Vector3 start, Vector3 end)
         {
-            if (layerMask == (layerMask | (1 << layer)))
-            {
-                return true;
-            }
-
-            return false;
+            Vector3 heading = end - start;
+            return heading.normalized;
         }
     }
 }
