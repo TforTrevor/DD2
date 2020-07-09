@@ -253,7 +253,7 @@ MonoBehaviour:
   radius: 0.5
   isAlive: 0
   fireTransform: {fileID: 1435513321151040543}
-  eyeTransform: {fileID: 0}
+  eyeTransform: {fileID: 1435513321151040543}
   isGrounded: 0
   animator: {fileID: 7317072879088927337}
   abilities:

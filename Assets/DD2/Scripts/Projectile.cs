@@ -80,8 +80,9 @@ namespace DD2
                 RaycastHit hit;
                 if (Physics.SphereCast(transform.position, radius, direction, out hit, speed * Time.deltaTime, hitMask))
                 {
-                    transform.position += direction * speed * Time.deltaTime;
-                    transform.forward = direction;
+                    //transform.position += direction * speed * Time.deltaTime;
+                    //transform.forward = direction;
+                    transform.position = hit.point - (direction * speed * Time.deltaTime);
                     Entity entity = hit.transform.GetComponent<Entity>();
                     callback?.Invoke(entity);
 
@@ -107,10 +108,9 @@ namespace DD2
             entity.transform.position = transform.position;
             model.gameObject.SetActive(false);
             vfx?.Stop();
-            vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
-            {
-                ProjectilePool.Instance.ReturnObject(PoolKey, this);
-            });
+            lightIntensity = vfxLight.intensity;
+            lightHandle = LeanTween.value(lightIntensity, 0, vfxLingerTime).setOnUpdate((value) => vfxLight.intensity = value);
+            vfxHandle = Timing.CallDelayed(vfxLingerTime, () => ProjectilePool.Instance.ReturnObject(PoolKey, this));
         }
     }
 }

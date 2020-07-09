@@ -41,7 +41,8 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Assault_Default_LOD0.ao/b_Root/b_Pelvis/b_Spine01/b_Spine02/b_Spine03/b_Spine04/b_Neck/b_head
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
@@ -127,7 +128,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.018
+    globalScale: 1.8
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
