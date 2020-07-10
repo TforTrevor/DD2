@@ -97,8 +97,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0.832973, a: 1}
-  m_Intensity: 0.23873241
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.15915494
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 3
+  m_Intensity: 2
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -323,8 +323,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 7.999999, g: 0, b: 0.76521295, a: 0}
-          key1: {r: 7.5766525, g: 0, b: 8, a: 1}
+          key0: {r: 8, g: 2.7708156, b: 0, a: 0}
+          key1: {r: 5.992157, g: 5.992157, b: 5.992157, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 3449179850076498063}
   - component: {fileID: 3449179850076498048}
   m_Layer: 0
-  m_Name: Javelin Projectile
+  m_Name: Archer Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28df95cb6303f2048bb384efc55e77d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolKey: projectileJavelin
-  speed: 20
+  poolKey: projectileArcher
+  speed: 5
   endDistance: 30
   radius: 0.125
   entity: {fileID: 392580390}
@@ -453,8 +453,8 @@ MonoBehaviour:
     m_Bits: 11776
   penetrateMask:
     serializedVersion: 2
-    m_Bits: 3072
-  maxPenetrations: 100
+    m_Bits: 0
+  maxPenetrations: 0
   vfx: {fileID: 3449179849795565554}
   vfxLight: {fileID: 2149370601955894027}
   model: {fileID: 3449179851045063403}
@@ -485,8 +485,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3449179851045063402}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.25, y: 1, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0, z: -0.25}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 3449179850076498063}
   m_RootOrder: 0
@@ -518,7 +518,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 34c4d794fbacdcb45a28f21dccb9959b, type: 2}
+  - {fileID: 2100000, guid: db272668633fe984ba321e98b87d3882, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

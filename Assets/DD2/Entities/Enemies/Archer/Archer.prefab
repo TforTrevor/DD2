@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1414977012}
   - component: {fileID: 1414977013}
   m_Layer: 12
-  m_Name: Javelin Ability
+  m_Name: Arhcer Ability
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   onCooldown: 0
   isUsing: 0
   isToggle: 1
-  toggleTickRate: 3
+  toggleTickRate: 2
   toggleState: 0
   bufferInput: 0
   bufferTime: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
     m_Bits: 3072
   multiTarget: 0
   hitSelf: 0
-  projectile: {fileID: 3449179850076498048, guid: 08357e27227203b4c8564dad98fd8b4e,
+  projectile: {fileID: 3449179850076498048, guid: b541172c5b42a8b4386dc7115122eae6,
     type: 3}
   onHit: {fileID: 1414977013}
   fireType: 1
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityEffects:
-  - {fileID: 11400000, guid: c15e1ad23c30e2e439de0eca51716b52, type: 2}
+  - {fileID: 11400000, guid: b5360b128c08c0d4ba43008c82e42c22, type: 2}
   cooldown: 0
   beforeEnd: 0
   onCooldown: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76abf17f922c31242ab403c5c78a8012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPoolKey: enemyJavelin
-  stats: {fileID: 11400000, guid: f99ce920aa98993469db7e9ba762b4cf, type: 2}
+  objectPoolKey: enemyArcher
+  stats: {fileID: 11400000, guid: ad1df02c5d5c30243b5d6cb5b624a3a7, type: 2}
   currentHealth: 0
   currentMana: 0
   radius: 0.5
@@ -399,7 +399,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fe40d6d1ed245741b1f5706d0cf2c95, type: 2}
+  - {fileID: 2100000, guid: 2d90a95850af8b041ae67839cda12cba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -553,7 +553,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_Name
-      value: Javelin
+      value: Archer
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033573, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -563,7 +563,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.444232
+      value: -7.5337286
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
@@ -573,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.790619
+      value: -3.5115194
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}

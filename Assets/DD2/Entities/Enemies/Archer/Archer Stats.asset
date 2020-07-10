@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
-  m_Name: Javelin Stats
+  m_Name: Archer Stats
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  maxMana: 40
+  maxHealth: 100
+  maxMana: 30
   attackDamage: 0
   attackSpeed: 0
-  moveSpeed: 1.5
+  moveSpeed: 1
   presence: 5
   physicalResist: 0
   fireResist: 0
   lightningResist: 0
   energyResist: 0
   waterResist: 0
-  attackRange: 10
+  attackRange: 5
   attackAngle: 0
-  searchRange: 10
-  searchAngle: 20
+  searchRange: 5
+  searchAngle: 30
