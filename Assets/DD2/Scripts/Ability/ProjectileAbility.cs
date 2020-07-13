@@ -22,7 +22,7 @@ namespace DD2.Abilities
                 }
                 else
                 {
-                    direction = Util.Utilities.DirectionTowards(this.entity.FireTransform.position, entity.EyePosition);
+                    direction = Util.Utilities.Direction(this.entity.FireTransform.position, entity.EyePosition);
                 }
                 projectile.transform.position = this.entity.FireTransform.position;
                 projectile.Initialize(direction, (Entity hit) =>

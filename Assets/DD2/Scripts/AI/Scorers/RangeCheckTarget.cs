@@ -10,7 +10,9 @@ namespace DD2.AI.Scorers
     public class RangeCheckTarget : ContextualScorerBase
     {
         [ApexSerialization] bool not;
-        [ApexSerialization] bool checkCone;
+        [ApexSerialization] bool coneCheck;
+        [ApexSerialization] bool losCheck;
+        [ApexSerialization] LayerMask losBlock;
         [ApexSerialization] Range rangeCheck;
         [ApexSerialization] bool includeRadius = true;
         [ApexSerialization] bool includeTargetRadius = true;        
@@ -19,30 +21,34 @@ namespace DD2.AI.Scorers
         {
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
+            Entity target = ctx.target;
 
             float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) 
                                 - (includeRadius ? entity.Radius : 0)
                                 - (includeTargetRadius ? ctx.target.Radius : 0);
+            float range = rangeCheck == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
+            float angle = rangeCheck == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
 
-            if (rangeCheck == Range.Attack ? distance <= entity.Stats.AttackRange : distance <= entity.Stats.SearchRange)
+            if (distance <= range)
             {
-                if (checkCone)
+                bool cone = false;
+                bool los = false;
+                if (coneCheck)
                 {
-                    float enemyDot = Vector3.Dot(entity.GetForward(), Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition()));
-                    float desiredDot = Mathf.Cos(Mathf.Deg2Rad * (rangeCheck == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle) / 2f);
-                    if (enemyDot > desiredDot)
-                    {
-                        return not ? 0 : score;
-                    }
+                    Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
+                    Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
+                    Vector2 end = new Vector2(target.EyePosition.x, target.EyePosition.z);
+                    cone = Util.Utilities.IsPositionInCone(start, direction, end, angle);
                 }
-                else
+                if (losCheck)
+                {
+                    los = !Physics.Raycast(entity.EyePosition, Util.Utilities.Direction(entity.EyePosition, target.EyePosition), Vector3.Distance(entity.EyePosition, target.EyePosition), losBlock);
+                }
+                if ((coneCheck ? cone : true) && (losCheck ? los : true))
                 {
                     return not ? 0 : score;
                 }
             }
-            Vector3 dir = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
-            Vector3 startPos = entity.GetPosition() + dir * entity.Radius;
-            Debug.DrawRay(startPos, dir * distance, Color.green, 0.5f);
             return not ? score : 0;
         }
     }

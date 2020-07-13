@@ -10,8 +10,10 @@ namespace DD2.AI.Actions
 {
     public class TargetScanner : ActionBase
     {
-        [ApexSerialization] LayerMask layerMasks;
-        [ApexSerialization] bool useCone;
+        [ApexSerialization] LayerMask scanMask;
+        [ApexSerialization] bool coneCheck;
+        [ApexSerialization] bool losCheck;
+        [ApexSerialization] LayerMask losBlock;
         [ApexSerialization] Range range;
         [ApexSerialization] bool includeRadius = true;
         [ApexSerialization] bool includeTargetRadius = true;
@@ -24,7 +26,7 @@ namespace DD2.AI.Actions
             float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;                            
             float angle = this.range == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
 
-            Collider[] colliders = Physics.OverlapSphere(entity.GetPosition(), range, layerMasks);
+            Collider[] colliders = Physics.OverlapSphere(entity.GetPosition(), range, scanMask);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Entity temp = colliders[i].GetComponent<Entity>();
@@ -35,25 +37,25 @@ namespace DD2.AI.Actions
                                         - (includeTargetRadius ? temp.Radius : 0);
                     if (enemyDistance < range)
                     {
-                        if (useCone)
+                        bool cone = false;
+                        bool los = false;
+                        if (coneCheck)
                         {
-                            if (Util.Utilities.IsColliderInCone(colliders[i], entity.transform, angle, range, layerMasks))
-                            {
-                                if (temp != null)
-                                {
-                                    ctx.targetList.Add(temp);
-                                }
-                            }
+                            Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
+                            Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
+                            Vector2 end = new Vector2(temp.EyePosition.x, temp.EyePosition.z);
+                            cone = Util.Utilities.IsPositionInCone(start, direction, end, angle);
                         }
-                        else
+                        if (losCheck)
                         {
-                            if (temp != null)
-                            {
-                                ctx.targetList.Add(temp);
-                            }
+                            los = !Physics.Raycast(entity.EyePosition, Util.Utilities.Direction(entity.EyePosition, temp.EyePosition), Vector3.Distance(entity.EyePosition, temp.EyePosition), losBlock);
+                        }
+                        if ((coneCheck ? cone : true) && (losCheck ? los : true))
+                        {
+                            ctx.targetList.Add(temp);
                         }
                     }
-                }                
+                }
             }
         }
     }

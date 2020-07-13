@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.040288776, g: 0.03397214, b: 0.036270168, a: 1}
+  m_IndirectSpecularColor: {r: 0.040258706, g: 0.03395539, b: 0.036267396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -45856,6 +45856,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 2244653046444653922, guid: 69b3a18da2005f4469204ea320e35355,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2244653046444653948, guid: 69b3a18da2005f4469204ea320e35355,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -46928,7 +46933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420451297}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -17.25, y: 5.1, z: 3.0000002}
+  m_LocalPosition: {x: -23.5, y: 3.6000001, z: 1.0000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63113,9 +63118,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 361613595, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 476858353, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 569294602, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.60000014
       objectReference: {fileID: 0}
     - target: {fileID: 1988815452, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -63134,17 +63147,17 @@ PrefabInstance:
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.25
+      value: -21.5
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}

@@ -18,6 +18,7 @@ namespace DD2.AI
         {
             base.Awake();
             context = new AIContext(this);
+            
         }
 
         public IAIContext GetContext(Guid aiId)

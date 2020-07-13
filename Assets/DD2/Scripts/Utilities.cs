@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,26 +7,6 @@ namespace DD2.Util
 {
     public static class Utilities
     {
-        static Dictionary<Vector3, float> viewDirections = new Dictionary<Vector3, float>();
-
-        static Utilities()
-        {
-            float numViewDirections = 200;
-            float goldenRatio = (1 + Mathf.Sqrt(5)) / 2;
-            float angleIncrement = Mathf.PI * 2 * goldenRatio;
-
-            for (int i = 0; i < numViewDirections; i++)
-            {
-                float t = (float)i / numViewDirections;
-                float inclination = Mathf.Acos(1 - 2 * t);
-                float azimuth = angleIncrement * i;
-
-                float x = Mathf.Sin(inclination) * Mathf.Cos(azimuth);
-                float y = Mathf.Sin(inclination) * Mathf.Sin(azimuth);
-                float z = Mathf.Cos(inclination);
-                viewDirections.Add(new Vector3(x, y, z), Vector3.Dot(Vector3.forward, new Vector3(x, y, z)));
-            }
-        }
 
         public static Collider GetClosestToPoint(Collider[] colliders, Vector3 position)
         {
@@ -174,37 +155,31 @@ namespace DD2.Util
             return largest;
         }
 
-        public static bool IsColliderInCone(Collider collider, Transform transform, float angle, float range, LayerMask layerMask)
+        public static bool IsPositionInCone(Vector3 start, Vector3 direction, Vector3 end, float angle)
         {
-            Vector3 center = collider.bounds.center;
-            float desiredDot = Mathf.Cos(Mathf.Deg2Rad * angle / 2f);
-            float dot = Vector3.Dot(transform.forward, Vector3.Normalize(center - transform.position));
-
-            if (dot > desiredDot)
-            {
-                return true;
-            }
-            else
-            {
-                foreach (KeyValuePair<Vector3, float> entry in viewDirections)
-                {
-                    if (entry.Value > desiredDot)
-                    {
-                        Vector3 dir = transform.TransformDirection(entry.Key);
-                        Debug.DrawRay(transform.position, dir * range, Color.red, 10f);
-                        if (Physics.Raycast(transform.position, dir, range, layerMask))
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
+            float desiredDot = Mathf.Cos(Mathf.Deg2Rad * angle);
+            float dot = Vector3.Dot(direction, Direction(start, end));
+            return dot > desiredDot;
         }
 
-        public static Vector3 DirectionTowards(Vector3 start, Vector3 end)
+        public static bool IsPositionInCone(Vector2 start, Vector2 direction, Vector2 end, float angle)
+        {
+            float desiredDot = Mathf.Cos(Mathf.Deg2Rad * angle);
+            float dot = Vector2.Dot(direction, Direction(start, end));
+            return dot > desiredDot;
+        }
+
+        ///Direction starting from "start" and ending at "end"
+        public static Vector3 Direction(Vector3 start, Vector3 end)
         {
             Vector3 heading = end - start;
+            return heading.normalized;
+        }
+
+        ///Direction starting from "start" and ending at "end"
+        public static Vector2 Direction(Vector2 start, Vector2 end)
+        {
+            Vector2 heading = end - start;
             return heading.normalized;
         }
     }
