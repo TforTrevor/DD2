@@ -19,24 +19,27 @@ namespace DD2.AI.Actions
         {
             AIContext ctx = (AIContext)context;
             Enemy entity = (Enemy)ctx.entity;
+            Entity target = ctx.target;
 
             if (ctx.target != null && ctx.pathTarget != ctx.target && entity.IsGrounded && !entity.IsRagdolled)
             {
                 float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
-                float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition())
-                                    - (includeRadius ? entity.Radius : 0)
-                                    - (includeTargetRadius ? ctx.target.Radius : 0);
-                if (distance > range || ensureMaxRange)
+                float entityRadius = includeRadius ? entity.Radius : 0;
+                float targetRadius = includeTargetRadius ? ctx.target.Radius : 0;
+                float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) - entityRadius - targetRadius;
+
+                if (ensureMaxRange)
                 {
                     Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
                     float distanceFromRange = distance - range + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + entity.GetPosition();
                     entity.MoveToPosition(position);
-                    //ctx.pathTarget = ctx.target;
                 }
                 else
                 {
-                    entity.MoveToPosition(entity.GetPosition());
+                    Vector3 direction = Util.Utilities.Direction(target.transform.position, entity.transform.position);
+                    Vector3 position = (direction * (entityRadius + targetRadius)) + target.transform.position;
+                    entity.MoveToPosition(position);
                 }
             }
         }

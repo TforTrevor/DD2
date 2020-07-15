@@ -13,6 +13,7 @@ namespace DD2.AI.Context
         public Entity target;
 
         public Entity pathTarget;
+        public Entity lookTarget;
         public float attention;
 
         public AIContext(EntityAI entity)
