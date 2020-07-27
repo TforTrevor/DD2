@@ -38,7 +38,7 @@ namespace DD2.Abilities
             Vector3 position = transform.position;
             foreach (Hitbox hitbox in hitboxes)
             {
-                hitbox.HitboxObject.transform.position = position;
+                //hitbox.HitboxObject.transform.position = position;
                 //hitbox.hitboxObject.SetActive(true);
 
                 yield return Timing.WaitForSeconds(hitbox.Delay);

@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace DD2.Abilities
 {
-    [System.Serializable]
-    public class Hitbox
+    [RequireComponent(typeof(CapsuleCollider))]
+    public class Hitbox : MonoBehaviour
     {
-        enum Shape { Sphere, Box, Capsule };
-        [SerializeField] Shape hitboxShape;
-        [SerializeField] GameObject hitboxObject;
+        [SerializeField] Transform parent;
         [SerializeField] float delay;
         [SerializeField] float duration;
         [SerializeField] float repeatDelay;
@@ -22,36 +20,24 @@ namespace DD2.Abilities
         Collider[] removeResults;
         int removeResultsCount;
 
-        SphereCollider sphereCollider;
-        BoxCollider boxCollider;
         CapsuleCollider capsuleCollider;
+        CoroutineHandle repeatRoutine;
 
         public int MaxCollisions { get => maxCollisions; private set => maxCollisions = value; }
-        public GameObject HitboxObject { get => hitboxObject; private set => hitboxObject = value; }
         public float Delay { get => delay; private set => delay = value; }
         public float Duration { get => duration; private set => duration = value; }
 
-        Hitbox()
+        void Awake()
         {
+            capsuleCollider = GetComponent<CapsuleCollider>();
+            capsuleCollider.enabled = false;
             results = new Collider[MaxCollisions];
             returnResults = new Collider[MaxCollisions];
             removeResults = new Collider[MaxCollisions];
-            //repeatList.Capacity = maxCollisions;
-        }
 
-        void Initialize()
-        {
-            if (hitboxShape == Shape.Sphere)
+            if (parent != null)
             {
-                sphereCollider = HitboxObject.GetComponent<SphereCollider>();
-            }
-            else if (hitboxShape == Shape.Box)
-            {
-                boxCollider = HitboxObject.GetComponent<BoxCollider>();
-            }
-            else if (hitboxShape == Shape.Capsule)
-            {
-                capsuleCollider = HitboxObject.GetComponent<CapsuleCollider>();
+                transform.SetParent(parent);
             }
         }
 
@@ -61,15 +47,12 @@ namespace DD2.Abilities
             Util.Utilities.ClearArray(results, resultsCount);
             returnResultsCount = 0;
 
-            if (hitboxShape == Shape.Sphere)
-            {
-                if (sphereCollider == null)
-                {
-                    Initialize();
-                }
-                
-                resultsCount = Physics.OverlapSphereNonAlloc(position, sphereCollider.radius * HitboxObject.transform.lossyScale.x, results, layerMask);
-            }
+            Vector3 direction = transform.InverseTransformDirection(Util.Utilities.CapsuleDirection(capsuleCollider.direction));
+            Vector3 start = capsuleCollider.bounds.center - (direction * capsuleCollider.height / 2);
+            Vector3 end = capsuleCollider.bounds.center + (direction * capsuleCollider.height / 2);
+            resultsCount = Physics.OverlapCapsuleNonAlloc(start, end, capsuleCollider.radius, results, layerMask);
+
+            //resultsCount = Physics.OverlapSphereNonAlloc(position, capsuleCollider.radius, results, layerMask);
 
             if (resultsCount > 0)
             {
@@ -79,6 +62,7 @@ namespace DD2.Abilities
                     {
                         this.returnResults[returnResultsCount] = results[i];
                         returnResultsCount++;
+                        Debug.Log("Hit!");
                     }
                 }
                 if (returnResultsCount > 0)
@@ -89,7 +73,7 @@ namespace DD2.Abilities
                         removeResults[removeResultsCount] = this.returnResults[i];
                         removeResultsCount++;
                     }
-                    Timing.RunCoroutine(RemoveRoutine(removeResults, returnResultsCount));
+                    repeatRoutine = Timing.RunCoroutine(RemoveRoutine(removeResults, returnResultsCount));
                 }
             }
 
@@ -128,6 +112,12 @@ namespace DD2.Abilities
                 colliders[i] = null;
             }
             removeResultsCount = newCount;
+        }
+
+        public void ClearRepeat()
+        {
+            Timing.KillCoroutines(repeatRoutine);
+            repeatList.Clear();
         }
     }
 }

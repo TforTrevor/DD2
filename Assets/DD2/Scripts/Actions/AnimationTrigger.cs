@@ -8,11 +8,21 @@ namespace DD2.Actions
     public class AnimationTrigger : Action
     {
         [SerializeField] string animationTrigger;
+        [SerializeField] ApplyTo applyTo;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            target.Animator.SetTrigger(animationTrigger);
+            if (applyTo == ApplyTo.Target)
+            {
+                target.Animator.SetTrigger(animationTrigger);
+            }
+            else
+            {
+                caller.Animator.SetTrigger(animationTrigger);
+            }
         }
+
+        enum ApplyTo { Target, Caller }
     }
 }
 

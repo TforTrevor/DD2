@@ -23,6 +23,8 @@ namespace DD2.Abilities
         protected Collider[] collisions;
         protected int collisionCount;
 
+        CoroutineHandle abilityHandle;
+
         protected override void Awake()
         {
             base.Awake();
@@ -42,7 +44,8 @@ namespace DD2.Abilities
         protected override void Tick(Entity target, object payload)
         {
             base.Tick(target, payload);
-            Timing.RunCoroutine(AbilityRoutine(target, payload));
+            Timing.KillCoroutines(abilityHandle);
+            abilityHandle = Timing.RunCoroutine(AbilityRoutine(target, payload));
         }
 
         IEnumerator<float> AbilityRoutine(Entity target, object payload)
@@ -51,19 +54,8 @@ namespace DD2.Abilities
             {
                 yield return Timing.WaitForSeconds(hitbox.Delay);
                 CoroutineHandle hitboxHandle = Timing.RunCoroutine(HitboxRoutine(target, payload, hitbox));
-                if (showHitbox)
-                {
-                    hitbox.HitboxObject.SetActive(true);
-                    hitbox.HitboxObject.transform.position = target.GetPosition();
-                    hitbox.HitboxObject.transform.parent = null;
-                }
                 yield return Timing.WaitForSeconds(hitbox.Duration);
                 Timing.KillCoroutines(hitboxHandle);
-                if (showHitbox)
-                {
-                    hitbox.HitboxObject.SetActive(false);
-                    hitbox.HitboxObject.transform.parent = transform;
-                }
             }
         }
 

@@ -12,6 +12,8 @@ namespace DD2.Abilities
     {
         //Effects
         [SerializeField] [ReorderableList] [Expandable]
+        protected Action[] tickActions;
+        [SerializeField] [ReorderableList] [Expandable]
         protected Action[] abilityEffects;
         //Cooldown
         [SerializeField] [MinValue(0)] [BoxGroup("Cooldown")]
@@ -141,7 +143,13 @@ namespace DD2.Abilities
                 Timing.RunCoroutine(CooldownRoutine(target, payload));
             }
         }
-        protected virtual void Tick(Entity target, object payload) { }
+        protected virtual void Tick(Entity target, object payload) 
+        {
+            foreach (Action action in tickActions)
+            {
+                action.DoAction(target, entity);
+            }
+        }
         protected virtual void StartCooldown() { }
         protected virtual void EndCooldown(Entity target, object payload)
         {

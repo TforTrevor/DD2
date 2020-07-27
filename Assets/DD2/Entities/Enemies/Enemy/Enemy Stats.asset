@@ -24,6 +24,6 @@ MonoBehaviour:
   energyResist: 0
   waterResist: 0
   attackRange: 1
-  attackAngle: 0
-  searchRange: 5
+  attackAngle: 40
+  searchRange: 1
   searchAngle: 40

@@ -182,5 +182,20 @@ namespace DD2.Util
             Vector2 heading = end - start;
             return heading.normalized;
         }
+
+        public static Vector3 CapsuleDirection(int direction)
+        {
+            switch (direction)
+            {
+                case 0:
+                    return Vector3.right;
+                case 1:
+                    return Vector3.up;
+                case 2:
+                    return Vector3.forward;
+                default:
+                    return Vector3.zero;
+            }
+        }
     }
 }
