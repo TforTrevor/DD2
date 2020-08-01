@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MEC;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace DD2.Actions
         [SerializeField] bool ignoreStats;
         [SerializeField] bool swapTargetAndCaller;
         [SerializeField] float damage;
+        [SerializeField] float hitlagMultiplier;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
@@ -48,12 +50,14 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
+                caller.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = this.damage * multiplier * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
-            }            
+                caller.Hitlag(HitlagFormula(damage));
+            }
         }
 
         void PercentMaxHealth(Entity target, Entity caller)
@@ -61,11 +65,13 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
+                caller.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
+                caller.Hitlag(HitlagFormula(damage));
             }            
         }
 
@@ -74,11 +80,13 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
+                caller.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
+                caller.Hitlag(HitlagFormula(damage));
             }            
         }
 
@@ -113,6 +121,11 @@ namespace DD2.Actions
                 return 100 / (100 + input);
             }
             return 2 - (100 / (100 - input));
+        }
+
+        float HitlagFormula(float damage)
+        {
+            return hitlagMultiplier * damage / 1000;
         }
 
         enum DamageType

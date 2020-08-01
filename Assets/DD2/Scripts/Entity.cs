@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using DD2.Abilities;
 using DD2.Actions;
 using System;
+using MEC;
 
 namespace DD2
 {
@@ -29,6 +30,8 @@ namespace DD2
         protected Rigidbody rb;
         private Collider[] colliders;
         protected InstancedStats instancedStats;
+        protected CoroutineHandle hitlagHandle;
+        protected int animatorSpeed;
 
         public float Radius { get => radius; protected set => radius = value; }
         public InstancedStats Stats { get => instancedStats; protected set => instancedStats = value; }
@@ -51,7 +54,10 @@ namespace DD2
                 abilities[i].SetEntity(this);
             }
             if (stats != null)
+            {
                 Stats = new InstancedStats(stats);
+            }
+            animatorSpeed = Animator.StringToHash("Speed");
         }
 
         protected virtual void Start()
@@ -70,6 +76,22 @@ namespace DD2
                     Die(entity);
                 }
             }
+        }
+
+        public void Hitlag(float time)
+        {
+            if (time > 0)
+            {
+                Timing.KillCoroutines(hitlagHandle);
+                hitlagHandle = Timing.RunCoroutine(HitlagRoutine(time));
+            }
+        }
+
+        IEnumerator<float> HitlagRoutine(float time)
+        {
+            animator.SetFloat(animatorSpeed, 0);
+            yield return Timing.WaitForSeconds(time);
+            animator.SetFloat(animatorSpeed, 1);
         }
 
         protected virtual void OnKilledEntity(Entity entity)
