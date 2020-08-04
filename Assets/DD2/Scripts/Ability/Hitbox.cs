@@ -47,9 +47,18 @@ namespace DD2.Abilities
             Util.Utilities.ClearArray(results, resultsCount);
             returnResultsCount = 0;
 
-            Vector3 direction = transform.InverseTransformDirection(Util.Utilities.CapsuleDirection(capsuleCollider.direction));
-            Vector3 start = position - (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
-            Vector3 end = position + (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
+            Vector3 pos;
+            if (parent == null)
+            {
+                pos = position;
+            }
+            else
+            {
+                pos = transform.TransformPoint(capsuleCollider.center);
+            }            
+            Vector3 direction = transform.TransformDirection(Util.Utilities.CapsuleDirection(capsuleCollider.direction));
+            Vector3 start = pos - (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
+            Vector3 end = pos + (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
             resultsCount = Physics.OverlapCapsuleNonAlloc(start, end, capsuleCollider.radius * transform.lossyScale.x, results, layerMask);
 
             //resultsCount = Physics.OverlapSphereNonAlloc(position, capsuleCollider.radius, results, layerMask);

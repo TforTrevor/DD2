@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
-  m_Name: Enemy Stats
+  m_Name: Ogre Stats
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  maxMana: 20
-  attackDamage: 0
+  maxHealth: 5000
+  maxMana: 200
+  attackDamage: 300
   attackSpeed: 0
-  moveSpeed: 1.5
-  presence: 5
+  moveSpeed: 0.5
+  presence: 50
   physicalResist: 0
-  fireResist: 100
+  fireResist: 0
   lightningResist: 0
   energyResist: 0
   waterResist: 0
-  attackRange: 1
+  attackRange: 3
   attackAngle: 80
-  searchRange: 1
+  searchRange: 3
   searchAngle: 80
