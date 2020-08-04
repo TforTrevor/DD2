@@ -48,9 +48,9 @@ namespace DD2.Abilities
             returnResultsCount = 0;
 
             Vector3 direction = transform.InverseTransformDirection(Util.Utilities.CapsuleDirection(capsuleCollider.direction));
-            Vector3 start = capsuleCollider.bounds.center - (direction * capsuleCollider.height / 2);
-            Vector3 end = capsuleCollider.bounds.center + (direction * capsuleCollider.height / 2);
-            resultsCount = Physics.OverlapCapsuleNonAlloc(start, end, capsuleCollider.radius, results, layerMask);
+            Vector3 start = position - (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
+            Vector3 end = position + (direction * capsuleCollider.height / 2 * transform.lossyScale.x);
+            resultsCount = Physics.OverlapCapsuleNonAlloc(start, end, capsuleCollider.radius * transform.lossyScale.x, results, layerMask);
 
             //resultsCount = Physics.OverlapSphereNonAlloc(position, capsuleCollider.radius, results, layerMask);
 
@@ -62,7 +62,6 @@ namespace DD2.Abilities
                     {
                         this.returnResults[returnResultsCount] = results[i];
                         returnResultsCount++;
-                        Debug.Log("Hit!");
                     }
                 }
                 if (returnResultsCount > 0)

@@ -17,4 +17,4 @@ MonoBehaviour:
   ignoreStats: 0
   swapTargetAndCaller: 0
   damage: 10
-  hitlagMultiplier: 100
+  hitlagMultiplier: 5

@@ -38,7 +38,7 @@ namespace DD2.AI.Scorers
                     Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
                     Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
                     Vector2 end = new Vector2(target.EyePosition.x, target.EyePosition.z);
-                    cone = Util.Utilities.IsPositionInCone(start, direction, end, angle);
+                    cone = Util.Utilities.IsPositionInCone(start, direction, end, angle / 2);
                 }
                 if (losCheck)
                 {

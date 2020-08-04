@@ -27,14 +27,7 @@ namespace DD2.Abilities
                 projectile.transform.position = this.entity.FireTransform.position;
                 projectile.Initialize(direction, (Entity hit) =>
                 {
-                    if (hit != null)
-                    {
-                        onHit?.UseAbility(hit, payload);
-                    }
-                    else
-                    {
-                        onHit?.UseAbility(projectile.Entity, payload);
-                    }
+                    onHit?.UseAbility(projectile.Entity, null);
                 });
                 ApplyEffects(entity, payload);
             }

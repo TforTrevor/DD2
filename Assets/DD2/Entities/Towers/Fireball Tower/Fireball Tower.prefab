@@ -114,6 +114,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2774424572511447608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2295114229947113443}
+  m_Layer: 11
+  m_Name: Eye Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2295114229947113443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774424572511447608}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3199320008054047978}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3798314036121989531
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f0df50cc211e4286e9232300dd315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   delay: 0
   duration: 0
   repeatDelay: 0
@@ -309,11 +340,11 @@ MonoBehaviour:
   radius: 0.5
   isAlive: 0
   fireTransform: {fileID: 5613189003747143395}
-  eyeTransform: {fileID: 0}
+  eyeTransform: {fileID: 2295114229947113443}
   isGrounded: 0
   animator: {fileID: 0}
   abilities:
-  - {fileID: 0}
+  - {fileID: 1330807363680851574}
   manaCost: 100
   towerGraphics: {fileID: 184165993803470731}
   towerVertical: {fileID: 6375561326163811203}
@@ -543,13 +574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dcf6eaffe4888419942517798b26ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tickActions: []
   abilityEffects: []
   cooldown: 0
   beforeEnd: 0
   onCooldown: 0
   isUsing: 0
-  isToggle: 0
-  toggleTickRate: 0
+  isToggle: 1
+  toggleTickRate: 2
   toggleState: 0
   bufferInput: 0
   bufferTime: 0
@@ -559,7 +591,8 @@ MonoBehaviour:
     m_Bits: 0
   multiTarget: 0
   hitSelf: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 3449179850076498048, guid: aaaa7319c8fce16419d15eebe3063806,
+    type: 3}
   onHit: {fileID: 2679586927874575545}
   fireType: 1
 --- !u!114 &2679586927874575545
@@ -574,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30515ffc821eacd43b205ffb43cfb372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tickActions: []
   abilityEffects:
   - {fileID: 11400000, guid: 04c9b4fc819f7c544bf681493f3029c1, type: 2}
   cooldown: 0
@@ -588,7 +622,7 @@ MonoBehaviour:
   isBuffered: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   multiTarget: 0
   hitSelf: 0
   hitboxTickRate: 0
@@ -702,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 10
+  m_Version: 11
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -800,6 +834,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+  m_AreaLightEmissiveMeshLayer: -1
 --- !u!1 &7746388781148012152
 GameObject:
   m_ObjectHideFlags: 0

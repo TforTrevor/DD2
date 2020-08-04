@@ -50,13 +50,13 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = this.damage * multiplier * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }
         }
 
@@ -65,13 +65,13 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }            
         }
 
@@ -80,13 +80,13 @@ namespace DD2.Actions
             if (ignoreStats)
             {
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }
             else
             {
                 float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
                 target.Damage(caller, damage);
-                caller.Hitlag(HitlagFormula(damage));
+                caller?.Hitlag(HitlagFormula(damage));
             }            
         }
 

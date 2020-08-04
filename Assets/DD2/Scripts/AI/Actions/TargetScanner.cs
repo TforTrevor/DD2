@@ -44,7 +44,7 @@ namespace DD2.AI.Actions
                             Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
                             Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
                             Vector2 end = new Vector2(temp.EyePosition.x, temp.EyePosition.z);
-                            cone = Util.Utilities.IsPositionInCone(start, direction, end, angle);
+                            cone = Util.Utilities.IsPositionInCone(start, direction, end, angle / 2);
                         }
                         if (losCheck)
                         {

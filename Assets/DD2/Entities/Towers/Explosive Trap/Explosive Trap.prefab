@@ -9802,6 +9802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30515ffc821eacd43b205ffb43cfb372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tickActions: []
   abilityEffects:
   - {fileID: 11400000, guid: d5732e642fc27df4699dd3a932a1b53c, type: 2}
   - {fileID: 11400000, guid: a80f7c85c837562438d224b0f3e4e51b, type: 2}
@@ -9819,15 +9820,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   multiTarget: 0
+  hitSelf: 0
   hitboxTickRate: 0
   showHitbox: 0
   hitboxes:
-  - hitboxShape: 0
-    hitboxObject: {fileID: 8848302446038717648}
-    delay: 0
-    duration: 0
-    repeatDelay: 0
-    maxCollisions: 100
+  - {fileID: 6083922924301994257}
   oneTimeActions:
   - {fileID: 11400000, guid: 253723c39e5c34f4689b9f28587ec9e2, type: 2}
   particleSystems:
@@ -10167,7 +10164,9 @@ MonoBehaviour:
   radius: 0
   isAlive: 0
   fireTransform: {fileID: 0}
+  eyeTransform: {fileID: 0}
   isGrounded: 0
+  animator: {fileID: 0}
   abilities:
   - {fileID: 2106072115397107850}
   manaCost: 0
@@ -10178,6 +10177,8 @@ MonoBehaviour:
   summonLight: {fileID: 8848302446680366108}
   summonRenderer: {fileID: 441076044599383990}
   collider: {fileID: 3419165450066065032}
+  buildOnStart: 0
+  upgradeEffect: {fileID: 0}
   trigger: {fileID: 8418364080866687474}
   triggerLayerMask:
     serializedVersion: 2
@@ -10218,16 +10219,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8848302446038717615}
-  - component: {fileID: 8848302446038717612}
-  - component: {fileID: 8848302446038717613}
-  - component: {fileID: 8848302446038717614}
+  - component: {fileID: 6029275081877250242}
+  - component: {fileID: 6083922924301994257}
   m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8848302446038717615
 Transform:
   m_ObjectHideFlags: 0
@@ -10242,68 +10242,37 @@ Transform:
   m_Father: {fileID: 6836536636022711763}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8848302446038717612
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848302446038717648}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8848302446038717613
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848302446038717648}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: f0bbe3e0d5428254191ccf49e8e87bca, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8848302446038717614
-SphereCollider:
+--- !u!136 &6029275081877250242
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8848302446038717648}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6083922924301994257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848302446038717648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61f0df50cc211e4286e9232300dd315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  delay: 0
+  duration: 0
+  repeatDelay: 0
+  maxCollisions: 100
 --- !u!1 &8848302446680366109
 GameObject:
   m_ObjectHideFlags: 0
@@ -10507,6 +10476,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+  m_AreaLightEmissiveMeshLayer: -1
 --- !u!1 &8848302446843441588
 GameObject:
   m_ObjectHideFlags: 0
