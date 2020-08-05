@@ -11,46 +11,30 @@ namespace DD2.Actions
         [SerializeField] float force;
         [SerializeField] Vector3 direction;
         [SerializeField] bool relativeToPosition;
+        [SerializeField] Vector3 additionalForce;
         [SerializeField] ForceMode forceMode;
         [SerializeField] bool clearVelocity;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            Vector3 position = caller.GetPosition();
-            Vector3 vector;
             if (clearVelocity)
             {
                 target.ClearVelocity(true, true, true);
             }
             if (relativeToPosition)
             {
-                if (payload != null)
+                Vector3 direction;
+                if (payload.GetType() == typeof(Vector3))
                 {
-                    vector = Vector3.Normalize(target.GetPosition() - (Vector3)payload);
-                }
-                else if (caller != null)
-                {
-                    vector = Vector3.Normalize(target.GetPosition() - caller.GetPosition());
+                    direction = Util.Utilities.Direction((Vector3)payload, target.transform.position);
                 }
                 else
                 {
-                    vector = Vector3.zero;
+                    direction = Util.Utilities.Direction(caller.GetPosition(), target.GetPosition());
                 }
+                Debug.Log((direction * force) + additionalForce);
+                target.AddForce((direction * force) + additionalForce, forceMode);
             }
-            else
-            {
-                vector = direction.normalized;
-            }
-            if (vector == Vector3.zero)
-            {
-                vector = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
-            }
-            if (target.IsGrounded && (vector.y < 0.1f || vector.y > -0.1f))
-            {
-                vector += Vector3.up * 0.5f;
-                vector.Normalize();
-            }
-            target.AddForce(vector * force, forceMode);
         }
     }
 }

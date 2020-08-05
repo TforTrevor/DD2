@@ -4,17 +4,17 @@ using UnityEngine;
 using MEC;
 using UnityEngine.AI;
 using DD2.Abilities;
+using NaughtyAttributes;
 
 namespace DD2.AI
 {
     public class Enemy : EntityAI
     {
-        public Transform target;
-        [SerializeField] float distance;
-        [SerializeField] Vector3 offset;
-        [SerializeField] LayerMask groundedMask;
-        [SerializeField] float ragdollTime;
-        [SerializeField] bool isRagdolled;
+        [BoxGroup("Enemy")] [SerializeField] float distance;
+        [BoxGroup("Enemy")] [SerializeField] Vector3 offset;
+        [BoxGroup("Enemy")] [SerializeField] LayerMask groundedMask;
+        [BoxGroup("Enemy")] [SerializeField] float ragdollTime;
+        [BoxGroup("Enemy")] [SerializeField] bool isRagdolled;
 
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;

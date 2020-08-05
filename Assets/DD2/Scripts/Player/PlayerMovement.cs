@@ -27,6 +27,7 @@ namespace DD2
         bool isGrounded;
         int currentJumps;
         int maximumJumps = 1;
+        bool forceApplied;
 
         public bool IsMoving { get => isMoving; private set => isMoving = value; }
         public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
@@ -34,12 +35,6 @@ namespace DD2
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
-        }
-
-        void Update()
-        {
-            //if (enableLook)
-            //    Rotate();
         }
 
         void FixedUpdate()
@@ -57,6 +52,10 @@ namespace DD2
             RaycastHit hit;
             if (Physics.SphereCast(transform.position + new Vector3(0, groundedOffset, 0), groundedRadius, Vector3.down, out hit, groundedLength, groundedMask)) 
             {
+                if (!isGrounded)
+                {
+                    forceApplied = false;
+                }                
                 IsGrounded = true;
                 currentJumps = 0;
             }
@@ -68,52 +67,55 @@ namespace DD2
 
         void Move()
         {
-            if (Mathf.Abs(moveInput.Value.x) > 0 || Mathf.Abs(moveInput.Value.y) > 0)
+            if (!forceApplied)
             {
-                IsMoving = true;
-            }
-            else
-            {
-                IsMoving = false;
-            }
-
-            float tempAcceleration = IsGrounded ? acceleration : airAcceleration;
-
-            if (Mathf.Abs(moveInput.Value.x) > 0)
-            {
-                direction.x += moveInput.Value.x * (tempAcceleration) * Time.deltaTime;
-                direction.x = Mathf.Clamp(direction.x, -1, 1);
-            }
-            else
-            {
-                if (Mathf.Abs(direction.x) < 0.05f)
+                if (Mathf.Abs(moveInput.Value.x) > 0 || Mathf.Abs(moveInput.Value.y) > 0)
                 {
-                    direction.x = 0;
+                    IsMoving = true;
                 }
                 else
                 {
-                    direction.x -= Mathf.Sign(direction.x) * (tempAcceleration) * Time.deltaTime;
+                    IsMoving = false;
                 }
-            }
-            if (Mathf.Abs(moveInput.Value.y) > 0)
-            {
-                direction.y += moveInput.Value.y * (tempAcceleration) * Time.deltaTime;
-                direction.y = Mathf.Clamp(direction.y, -1, 1);
-            }
-            else
-            {
-                if (Mathf.Abs(direction.y) < 0.05f)
+
+                float tempAcceleration = IsGrounded ? acceleration : airAcceleration;
+
+                if (Mathf.Abs(moveInput.Value.x) > 0)
                 {
-                    direction.y = 0;
+                    direction.x += moveInput.Value.x * (tempAcceleration) * Time.deltaTime;
+                    direction.x = Mathf.Clamp(direction.x, -1, 1);
                 }
                 else
                 {
-                    direction.y -= Mathf.Sign(direction.y) * (tempAcceleration) * Time.deltaTime;
+                    if (Mathf.Abs(direction.x) < 0.05f)
+                    {
+                        direction.x = 0;
+                    }
+                    else
+                    {
+                        direction.x -= Mathf.Sign(direction.x) * (tempAcceleration) * Time.deltaTime;
+                    }
                 }
-            }
-            Vector2 temp = Vector2.ClampMagnitude(direction, 1);
-            Vector3 speed = new Vector3(temp.x * stats.MoveSpeed, rb.velocity.y, temp.y * stats.MoveSpeed);
-            rb.velocity = transform.TransformVector(speed);
+                if (Mathf.Abs(moveInput.Value.y) > 0)
+                {
+                    direction.y += moveInput.Value.y * (tempAcceleration) * Time.deltaTime;
+                    direction.y = Mathf.Clamp(direction.y, -1, 1);
+                }
+                else
+                {
+                    if (Mathf.Abs(direction.y) < 0.05f)
+                    {
+                        direction.y = 0;
+                    }
+                    else
+                    {
+                        direction.y -= Mathf.Sign(direction.y) * (tempAcceleration) * Time.deltaTime;
+                    }
+                }
+                Vector2 temp = Vector2.ClampMagnitude(direction, 1);
+                Vector3 speed = new Vector3(temp.x * stats.MoveSpeed, rb.velocity.y, temp.y * stats.MoveSpeed);
+                rb.velocity = transform.TransformVector(speed);
+            }            
         }
 
         void Rotate()
@@ -132,6 +134,12 @@ namespace DD2
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 currentJumps++;
             }
+        }
+
+        public void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            forceApplied = true;
+            rb.AddForce(force, forceMode);
         }
     }
 }
