@@ -9925,7 +9925,7 @@ GameObject:
   - component: {fileID: 8848302445012077282}
   - component: {fileID: 8848302445012077283}
   m_Layer: 16
-  m_Name: Sphere
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9952,7 +9952,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8848302445012077285}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -8264766115119967290, guid: 5fc10af65f1fc9348ae000d267214fb8, type: 3}
 --- !u!23 &8848302445012077283
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10040,7 +10040,7 @@ GameObject:
   - component: {fileID: 8848302445800181123}
   - component: {fileID: 8848302445800181124}
   m_Layer: 16
-  m_Name: Radius
+  m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10087,7 +10087,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ca173d58d8cf9040bb6e4e221dc6909, type: 2}
+  - {fileID: 2100000, guid: a2ce221e9bdfa2544b53dfc03a7a9f28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

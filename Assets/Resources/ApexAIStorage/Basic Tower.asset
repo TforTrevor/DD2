@@ -21,7 +21,7 @@ MonoBehaviour:
     Assembly-CSharp","not":false,"targetList":false,"layerMask":4096,"score":5}]}],"_defaultQualifier":{"@type":"Apex.AI.DefaultQualifier,
     ApexAI","action":{"@type":"Apex.AI.CompositeAction, ApexAI","_actions":[{"@type":"DD2.AI.Actions.ClearTarget,
     Assembly-CSharp","clearTarget":false,"clearTargetList":true,"layerMask":4096},{"@type":"DD2.AI.Actions.TargetScanner,
-    Assembly-CSharp","scanMask":4096,"coneCheck":true,"losCheck":false,"losBlock":0,"range":Attack,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Actions.SelectBestTarget,
+    Assembly-CSharp","scanMask":4096,"coneCheck":true,"losCheck":true,"losBlock":512,"range":Attack,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Actions.SelectBestTarget,
     Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.DistanceOption, Assembly-CSharp","multiplier":-1,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Scorers.PresenceOption,
     Assembly-CSharp","multiplier":1}]}]}}},{"@type":"Apex.AI.ScoreSelector, ApexAI","_id":eca59cde824848e89f6fda097c2fec47,"_qualifiers":[{"@type":"Apex.AI.CompositeScoreQualifier,
     ApexAI","action":{"@type":"DD2.AI.Actions.UseAbility, Assembly-CSharp","index":0,"enable":true},"_scorers":[{"@type":"DD2.AI.Scorers.RangeCheckTarget,

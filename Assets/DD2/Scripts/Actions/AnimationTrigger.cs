@@ -10,15 +10,22 @@ namespace DD2.Actions
         [SerializeField] string animationTrigger;
         [SerializeField] ApplyTo applyTo;
 
+        int animationId;
+
+        void OnEnable()
+        {
+            animationId = Animator.StringToHash(animationTrigger);
+        }
+
         public override void DoAction(Entity target, Entity caller, object payload)
         {
             if (applyTo == ApplyTo.Target)
             {
-                target.Animator.SetTrigger(animationTrigger);
+                target.Animator.SetTrigger(animationId);
             }
             else
             {
-                caller.Animator.SetTrigger(animationTrigger);
+                caller.Animator.SetTrigger(animationId);
             }
         }
 

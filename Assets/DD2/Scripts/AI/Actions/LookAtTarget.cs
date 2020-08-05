@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Apex.AI;
+﻿using Apex.AI;
 using Apex.Serialization;
 using DD2.AI.Context;
-using UnityEditor.Rendering.LookDev;
 
 namespace DD2.AI.Actions
 {
@@ -21,7 +17,7 @@ namespace DD2.AI.Actions
             if (state == State.Start && target != ctx.lookTarget)
             {
                 ctx.lookTarget = target;
-                entity.LookAt(target.transform);
+                entity.LookAt(target);
             }
             else
             {

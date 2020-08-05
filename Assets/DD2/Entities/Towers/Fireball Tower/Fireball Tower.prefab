@@ -345,6 +345,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   abilities:
   - {fileID: 1330807363680851574}
+  buildOnStart: 0
   manaCost: 100
   towerGraphics: {fileID: 184165993803470731}
   towerVertical: {fileID: 6375561326163811203}
@@ -353,7 +354,6 @@ MonoBehaviour:
   summonLight: {fileID: 2883186535015136886}
   summonRenderer: {fileID: 3200667261570169068}
   collider: {fileID: 5613189003723327719}
-  buildOnStart: 0
   upgradeEffect: {fileID: 0}
 --- !u!1 &5312015312721352768
 GameObject:
@@ -931,7 +931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &184165993803470731
 Transform:
   m_ObjectHideFlags: 0

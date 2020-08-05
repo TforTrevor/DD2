@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI.Components;
 using UnityEngine.VFX;
+using NaughtyAttributes;
 
 namespace DD2.AI
 {
     public class Tower : EntityAI
     {
-        [SerializeField] int manaCost;
-        [SerializeField] protected Transform towerGraphics;
-        [SerializeField] Transform towerVertical;
-        [SerializeField] protected Transform towerSummonGraphics;
-        [SerializeField] Color errorColor = Color.red;
-        [SerializeField] Light summonLight;
-        [SerializeField] protected MeshRenderer summonRenderer;
-        [SerializeField] new Collider collider;
-        [SerializeField] bool buildOnStart;
-        [SerializeField] VisualEffect upgradeEffect;
+        [BoxGroup("Tower")] [SerializeField] bool buildOnStart;
+        [BoxGroup("Tower")] [SerializeField] int manaCost;
+        [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
+        [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
+        [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
+        [BoxGroup("Tower")] [SerializeField] Color errorColor = Color.red;
+        [BoxGroup("Tower")] [SerializeField] Light summonLight;
+        [BoxGroup("Tower")] [SerializeField] protected MeshRenderer summonRenderer;
+        [BoxGroup("Tower")] [SerializeField] new Collider collider;
+        [BoxGroup("Tower")] [SerializeField] VisualEffect upgradeEffect;
+
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
         Color defaultColor;

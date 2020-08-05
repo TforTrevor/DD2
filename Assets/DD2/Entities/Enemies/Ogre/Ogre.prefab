@@ -197,7 +197,7 @@ MonoBehaviour:
   onCooldown: 0
   isUsing: 0
   isToggle: 1
-  toggleTickRate: 5
+  toggleTickRate: 7.5
   toggleState: 0
   bufferInput: 0
   bufferTime: 0
@@ -405,7 +405,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 4
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

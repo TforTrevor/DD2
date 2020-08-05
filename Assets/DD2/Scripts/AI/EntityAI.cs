@@ -28,10 +28,10 @@ namespace DD2.AI
             return context;
         }
 
-        public virtual void LookAt(Transform transform)
+        public virtual void LookAt(Entity entity)
         {
             StopLookAt();
-            lookHandle = Timing.RunCoroutine(LookAtRoutine(transform));
+            lookHandle = Timing.RunCoroutine(LookAtRoutine(entity));
         }
 
         public virtual void StopLookAt()
@@ -39,15 +39,22 @@ namespace DD2.AI
             Timing.KillCoroutines(lookHandle);
         }
 
-        protected virtual IEnumerator<float> LookAtRoutine(Transform transform)
+        protected virtual IEnumerator<float> LookAtRoutine(Entity entity)
         {
             while (true)
             {
-                Vector2 start = new Vector2(this.transform.position.x, this.transform.position.z);
-                Vector2 end = new Vector2(transform.position.x, transform.position.z);
-                Vector2 direction = Util.Utilities.Direction(start, end);
-                this.transform.forward = new Vector3(direction.x, 0, direction.y);
-                yield return Timing.WaitForOneFrame;
+                if (entity.IsAlive)
+                {
+                    Vector2 start = new Vector2(transform.position.x, transform.position.z);
+                    Vector2 end = new Vector2(entity.transform.position.x, entity.transform.position.z);
+                    Vector2 direction = Util.Utilities.Direction(start, end);
+                    transform.forward = new Vector3(direction.x, 0, direction.y);
+                    yield return Timing.WaitForOneFrame;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }
