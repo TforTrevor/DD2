@@ -11,6 +11,7 @@ namespace DD2
     {
         [SerializeField] LayerMask repairMask;
         [SerializeField] float healAmount;
+        [SerializeField] float manaMultiplier;
 
         CoroutineHandle repairHandle;
         bool isRepairing;
@@ -66,7 +67,7 @@ namespace DD2
                 if (player.CurrentMana >= healAmount * Time.deltaTime)
                 {
                     tower.Heal(player, healAmount * Time.deltaTime);
-                    player.SpendMana(Mathf.CeilToInt(healAmount * Time.deltaTime));
+                    player.SpendMana(Mathf.CeilToInt(healAmount * manaMultiplier * Time.deltaTime));
                 }
                 else
                 {

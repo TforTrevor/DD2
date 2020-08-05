@@ -238,6 +238,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 67584
   healAmount: 30
+  manaMultiplier: 0.1
 --- !u!114 &3907625137405831111
 MonoBehaviour:
   m_ObjectHideFlags: 0
