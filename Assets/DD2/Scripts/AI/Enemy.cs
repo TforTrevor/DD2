@@ -45,7 +45,7 @@ namespace DD2.AI
             if (Stats != null)
             {
                 Stats.RandomizeHealth(Stats.MaxHealth * 0.25f);
-                Stats.RandomizeResistances();
+                //Stats.RandomizeResistances();
             }            
         }
 
@@ -153,12 +153,10 @@ namespace DD2.AI
             }            
         }
 
-        //void Update()
-        //{
-        //    if (animator != null)
-        //    {
-        //        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
-        //    }            
-        //}
+        public override void SetMoveSpeed(float speed)
+        {
+            base.SetMoveSpeed(speed);
+            navMeshAgent.speed = Stats.MoveSpeed;
+        }
     }
 }

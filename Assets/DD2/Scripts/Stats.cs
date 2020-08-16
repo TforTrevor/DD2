@@ -15,6 +15,7 @@ namespace DD2
         [SerializeField] [BoxGroup("Character")] float moveSpeed;
         [SerializeField] [BoxGroup("Character")] float presence;
 
+        [SerializeField] [EnumFlags] [BoxGroup("Resistances")] ElementType resistedElements;
         [SerializeField] [BoxGroup("Resistances")] float physicalResist;
         [SerializeField] [BoxGroup("Resistances")] float fireResist;
         [SerializeField] [BoxGroup("Resistances")] float lightningResist;
@@ -32,6 +33,7 @@ namespace DD2
         public float AttackSpeed { get => attackSpeed; private set => attackSpeed = value; }
         public float MoveSpeed { get => moveSpeed; private set => moveSpeed = value; }
         public float Presence { get => presence; private set => presence = value; }
+        public ElementType ResistedElements { get => resistedElements; private set => resistedElements = value; }
         public float PhysicalResist { get => physicalResist; private set => physicalResist = value; }
         public float FireResist { get => fireResist; private set => fireResist = value; }
         public float LightningResist { get => lightningResist; private set => lightningResist = value; }

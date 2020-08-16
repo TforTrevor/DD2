@@ -17,6 +17,7 @@ namespace DD2
         [SerializeField] private int currentMana;
         [SerializeField] private float radius;
         [ReadOnly] [SerializeField] private bool isAlive;
+        [ReadOnly] [SerializeField] private StatusEffect statusEffects;
 
         [SerializeField] private Transform fireTransform;
         [SerializeField] private Transform eyeTransform;
@@ -44,6 +45,7 @@ namespace DD2
         public Animator Animator { get => animator; private set => animator = value; }
         public Transform FireTransform { get => fireTransform; private set => fireTransform = value; }
         public Vector3 EyePosition { get => eyeTransform != null ? eyeTransform.position : transform.position; }
+        public StatusEffect StatusEffects { get => statusEffects; private set => statusEffects = value; }
 
         protected virtual void Awake()
         {
@@ -170,11 +172,6 @@ namespace DD2
             EntityPool.Instance.ReturnObject(ObjectPoolKey, this);
         }
 
-        public virtual Vector3 GetVelocity()
-        {
-            return rb.velocity;
-        }
-
         public virtual void AddForce(Vector3 force, ForceMode forceMode)
         {
             rb.AddForce(force, forceMode);
@@ -237,6 +234,21 @@ namespace DD2
         public virtual Vector3 GetForward()
         {
             return transform.forward;
+        }
+
+        public virtual void SetMoveSpeed(float speed)
+        {
+            Stats.MoveSpeed = speed;
+        }
+
+        public void AddStatus(StatusEffect status)
+        {
+            statusEffects |= status;
+        }
+
+        public void RemoveStatus(StatusEffect status)
+        {
+            statusEffects &= ~status;
         }
     }
 }

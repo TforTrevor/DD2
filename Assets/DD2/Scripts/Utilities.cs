@@ -7,7 +7,6 @@ namespace DD2.Util
 {
     public static class Utilities
     {
-
         public static Collider GetClosestToPoint(Collider[] colliders, Vector3 position)
         {
             Collider closestCollider = null;

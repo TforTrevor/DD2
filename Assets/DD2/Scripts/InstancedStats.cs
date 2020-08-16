@@ -13,6 +13,7 @@ namespace DD2
         public float MoveSpeed;
         public float Presence;
 
+        public ElementType ResistedElements;
         public float PhysicalResist;
         public float FireResist;
         public float LightningResist;
@@ -32,6 +33,7 @@ namespace DD2
             AttackSpeed = stats.AttackSpeed;
             MoveSpeed = stats.MoveSpeed;
             Presence = stats.Presence;
+            ResistedElements = stats.ResistedElements;
             PhysicalResist = stats.PhysicalResist;
             FireResist = stats.FireResist;
             LightningResist = stats.LightningResist;

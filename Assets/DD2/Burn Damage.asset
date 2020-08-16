@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c837e949135b73449d74eb109a27115, type: 3}
-  m_Name: Fireball Tower Damage
+  m_Name: Burn Damage
   m_EditorClassIdentifier: 
   elementType: 2
   damageType: 0
   ignoreStats: 0
   swapTargetAndCaller: 0
-  damage: 50
+  damage: 100
   hitlagMultiplier: 0

@@ -17,27 +17,30 @@ namespace DD2.Actions
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            if (damageType == DamageType.Flat)
+            if (!target.Stats.ResistedElements.HasFlag(elementType) || target.Stats.ResistedElements == ElementType.None)
             {
-                if (swapTargetAndCaller)
-                    Flat(caller, target);
-                else
-                    Flat(target, caller);
-            }
-            else if (damageType == DamageType.PercentMaxHealth)
-            {
-                if (swapTargetAndCaller)
-                    PercentMaxHealth(caller, target);
-                else
-                    PercentMaxHealth(target, caller);
-            }
-            else if (damageType == DamageType.PercentCurrentHealth)
-            {
-                if (swapTargetAndCaller)
-                    PercentCurrentHealth(caller, target);
-                else
-                    PercentCurrentHealth(target, caller);
-            }
+                if (damageType == DamageType.Flat)
+                {
+                    if (swapTargetAndCaller)
+                        Flat(caller, target);
+                    else
+                        Flat(target, caller);
+                }
+                else if (damageType == DamageType.PercentMaxHealth)
+                {
+                    if (swapTargetAndCaller)
+                        PercentMaxHealth(caller, target);
+                    else
+                        PercentMaxHealth(target, caller);
+                }
+                else if (damageType == DamageType.PercentCurrentHealth)
+                {
+                    if (swapTargetAndCaller)
+                        PercentCurrentHealth(caller, target);
+                    else
+                        PercentCurrentHealth(target, caller);
+                }
+            }            
         }
 
         void Flat(Entity target, Entity caller)

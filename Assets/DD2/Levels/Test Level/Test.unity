@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.040260017, g: 0.033956703, b: 0.036267426, a: 1}
+  m_IndirectSpecularColor: {r: 0.04025978, g: 0.03395706, b: 0.036267396, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7011,17 +7011,17 @@ PrefabInstance:
     - target: {fileID: 3054706925385295338, guid: 9055b27e3891edf4b963c3356389f8ca,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3054706925385295348, guid: 9055b27e3891edf4b963c3356389f8ca,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3054706925385295348, guid: 9055b27e3891edf4b963c3356389f8ca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.75
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 3054706925385295348, guid: 9055b27e3891edf4b963c3356389f8ca,
         type: 3}
@@ -7821,7 +7821,7 @@ PrefabInstance:
     - target: {fileID: 3199320008054047988, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4095120498645782536, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
@@ -27837,7 +27837,7 @@ PrefabInstance:
     - target: {fileID: 3199320008054047988, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4095120498645782536, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
@@ -62962,6 +62962,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: abilityEffects.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: abilityEffects.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 23f2507037af2474b81d79dd8cc9c6d0,
+        type: 2}
+    - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: abilityEffects.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2008594d81194ba4f93c830dcf8c470b,
+        type: 2}
     - target: {fileID: 1988815452, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

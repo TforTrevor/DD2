@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c837e949135b73449d74eb109a27115, type: 3}
-  m_Name: Fireball Tower Damage
+  m_Script: {fileID: 11500000, guid: cbf335690f8e39c4788e462ba2f34fa9, type: 3}
+  m_Name: Slow Status
   m_EditorClassIdentifier: 
-  elementType: 2
-  damageType: 0
-  ignoreStats: 0
-  swapTargetAndCaller: 0
-  damage: 50
-  hitlagMultiplier: 0
+  statusEffect: 8
+  strength: 200
+  duration: 5
+  damage: {fileID: 0}
