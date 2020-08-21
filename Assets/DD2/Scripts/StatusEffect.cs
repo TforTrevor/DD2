@@ -7,9 +7,21 @@ namespace DD2
     public enum StatusEffect
     {
         None = 0,
-        Stunned = 1 << 0,
-        Frozen = 1 << 1,
-        Burned = 1 << 2,
-        Slowed = 1 << 3
+        Stun = 1 << 0,
+        Freeze = 1 << 1,
+        Burn = 1 << 2,
+        Slow = 1 << 3,
+        Speed = 1 << 4,
+        Root = 1 << 5,
+        Fear = 1 << 6,
+        Confuse = 1 << 7
     }
+
+    //Poison, exponential DOT
+    //Rooted
+    //Fear
+    //Confusion
+    //Speed
+    //Stat buff / debuff
+    //
 }

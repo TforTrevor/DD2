@@ -1,4 +1,6 @@
-﻿using MEC;
+﻿using DD2.UI;
+using MEC;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +42,7 @@ namespace DD2.Actions
                     else
                         PercentCurrentHealth(target, caller);
                 }
-            }            
+            }
         }
 
         void Flat(Entity target, Entity caller)
@@ -57,9 +59,10 @@ namespace DD2.Actions
             }
             else
             {
-                float damage = this.damage * multiplier * GetDamageMultiplier(target.Stats);
+                float damage = this.damage * multiplier * GetDamageMultiplier(target);
                 target.Damage(caller, damage);
                 caller?.Hitlag(HitlagFormula(damage));
+                DamageUICanvas.Instance.ShowDamage(target, damage);
             }
         }
 
@@ -72,7 +75,7 @@ namespace DD2.Actions
             }
             else
             {
-                float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
+                float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target);
                 target.Damage(caller, damage);
                 caller?.Hitlag(HitlagFormula(damage));
             }            
@@ -87,29 +90,17 @@ namespace DD2.Actions
             }
             else
             {
-                float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target.Stats);
+                float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target);
                 target.Damage(caller, damage);
                 caller?.Hitlag(HitlagFormula(damage));
             }            
         }
 
-        float GetDamageMultiplier(InstancedStats targetStats)
+        float GetDamageMultiplier(Entity entity)
         {
-            if (targetStats != null)
+            if (entity.StatusEffects.HasFlag(StatusEffect.Freeze))
             {
-                switch (elementType)
-                {
-                    case ElementType.Fire:
-                        return ResistanceFormula(targetStats.FireResist);
-                    case ElementType.Lightning:
-                        return ResistanceFormula(targetStats.LightningResist);
-                    case ElementType.Energy:
-                        return ResistanceFormula(targetStats.EnergyResist);
-                    case ElementType.Water:
-                        return ResistanceFormula(targetStats.WaterResist);
-                    default:
-                        return ResistanceFormula(targetStats.PhysicalResist);
-                }
+                return 2;
             }
             else
             {

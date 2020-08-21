@@ -14,7 +14,7 @@ namespace DD2.Actions
         [SerializeField] float duration;
         [ShowIf("ShowDamage")] [SerializeField] Damage damage;
 
-        bool ShowDamage { get => statusEffect == StatusEffect.Burned; }
+        bool ShowDamage { get => statusEffect == StatusEffect.Burn; }
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
@@ -22,17 +22,29 @@ namespace DD2.Actions
             {
                 switch (statusEffect)
                 {
-                    case StatusEffect.Stunned:
-                        Stunned(target, caller, payload);
+                    case StatusEffect.Stun:
+                        Timing.RunCoroutine(GenericRoutine(target, caller, payload));
                         break;
-                    case StatusEffect.Frozen:
-                        Frozen(target, caller, payload);
+                    case StatusEffect.Freeze:
+                        Timing.RunCoroutine(GenericRoutine(target, caller, payload));
                         break;
-                    case StatusEffect.Burned:
+                    case StatusEffect.Burn:
                         Timing.RunCoroutine(BurnRoutine(target, caller, payload));
                         break;
-                    case StatusEffect.Slowed:
+                    case StatusEffect.Slow:
                         Timing.RunCoroutine(SlowRoutine(target, caller, payload));
+                        break;
+                    case StatusEffect.Speed:
+                        Timing.RunCoroutine(SpeedRoutine(target, caller, payload));
+                        break;
+                    case StatusEffect.Root:
+                        Timing.RunCoroutine(RootRoutine(target, caller, payload));
+                        break;
+                    case StatusEffect.Fear:
+                        Timing.RunCoroutine(GenericRoutine(target, caller, payload));
+                        break;
+                    case StatusEffect.Confuse:
+                        Timing.RunCoroutine(GenericRoutine(target, caller, payload));
                         break;
                     default:
                         break;
@@ -40,14 +52,13 @@ namespace DD2.Actions
             }
         }
 
-        void Stunned(Entity target, Entity caller, object payload)
+        IEnumerator<float> GenericRoutine(Entity target, Entity caller, object payload)
         {
+            target.AddStatus(statusEffect);
 
-        }
+            yield return Timing.WaitForSeconds(duration);
 
-        void Frozen(Entity target, Entity caller, object payload)
-        {
-
+            target.RemoveStatus(statusEffect);
         }
 
         IEnumerator<float> BurnRoutine(Entity target, Entity caller, object payload)
@@ -56,9 +67,9 @@ namespace DD2.Actions
             float currentDuration = 0;
             while (currentDuration < duration)
             {
-                damage.DoAction(target, caller, payload);
-                currentDuration += 0.5f;
                 yield return Timing.WaitForSeconds(0.5f);
+                damage.DoAction(target, caller, payload);
+                currentDuration += 0.5f;                
             }
             target.RemoveStatus(statusEffect);
         }
@@ -72,6 +83,31 @@ namespace DD2.Actions
             yield return Timing.WaitForSeconds(duration);
 
             target.SetMoveSpeed(target.Stats.MoveSpeed * value);
+            target.RemoveStatus(statusEffect);
+        }
+
+        IEnumerator<float> SpeedRoutine(Entity target, Entity caller, object payload)
+        {
+            target.AddStatus(statusEffect);
+            float value = Mathf.Max(100, strength) / 100;
+            target.SetMoveSpeed(target.Stats.MoveSpeed * value);
+
+            yield return Timing.WaitForSeconds(duration);
+
+            target.SetMoveSpeed(target.Stats.MoveSpeed / value);
+            target.RemoveStatus(statusEffect);
+        }
+
+        IEnumerator<float> RootRoutine(Entity target, Entity caller, object payload)
+        {
+            target.AddStatus(statusEffect);
+
+            float previousSpeed = target.Stats.MoveSpeed;
+            target.SetMoveSpeed(0);
+
+            yield return Timing.WaitForSeconds(duration);
+
+            target.SetMoveSpeed(previousSpeed);
             target.RemoveStatus(statusEffect);
         }
     }
