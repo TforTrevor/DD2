@@ -13,7 +13,10 @@ namespace DD2.AI.Actions
         {
             AIContext ctx = (AIContext)context;
 
-            ctx.attention = ctx.target.Stats.Presence;
+            if (ctx.target != null)
+            {
+                ctx.attention = ctx.target.Stats.Presence;
+            }
         }
     }
 }

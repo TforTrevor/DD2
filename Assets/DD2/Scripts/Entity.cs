@@ -23,7 +23,7 @@ namespace DD2
         [SerializeField] private Transform eyeTransform;
         [ReadOnly] [SerializeField] private bool isGrounded;
         [SerializeField] Animator animator;
-        [SerializeField] [ReorderableList] protected Ability[] abilities;
+        [SerializeField] [ReorderableList] protected List<Ability> abilities;
 
         public event EventHandler<float> healthUpdated;
         public event EventHandler<float> manaUpdated;
@@ -46,12 +46,13 @@ namespace DD2
         public Transform FireTransform { get => fireTransform; private set => fireTransform = value; }
         public Vector3 EyePosition { get => eyeTransform != null ? eyeTransform.position : transform.position; }
         public StatusEffect StatusEffects { get => statusEffects; private set => statusEffects = value; }
+        public List<Ability> Abilities { get => abilities; private set => abilities = value; }
 
         protected virtual void Awake()
         {
             rb = GetComponent<Rigidbody>();
             Colliders = GetComponents<Collider>();
-            for (int i = 0; i < abilities.Length; i++)
+            for (int i = 0; i < abilities.Count; i++)
             {
                 abilities[i].SetEntity(this);
             }
@@ -215,16 +216,6 @@ namespace DD2
 
 
         //ACCESSORS
-
-        public Ability GetAbility(int index)
-        {
-            return abilities[index];
-        }
-
-        public Ability[] GetAllAbilities()
-        {
-            return abilities;
-        }
 
         public virtual Vector3 GetPosition()
         {

@@ -59,7 +59,7 @@ namespace DD2.Abilities
             while(true)
             {
                 hitColliders.Clear();
-                int tempCount = hitbox.GetCollisionNonAlloc(position, layerMask, collisions);
+                int tempCount = hitbox.GetCollisionNonAlloc(position, LayerMask, collisions);
                 for (int i = 0; i < tempCount; i++)
                 {
                     hitColliders.Add(collisions[i]);

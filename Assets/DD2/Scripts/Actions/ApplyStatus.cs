@@ -1,4 +1,5 @@
-﻿using MEC;
+﻿using DD2.Abilities;
+using MEC;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;

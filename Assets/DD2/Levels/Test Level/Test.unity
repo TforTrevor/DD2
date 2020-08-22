@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04102449, g: 0.03518736, b: 0.038289066, a: 1}
+  m_IndirectSpecularColor: {r: 0.040472537, g: 0.03407764, b: 0.03628045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -63130,17 +63130,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: abilityEffects.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: abilityEffects.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 23f2507037af2474b81d79dd8cc9c6d0,
+      objectReference: {fileID: 11400000, guid: 4eaa719bf38afae4d9bd351d71ce64f7,
         type: 2}
     - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: abilityEffects.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 2008594d81194ba4f93c830dcf8c470b,
+        type: 2}
+    - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: abilityEffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: fb1a9c177a8b290459f838cd7fbea523,
+        type: 2}
+    - target: {fileID: 1708777732, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
+      propertyPath: abilityEffects.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: dfcd615bcb841b445846bdca7f6339fd,
         type: 2}
     - target: {fileID: 1988815452, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -63739,17 +63749,17 @@ PrefabInstance:
     - target: {fileID: 8672604066086514324, guid: a0804dd505be82b4ca51575038041fc6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.630136
+      value: -6.75
       objectReference: {fileID: 0}
     - target: {fileID: 8672604066086514324, guid: a0804dd505be82b4ca51575038041fc6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672604066086514324, guid: a0804dd505be82b4ca51575038041fc6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 10.25
       objectReference: {fileID: 0}
     - target: {fileID: 8672604066086514324, guid: a0804dd505be82b4ca51575038041fc6,
         type: 3}

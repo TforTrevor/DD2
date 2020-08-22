@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbf335690f8e39c4788e462ba2f34fa9, type: 3}
-  m_Name: Speed
+  m_Name: Confuse
   m_EditorClassIdentifier: 
-  statusEffect: 16
-  strength: 200
-  duration: 5
+  statusEffect: 128
+  strength: 0
+  duration: 100
   damage: {fileID: 0}

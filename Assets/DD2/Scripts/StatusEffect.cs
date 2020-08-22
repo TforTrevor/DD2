@@ -18,10 +18,6 @@ namespace DD2
     }
 
     //Poison, exponential DOT
-    //Rooted
-    //Fear
-    //Confusion
-    //Speed
     //Stat buff / debuff
-    //
+    //Taunt
 }

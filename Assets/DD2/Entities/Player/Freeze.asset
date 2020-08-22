@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf335690f8e39c4788e462ba2f34fa9, type: 3}
   m_Name: Freeze
   m_EditorClassIdentifier: 
-  statusEffect: 0
+  statusEffect: 2
   strength: 0
-  duration: 0
+  duration: 5
   damage: {fileID: 0}

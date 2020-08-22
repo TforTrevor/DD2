@@ -17,7 +17,8 @@ MonoBehaviour:
   attackDamage: 0
   attackSpeed: 0
   moveSpeed: 0
-  presence: 0
+  presence: 1
+  resistedElements: 0
   physicalResist: 0
   fireResist: 0
   lightningResist: 0

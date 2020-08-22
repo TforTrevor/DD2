@@ -205,6 +205,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 11264
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   multiTarget: 0
   hitSelf: 0
   hitboxTickRate: 0
@@ -354,13 +357,13 @@ MonoBehaviour:
   currentMana: 0
   radius: 1
   isAlive: 0
+  statusEffects: 0
   fireTransform: {fileID: 1547989622}
   eyeTransform: {fileID: 7163324005030831721}
   isGrounded: 0
   animator: {fileID: 5866666020778272776}
   abilities:
   - {fileID: 1004062947}
-  target: {fileID: 0}
   distance: 0.2
   offset: {x: 0, y: -0.95, z: 0}
   groundedMask:
