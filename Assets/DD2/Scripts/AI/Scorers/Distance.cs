@@ -18,7 +18,7 @@ namespace DD2.AI.Scorers
         {
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
-            float score = Vector3.Distance(entity.GetPosition(), target.GetPosition())
+            float score = Vector3.Distance(entity.transform.position, target.transform.position)
                             - (includeRadius ? entity.Radius : 0)
                             - (includeTargetRadius ? target.Radius : 0);
             return score * multiplier;
@@ -35,7 +35,7 @@ namespace DD2.AI.Scorers
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
             Entity target = ctx.target;
-            float distance = Vector3.Distance(entity.GetPosition(), target.GetPosition())
+            float distance = Vector3.Distance(entity.transform.position, target.transform.position)
                             - (includeRadius ? entity.Radius : 0)
                             - (includeTargetRadius ? target.Radius : 0);
             return distance * score;

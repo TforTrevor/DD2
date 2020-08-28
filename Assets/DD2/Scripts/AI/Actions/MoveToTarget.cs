@@ -26,13 +26,13 @@ namespace DD2.AI.Actions
                 float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
                 float entityRadius = includeRadius ? entity.Radius : 0;
                 float targetRadius = includeTargetRadius ? ctx.target.Radius : 0;
-                float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) - entityRadius - targetRadius;
+                float distance = Vector3.Distance(ctx.target.transform.position, entity.transform.position) - entityRadius - targetRadius;
 
                 if (ensureMaxRange)
                 {
-                    Vector3 direction = Vector3.Normalize(ctx.target.GetPosition() - entity.GetPosition());
+                    Vector3 direction = Vector3.Normalize(ctx.target.transform.position - entity.transform.position);
                     float distanceFromRange = distance - range + 0.1f;
-                    Vector3 position = (direction * distanceFromRange) + entity.GetPosition();
+                    Vector3 position = (direction * distanceFromRange) + entity.transform.position;
                     entity.MoveToPosition(position);
                 }
                 else

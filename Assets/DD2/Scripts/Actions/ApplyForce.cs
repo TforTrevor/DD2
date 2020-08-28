@@ -30,7 +30,7 @@ namespace DD2.Actions
                 }
                 else
                 {
-                    direction = Util.Utilities.Direction(caller.GetPosition(), target.GetPosition());
+                    direction = Util.Utilities.Direction(caller.transform.position, target.transform.position);
                 }
                 target.AddForce((direction * force) + additionalForce, forceMode);
             }

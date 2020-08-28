@@ -23,7 +23,7 @@ namespace DD2.AI.Scorers
             Entity entity = ctx.entity;
             Entity target = ctx.target;
 
-            float distance = Vector3.Distance(ctx.target.GetPosition(), entity.GetPosition()) 
+            float distance = Vector3.Distance(ctx.target.transform.position, entity.transform.position) 
                                 - (includeRadius ? entity.Radius : 0)
                                 - (includeTargetRadius ? ctx.target.Radius : 0);
             float range = rangeCheck == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;

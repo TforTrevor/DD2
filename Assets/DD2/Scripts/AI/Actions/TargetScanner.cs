@@ -26,13 +26,13 @@ namespace DD2.AI.Actions
             float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;                            
             float angle = this.range == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
 
-            Collider[] colliders = Physics.OverlapSphere(entity.GetPosition(), range, scanMask);
+            Collider[] colliders = Physics.OverlapSphere(entity.transform.position, range, scanMask);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Entity temp = colliders[i].GetComponent<Entity>();
                 if (temp != null)
                 {
-                    float enemyDistance = Vector3.Distance(entity.GetPosition(), temp.GetPosition())
+                    float enemyDistance = Vector3.Distance(entity.transform.position, temp.transform.position)
                                         - (includeRadius ? entity.Radius : 0)
                                         - (includeTargetRadius ? temp.Radius : 0);
                     if (enemyDistance < range)

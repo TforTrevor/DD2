@@ -16,7 +16,7 @@ namespace DD2.AI.Actions
             Enemy entity = (Enemy)ctx.entity;
 
             ctx.pathTarget = null;
-            entity.MoveToPosition(entity.GetPosition());
+            entity.MoveToPosition(entity.transform.position);
         }
     }
 }

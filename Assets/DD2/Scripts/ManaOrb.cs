@@ -47,9 +47,9 @@ namespace DD2
             {
                 if (entity.CurrentMana < entity.Stats.MaxMana)
                 {
-                    Vector3 direction = Vector3.Normalize(entity.GetPosition() - transform.position);
+                    Vector3 direction = Vector3.Normalize(entity.transform.position - transform.position);
                     transform.position += direction * pickUpSpeed * Time.deltaTime;
-                    if (Vector3.Distance(transform.position, entity.GetPosition()) < terminateDistance)
+                    if (Vector3.Distance(transform.position, entity.transform.position) < terminateDistance)
                     {
                         entity.GiveMana(amount);
                         ManaOrbPool.Instance.ReturnObject(amount.ToString(), this);
@@ -59,7 +59,7 @@ namespace DD2
                 else
                 {
                     rb.isKinematic = false;
-                    rb.velocity = Vector3.Normalize(entity.GetPosition() - transform.position) * pickUpSpeed;
+                    rb.velocity = Vector3.Normalize(entity.transform.position - transform.position) * pickUpSpeed;
                     isPickedUp = false;
                     break;
                 }                

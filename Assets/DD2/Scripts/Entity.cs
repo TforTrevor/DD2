@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using DD2.Abilities;
-using DD2.Actions;
 using System;
 using MEC;
 
@@ -29,7 +27,6 @@ namespace DD2
         public event EventHandler<float> manaUpdated;
         public event EventHandler<Entity> onDeath;
         protected Rigidbody rb;
-        private Collider[] colliders;
         protected InstancedStats instancedStats;
         protected CoroutineHandle hitlagHandle;
         protected int animatorSpeed;
@@ -41,7 +38,7 @@ namespace DD2
         public float CurrentHealth { get => currentHealth; protected set => currentHealth = value; }
         public int CurrentMana { get => currentMana; protected set => currentMana = value; }
         public bool IsGrounded { get => isGrounded; protected set => isGrounded = value; }
-        public Collider[] Colliders { get => colliders; protected set => colliders = value; }
+        public Collider[] Colliders { get; protected set; }
         public Animator Animator { get => animator; private set => animator = value; }
         public Transform FireTransform { get => fireTransform; private set => fireTransform = value; }
         public Vector3 EyePosition { get => eyeTransform != null ? eyeTransform.position : transform.position; }
@@ -155,7 +152,7 @@ namespace DD2
             List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(CurrentMana);
             foreach (ManaOrb orb in manaOrbs)
             {
-                orb.transform.position = GetPosition() + Vector3.up;
+                orb.transform.position = transform.position + Vector3.up;
                 orb.gameObject.SetActive(true);
                 orb.Burst(3f);
             }
@@ -216,16 +213,6 @@ namespace DD2
 
 
         //ACCESSORS
-
-        public virtual Vector3 GetPosition()
-        {
-            return transform.position;
-        }
-
-        public virtual Vector3 GetForward()
-        {
-            return transform.forward;
-        }
 
         public virtual void SetMoveSpeed(float speed)
         {

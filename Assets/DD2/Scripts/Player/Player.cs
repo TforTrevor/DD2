@@ -51,7 +51,7 @@ namespace DD2
         protected virtual void FixedUpdate()
         {
             Util.Utilities.ClearArray(manaOrbs, manaOrbsCount);
-            manaOrbsCount = Physics.OverlapSphereNonAlloc(GetPosition(), manaOrbRadius, manaOrbs, manaOrbLayerMask);
+            manaOrbsCount = Physics.OverlapSphereNonAlloc(transform.position, manaOrbRadius, manaOrbs, manaOrbLayerMask);
             for (int i = 0; i < manaOrbsCount; i++)
             {
                 ManaOrb orb = manaOrbs[i].GetComponent<ManaOrb>();

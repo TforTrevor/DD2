@@ -108,9 +108,9 @@ namespace DD2.AI
             if (context != null && context.target != null)
             {
                 Entity target = context.target;
-                Vector3 direction = (target.GetPosition() - transform.position).normalized;
+                Vector3 direction = (target.transform.position - transform.position).normalized;
                 Vector3 horizontal = Vector3.Scale(direction, new Vector3(1, 0, 1));
-                Vector3 vertical = (target.GetPosition() - towerVertical.position).normalized;
+                Vector3 vertical = (target.transform.position - towerVertical.position).normalized;
                 towerGraphics.rotation = Quaternion.LookRotation(horizontal);
                 towerVertical.rotation = Quaternion.LookRotation(vertical);
             }

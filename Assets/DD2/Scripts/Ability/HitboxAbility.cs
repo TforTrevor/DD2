@@ -64,7 +64,7 @@ namespace DD2.Abilities
             while (true)
             {
                 Util.Utilities.ClearArray(collisions, collisionCount);
-                collisionCount = hitbox.GetCollisionNonAlloc(target.GetPosition(), LayerMask, collisions);
+                collisionCount = hitbox.GetCollisionNonAlloc(target.transform.position, LayerMask, collisions);
                 HitboxTick(target, hitbox.transform.position, collisions);
                 yield return hitboxTickRate;
             }

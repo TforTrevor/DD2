@@ -15,7 +15,7 @@ namespace DD2.Actions
             Entity entity = EntityPool.Instance.GetObject(key);
             if (entity != null)
             {
-                entity.transform.rotation = Quaternion.LookRotation(caller.GetForward(), Vector3.up);
+                entity.transform.rotation = Quaternion.LookRotation(caller.transform.forward, Vector3.up);
                 entity.transform.position = caller.transform.TransformPoint(offset);
                 entity.gameObject.SetActive(true);
             }            
