@@ -15,6 +15,7 @@ namespace DD2
         [SerializeField] float sensitivity;
         [SerializeField] float acceleration;
         [SerializeField] float airAcceleration;
+        [SerializeField] float brakeSpeed;
         [SerializeField] float jumpForce;
         [SerializeField] Vector2 direction;
         [SerializeField] LayerMask groundedMask;
@@ -23,14 +24,12 @@ namespace DD2
         [SerializeField] float groundedRadius;
 
         Rigidbody rb;
-        bool isMoving;
-        bool isGrounded;
         int currentJumps;
         int maximumJumps = 1;
-        bool forceApplied;
 
-        public bool IsMoving { get => isMoving; private set => isMoving = value; }
-        public bool IsGrounded { get => isGrounded; private set => isGrounded = value; }
+        public bool IsMoving { get; private set; }
+        public bool IsGrounded { get; private set; }
+        public Vector3 Velocity { get; private set; }
 
         void Awake()
         {
@@ -52,10 +51,6 @@ namespace DD2
             RaycastHit hit;
             if (Physics.SphereCast(transform.position + new Vector3(0, groundedOffset, 0), groundedRadius, Vector3.down, out hit, groundedLength, groundedMask)) 
             {
-                if (!isGrounded)
-                {
-                    forceApplied = false;
-                }                
                 IsGrounded = true;
                 currentJumps = 0;
             }
@@ -67,55 +62,25 @@ namespace DD2
 
         void Move()
         {
-            if (!forceApplied)
+            if (moveInput.Value.magnitude > 0)
             {
-                if (Mathf.Abs(moveInput.Value.x) > 0 || Mathf.Abs(moveInput.Value.y) > 0)
-                {
-                    IsMoving = true;
-                }
-                else
-                {
-                    IsMoving = false;
-                }
+                IsMoving = true;
 
                 float tempAcceleration = IsGrounded ? acceleration : airAcceleration;
+                Velocity += transform.TransformVector(new Vector3(moveInput.Value.x * tempAcceleration * Time.deltaTime, 0, moveInput.Value.y * tempAcceleration * Time.deltaTime));
+                Velocity = Vector3.ClampMagnitude(Velocity, stats.MoveSpeed);
+            }
+            else
+            {
+                IsMoving = false;
 
-                if (Mathf.Abs(moveInput.Value.x) > 0)
+                if (IsGrounded && Velocity.magnitude > 0)
                 {
-                    direction.x += moveInput.Value.x * (tempAcceleration) * Time.deltaTime;
-                    direction.x = Mathf.Clamp(direction.x, -1, 1);
+                    Velocity -= Velocity.normalized * brakeSpeed * Time.deltaTime;
                 }
-                else
-                {
-                    if (Mathf.Abs(direction.x) < 0.05f)
-                    {
-                        direction.x = 0;
-                    }
-                    else
-                    {
-                        direction.x -= Mathf.Sign(direction.x) * (tempAcceleration) * Time.deltaTime;
-                    }
-                }
-                if (Mathf.Abs(moveInput.Value.y) > 0)
-                {
-                    direction.y += moveInput.Value.y * (tempAcceleration) * Time.deltaTime;
-                    direction.y = Mathf.Clamp(direction.y, -1, 1);
-                }
-                else
-                {
-                    if (Mathf.Abs(direction.y) < 0.05f)
-                    {
-                        direction.y = 0;
-                    }
-                    else
-                    {
-                        direction.y -= Mathf.Sign(direction.y) * (tempAcceleration) * Time.deltaTime;
-                    }
-                }
-                Vector2 temp = Vector2.ClampMagnitude(direction, 1);
-                Vector3 speed = new Vector3(temp.x * stats.MoveSpeed, rb.velocity.y, temp.y * stats.MoveSpeed);
-                rb.velocity = transform.TransformVector(speed);
-            }            
+            }
+
+            rb.MovePosition(rb.position + Velocity * Time.deltaTime);
         }
 
         void Rotate()
@@ -138,7 +103,6 @@ namespace DD2
 
         public void AddForce(Vector3 force, ForceMode forceMode)
         {
-            forceApplied = true;
             rb.AddForce(force, forceMode);
         }
     }

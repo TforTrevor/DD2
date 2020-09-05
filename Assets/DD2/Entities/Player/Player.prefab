@@ -1410,6 +1410,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
   hitSelf: 0
   projectile: {fileID: 2256803108965906256, guid: 39e1de274560f7a4fac4135e09c2ddcf,
@@ -1444,6 +1447,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
   hitSelf: 0
   hitboxTickRate: 0
@@ -2536,8 +2542,9 @@ MonoBehaviour:
   enableMove: {fileID: 11400000, guid: 13fcbe34664d65c47ba1beec907dfc5a, type: 2}
   enableLook: {fileID: 11400000, guid: a74cfad9b0240fb468a150d7ec79ea90, type: 2}
   sensitivity: 3
-  acceleration: 5
-  airAcceleration: 1
+  acceleration: 20
+  airAcceleration: 5
+  brakeSpeed: 20
   jumpForce: 5
   direction: {x: 0, y: 0}
   groundedMask:
@@ -2600,6 +2607,7 @@ MonoBehaviour:
   currentMana: 0
   radius: 0.5
   isAlive: 0
+  statusEffects: 0
   fireTransform: {fileID: 301605648}
   eyeTransform: {fileID: 8558060160901365186}
   isGrounded: 0

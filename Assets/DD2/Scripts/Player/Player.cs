@@ -136,7 +136,7 @@ namespace DD2
 
         void Update()
         {
-            Vector3 velocity = transform.InverseTransformDirection(rb.velocity);
+            Vector3 velocity = transform.InverseTransformDirection(movement.Velocity);
             Animator.SetFloat("Blend_X", velocity.x / Stats.MoveSpeed);
             Animator.SetFloat("Blend_Y", velocity.z / Stats.MoveSpeed);
             Animator.SetBool("Is_Moving", movement.IsMoving);
