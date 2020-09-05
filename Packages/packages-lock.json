@@ -5,7 +5,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "d0be92615128a89f2d6b95b8e3435630d5432b9d"
+      "hash": "ed0edab05e0503622f0b6c6b41061d5fb64e3ece"
     },
     "com.mambojambostudios.unity-atoms-base-atoms": {
       "version": "4.2.1",
@@ -95,7 +95,7 @@
       "dependencies": {}
     },
     "com.unity.cinemachine": {
-      "version": "2.6.1",
+      "version": "2.6.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
