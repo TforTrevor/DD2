@@ -10,6 +10,7 @@ namespace DD2.UI
         [SerializeField] float maxDistance;
 
         Dictionary<DamageUI, Entity> uiDictionary = new Dictionary<DamageUI, Entity>();
+        List<DamageUI> removeList = new List<DamageUI>();
 
         public void ShowDamage(Entity entity, float damage)
         {
@@ -21,28 +22,45 @@ namespace DD2.UI
 
         void LateUpdate()
         {
+            removeList.Clear();
+
             foreach (KeyValuePair<DamageUI, Entity> entry in uiDictionary)
             {
                 Entity entity = entry.Value;
                 DamageUI ui = entry.Key;
 
-                Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(entity.EyePosition);
-                if (pos.z > maxDistance || pos.z < 0)
+                if (entity != null)
                 {
-                    ui.gameObject.SetActive(false);
+                    Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(entity.EyePosition);
+                    if (pos.z > maxDistance || pos.z < 0)
+                    {
+                        ui.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        ui.gameObject.SetActive(true);
+                        ui.transform.position = pos;
+                    }
                 }
                 else
                 {
-                    ui.gameObject.SetActive(true);
-                    ui.transform.position = pos;
+                    removeList.Add(ui);
                 }
+            }
+
+            foreach (DamageUI ui in removeList)
+            {
+                Return(ui);
             }
         }
 
         public void Return(DamageUI ui)
         {
-            uiDictionary.Remove(ui);
-            DamageUIPool.Instance.ReturnObject(uiPrefab.PoolKey, ui);
+            if (ui != null)
+            {
+                uiDictionary.Remove(ui);
+                DamageUIPool.Instance?.ReturnObject(uiPrefab.PoolKey, ui);
+            }            
         }
     }
 }

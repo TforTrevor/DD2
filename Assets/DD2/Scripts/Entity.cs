@@ -91,7 +91,10 @@ namespace DD2
         {
             animator.SetFloat(animatorSpeed, 0);
             yield return Timing.WaitForSeconds(time);
-            animator.SetFloat(animatorSpeed, 1);
+            if (animator != null)
+            {
+                animator.SetFloat(animatorSpeed, 1);
+            }            
         }
 
         protected virtual void OnKilledEntity(Entity entity)
@@ -144,10 +147,7 @@ namespace DD2
         {
             foreach (Ability ability in abilities)
             {
-                if (ability.ToggleState)
-                {
-                    ability.UseAbility(null, null);
-                }
+                ability.CancelAbility();
             }
             List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(CurrentMana);
             foreach (ManaOrb orb in manaOrbs)

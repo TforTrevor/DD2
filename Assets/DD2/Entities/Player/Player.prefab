@@ -1434,6 +1434,9 @@ MonoBehaviour:
   tickActions: []
   abilityEffects:
   - {fileID: 11400000, guid: dfcd615bcb841b445846bdca7f6339fd, type: 2}
+  - {fileID: 11400000, guid: 4eaa719bf38afae4d9bd351d71ce64f7, type: 2}
+  - {fileID: 11400000, guid: 2008594d81194ba4f93c830dcf8c470b, type: 2}
+  - {fileID: 11400000, guid: fb1a9c177a8b290459f838cd7fbea523, type: 2}
   cooldown: 0
   beforeEnd: 0
   onCooldown: 0

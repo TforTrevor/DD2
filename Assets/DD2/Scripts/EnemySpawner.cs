@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using MEC;
+using DD2.AI;
 
 namespace DD2
 {
@@ -20,7 +21,7 @@ namespace DD2
                 {
                     for (int i = 0; i < spawn.Amount; i++)
                     {
-                        SpawnEntity(spawn);
+                        SpawnEnemy(spawn);
                     }
                 }
                 else
@@ -35,12 +36,12 @@ namespace DD2
             yield return Timing.WaitForSeconds(spawn.Delay);
             for (int i = 0; i < spawn.Amount; i++)
             {
-                SpawnEntity(spawn);
+                SpawnEnemy(spawn);
                 yield return Timing.WaitForSeconds(spawn.Rate);
             }
         }
 
-        void SpawnEntity(Spawn spawn)
+        void SpawnEnemy(Spawn spawn)
         {
             Entity entity = EntityPool.Instance.GetObject(spawn.Key);
             float randomX = Random.Range(-randomPosition, randomPosition);

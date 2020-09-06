@@ -130,6 +130,14 @@ namespace DD2.Abilities
             this.entity = entity;
         }
 
+        public virtual void CancelAbility()
+        {
+            if (ToggleState)
+            {
+                UseAbility(null, null);
+            }
+        }
+
         //Events
         protected virtual void StartAbility(Entity target, object payload) 
         {

@@ -20,7 +20,13 @@ namespace DD2.AI
         {
             base.Awake();
             context = new AIContext(this);
-            
+        }
+
+        protected override void Die(Entity entity)
+        {
+            base.Die(entity);
+
+            StopLookAt();
         }
 
         public IAIContext GetContext(Guid aiId)

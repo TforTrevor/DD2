@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
   m_Name: Core
   m_EditorClassIdentifier: 
-  maxHealth: 1e+9
+  maxHealth: 100
   maxMana: 0
   attackDamage: 0
   attackSpeed: 0
   moveSpeed: 0
   presence: 1
+  resistedElements: 0
   physicalResist: 0
   fireResist: 0
   lightningResist: 0

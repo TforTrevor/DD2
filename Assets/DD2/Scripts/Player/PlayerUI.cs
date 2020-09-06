@@ -65,7 +65,14 @@ namespace DD2
 
         public void UpdateWaveCount()
         {
-            waveCountText.text = LevelManager.Instance.CurrentWave + 1 + "/" + LevelManager.Instance.WaveCount;
+            if (LevelManager.Instance.WaveCount > 0)
+            {
+                waveCountText.text = LevelManager.Instance.CurrentWave + 1 + "/" + LevelManager.Instance.WaveCount;
+            }
+            else
+            {
+                waveCountText.text = "";
+            }
         }
     }
 }

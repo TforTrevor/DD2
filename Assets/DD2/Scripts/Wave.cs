@@ -20,7 +20,6 @@ namespace DD2
             CurrentCount = 0;
             foreach (EnemySpawner spawner in Spawners)
             {
-                spawner.SpawnEnemies();
                 MaxCount += spawner.GetEnemyCount();
             }
             CurrentCount = MaxCount;

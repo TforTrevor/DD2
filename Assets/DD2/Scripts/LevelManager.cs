@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 using UnityAtoms.BaseAtoms;
+using DD2.Actions;
+using DD2.AI;
 
 namespace DD2
 {
@@ -17,6 +19,7 @@ namespace DD2
         [SerializeField] VoidEvent waveStarted;
         [SerializeField] VoidEvent waveUpdated;
         [SerializeField] VoidEvent waveEnded;
+        [SerializeField] LoadLevel loadHub;
 
         public List<Core> Cores { get => cores; private set => cores = value; }
         public int WaveCount { get => waves.Count; }
@@ -24,15 +27,13 @@ namespace DD2
         public Camera Camera { get => camera; set => camera = value; }
         public VoidEvent WaveStarted { get => waveStarted; private set => waveStarted = value; }
         public VoidEvent WaveUpdated { get => waveUpdated; private set => waveUpdated = value; }
-        public VoidEvent WaveEnded { get => waveEnded; private set => waveEnded = value; }        
-
-        //public event EventHandler<Wave> waveUpdated;
-        //public event EventHandler<int> waveStarted;
-        //public event EventHandler<int> waveEnded;
+        public VoidEvent WaveEnded { get => waveEnded; private set => waveEnded = value; }   
+        public List<Enemy> Enemies { get; private set; }
 
         protected override void Awake()
         {
-            base.Awake();          
+            base.Awake();
+            Enemies = new List<Enemy>();
         }
         
         void Start()
@@ -68,6 +69,17 @@ namespace DD2
         public Wave GetWave()
         {
             return waves[CurrentWave];
+        }
+
+        public void LoseGame()
+        {
+            List<Enemy> tempEnemies = new List<Enemy>(Enemies);
+            foreach (Enemy enemy in tempEnemies)
+            {
+                enemy.Damage(null, float.MaxValue);
+            }
+
+            loadHub.DoAction(null, null);
         }
     }
 }

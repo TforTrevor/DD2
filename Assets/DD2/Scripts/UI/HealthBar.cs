@@ -48,7 +48,10 @@ namespace DD2.UI
             {
                 LeanTween.value(backgroundFill.fillAmount, foregroundFill.fillAmount, 1f).setOnUpdate((value) =>
                 {
-                    backgroundFill.fillAmount = value;
+                    if (backgroundFill != null)
+                    {
+                        backgroundFill.fillAmount = value;
+                    }                    
                 });
             });
         }

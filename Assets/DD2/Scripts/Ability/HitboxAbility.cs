@@ -24,6 +24,7 @@ namespace DD2.Abilities
         protected int collisionCount;
 
         CoroutineHandle abilityHandle;
+        CoroutineHandle hitboxHandle;
 
         protected override void Awake()
         {
@@ -53,7 +54,7 @@ namespace DD2.Abilities
             foreach (Hitbox hitbox in hitboxes)
             {
                 yield return Timing.WaitForSeconds(hitbox.Delay);
-                CoroutineHandle hitboxHandle = Timing.RunCoroutine(HitboxRoutine(target, payload, hitbox));
+                hitboxHandle = Timing.RunCoroutine(HitboxRoutine(target, payload, hitbox));
                 yield return Timing.WaitForSeconds(hitbox.Duration);
                 Timing.KillCoroutines(hitboxHandle);
             }
@@ -61,7 +62,7 @@ namespace DD2.Abilities
 
         IEnumerator<float> HitboxRoutine(Entity target, object payload, Hitbox hitbox)
         {
-            while (true)
+            while (target != null)
             {
                 Util.Utilities.ClearArray(collisions, collisionCount);
                 collisionCount = hitbox.GetCollisionNonAlloc(target.transform.position, LayerMask, collisions);
