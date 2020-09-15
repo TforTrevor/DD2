@@ -53,7 +53,7 @@ namespace DD2.Abilities
 
         public float ToggleTickRate { get => toggleTickRate; private set => toggleTickRate = value; }
         public bool ToggleState { get => toggleState; private set => toggleState = value; }
-        protected LayerMask LayerMask { get => entity.StatusEffects.HasFlag(StatusEffect.Confuse) ? confuseLayerMask : layerMask; }
+        protected LayerMask LayerMask { get => entity != null && entity.StatusEffects.HasFlag(StatusEffect.Confuse) ? confuseLayerMask : layerMask; }
 
         protected virtual void Awake()
         {

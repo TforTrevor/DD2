@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Enemy Stats
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxMana: 20
+  maxMana: 5
   attackDamage: 0
   attackSpeed: 0
   moveSpeed: 1.5
   presence: 5
+  resistedElements: 0
   physicalResist: 0
   fireResist: 100
   lightningResist: 0

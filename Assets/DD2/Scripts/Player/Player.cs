@@ -21,6 +21,7 @@ namespace DD2
         [SerializeField] BoolVariable enableLook;
         [SerializeField] BoolVariable enableUpgrade;
         [SerializeField] BoolVariable enableRepair;
+        [SerializeField] new VoidEvent onDeath;
 
         Collider[] manaOrbs;
         int manaOrbsCount;
@@ -33,14 +34,21 @@ namespace DD2
 
         protected override void Die(Entity entity)
         {
-            if (entity != null)
+            foreach (Ability ability in abilities)
             {
-                Debug.Log(entity.name + " killed " + name);
+                ability.CancelAbility();
             }
-            else
+            List<ManaOrb> manaOrbs = ((ManaOrbPool)ManaOrbPool.Instance).GetManaOrbs(CurrentMana);
+            foreach (ManaOrb orb in manaOrbs)
             {
-                Debug.Log("null killed " + name);
+                orb.transform.position = transform.position + Vector3.up;
+                orb.gameObject.SetActive(true);
+                orb.Burst(3f);
             }
+            SpendMana(CurrentMana);
+            IsAlive = false;
+            onDeath.Raise();
+            gameObject.SetActive(false);
         }
 
         public override void AddForce(Vector3 force, ForceMode forceMode)

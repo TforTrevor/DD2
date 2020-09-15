@@ -27,15 +27,26 @@ namespace DD2
                 {
                     orb.transform.position = dropPosition.position;
                     orb.gameObject.SetActive(true);
-                    orb.SetIsPickedUp(true);
+                    Timing.RunCoroutine(OrbRoutine(orb));
                     orb.Burst(3f);
-                    Timing.CallDelayed(0.5f, () =>
-                    {
-                        orb.SetIsPickedUp(false);
-                    });
                 }
                 isUsed = true;
             }
+        }
+
+        IEnumerator<float> OrbRoutine(ManaOrb orb)
+        {
+            orb.SetIsPickedUp(true);
+            yield return Timing.WaitForSeconds(0.5f);
+            if (orb != null)
+            {
+                orb.SetIsPickedUp(false);
+            }            
+        }
+
+        public void Refill()
+        {
+            isUsed = false;
         }
     }
 }

@@ -144,6 +144,76 @@ Transform:
   m_Father: {fileID: 3199320008054047978}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5613189003723327719
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199320008054047988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1967085876804014732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199320008054047988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiConfigs:
+  - aiId: 4ec1ca6a-6d5e-49a8-9af1-9ec96734ebc5
+    intervalMin: 0.5
+    intervalMax: 0.5
+    startDelayMin: 0
+    startDelayMax: 0
+    isActive: 1
+--- !u!114 &4095120498645782536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199320008054047988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544c52e9ac4870047b48ce1d27138862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPoolKey: Fireball Tower
+  stats: {fileID: 11400000, guid: 174af36fd9654ab4ba5bc5cac64be037, type: 2}
+  currentHealth: 0
+  currentMana: 0
+  radius: 0.5
+  isAlive: 0
+  statusEffects: 0
+  fireTransform: {fileID: 5613189003747143395}
+  eyeTransform: {fileID: 2295114229947113443}
+  isGrounded: 0
+  animator: {fileID: 0}
+  abilities:
+  - {fileID: 1330807363680851574}
+  buildOnStart: 0
+  manaCost: 100
+  buildTime: 5
+  towerGraphics: {fileID: 184165993803470731}
+  towerVertical: {fileID: 6375561326163811203}
+  towerSummonGraphics: {fileID: 2161502733071307275}
+  towerSummonMaterial: {fileID: 2100000, guid: 5ceb197ba9c33014c88620b5c868a7af, type: 2}
+  errorColor: {r: 1, g: 0, b: 0, a: 1}
+  summonLight: {fileID: 2883186535015136886}
+  summonRenderer: {fileID: 3200667261570169068}
+  collider: {fileID: 5613189003723327719}
+  upgradeEffect: {fileID: 0}
 --- !u!1 &3798314036121989531
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,73 +358,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5613189003723327719
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3199320008054047988}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1967085876804014732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3199320008054047988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 939582531, guid: 6012f3241c1c1f7409c44769fc0a1db7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aiConfigs:
-  - aiId: 4ec1ca6a-6d5e-49a8-9af1-9ec96734ebc5
-    intervalMin: 0.5
-    intervalMax: 0.5
-    startDelayMin: 0
-    startDelayMax: 0
-    isActive: 1
---- !u!114 &4095120498645782536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3199320008054047988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544c52e9ac4870047b48ce1d27138862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectPoolKey: Fireball Tower
-  stats: {fileID: 11400000, guid: 174af36fd9654ab4ba5bc5cac64be037, type: 2}
-  currentHealth: 0
-  currentMana: 0
-  radius: 0.5
-  isAlive: 0
-  fireTransform: {fileID: 5613189003747143395}
-  eyeTransform: {fileID: 2295114229947113443}
-  isGrounded: 0
-  animator: {fileID: 0}
-  abilities:
-  - {fileID: 1330807363680851574}
-  buildOnStart: 0
-  manaCost: 100
-  towerGraphics: {fileID: 184165993803470731}
-  towerVertical: {fileID: 6375561326163811203}
-  towerSummonGraphics: {fileID: 2161502733071307275}
-  errorColor: {r: 1, g: 0, b: 0, a: 1}
-  summonLight: {fileID: 2883186535015136886}
-  summonRenderer: {fileID: 3200667261570169068}
-  collider: {fileID: 5613189003723327719}
-  upgradeEffect: {fileID: 0}
 --- !u!1 &5312015312721352768
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +592,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
   hitSelf: 0
   projectile: {fileID: 3449179850076498048, guid: aaaa7319c8fce16419d15eebe3063806,
@@ -623,6 +629,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
   hitSelf: 0
   hitboxTickRate: 0

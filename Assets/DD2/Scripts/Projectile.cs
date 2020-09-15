@@ -109,8 +109,17 @@ namespace DD2
             model.gameObject.SetActive(false);
             vfx?.Stop();
             lightIntensity = vfxLight.intensity;
-            lightHandle = LeanTween.value(lightIntensity, 0, vfxLingerTime).setOnUpdate((value) => vfxLight.intensity = value);
-            vfxHandle = Timing.CallDelayed(vfxLingerTime, () => ProjectilePool.Instance.ReturnObject(PoolKey, this));
+            lightHandle = LeanTween.value(lightIntensity, 0, vfxLingerTime).setOnUpdate((value) => 
+            {
+                if (vfxLight != null)
+                {
+                    vfxLight.intensity = value;
+                }                
+            });
+            vfxHandle = Timing.CallDelayed(vfxLingerTime, () =>
+            {
+                ProjectilePool.Instance?.ReturnObject(PoolKey, this);
+            });
         }
     }
 }

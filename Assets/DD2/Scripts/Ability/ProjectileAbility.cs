@@ -12,7 +12,7 @@ namespace DD2.Abilities
 
         protected override void Tick(Entity entity, object payload)
         {
-            Projectile projectile = ProjectilePool.Instance.GetObject(this.projectile.PoolKey);
+            Projectile projectile = ProjectilePool.Instance?.GetObject(this.projectile.PoolKey);
             if (projectile != null)
             {
                 Vector3 direction;

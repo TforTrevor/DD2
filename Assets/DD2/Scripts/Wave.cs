@@ -18,8 +18,9 @@ namespace DD2
         public void StartWave()
         {
             CurrentCount = 0;
-            foreach (EnemySpawner spawner in Spawners)
+            foreach (EnemySpawner spawner in spawners)
             {
+                spawner.SpawnEnemies();
                 MaxCount += spawner.GetEnemyCount();
             }
             CurrentCount = MaxCount;

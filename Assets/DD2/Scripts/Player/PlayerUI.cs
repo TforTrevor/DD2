@@ -58,9 +58,12 @@ namespace DD2
         public void UpdateEnemyCount()
         {
             Wave wave = LevelManager.Instance.GetWave();
-            enemyCountSlider.maxValue = wave.MaxCount;
-            enemyCountSlider.value = wave.CurrentCount;
-            enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
+            if (wave != null)
+            {
+                enemyCountSlider.maxValue = wave.MaxCount;
+                enemyCountSlider.value = wave.CurrentCount;
+                enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
+            }            
         }
 
         public void UpdateWaveCount()

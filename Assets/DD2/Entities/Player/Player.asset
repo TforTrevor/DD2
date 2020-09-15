@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a75828d54b34d48a810fe793199764, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  maxHealth: 100000000
-  maxMana: 1000
+  maxHealth: 200
+  maxMana: 200
   attackDamage: 0
   attackSpeed: 0
   moveSpeed: 4
   presence: 10
+  resistedElements: 0
   physicalResist: 0
   fireResist: 0
   lightningResist: 0

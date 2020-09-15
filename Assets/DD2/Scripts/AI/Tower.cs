@@ -4,6 +4,7 @@ using UnityEngine;
 using Apex.AI.Components;
 using UnityEngine.VFX;
 using NaughtyAttributes;
+using MEC;
 
 namespace DD2.AI
 {
@@ -11,9 +12,11 @@ namespace DD2.AI
     {
         [BoxGroup("Tower")] [SerializeField] bool buildOnStart;
         [BoxGroup("Tower")] [SerializeField] int manaCost;
+        [BoxGroup("Tower")] [SerializeField] int buildTime;
         [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
         [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
         [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
+        [BoxGroup("Tower")] [SerializeField] protected Material towerSummonMaterial;
         [BoxGroup("Tower")] [SerializeField] Color errorColor = Color.red;
         [BoxGroup("Tower")] [SerializeField] Light summonLight;
         [BoxGroup("Tower")] [SerializeField] protected MeshRenderer summonRenderer;
@@ -84,17 +87,7 @@ namespace DD2.AI
 
         public virtual void Build()
         {
-            towerSummonGraphics.gameObject.SetActive(false);
-            towerGraphics.gameObject.SetActive(true);
-            if (collider != null)
-            {
-                collider.isTrigger = false;
-            }            
-            if (aiComponent != null)
-            {
-                aiComponent.enabled = true;
-            }                
-            IsAlive = true;
+            Timing.RunCoroutine(BuildRoutine());
         }
 
         public virtual void Upgrade()
@@ -135,6 +128,30 @@ namespace DD2.AI
                 }
                 CurrentColor = color;
             }            
+        }
+
+        IEnumerator<float> BuildRoutine()
+        {
+            if (collider != null)
+            {
+                collider.isTrigger = false;
+            }
+
+            if (towerSummonMaterial != null)
+            {
+                towerSummonMaterial.SetFloat("_BuildTime", buildTime);
+                towerSummonMaterial.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+            }           
+
+            yield return Timing.WaitForSeconds(buildTime);
+
+            towerSummonGraphics.gameObject.SetActive(false);
+            towerGraphics.gameObject.SetActive(true);
+            if (aiComponent != null)
+            {
+                aiComponent.enabled = true;
+            }
+            IsAlive = true;
         }
     }
 }

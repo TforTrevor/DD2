@@ -6,12 +6,16 @@ using NaughtyAttributes;
 using UnityAtoms.BaseAtoms;
 using DD2.Actions;
 using DD2.AI;
+using MEC;
 
 namespace DD2
 {
     public class LevelManager : Singleton<LevelManager>
     {
+        [SerializeField] Player player;
         [SerializeField] new Camera camera;
+        [SerializeField] Transform playerSpawn;
+        [SerializeField] float respawnTime;
         [SerializeField] [ReorderableList] List<Core> cores;
         [SerializeField] [ReorderableList] List<Wave> waves;
         [SerializeField] int currentWave = 0;
@@ -20,6 +24,8 @@ namespace DD2
         [SerializeField] VoidEvent waveUpdated;
         [SerializeField] VoidEvent waveEnded;
         [SerializeField] LoadLevel loadHub;
+
+        bool gameOver;
 
         public List<Core> Cores { get => cores; private set => cores = value; }
         public int WaveCount { get => waves.Count; }
@@ -60,19 +66,28 @@ namespace DD2
 
         public void EndWave()
         {
-            CurrentWave++;
-            waveInProgress = false;
-            WaveEnded.Raise();
-            //waveEnded?.Invoke(this, CurrentWave);
+            if (!gameOver)
+            {
+                CurrentWave++;
+                waveInProgress = false;
+                WaveEnded.Raise();
+                //waveEnded?.Invoke(this, CurrentWave);
+            }
         }
 
         public Wave GetWave()
         {
-            return waves[CurrentWave];
+            if (CurrentWave < waves.Count)
+            {
+                return waves[CurrentWave];
+            }
+            return null;
         }
 
         public void LoseGame()
         {
+            gameOver = true;
+
             List<Enemy> tempEnemies = new List<Enemy>(Enemies);
             foreach (Enemy enemy in tempEnemies)
             {
@@ -80,6 +95,23 @@ namespace DD2
             }
 
             loadHub.DoAction(null, null);
+        }
+
+        public void RespawnPlayer()
+        {
+            if (!player.IsAlive)
+            {
+                Timing.RunCoroutine(RespawnRoutine());
+            }
+        }
+
+        IEnumerator<float> RespawnRoutine()
+        {
+            yield return Timing.WaitForSeconds(respawnTime);
+            player.Respawn();
+            player.transform.position = playerSpawn.transform.position;
+            player.transform.forward = playerSpawn.transform.forward;
+            player.gameObject.SetActive(true);
         }
     }
 }
