@@ -203,6 +203,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+  m_AreaLightEmissiveMeshLayer: -1
 --- !u!1 &1319620231183350408
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,20 +412,23 @@ MonoBehaviour:
   currentMana: 0
   radius: 0.8
   isAlive: 0
+  statusEffects: 0
   fireTransform: {fileID: 4993670199648463880}
   eyeTransform: {fileID: 4250314584543993347}
   isGrounded: 0
   animator: {fileID: 0}
   abilities: []
+  buildOnStart: 0
   manaCost: 30
+  buildTime: 10
   towerGraphics: {fileID: 6635896054950298341}
   towerVertical: {fileID: 4993670199648463880}
   towerSummonGraphics: {fileID: 4856581324676663141}
+  towerSummonMaterial: {fileID: 2100000, guid: 5ceb197ba9c33014c88620b5c868a7af, type: 2}
   errorColor: {r: 1, g: 0, b: 0, a: 1}
   summonLight: {fileID: 8546173290096519960}
   summonRenderer: {fileID: 4503334246509781787}
   collider: {fileID: 4571618255341315653}
-  buildOnStart: 0
   upgradeEffect: {fileID: 0}
 --- !u!1 &5267178685551948537
 GameObject:

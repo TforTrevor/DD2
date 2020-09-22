@@ -16,7 +16,6 @@ namespace DD2.AI
         [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
         [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
         [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
-        [BoxGroup("Tower")] [SerializeField] protected Material towerSummonMaterial;
         [BoxGroup("Tower")] [SerializeField] Color errorColor = Color.red;
         [BoxGroup("Tower")] [SerializeField] Light summonLight;
         [BoxGroup("Tower")] [SerializeField] protected MeshRenderer summonRenderer;
@@ -27,6 +26,8 @@ namespace DD2.AI
         protected int level = 0;
         Color defaultColor;
         Color currentColor;
+        int shaderBuildProgress;
+        int shaderBuildTime;
 
         public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
         public Color CurrentColor { get => currentColor; private set => currentColor = value; }
@@ -42,6 +43,8 @@ namespace DD2.AI
             {
                 DefaultColor = summonRenderer.material.GetColor("_Color");
             }
+            shaderBuildProgress = Shader.PropertyToID("_BuildProgress");
+            shaderBuildTime = Shader.PropertyToID("_BuildTime");
         }
 
         protected override void Start()
@@ -137,13 +140,15 @@ namespace DD2.AI
                 collider.isTrigger = false;
             }
 
-            if (towerSummonMaterial != null)
-            {
-                towerSummonMaterial.SetFloat("_BuildTime", buildTime);
-                towerSummonMaterial.SetFloat("_StartTime", Time.timeSinceLevelLoad);
-            }           
+            summonRenderer.material.SetFloat(shaderBuildTime, buildTime);
+            float currentTime = 0;
 
-            yield return Timing.WaitForSeconds(buildTime);
+            while (currentTime < buildTime)
+            {
+                summonRenderer.material.SetFloat(shaderBuildProgress, currentTime);
+                yield return Timing.WaitForOneFrame;
+                currentTime += Time.deltaTime;
+            }
 
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);

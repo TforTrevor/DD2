@@ -132,10 +132,11 @@ Material:
     - Vector1_39B81922: 0.53
     - Vector1_75D7A397: 5
     - Vector1_A2251AD4: 0.875
-    - Vector1_A76E38DF: 40.15
+    - Vector1_A76E38DF: 4.3
     - Vector1_AF058B5F: -0.1
     - Vector1_B9BBC779: 1
     - Vector1_BBE70953: 1.09
+    - Vector1_CCF9C948: 2
     - Vector1_D449E70: 3.56
     - Vector1_D603512F: 0.58
     - Vector1_E44DE224: 1
@@ -154,6 +155,7 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
+    - _BuildProgress: 0
     - _BuildTime: 5
     - _CoatMask: 0
     - _CullMode: 2
@@ -229,7 +231,7 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
-    - _StartTime: 4.1499243
+    - _StartTime: 0
     - _StencilRef: 0
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
@@ -266,11 +268,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_20F1EBAE: {r: 1, g: 1, b: 1, a: 1}
-    - Color_43AF6969: {r: 0, g: 1.9162302, b: 1.9999998, a: 0}
+    - Color_43AF6969: {r: 0, g: 1.9162302, b: 1.9999998, a: 1}
     - Color_7067E7EF: {r: 0, g: 0, b: 1, a: 0.5019608}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0, b: 1, a: 0.5019608}
+    - _Color: {r: 0, g: 0, b: 1, a: 0.27058825}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
