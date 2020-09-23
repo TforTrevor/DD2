@@ -121,7 +121,7 @@ namespace DD2
                 else
                 {
                     //instance.transform.position = LevelManager.Instance.Camera.transform.position + LevelManager.Instance.Camera.transform.forward * 5;
-                    instance.SetColor(instance.ErrorColor);
+                    instance.SetError(true);
                     enableBuild = false;
                 }
                 instance.transform.localEulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
@@ -151,12 +151,12 @@ namespace DD2
             {
                 if (!instanceColliders.Contains(collider) && instanceColliders[0].bounds.Intersects(collider.bounds))
                 {
-                    instance.SetColor(instance.ErrorColor);
+                    instance.SetError(true);
                     enableBuild = false;
                     return;
                 }
             }
-            instance.SetColor(instance.DefaultColor);
+            instance.SetError(false);
             enableBuild = true;
         }
 

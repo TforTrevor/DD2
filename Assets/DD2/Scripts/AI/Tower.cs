@@ -12,39 +12,36 @@ namespace DD2.AI
     {
         [BoxGroup("Tower")] [SerializeField] bool buildOnStart;
         [BoxGroup("Tower")] [SerializeField] int manaCost;
-        [BoxGroup("Tower")] [SerializeField] int buildTime;
+        [BoxGroup("Tower")] [SerializeField] float buildTime;
         [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
         [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
         [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
-        [BoxGroup("Tower")] [SerializeField] Color errorColor = Color.red;
-        [BoxGroup("Tower")] [SerializeField] Light summonLight;
-        [BoxGroup("Tower")] [SerializeField] protected MeshRenderer summonRenderer;
+        [BoxGroup("Tower")] [SerializeField] Light buildLight;
+        [BoxGroup("Tower")] [SerializeField] protected MeshRenderer buildRenderer;
         [BoxGroup("Tower")] [SerializeField] new Collider collider;
         [BoxGroup("Tower")] [SerializeField] VisualEffect upgradeEffect;
+        [BoxGroup("Tower")] [SerializeField] VisualEffect buildEffect;
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
-        Color defaultColor;
-        Color currentColor;
         int shaderBuildProgress;
         int shaderBuildTime;
+        int shaderIsError;
+        int shaderColor;
+        int shaderErrorColor;
+        CoroutineHandle upgradeHandle;
 
-        public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
-        public Color CurrentColor { get => currentColor; private set => currentColor = value; }
-        public Color ErrorColor { get => errorColor; private set => errorColor = value; }
         public int ManaCost { get => manaCost; private set => manaCost = value; }
-        public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
 
         protected override void Awake()
         {
             base.Awake();
             aiComponent = GetComponent<UtilityAIComponent>();
-            if (summonRenderer != null)
-            {
-                DefaultColor = summonRenderer.material.GetColor("_Color");
-            }
             shaderBuildProgress = Shader.PropertyToID("_BuildProgress");
             shaderBuildTime = Shader.PropertyToID("_BuildTime");
+            shaderIsError = Shader.PropertyToID("_IsError");
+            shaderColor = Shader.PropertyToID("_Color");
+            shaderErrorColor = Shader.PropertyToID("_ErrorColor");
         }
 
         protected override void Start()
@@ -72,6 +69,12 @@ namespace DD2.AI
             IsAlive = false;
         }
 
+        protected override void Die(Entity entity)
+        {
+            base.Die(entity);
+            Timing.KillCoroutines(upgradeHandle);
+        }
+
         public override void AddForce(Vector3 force, ForceMode forceMode)
         {
             
@@ -95,8 +98,7 @@ namespace DD2.AI
 
         public virtual void Upgrade()
         {
-            Stats.TowerLevel();
-            level++;
+            upgradeHandle = Timing.RunCoroutine(UpgradeRoutine());
         }
 
         protected virtual void Update()
@@ -117,19 +119,29 @@ namespace DD2.AI
             }
         }
 
-        public void SetColor(Color color)
+        public void SetError(bool value)
         {
-            if (color != CurrentColor)
+            if (value)
             {
-                if (summonLight != null)
+                if (buildLight != null)
                 {
-                    summonLight.color = color;
+                    buildLight.color = buildRenderer.material.GetColor(shaderErrorColor);
                 }
-                if (summonRenderer != null)
+                if (buildRenderer != null)
                 {
-                    summonRenderer.material.SetColor("_Color", color);
+                    buildRenderer.material.SetInt(shaderIsError, 1);
                 }
-                CurrentColor = color;
+            }
+            else
+            {
+                if (buildLight != null)
+                {
+                    buildLight.color = buildRenderer.material.GetColor(shaderColor);
+                }
+                if (buildRenderer != null)
+                {
+                    buildRenderer.material.SetInt(shaderIsError, 0);
+                }
             }            
         }
 
@@ -140,15 +152,19 @@ namespace DD2.AI
                 collider.isTrigger = false;
             }
 
-            summonRenderer.material.SetFloat(shaderBuildTime, buildTime);
+            buildRenderer.material.SetFloat(shaderBuildTime, buildTime);
+
+            if (buildEffect != null) buildEffect.SendEvent("OnPlay");
             float currentTime = 0;
 
             while (currentTime < buildTime)
             {
-                summonRenderer.material.SetFloat(shaderBuildProgress, currentTime);
+                buildRenderer.material.SetFloat(shaderBuildProgress, currentTime);
                 yield return Timing.WaitForOneFrame;
                 currentTime += Time.deltaTime;
             }
+
+            if (buildEffect != null) buildEffect.SendEvent("OnStop");
 
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
@@ -157,6 +173,15 @@ namespace DD2.AI
                 aiComponent.enabled = true;
             }
             IsAlive = true;
+        }
+
+        IEnumerator<float> UpgradeRoutine()
+        {
+            upgradeEffect.SendEvent("OnPlay");
+            yield return Timing.WaitForSeconds(buildTime);
+            Stats.TowerLevel();
+            level++;
+            upgradeEffect.SendEvent("OnStop");
         }
     }
 }

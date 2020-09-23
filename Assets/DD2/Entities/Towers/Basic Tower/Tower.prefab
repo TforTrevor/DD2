@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed454230fbb0b354682f47c92f8e74c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tickActions: []
   abilityEffects:
   - {fileID: 11400000, guid: 70c9b49de6ecac445853a8ee3c574575, type: 2}
   cooldown: 0.1
@@ -232,9 +233,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
-  projectile: {fileID: 3449179850076498048, guid: aaaa7319c8fce16419d15eebe3063806,
-    type: 3}
+  hitSelf: 0
 --- !u!1 &1925617473843220499
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 10
+  m_Version: 11
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -438,6 +441,7 @@ MonoBehaviour:
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
+  m_AreaLightEmissiveMeshLayer: -1
 --- !u!1 &2435850808861389492
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,20 +607,22 @@ MonoBehaviour:
   currentMana: 0
   radius: 0.5
   isAlive: 0
+  statusEffects: 0
   fireTransform: {fileID: 522014266}
+  eyeTransform: {fileID: 0}
   isGrounded: 0
   animator: {fileID: 0}
   abilities:
   - {fileID: 2701457161805265544}
+  buildOnStart: 0
   manaCost: 50
+  buildTime: 5
   towerGraphics: {fileID: 5721898464044627794}
   towerVertical: {fileID: 1557267556808604506}
   towerSummonGraphics: {fileID: 5771713530179302098}
-  errorColor: {r: 1, g: 0, b: 0, a: 1}
-  summonLight: {fileID: 7342326754161417903}
-  summonRenderer: {fileID: 7029274877072496693}
+  buildLight: {fileID: 7342326754161417903}
+  buildRenderer: {fileID: 7029274877072496693}
   collider: {fileID: 510240830}
-  buildOnStart: 0
   upgradeEffect: {fileID: 250506149425218185}
 --- !u!1 &6320886620070764834
 GameObject:

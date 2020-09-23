@@ -15,23 +15,16 @@ namespace DD2
         [SerializeField] LayerMask upgradeMask;
 
         CoroutineHandle upgradeHandle;
-        bool isUpgrading;
 
         protected override void Start()
         {
             base.Start();
-            isUpgrading = false;
         }
 
         protected override void Action()
         {
             player.ToggleRepair(false);
-            if (isUpgrading)
-            {
-                Timing.KillCoroutines(upgradeHandle);
-                isUpgrading = false;
-            }
-            else if (player.CurrentMana >= manaCost)
+            if (player.CurrentMana >= manaCost)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, upgradeMask))
@@ -41,8 +34,8 @@ namespace DD2
                         Tower tower = hit.transform.GetComponent<Tower>();
                         if (tower != null)
                         {
-                            upgradeHandle = Timing.RunCoroutine(UpgradeRoutine(tower));
-                            isUpgrading = true;
+                            player.SpendMana(manaCost);
+                            tower.Upgrade();
                             Cancel();
                         }
                     }
@@ -60,15 +53,6 @@ namespace DD2
         {
             base.Begin();
             player.ToggleRepair(false);
-        }
-
-        IEnumerator<float> UpgradeRoutine(Tower tower)
-        {
-            player.SpendMana(manaCost);
-            tower.UpgradeEffect.SendEvent("OnPlay");            
-            yield return Timing.WaitForSeconds(upgradeTime);
-            tower.UpgradeEffect.SendEvent("OnStop");
-            tower.Upgrade();            
         }
     }
 }

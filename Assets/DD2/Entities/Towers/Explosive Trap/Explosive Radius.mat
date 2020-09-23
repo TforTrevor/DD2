@@ -27,6 +27,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
+    - Vector1_82C5322C: 0.5
     - Vector1_8EC12412: 0.5
     - Vector1_EA6BE072: 1
     - _AlphaCutoffEnable: 0
