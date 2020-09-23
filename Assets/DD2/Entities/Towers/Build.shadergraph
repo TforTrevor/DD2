@@ -70,19 +70,19 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6e2c7d6e-915e-4a3a-af02-1a4458905e69\"\n    },\n    \"m_Name\": \"Build Time\",\n    \"m_DefaultReferenceName\": \"Vector1_438A97CE\",\n    \"m_OverrideReferenceName\": \"_BuildTime\",\n    \"m_GeneratePropertyBlock\": false,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 3.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"6e2c7d6e-915e-4a3a-af02-1a4458905e69\"\n    },\n    \"m_Name\": \"Build Time\",\n    \"m_DefaultReferenceName\": \"Vector1_438A97CE\",\n    \"m_OverrideReferenceName\": \"_BuildTime\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 3.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"385f314b-ea70-4992-9c3e-f603c656d392\"\n    },\n    \"m_Name\": \"Build Progress\",\n    \"m_DefaultReferenceName\": \"Vector1_50FFEFB0\",\n    \"m_OverrideReferenceName\": \"_BuildProgress\",\n    \"m_GeneratePropertyBlock\": false,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"385f314b-ea70-4992-9c3e-f603c656d392\"\n    },\n    \"m_Name\": \"Build Progress\",\n    \"m_DefaultReferenceName\": \"Vector1_50FFEFB0\",\n    \"m_OverrideReferenceName\": \"_BuildProgress\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": 0.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"740caa20-e670-4270-801d-b17645ad0368\"\n    },\n    \"m_Name\": \"Is Error\",\n    \"m_DefaultReferenceName\": \"Boolean_41012F2\",\n    \"m_OverrideReferenceName\": \"_IsError\",\n    \"m_GeneratePropertyBlock\": false,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": false\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"740caa20-e670-4270-801d-b17645ad0368\"\n    },\n    \"m_Name\": \"Is Error\",\n    \"m_DefaultReferenceName\": \"Boolean_41012F2\",\n    \"m_OverrideReferenceName\": \"_IsError\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": false\n}"
         }
     ],
     "m_SerializedKeywords": [],

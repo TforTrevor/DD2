@@ -75,16 +75,6 @@ namespace DD2.AI
             Timing.KillCoroutines(upgradeHandle);
         }
 
-        public override void AddForce(Vector3 force, ForceMode forceMode)
-        {
-            
-        }
-
-        public override void ClearVelocity(bool x, bool y, bool z)
-        {
-            
-        }
-
         public virtual void Sell(Player player)
         {
             player.GiveMana(Mathf.CeilToInt(CurrentHealth / Stats.MaxHealth * manaCost));
@@ -121,28 +111,19 @@ namespace DD2.AI
 
         public void SetError(bool value)
         {
-            if (value)
+            if (buildLight != null & buildRenderer != null)
             {
-                if (buildLight != null)
+                if (value)
                 {
                     buildLight.color = buildRenderer.material.GetColor(shaderErrorColor);
-                }
-                if (buildRenderer != null)
-                {
                     buildRenderer.material.SetInt(shaderIsError, 1);
                 }
-            }
-            else
-            {
-                if (buildLight != null)
+                else
                 {
                     buildLight.color = buildRenderer.material.GetColor(shaderColor);
-                }
-                if (buildRenderer != null)
-                {
                     buildRenderer.material.SetInt(shaderIsError, 0);
                 }
-            }            
+            }                    
         }
 
         IEnumerator<float> BuildRoutine()
@@ -183,5 +164,9 @@ namespace DD2.AI
             level++;
             upgradeEffect.SendEvent("OnStop");
         }
+
+        public override void AddForce(Vector3 force, ForceMode forceMode) { }
+
+        public override void ClearVelocity(bool x, bool y, bool z) { }
     }
 }
