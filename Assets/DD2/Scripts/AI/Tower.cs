@@ -29,6 +29,7 @@ namespace DD2.AI
         int shaderIsError;
         int shaderColor;
         int shaderErrorColor;
+        int shaderHeight;
         CoroutineHandle upgradeHandle;
 
         public int ManaCost { get => manaCost; private set => manaCost = value; }
@@ -42,6 +43,7 @@ namespace DD2.AI
             shaderIsError = Shader.PropertyToID("_IsError");
             shaderColor = Shader.PropertyToID("_Color");
             shaderErrorColor = Shader.PropertyToID("_ErrorColor");
+            shaderHeight = Shader.PropertyToID("_Height");
         }
 
         protected override void Start()
@@ -133,6 +135,7 @@ namespace DD2.AI
                 collider.isTrigger = false;
             }
 
+            buildRenderer.material.SetFloat(shaderHeight, buildRenderer.bounds.size.y);
             buildRenderer.material.SetFloat(shaderBuildTime, buildTime);
 
             if (buildEffect != null) buildEffect.SendEvent("OnPlay");
