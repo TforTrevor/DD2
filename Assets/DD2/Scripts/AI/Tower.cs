@@ -24,6 +24,7 @@ namespace DD2.AI
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
+
         int shaderBuildProgress;
         int shaderBuildTime;
         int shaderIsError;
@@ -64,10 +65,7 @@ namespace DD2.AI
             base.Respawn();
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
-            if (aiComponent != null)
-            {
-                aiComponent.enabled = false;
-            }
+            aiComponent.enabled = false;
             IsAlive = false;
         }
 
@@ -130,10 +128,7 @@ namespace DD2.AI
 
         IEnumerator<float> BuildRoutine()
         {
-            if (collider != null)
-            {
-                collider.isTrigger = false;
-            }
+            if (collider != null) collider.isTrigger = false;
 
             buildRenderer.material.SetFloat(shaderHeight, buildRenderer.bounds.size.y);
             buildRenderer.material.SetFloat(shaderBuildTime, buildTime);
@@ -152,10 +147,7 @@ namespace DD2.AI
 
             towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
-            if (aiComponent != null)
-            {
-                aiComponent.enabled = true;
-            }
+            aiComponent.enabled = true;
             IsAlive = true;
         }
 

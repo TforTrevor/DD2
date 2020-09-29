@@ -14,16 +14,9 @@ namespace DD2
         public float Presence;
 
         public ElementType ResistedElements;
-        public float PhysicalResist;
-        public float FireResist;
-        public float LightningResist;
-        public float EnergyResist;
-        public float WaterResist;
 
         public float AttackRange;
         public float AttackAngle;
-        public float SearchRange;
-        public float SearchAngle;
 
         public InstancedStats(Stats stats)
         {
@@ -34,15 +27,8 @@ namespace DD2
             MoveSpeed = stats.MoveSpeed;
             Presence = stats.Presence;
             ResistedElements = stats.ResistedElements;
-            PhysicalResist = stats.PhysicalResist;
-            FireResist = stats.FireResist;
-            LightningResist = stats.LightningResist;
-            EnergyResist = stats.EnergyResist;
-            WaterResist = stats.WaterResist;
             AttackRange = stats.AttackRange;
             AttackAngle = stats.AttackAngle;
-            SearchRange = stats.SearchRange;
-            SearchAngle = stats.SearchAngle;
         }
 
         public void RandomizeHealth(float range)
@@ -53,24 +39,6 @@ namespace DD2
         public void RandomizeResistances()
         {
             int resistance = Random.Range(0, 16);
-            switch (resistance)
-            {
-                case 0:
-                    FireResist = 10000;
-                    break;
-                case 1:
-                    LightningResist = 10000;
-                    break;
-                case 2:
-                    EnergyResist = 10000;
-                    break;
-                case 3:
-                    WaterResist = 10000;
-                    break;
-                case 4:
-                    PhysicalResist = 10000;
-                    break;
-            }
         }
 
         public void TowerLevel()
@@ -80,15 +48,8 @@ namespace DD2
             AttackDamage *= increase;
             AttackSpeed *= increase;
             Presence *= increase;
-            PhysicalResist *= increase;
-            FireResist *= increase;
-            LightningResist *= increase;
-            EnergyResist *= increase;
-            WaterResist *= increase;
             AttackRange *= increase;
             AttackAngle *= increase;
-            SearchRange *= increase;
-            SearchAngle *= increase;
         }
     }
 }

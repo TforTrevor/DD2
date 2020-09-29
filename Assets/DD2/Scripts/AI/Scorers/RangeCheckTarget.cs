@@ -13,7 +13,6 @@ namespace DD2.AI.Scorers
         [ApexSerialization] bool coneCheck;
         [ApexSerialization] bool losCheck;
         [ApexSerialization] LayerMask losBlock;
-        [ApexSerialization] Range rangeCheck;
         [ApexSerialization] bool includeRadius = true;
         [ApexSerialization] bool includeTargetRadius = true;        
         
@@ -26,10 +25,8 @@ namespace DD2.AI.Scorers
             float distance = Vector3.Distance(ctx.target.transform.position, entity.transform.position) 
                                 - (includeRadius ? entity.Radius : 0)
                                 - (includeTargetRadius ? ctx.target.Radius : 0);
-            float range = rangeCheck == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
-            float angle = rangeCheck == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
 
-            if (distance <= range)
+            if (distance <= entity.Stats.AttackRange)
             {
                 bool cone = false;
                 bool los = false;
@@ -38,7 +35,7 @@ namespace DD2.AI.Scorers
                     Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
                     Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
                     Vector2 end = new Vector2(target.EyePosition.x, target.EyePosition.z);
-                    cone = Util.Utilities.IsPositionInCone(start, direction, end, angle / 2);
+                    cone = Util.Utilities.IsPositionInCone(start, direction, end, entity.Stats.AttackAngle / 2);
                 }
                 if (losCheck)
                 {
@@ -51,12 +48,6 @@ namespace DD2.AI.Scorers
             }
             return not ? score : 0;
         }
-    }
-
-    public enum Range
-    {
-        Attack,
-        Search
     }
 }
 

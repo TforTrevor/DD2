@@ -19,86 +19,36 @@ namespace DD2.Actions
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
-            if (!target.Stats.ResistedElements.HasFlag(elementType) || target.Stats.ResistedElements == ElementType.None)
-            {
-                if (damageType == DamageType.Flat)
-                {
-                    if (swapTargetAndCaller)
-                        Flat(caller, target);
-                    else
-                        Flat(target, caller);
-                }
-                else if (damageType == DamageType.PercentMaxHealth)
-                {
-                    if (swapTargetAndCaller)
-                        PercentMaxHealth(caller, target);
-                    else
-                        PercentMaxHealth(target, caller);
-                }
-                else if (damageType == DamageType.PercentCurrentHealth)
-                {
-                    if (swapTargetAndCaller)
-                        PercentCurrentHealth(caller, target);
-                    else
-                        PercentCurrentHealth(target, caller);
-                }
-            }
-        }
+            Entity tempTarget = swapTargetAndCaller ? caller : target;
+            Entity tempCaller = swapTargetAndCaller ? target : caller;
+            float damage = this.damage;
 
-        void Flat(Entity target, Entity caller)
-        {
-            float multiplier = 1;
-            if (caller != null)
+            switch (damageType)
             {
-                multiplier = 1 + caller.Stats.AttackDamage / 50;
+                case DamageType.Flat:
+                    float multiplier = tempCaller != null ? 1 + tempCaller.Stats.AttackDamage / 50 : 1;
+                    damage = ignoreStats ? this.damage : this.damage * multiplier * GetDamageMultiplier(tempTarget);
+                    break;
+                case DamageType.PercentMaxHealth:
+                    damage = tempTarget.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(tempTarget);
+                    break;
+                case DamageType.PercentCurrentHealth:
+                    damage = tempTarget.CurrentHealth * this.damage / 100 * GetDamageMultiplier(tempTarget);
+                    break;
             }
-            if (ignoreStats)
-            {
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-            }
-            else
-            {
-                float damage = this.damage * multiplier * GetDamageMultiplier(target);
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-                DamageUICanvas.Instance.ShowDamage(target, damage);
-            }
-        }
 
-        void PercentMaxHealth(Entity target, Entity caller)
-        {
-            if (ignoreStats)
-            {
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-            }
-            else
-            {
-                float damage = target.Stats.MaxHealth * this.damage / 100 * GetDamageMultiplier(target);
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-            }            
-        }
-
-        void PercentCurrentHealth(Entity target, Entity caller)
-        {
-            if (ignoreStats)
-            {
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-            }
-            else
-            {
-                float damage = target.CurrentHealth * this.damage / 100 * GetDamageMultiplier(target);
-                target.Damage(caller, damage);
-                caller?.Hitlag(HitlagFormula(damage));
-            }            
+            tempTarget.Damage(tempCaller, damage);
+            if (tempCaller != null) tempCaller.Hitlag(HitlagFormula(damage));
+            DamageUICanvas.Instance.ShowDamage(tempTarget, damage);
         }
 
         float GetDamageMultiplier(Entity entity)
         {
-            if (entity.StatusEffects.HasFlag(StatusEffect.Freeze))
+            if (entity.Stats.ResistedElements.HasFlag(elementType) && entity.Stats.ResistedElements != ElementType.None)
+            {
+                return 0;
+            }
+            else if (entity.StatusEffects.HasFlag(StatusEffect.Freeze))
             {
                 return 2;
             }
