@@ -1,5 +1,5 @@
 ﻿using DD2.AI;
-using NaughtyAttributes;
+
 using RoboRyanTron.SearchableEnum;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace DD2
         [SerializeField] BuildTower buildTower;
         [SerializeField] TowerWheelButton towerButton;
         [SerializeField] Transform parent;
-        [SerializeField] [ReorderableList] List<Tower> towerPrefabs;
+        [SerializeField]  List<Tower> towerPrefabs;
 
         Canvas canvas;
         List<TowerWheelButton> towerButtons = new List<TowerWheelButton>();

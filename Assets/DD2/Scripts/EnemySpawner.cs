@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 using MEC;
 using DD2.AI;
 
@@ -11,7 +11,7 @@ namespace DD2
     {
         [SerializeField] Wave wave;
         [SerializeField] float randomPosition;
-        [SerializeField] [ReorderableList] List<Spawn> spawns;
+        [SerializeField]  List<Spawn> spawns;
 
         public void SpawnEnemies()
         {

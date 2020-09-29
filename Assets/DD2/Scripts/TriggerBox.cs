@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DD2.Actions;
-using NaughtyAttributes;
+
 
 namespace DD2
 {
@@ -11,7 +11,7 @@ namespace DD2
         [SerializeField] bool onTriggerEnter = true;
         [SerializeField] bool onTriggerExit;
         [SerializeField] LayerMask layerMask;
-        [SerializeField] [ReorderableList] List<Action> actions;
+        [SerializeField]  List<Action> actions;
 
         void OnTriggerEnter(Collider collider)
         {

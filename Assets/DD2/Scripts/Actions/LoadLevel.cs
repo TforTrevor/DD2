@@ -1,6 +1,4 @@
-﻿using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 using UnityEngine.SceneManagement;
@@ -10,7 +8,7 @@ namespace DD2.Actions
     [CreateAssetMenu(menuName = "Scriptable Objects/Actions/Load Level")]
     public class LoadLevel : Action
     {
-        [SerializeField] [Scene] int scene;
+        [SerializeField] int scene;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {

@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 
 namespace DD2
 {
     public class Wave : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] List<EnemySpawner> spawners;
-        [SerializeField] [ReadOnly] int maxCount;
-        [SerializeField] [ReadOnly] int currentCount;
+        [SerializeField]  List<EnemySpawner> spawners;
+        [SerializeField]  int maxCount;
+        [SerializeField]  int currentCount;
 
         public int CurrentCount { get => currentCount; private set => currentCount = value; }
         public int MaxCount { get => maxCount; private set => maxCount = value; }

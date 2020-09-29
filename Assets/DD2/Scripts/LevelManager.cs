@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using NaughtyAttributes;
-using UnityAtoms.BaseAtoms;
-using DD2.Actions;
+﻿using DD2.Actions;
 using DD2.AI;
 using MEC;
+using System.Collections.Generic;
+using UnityAtoms.BaseAtoms;
+using UnityEngine;
 
 namespace DD2
 {
@@ -16,10 +13,10 @@ namespace DD2
         [SerializeField] new Camera camera;
         [SerializeField] Transform playerSpawn;
         [SerializeField] float respawnTime;
-        [SerializeField] [ReorderableList] List<Core> cores;
-        [SerializeField] [ReorderableList] List<Wave> waves;
+        [SerializeField] List<Core> cores;
+        [SerializeField] List<Wave> waves;
         [SerializeField] int currentWave = 0;
-        [SerializeField] [ReadOnly] bool waveInProgress;
+        [SerializeField] bool waveInProgress;
         [SerializeField] VoidEvent waveStarted;
         [SerializeField] VoidEvent waveUpdated;
         [SerializeField] VoidEvent waveEnded;

@@ -1,31 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 
 namespace DD2
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Stats")]
     public class Stats : ScriptableObject
     {
-        [SerializeField] [BoxGroup("Character")] float maxHealth;
-        [SerializeField] [BoxGroup("Character")] int maxMana;
-        [SerializeField] [BoxGroup("Character")] float attackDamage;
-        [SerializeField] [BoxGroup("Character")] float attackSpeed;
-        [SerializeField] [BoxGroup("Character")] float moveSpeed;
-        [SerializeField] [BoxGroup("Character")] float presence;
+        [SerializeField] float maxHealth;
+        [SerializeField] int maxMana;
+        [SerializeField] float attackDamage;
+        [SerializeField] float attackSpeed;
+        [SerializeField] float moveSpeed;
+        [SerializeField] float presence;
 
-        [SerializeField] [EnumFlags] [BoxGroup("Resistances")] ElementType resistedElements;
-        [SerializeField] [BoxGroup("Resistances")] float physicalResist;
-        [SerializeField] [BoxGroup("Resistances")] float fireResist;
-        [SerializeField] [BoxGroup("Resistances")] float lightningResist;
-        [SerializeField] [BoxGroup("Resistances")] float energyResist;
-        [SerializeField] [BoxGroup("Resistances")] float waterResist;
+        [SerializeField] ElementType resistedElements;
+        [SerializeField] float physicalResist;
+        [SerializeField] float fireResist;
+        [SerializeField] float lightningResist;
+        [SerializeField] float energyResist;
+        [SerializeField] float waterResist;
 
-        [SerializeField] [BoxGroup("Range")] float attackRange;
-        [SerializeField] [BoxGroup("Range")] float attackAngle;
-        [SerializeField] [BoxGroup("Range")] float searchRange;
-        [SerializeField] [BoxGroup("Range")] float searchAngle;
+        [SerializeField] float attackRange;
+        [SerializeField] float attackAngle;
+        [SerializeField] float searchRange;
+        [SerializeField] float searchAngle;
 
         public float MaxHealth { get => maxHealth; private set => maxHealth = value; }
         public int MaxMana { get => maxMana; private set => maxMana = value; }

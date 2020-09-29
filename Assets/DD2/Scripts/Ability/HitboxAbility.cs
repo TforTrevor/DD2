@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 using MEC;
 using DD2.Actions;
 
@@ -9,15 +9,15 @@ namespace DD2.Abilities
 {
     public class HitboxAbility : Ability
     {
-        [SerializeField] [BoxGroup("Hitboxes")]
+        [SerializeField]
         protected float hitboxTickRate;
-        [SerializeField] [BoxGroup("Hitboxes")]
+        [SerializeField]
         protected bool showHitbox;
-        [SerializeField] [ReorderableList] [BoxGroup("Hitboxes")]
+        [SerializeField]
         protected Hitbox[] hitboxes;
-        [SerializeField] [ReorderableList] [Expandable]
+        [SerializeField]  [Expandable]
         protected Action[] oneTimeActions;
-        [SerializeField] [ReorderableList]
+        [SerializeField] 
         protected ParticleSystem[] particleSystems;
 
         protected Collider[] collisions;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 using UnityEngine.VFX;
-using NaughtyAttributes;
+
 
 namespace DD2
 {
@@ -17,10 +17,10 @@ namespace DD2
         [SerializeField] LayerMask hitMask;
         [SerializeField] LayerMask penetrateMask;
         [SerializeField] int maxPenetrations;
-        [SerializeField] [BoxGroup("VFX")] VisualEffect vfx;
-        [SerializeField] [BoxGroup("VFX")] Light vfxLight;
-        [SerializeField] [BoxGroup("VFX")] Transform model;
-        [SerializeField] [BoxGroup("VFX")] float vfxLingerTime;
+        [SerializeField] VisualEffect vfx;
+        [SerializeField] Light vfxLight;
+        [SerializeField] Transform model;
+        [SerializeField] float vfxLingerTime;
 
         public string PoolKey { get => poolKey; private set => poolKey = value; }
         public Entity Entity { get => entity; private set => entity = value; }

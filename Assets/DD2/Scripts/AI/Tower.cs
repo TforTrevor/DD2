@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI.Components;
 using UnityEngine.VFX;
-using NaughtyAttributes;
+
 using MEC;
 
 namespace DD2.AI
 {
     public class Tower : EntityAI
     {
-        [BoxGroup("Tower")] [SerializeField] bool buildOnStart;
-        [BoxGroup("Tower")] [SerializeField] int manaCost;
-        [BoxGroup("Tower")] [SerializeField] int buildTime;
-        [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
-        [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
-        [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
-        [BoxGroup("Tower")] [SerializeField] protected Material towerSummonMaterial;
-        [BoxGroup("Tower")] [SerializeField] Color errorColor = Color.red;
-        [BoxGroup("Tower")] [SerializeField] Light summonLight;
-        [BoxGroup("Tower")] [SerializeField] protected MeshRenderer summonRenderer;
-        [BoxGroup("Tower")] [SerializeField] new Collider collider;
-        [BoxGroup("Tower")] [SerializeField] VisualEffect upgradeEffect;
+        [SerializeField] bool buildOnStart;
+        [SerializeField] int manaCost;
+        [SerializeField] int buildTime;
+        [SerializeField] protected Transform towerGraphics;
+        [SerializeField] Transform towerVertical;
+        [SerializeField] protected Transform towerSummonGraphics;
+        [SerializeField] protected Material towerSummonMaterial;
+        [SerializeField] Color errorColor = Color.red;
+        [SerializeField] Light summonLight;
+        [SerializeField] protected MeshRenderer summonRenderer;
+        [SerializeField] new Collider collider;
+        [SerializeField] VisualEffect upgradeEffect;
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 using DD2.Abilities;
 using System;
 using MEC;
@@ -14,14 +14,14 @@ namespace DD2
         [SerializeField] private float currentHealth;
         [SerializeField] private int currentMana;
         [SerializeField] private float radius;
-        [ReadOnly] [SerializeField] private bool isAlive;
-        [ReadOnly] [SerializeField] private StatusEffect statusEffects;
+         [SerializeField] private bool isAlive;
+         [SerializeField] private StatusEffect statusEffects;
 
         [SerializeField] private Transform fireTransform;
         [SerializeField] private Transform eyeTransform;
-        [ReadOnly] [SerializeField] private bool isGrounded;
+         [SerializeField] private bool isGrounded;
         [SerializeField] Animator animator;
-        [SerializeField] [ReorderableList] protected List<Ability> abilities;
+        [SerializeField]  protected List<Ability> abilities;
 
         public event EventHandler<float> healthUpdated;
         public event EventHandler<float> manaUpdated;

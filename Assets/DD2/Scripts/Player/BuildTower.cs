@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DD2.AI;
-using NaughtyAttributes;
+
 using MEC;
 using UnityAtoms.BaseAtoms;
 

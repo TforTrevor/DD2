@@ -1,6 +1,6 @@
 ﻿using DD2.Abilities;
 using MEC;
-using NaughtyAttributes;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace DD2.Actions
         [SerializeField] StatusEffect statusEffect;
         [SerializeField] float strength;
         [SerializeField] float duration;
-        [ShowIf("ShowDamage")] [SerializeField] Damage damage;
+        [SerializeField] Damage damage;
 
         bool ShowDamage { get => statusEffect == StatusEffect.Burn; }
 

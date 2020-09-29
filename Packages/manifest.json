@@ -16,7 +16,6 @@
     }
   ],
   "dependencies": {
-    "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
     "com.mambojambostudios.unity-atoms-base-atoms": "4.2.1",
     "com.mambojambostudios.unity-atoms-core": "4.2.0",
     "com.mambojambostudios.unity-atoms-fsm": "4.2.1",
