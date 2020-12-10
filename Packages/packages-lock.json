@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.av.smart-hierarchy": {
+      "version": "https://github.com/neon-age/Smart-Hierarchy.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e9639886cf5e6aba04b8bc3106f31b11a74f23e2"
+    },
     "com.mambojambostudios.unity-atoms-base-atoms": {
       "version": "4.2.1",
       "depth": 0,
@@ -88,28 +95,28 @@
       "dependencies": {}
     },
     "com.unity.cinemachine": {
-      "version": "2.6.2",
+      "version": "2.6.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
-      "version": "1.0.0",
+      "version": "1.0.6",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.2",
+      "version": "2.0.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -134,7 +141,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
-      "version": "10.0.0-preview.30",
+      "version": "10.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -143,23 +150,23 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.high-definition": {
-      "version": "10.0.0-preview.27",
+      "version": "10.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.render-pipelines.core": "10.0.0-preview.30",
-        "com.unity.shadergraph": "10.0.0-preview.27",
-        "com.unity.visualeffectgraph": "10.0.0-preview.27",
-        "com.unity.render-pipelines.high-definition-config": "10.0.0-preview.27"
+        "com.unity.render-pipelines.core": "10.2.2",
+        "com.unity.shadergraph": "10.2.2",
+        "com.unity.visualeffectgraph": "10.2.2",
+        "com.unity.render-pipelines.high-definition-config": "10.2.2"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.high-definition-config": {
-      "version": "10.0.0-preview.27",
+      "version": "10.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.render-pipelines.core": "10.0.0-preview.30"
+        "com.unity.render-pipelines.core": "10.2.2"
       },
       "url": "https://packages.unity.com"
     },
@@ -178,28 +185,28 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
-      "version": "10.0.0-preview.27",
+      "version": "10.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.render-pipelines.core": "10.0.0-preview.30",
+        "com.unity.render-pipelines.core": "10.2.2",
         "com.unity.searcher": "4.3.1"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.16",
+      "version": "1.1.20",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.ext.nunit": "1.0.0",
+        "com.unity.ext.nunit": "1.0.6",
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.textmeshpro": {
-      "version": "3.0.1",
+      "version": "3.0.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -208,7 +215,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.4.2",
+      "version": "1.4.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -229,20 +236,13 @@
       }
     },
     "com.unity.visualeffectgraph": {
-      "version": "10.0.0-preview.27",
+      "version": "10.2.2",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.shadergraph": "10.0.0-preview.27"
+        "com.unity.shadergraph": "10.2.2"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.xsduan.hierarchy-folders": {
-      "version": "https://github.com/bezoro/unity-hierarchy-folders.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "cd511b3c9271e9709604e48b4670cbffe0d4287a"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
