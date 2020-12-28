@@ -22,6 +22,7 @@ namespace DD2.AI
         [SerializeField] protected MeshRenderer summonRenderer;
         [SerializeField] new Collider collider;
         [SerializeField] VisualEffect upgradeEffect;
+        [SerializeField] VisualEffect buildEffect;
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
@@ -45,6 +46,11 @@ namespace DD2.AI
                 summonRenderer.material.SetFloat("_Progress", 0);
                 summonRenderer.transform.localScale *= 1.01f;
                 summonRenderer.material.SetInt("_IsBuilt", 0);
+            }
+            if (buildEffect != null)
+            {
+                buildEffect.Stop();
+                buildEffect.SetFloat("Height", summonRenderer.bounds.size.y);
             }
         }
 
@@ -141,22 +147,30 @@ namespace DD2.AI
                 collider.isTrigger = false;
             }
 
-            //if (towerSummonMaterial != null)
-            //{
-            //    //towerSummonMaterial.SetFloat("_BuildTime", buildTime);
-            //    //towerSummonMaterial.SetFloat("_StartTime", Time.timeSinceLevelLoad);
-
-                
-            //}
+            if (buildEffect != null)
+            {
+                buildEffect.SetFloat("Progress", 0);
+                buildEffect.Play();
+            }            
 
             float buildProgress = 0;
             while (buildProgress < buildTime)
             {
+                if (buildEffect != null)
+                {
+                    buildEffect.SetFloat("Progress", buildProgress / buildTime);
+                }
+                
                 summonRenderer.material.SetFloat("_Progress", buildProgress / buildTime);
                 yield return Timing.WaitForOneFrame;
                 buildProgress += Time.deltaTime;
             }
 
+            if (buildEffect != null)
+            {
+                buildEffect.Stop();
+            }
+            
             towerGraphics.gameObject.SetActive(true);
             if (aiComponent != null)
             {
