@@ -62,7 +62,7 @@ namespace DD2.Actions
                 float damage = this.damage * multiplier * GetDamageMultiplier(target);
                 target.Damage(caller, damage);
                 caller?.Hitlag(HitlagFormula(damage));
-                DamageUICanvas.Instance.ShowDamage(target, damage);
+                //DamageUICanvas.Instance.ShowDamage(target, damage);
             }
         }
 

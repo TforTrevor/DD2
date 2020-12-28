@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DD2.Util;
 
-namespace DD2
+namespace DD2.UI
 {
     public class PlayerUI : MonoBehaviour
     {

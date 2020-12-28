@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4475002502327752551}
   - component: {fileID: 4475002502327752544}
   - component: {fileID: 1872251033}
-  - component: {fileID: 1872251034}
   m_Layer: 5
   m_Name: Health Bar UI
   m_TagString: Untagged
@@ -82,6 +81,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1872251033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,27 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83b87592a6ced944a34e3433e24760e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolKey: healthBar
-  maxDistance: 10
-  layerMask:
+  uiElement: {fileID: 5743558424708314640, guid: 8c9c92f83013f9c4b80907e715a4f3b9,
+    type: 3}
+  maxElements: 100
+  range: 5
+  healthBarMask:
     serializedVersion: 2
-    m_Bits: 79872
---- !u!114 &1872251034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4475002502327752547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777359b8f1f23ae45b3ad15fc13beb0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  pools:
-  - tag: healthBar
-    prefab: {fileID: 5135686499253681898, guid: cc9932cd2143ca14eb1347e626636a9e,
-      type: 3}
-    size: 100
-    canExpand: 0
+    m_Bits: 4096

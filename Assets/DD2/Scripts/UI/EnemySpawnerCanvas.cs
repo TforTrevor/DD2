@@ -3,20 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DD2
+namespace DD2.UI
 {
-    public class EnemySpawnerCanvas : MonoBehaviour
+    public class EnemySpawnerCanvas : FloatingUICanvas<EnemySpawnerUI>
     {
-        [SerializeField] EnemySpawnerUI spawnerUI;
-        [SerializeField] float uiOffset;
+        [SerializeField] float heightOffset;
 
         Dictionary<EnemySpawner, EnemySpawnerUI> uiDictionary = new Dictionary<EnemySpawner, EnemySpawnerUI>();
-        bool show;
+        bool isEnabled;
 
         void Start()
         {
-            //LevelManager.Instance.WaveEnded += Show;
-            //LevelManager.Instance.WaveStarted += Hide;
             Show();
         }
 
@@ -26,38 +23,35 @@ namespace DD2
             Wave wave = LevelManager.Instance.GetWave();
             foreach (EnemySpawner spawner in wave.Spawners)
             {
-                EnemySpawnerUI instance = Instantiate(spawnerUI, transform);
-                foreach (KeyValuePair<string, int> pair in spawner.GetEnemies())
-                {
-                    instance.AddEnemy(pair.Key, pair.Value);
-                }
+                EnemySpawnerUI instance = ShowElement();
                 uiDictionary.Add(spawner, instance);
             }
-            show = true;
+            isEnabled = true;
         }
 
         public void Hide()
         {
             foreach (KeyValuePair<EnemySpawner, EnemySpawnerUI> pair in uiDictionary)
             {
-                Destroy(uiDictionary[pair.Key].gameObject);
+                HideElement(pair.Value);
+                //Destroy(uiDictionary[pair.Key].gameObject);
             }
-            show = false;
+            isEnabled = false;
         }
 
         void LateUpdate()
         {
-            if (show)
+            if (isEnabled)
             {
                 foreach (KeyValuePair<EnemySpawner, EnemySpawnerUI> pair in uiDictionary)
                 {
                     EnemySpawner spawner = pair.Key;
                     EnemySpawnerUI spawnerUI = pair.Value;
 
-                    Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(spawner.transform.position + Vector3.up * uiOffset);
+                    Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(spawner.transform.position + Vector3.up * heightOffset);
                     if (pos.z > 0 && pos.z < 15)
                     {
-                        spawnerUI.ToggleVisibility(true);
+                        spawnerUI.ToggleVisible(true, spawner);
                         spawnerUI.transform.position = pos;
 
                         float value = Util.Utilities.Remap(pos.z, 15, 5, 0, 1);
@@ -65,7 +59,7 @@ namespace DD2
                     }
                     else
                     {
-                        spawnerUI.ToggleVisibility(false);
+                        spawnerUI.ToggleVisible(false, spawner);
                     }
                 }
             }            

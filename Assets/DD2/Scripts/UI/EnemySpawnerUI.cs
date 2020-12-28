@@ -4,45 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DD2
+namespace DD2.UI
 {
-    public class EnemySpawnerUI : MonoBehaviour
+    public class EnemySpawnerUI : FloatingUI
     {
         [SerializeField] EnemySpawnerUIElement elementPrefab;
-        [SerializeField] Transform parent;
 
         List<EnemySpawnerUIElement> elements = new List<EnemySpawnerUIElement>();
-        Canvas canvas;
-        bool visible;
+        bool isEnabled;
 
-        void Awake()
+        protected override void Awake()
         {
-            canvas = GetComponent<Canvas>();
-            visible = canvas.enabled;
+            base.Awake();
+            isEnabled = true;
         }
 
-        public void ToggleVisibility(bool value)
+        public void ToggleVisible(bool value, EnemySpawner spawner)
         {
-            if (value != visible)
+            if (!isEnabled && value)
             {
-                canvas.enabled = value;
-                visible = value;
-            }
-        }
+                foreach (KeyValuePair<string, int> item in spawner.GetEnemies())
+                {
+                    EnemySpawnerUIElement instance = Instantiate(elementPrefab, transform);
+                    instance.SetEnemy(item.Key, item.Value);
+                    elements.Add(instance);
+                }
 
-        public void Clear()
-        {
-            foreach (EnemySpawnerUIElement element in elements)
+                CanvasGroup.alpha = 1;
+                isEnabled = true;
+            }
+            else if (isEnabled && !value)
             {
-                Destroy(element);
-            }
-        }
+                CanvasGroup.alpha = 0;
 
-        public void AddEnemy(string name, int count)
-        {
-            EnemySpawnerUIElement instance = Instantiate(elementPrefab, parent);
-            instance.SetEnemy(name, count);
-            elements.Add(instance);
+                foreach (EnemySpawnerUIElement element in elements)
+                {
+                    Destroy(element.gameObject);
+                }
+                elements.Clear();
+
+                isEnabled = false;
+            }
         }
     }
 }

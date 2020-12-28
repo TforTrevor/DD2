@@ -16,7 +16,7 @@ namespace DD2.AI
         [SerializeField] protected Transform towerGraphics;
         [SerializeField] Transform towerVertical;
         [SerializeField] protected Transform towerSummonGraphics;
-        [SerializeField] protected Material towerSummonMaterial;
+        //[SerializeField] protected Material towerSummonMaterial;
         [SerializeField] Color errorColor = Color.red;
         [SerializeField] Light summonLight;
         [SerializeField] protected MeshRenderer summonRenderer;
@@ -41,6 +41,10 @@ namespace DD2.AI
             if (summonRenderer != null)
             {
                 DefaultColor = summonRenderer.material.GetColor("_Color");
+                summonRenderer.material.SetFloat("_Height", summonRenderer.bounds.size.y);
+                summonRenderer.material.SetFloat("_Progress", 0);
+                summonRenderer.transform.localScale *= 1.01f;
+                summonRenderer.material.SetInt("_IsBuilt", 0);
             }
         }
 
@@ -137,21 +141,40 @@ namespace DD2.AI
                 collider.isTrigger = false;
             }
 
-            if (towerSummonMaterial != null)
+            //if (towerSummonMaterial != null)
+            //{
+            //    //towerSummonMaterial.SetFloat("_BuildTime", buildTime);
+            //    //towerSummonMaterial.SetFloat("_StartTime", Time.timeSinceLevelLoad);
+
+                
+            //}
+
+            float buildProgress = 0;
+            while (buildProgress < buildTime)
             {
-                towerSummonMaterial.SetFloat("_BuildTime", buildTime);
-                towerSummonMaterial.SetFloat("_StartTime", Time.timeSinceLevelLoad);
-            }           
+                summonRenderer.material.SetFloat("_Progress", buildProgress / buildTime);
+                yield return Timing.WaitForOneFrame;
+                buildProgress += Time.deltaTime;
+            }
 
-            yield return Timing.WaitForSeconds(buildTime);
-
-            towerSummonGraphics.gameObject.SetActive(false);
             towerGraphics.gameObject.SetActive(true);
             if (aiComponent != null)
             {
                 aiComponent.enabled = true;
             }
             IsAlive = true;
+
+            summonRenderer.material.SetInt("_IsBuilt", 1);
+
+            float hideProgress = 1;
+            while (hideProgress > 0)
+            {
+                summonRenderer.material.SetFloat("_Progress", hideProgress);
+                yield return Timing.WaitForOneFrame;
+                hideProgress -= Time.deltaTime * 2;
+            }
+
+            towerSummonGraphics.gameObject.SetActive(false);
         }
     }
 }

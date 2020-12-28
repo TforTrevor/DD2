@@ -17,7 +17,7 @@ namespace DD2
                 {
                     FloatingUI poolObject = Instantiate(pool.prefab, transform);
                     //poolObject.transform.localScale = Vector3.zero;
-                    poolObject.ToggleCanvas(false);
+                    poolObject.ToggleVisible(false);
                     if (poolObject != null)
                     {
                         queue.Enqueue(poolObject);
@@ -58,7 +58,7 @@ namespace DD2
             }
 
             //poolComponent.transform.localScale = Vector3.zero;
-            poolComponent.ToggleCanvas(false, () =>
+            poolComponent.ToggleVisible(false, () =>
             {
                 poolDictionary[key].Enqueue(poolComponent);
             });            
