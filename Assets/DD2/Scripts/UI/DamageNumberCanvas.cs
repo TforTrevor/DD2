@@ -42,7 +42,7 @@ namespace DD2.UI
 
         void HealthUpdated(object sender, float difference)
         {
-            DamageNumber damageNumber = ShowElement();
+            DamageNumber damageNumber = GetElement();
             Entity entity = (Entity)sender;
             damageNumber.ToggleVisible(true, difference, entity.transform.position);
         }

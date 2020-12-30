@@ -21,10 +21,10 @@ namespace DD2.UI
         float yVariance;
         Vector3 offset;
 
-        public override void ToggleVisible(bool value)
-        {
-            ToggleVisible(value, 0, Vector3.zero);
-        }
+        //public override void ToggleVisible(bool value)
+        //{
+        //    ToggleVisible(value, 0, Vector3.zero);
+        //}
 
         public void ToggleVisible(bool value, float difference, Vector3 position)
         {

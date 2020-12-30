@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4475002502327752544}
   - component: {fileID: 1872251033}
   m_Layer: 5
-  m_Name: Health Bar UI
+  m_Name: Health Bar Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   uiElement: {fileID: 5743558424708314640, guid: 8c9c92f83013f9c4b80907e715a4f3b9,
     type: 3}
   maxElements: 100
-  range: 5
+  range: 10
   healthBarMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 6144

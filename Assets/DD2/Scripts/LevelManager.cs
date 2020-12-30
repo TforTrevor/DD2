@@ -17,6 +17,7 @@ namespace DD2
         [SerializeField] List<Wave> waves;
         [SerializeField] int currentWave = 0;
         [SerializeField] bool waveInProgress;
+        [SerializeField] VoidEvent levelLoaded;
         [SerializeField] VoidEvent waveStarted;
         [SerializeField] VoidEvent waveUpdated;
         [SerializeField] VoidEvent waveEnded;
@@ -28,9 +29,6 @@ namespace DD2
         public int WaveCount { get => waves.Count; }
         public int CurrentWave { get => currentWave; private set => currentWave = value; }
         public Camera Camera { get => camera; set => camera = value; }
-        public VoidEvent WaveStarted { get => waveStarted; private set => waveStarted = value; }
-        public VoidEvent WaveUpdated { get => waveUpdated; private set => waveUpdated = value; }
-        public VoidEvent WaveEnded { get => waveEnded; private set => waveEnded = value; }   
         public List<Enemy> Enemies { get; private set; }
 
         protected override void Awake()
@@ -43,6 +41,7 @@ namespace DD2
         {
             CurrentWave = 0;
             waveInProgress = false;
+            levelLoaded.Raise();
         }
 
         public void StartWave()
@@ -51,14 +50,14 @@ namespace DD2
             {
                 waves[CurrentWave].StartWave();
                 waveInProgress = true;
-                WaveStarted.Raise();
+                waveStarted.Raise();
                 //waveStarted?.Invoke(this, CurrentWave);
             }            
         }
 
         public void UpdateWave()
         {
-            WaveUpdated.Raise();
+            waveUpdated.Raise();
         }
 
         public void EndWave()
@@ -67,7 +66,7 @@ namespace DD2
             {
                 CurrentWave++;
                 waveInProgress = false;
-                WaveEnded.Raise();
+                waveEnded.Raise();
                 //waveEnded?.Invoke(this, CurrentWave);
             }
         }

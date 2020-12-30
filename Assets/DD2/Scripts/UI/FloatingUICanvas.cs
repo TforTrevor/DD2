@@ -24,12 +24,12 @@ namespace DD2.UI
             for (int i = 0; i < maxElements; i++)
             {
                 T temp = Instantiate(uiElement, transform);
-                temp.ToggleVisible(false);
+                temp.Hide();
                 inactiveElements[i] = temp;
             }
         }
 
-        public virtual T ShowElement()
+        public virtual T GetElement()
         {
             T element;
             //Take oldest active element (front of queue) and send it to the back of the active queue
@@ -56,15 +56,11 @@ namespace DD2.UI
                 activeCount++;
             }
 
-            element.ToggleVisible(true);
-
             return element;
         }
 
-        public virtual void HideElement(T element)
+        public virtual void ReturnElement(T element)
         {
-            element.ToggleVisible(false);
-            
             if (activeCount > 0)
             {
                 inactiveElements[maxElements - activeCount] = element;

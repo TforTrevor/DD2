@@ -10,58 +10,47 @@ namespace DD2.UI
         [SerializeField] float range;
         [SerializeField] LayerMask healthBarMask;
 
-        Dictionary<Collider, HealthBar> healthBarObjects = new Dictionary<Collider, HealthBar>();
-        Dictionary<Collider, Entity> entities = new Dictionary<Collider, Entity>();
+        Transform currentTransform;
+        Entity currentEntity;
+        HealthBar currentHealthBar;
 
         //Add and remove colliders from dictionary
         void FixedUpdate()
         {
-
-            Collider[] colliders = Physics.OverlapSphere(LevelManager.Instance.Camera.transform.position, range, healthBarMask);
-            Dictionary<Collider, HealthBar> copy = new Dictionary<Collider, HealthBar>(healthBarObjects);
-
-            //Remove colliders from dictionary
-            foreach (KeyValuePair<Collider, HealthBar> pair in copy)
+            RaycastHit hit;
+            Ray ray = new Ray(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward);
+            if (Physics.Raycast(ray, out hit, range, healthBarMask))
             {
-                if (!Utilities.ArrayContains(colliders, pair.Key))
+                if (hit.transform != currentTransform)
                 {
-                    HideElement(pair.Value);
-                    healthBarObjects.Remove(pair.Key);
-                    entities.Remove(pair.Key);
+                    Entity newEntity = hit.transform.GetComponent<Entity>();
+                    if (newEntity != null)
+                    {
+                        HideHealthBar();
+
+                        currentTransform = hit.transform;
+                        currentEntity = newEntity;
+                        currentHealthBar = GetElement();
+                        currentHealthBar.Show(currentEntity);
+                    }
                 }
             }
-
-            //Add colliders to dictionary
-            foreach (Collider collider in colliders)
+            else
             {
-                if (!healthBarObjects.ContainsKey(collider))
-                {
-                    HealthBar uiElement = ShowElement();
-
-                    Vector3 elementPosition = LevelManager.Instance.Camera.WorldToScreenPoint(collider.transform.position);
-                    uiElement.transform.position = elementPosition;
-
-                    healthBarObjects.Add(collider, uiElement);
-                    Entity entity = collider.GetComponent<Entity>();
-                    entities.Add(collider, entity);
-                }
+                HideHealthBar();
             }
         }
 
-        void LateUpdate()
+        void HideHealthBar()
         {
-            foreach (KeyValuePair<Collider, HealthBar> pair in healthBarObjects)
+            if (currentHealthBar != null)
             {
-                Vector3 elementPosition = LevelManager.Instance.Camera.WorldToScreenPoint(pair.Key.transform.position);
-                pair.Value.transform.position = elementPosition;
-                if (elementPosition.z < 0)
-                {
-                    pair.Value.ToggleVisible(false, entities[pair.Key]);
-                }
-                else
-                {
-                    pair.Value.ToggleVisible(true, entities[pair.Key]);
-                }
+                currentHealthBar.Hide();
+                ReturnElement(currentHealthBar);
+
+                currentHealthBar = null;
+                currentTransform = null;
+                currentEntity = null;
             }
         }
     }

@@ -3946,10 +3946,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3342988195871786058}
     m_Modifications:
-    - target: {fileID: 1872251033, guid: 85a451c317b1cdd4b934a025e900595b, type: 3}
-      propertyPath: healthBarMask.m_Bits
-      value: 2048
-      objectReference: {fileID: 0}
     - target: {fileID: 4475002502327752547, guid: 85a451c317b1cdd4b934a025e900595b,
         type: 3}
       propertyPath: m_Name

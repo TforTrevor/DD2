@@ -22,22 +22,14 @@ namespace DD2.UI
             sortingGroup = GetComponent<SortingGroup>();
         }
 
-        public virtual void ToggleVisible(bool value)
+        public virtual void Show()
         {
-            ToggleVisible(value, null);
+            canvasGroup.alpha = 1;
         }
 
-        public virtual void ToggleVisible(bool value, System.Action onComplete)
+        public virtual void Hide()
         {
-            if (value)
-            {
-                canvasGroup.alpha = 1;
-            }
-            else
-            {
-                canvasGroup.alpha = 0;
-            }
-            onComplete?.Invoke();
+            canvasGroup.alpha = 0;
         }
     }
 }

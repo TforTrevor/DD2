@@ -116,6 +116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementPrefab: {fileID: 1760051649893220546, guid: c4edb8873597e5d4d8be93f5f9add058,
     type: 3}
+  heightOffset: 2
+  maxRange: 15
+  minRange: 5
 --- !u!114 &6667644269140079641
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -139,7 +139,7 @@ MonoBehaviour:
   m_ImportDependencies: []
   m_GraphVersion: 6
   m_ResourceVersion: 1
-  m_saved: 1
+  m_saved: 0
   m_SubgraphDependencies: []
   m_CategoryPath: 
 --- !u!2058629511 &8926484042661614527
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
@@ -6517,7 +6517,7 @@ MonoBehaviour:
   m_OutputSlots:
   - {fileID: 8926484042661614900}
   - {fileID: 8926484042661614901}
-  Asset: {fileID: -3256353808211938606, guid: 0250167e26b7b7f4ca10f39a75a4f4d9, type: 3}
+  Asset: {fileID: 0}
 --- !u!114 &8926484042661614900
 MonoBehaviour:
   m_ObjectHideFlags: 0
