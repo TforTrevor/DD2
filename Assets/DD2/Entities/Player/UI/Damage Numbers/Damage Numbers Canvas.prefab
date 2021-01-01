@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiElement: {fileID: 6114676616684486025, guid: 48268776f3609ca4997a52984a96d191,
     type: 3}
-  maxElements: 2
+  maxElements: 100
   range: 10
   damageMask:
     serializedVersion: 2
