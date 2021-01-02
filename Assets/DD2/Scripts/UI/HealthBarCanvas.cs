@@ -18,7 +18,7 @@ namespace DD2.UI
         void FixedUpdate()
         {
             RaycastHit hit;
-            Ray ray = new Ray(LevelManager.Instance.Camera.transform.position, LevelManager.Instance.Camera.transform.forward);
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
             if (Physics.Raycast(ray, out hit, range, healthBarMask))
             {
                 if (hit.transform != currentTransform)

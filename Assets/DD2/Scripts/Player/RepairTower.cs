@@ -32,7 +32,7 @@ namespace DD2
             else
             {
                 RaycastHit hit;
-                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, repairMask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, repairMask))
                 {
                     if (!hit.collider.isTrigger)
                     {

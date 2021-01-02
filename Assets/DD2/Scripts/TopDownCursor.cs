@@ -78,7 +78,8 @@ namespace DD2
             player.ToggleLook(false);
 
             Timing.KillCoroutines(effectHandle);
-            cursorEffect.Play();
+            //cursorEffect.Play();
+            cursorEffect.Stop();
             if (lightHandle != null)
                 LeanTween.cancel(lightHandle.uniqueId);
             cursorLight.intensity = lightIntensity;
@@ -115,7 +116,7 @@ namespace DD2
                 localPos = Vector3.ClampMagnitude(localPos, maxRange);
                 RaycastHit hit;
                 Vector3 worldPos = player.transform.TransformPoint(localPos);
-                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, cursorMask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, cursorMask))
                 {
                     worldPos.y = hit.point.y;
                 }

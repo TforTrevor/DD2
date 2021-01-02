@@ -11,7 +11,8 @@ namespace DD2
     {
         [SerializeField] Wave wave;
         [SerializeField] float randomPosition;
-        [SerializeField]  List<Spawn> spawns;
+        [SerializeField] List<Spawn> spawns;
+        [SerializeField] EntityList enemyList;
 
         public void SpawnEnemies()
         {
@@ -50,11 +51,13 @@ namespace DD2
             entity.transform.forward = transform.forward;
             entity.gameObject.SetActive(true);
             entity.onDeath += DecrementCount;
+            enemyList.Entities.Add(entity);
         }
 
         void DecrementCount(object sender, Entity entity)
         {
             wave.DecrementCount(sender, entity);
+            enemyList.Entities.Remove(entity);
         }
 
         public Dictionary<string, int> GetEnemies()

@@ -7,17 +7,22 @@ namespace DD2.UI
 {
     public class EnemySpawnerCanvas : FloatingUICanvas<EnemySpawnerUI>
     {
+        [SerializeField] WaveInfo waveInfo;
+
         List<EnemySpawnerUI> uiElements = new List<EnemySpawnerUI>();
 
         public void Show()
         {
-            Wave wave = LevelManager.Instance.GetWave();
-            foreach (EnemySpawner spawner in wave.Spawners)
+            List<EnemySpawner> spawners = waveInfo.Spawners;
+            if (spawners != null)
             {
-                EnemySpawnerUI instance = GetElement();
-                instance.Show(spawner);
-                uiElements.Add(instance);
-            }
+                foreach (EnemySpawner spawner in waveInfo.Spawners)
+                {
+                    EnemySpawnerUI instance = GetElement();
+                    instance.Show(spawner);
+                    uiElements.Add(instance);
+                }
+            }            
         }
 
         public void Hide()

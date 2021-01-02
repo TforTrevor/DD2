@@ -16,6 +16,8 @@ namespace DD2.AI.Context
         public Entity lookTarget;
         public float attention;
 
+        public EntityList coreList;
+
         public AIContext(EntityAI entity)
         {
             this.entity = entity;

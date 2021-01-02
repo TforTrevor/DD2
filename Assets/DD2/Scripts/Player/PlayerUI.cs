@@ -17,6 +17,7 @@ namespace DD2.UI
         [SerializeField] Slider enemyCountSlider;
         [SerializeField] TextMeshProUGUI enemyCountText;
         [SerializeField] TextMeshProUGUI waveCountText;
+        [SerializeField] WaveInfo waveInfo;
 
         void Start()
         {
@@ -58,20 +59,16 @@ namespace DD2.UI
 
         public void UpdateEnemyCount()
         {
-            Wave wave = LevelManager.Instance.GetWave();
-            if (wave != null)
-            {
-                enemyCountSlider.maxValue = wave.MaxCount;
-                enemyCountSlider.value = wave.CurrentCount;
-                enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
-            }            
+            enemyCountSlider.maxValue = waveInfo.TotalEnemyCount;
+            enemyCountSlider.value = waveInfo.CurrentEnemyCount;
+            enemyCountText.text = waveInfo.CurrentEnemyCount + "/" + waveInfo.TotalEnemyCount;
         }
 
         public void UpdateWaveCount()
         {
-            if (LevelManager.Instance.WaveCount > 0)
+            if (waveInfo.TotalWaves > 0)
             {
-                waveCountText.text = LevelManager.Instance.CurrentWave + 1 + "/" + LevelManager.Instance.WaveCount;
+                waveCountText.text = waveInfo.WaveIndex + 1 + "/" + waveInfo.TotalWaves;
             }
             else
             {

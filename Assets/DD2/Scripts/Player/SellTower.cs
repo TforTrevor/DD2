@@ -12,7 +12,7 @@ namespace DD2
         protected override void Action()
         {
             RaycastHit hit;
-            if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, sellMask))
+            if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, sellMask))
             {
                 if (!hit.collider.isTrigger)
                 {

@@ -14,7 +14,7 @@ namespace DD2.UI
 
         void FixedUpdate()
         {
-            Collider[] colliders = Physics.OverlapSphere(LevelManager.Instance.Camera.transform.position, range, damageMask);
+            Collider[] colliders = Physics.OverlapSphere(Camera.main.transform.position, range, damageMask);
             Dictionary<Collider, Entity> copy = new Dictionary<Collider, Entity>(entities);
             
             //Remove entities

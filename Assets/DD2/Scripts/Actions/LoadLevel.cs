@@ -2,13 +2,16 @@
 using UnityEngine;
 using MEC;
 using UnityEngine.SceneManagement;
+using UnityAtoms.SceneMgmt;
+using DD2.UI;
 
 namespace DD2.Actions
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Actions/Load Level")]
     public class LoadLevel : Action
     {
-        [SerializeField] int scene;
+        [SerializeField] SceneFieldVariable scene;
+        [SerializeField] LoadingScreen loadingScreen;
 
         public override void DoAction(Entity target, Entity caller, object payload)
         {
@@ -17,12 +20,17 @@ namespace DD2.Actions
 
         IEnumerator<float> LoadSceneRoutine()
         {
-            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+            LoadingScreen instance = Instantiate(loadingScreen);
+            DontDestroyOnLoad(instance);
+            
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.Value);
             asyncLoad.allowSceneActivation = false;
+
+            instance.Show(asyncLoad);
 
             while (!asyncLoad.isDone)
             {
-                Debug.Log(asyncLoad.progress * 100 + "%");
+                //Debug.Log(asyncLoad.progress * 100 + "%");
 
                 if (asyncLoad.progress >= 0.9f)
                 {
@@ -30,7 +38,7 @@ namespace DD2.Actions
                 }
 
                 yield return Timing.WaitForOneFrame;
-            }            
+            }
         }
     }
 }

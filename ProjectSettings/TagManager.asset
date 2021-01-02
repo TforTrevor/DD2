@@ -45,3 +45,9 @@ TagManager:
   - name: Health Bar
     uniqueID: 2649035139
     locked: 0
+  - name: Player UI
+    uniqueID: 2005607347
+    locked: 0
+  - name: Loading Screen
+    uniqueID: 2946609103
+    locked: 0

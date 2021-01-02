@@ -43,13 +43,11 @@ namespace DD2.AI
         public override void Respawn()
         {
             base.Respawn();
-            LevelManager.Instance.Enemies.Add(this);
         }
 
         protected override void Die(Entity entity)
         {
             base.Die(entity);
-            LevelManager.Instance.Enemies.Remove(this);
         }
 
         void RandomizeStats()

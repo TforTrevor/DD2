@@ -78,7 +78,7 @@ namespace DD2.UI
         {
             if (isEnabled && entity != null)
             {
-                Vector3 elementPosition = LevelManager.Instance.Camera.WorldToScreenPoint(entity.transform.position);
+                Vector3 elementPosition = Camera.main.WorldToScreenPoint(entity.transform.position);
                 transform.position = elementPosition;
                 if (elementPosition.z > 0)
                 {

@@ -97,7 +97,7 @@ namespace DD2.UI
 
         Vector3 GetPosition()
         {
-            Vector3 projectPos = LevelManager.Instance.Camera.WorldToScreenPoint(worldPosition);
+            Vector3 projectPos = Camera.main.WorldToScreenPoint(worldPosition);
             Vector3 newPosition = new Vector3(projectPos.x + xVariance, projectPos.y + yVariance, projectPos.z) + offset;
 
             return newPosition;

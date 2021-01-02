@@ -61,7 +61,7 @@ namespace DD2.UI
         {
             if (isEnabled)
             {
-                Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(currentSpawner.transform.position + Vector3.up * heightOffset);
+                Vector3 pos = Camera.main.WorldToScreenPoint(currentSpawner.transform.position + Vector3.up * heightOffset);
                 if (pos.z > 0 && pos.z < maxRange)
                 {
                     CanvasGroup.alpha = 1;

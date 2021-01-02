@@ -31,7 +31,7 @@ namespace DD2.UI
 
                 if (entity != null)
                 {
-                    Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(entity.EyePosition);
+                    Vector3 pos = Camera.main.WorldToScreenPoint(entity.EyePosition);
                     if (pos.z > maxDistance || pos.z < 0)
                     {
                         ui.gameObject.SetActive(false);
