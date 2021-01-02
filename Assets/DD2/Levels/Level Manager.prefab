@@ -47,9 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbfea43d09449d479d39b36e8e54b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
   player: {fileID: 0}
-  camera: {fileID: 0}
   playerSpawn: {fileID: 0}
   respawnTime: 0
   cores:
@@ -57,11 +55,12 @@ MonoBehaviour:
   waves:
   - {fileID: 0}
   levelLoaded: {fileID: 11400000, guid: 5f30d81e2dcd2ba4caff59600d1e8bd2, type: 2}
-  showEndScreen: {fileID: 11400000, guid: da98af0d99554fd4db77cb8254e2e703, type: 2}
+  levelEnded: {fileID: 11400000, guid: 6fd3bfeb84c4afd43963ea0d6763962c, type: 2}
   loadHub: {fileID: 11400000, guid: fbdabd32114335f47b872579c5effd85, type: 2}
   waveInfo: {fileID: 11400000, guid: 4ce9e5de2015c35418ebe74572bc9648, type: 2}
   enemyList: {fileID: 11400000, guid: 06d297c8c75e9e6478a8419b46011e3c, type: 2}
   coreList: {fileID: 11400000, guid: 5b65766609cbf5a4d91918fb11ad795e, type: 2}
+  enableInput: {fileID: 11400000, guid: 864149a2edd9c3046b8796961ed831e4, type: 2}
 --- !u!114 &2830449629586393168
 MonoBehaviour:
   m_ObjectHideFlags: 0

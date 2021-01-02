@@ -6,6 +6,7 @@ using UnityAtoms.BaseAtoms;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] BoolVariable enableInput;
     [SerializeField] Vector2Variable moveVector;
     [SerializeField] Vector2Variable lookVector;
     [SerializeField] BoolVariable jump;
@@ -22,37 +23,58 @@ public class PlayerInput : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        moveVector.Value = value.Get<Vector2>();
+        if (enableInput.Value)
+            moveVector.Value = value.Get<Vector2>();
+        else
+            moveVector.Value = Vector2.zero;
     }
 
     void OnLook(InputValue value)
     {
-        lookVector.Value = value.Get<Vector2>();
+        if (enableInput.Value)
+            lookVector.Value = value.Get<Vector2>();
+        else
+            lookVector.Value = Vector2.zero;
     }
 
     void OnJump(InputValue value)
     {
-        jump.Value = value.isPressed;
+        if (enableInput.Value)
+            jump.Value = value.isPressed;
+        else
+            jump.Value = false;
     }
 
     void OnPrimaryFire(InputValue value)
     {
-        primaryFire.Value = value.isPressed;
+        if (enableInput.Value)
+            primaryFire.Value = value.isPressed;
+        else
+            primaryFire.Value = false;
     }
 
     void OnSecondaryFire(InputValue value)
     {
-        secondaryFire.Value = value.isPressed;
+        if (enableInput.Value)
+            secondaryFire.Value = value.isPressed;
+        else
+            secondaryFire.Value = false;
     }
 
     void OnAbility1(InputValue value)
     {
-        ability1.Value = value.isPressed;
+        if (enableInput.Value)
+            ability1.Value = value.isPressed;
+        else
+            ability1.Value = false;
     }
 
     void OnAbility2(InputValue value)
     {
-        ability2.Value = value.isPressed;
+        if (enableInput.Value)
+            ability2.Value = value.isPressed;
+        else
+            ability2.Value = false;
     }
 
     void OnMenu()
@@ -62,26 +84,31 @@ public class PlayerInput : MonoBehaviour
 
     void OnRepairTower()
     {
-        repairTower?.Raise();
+        if (enableInput.Value)
+            repairTower?.Raise();
     }
 
     void OnReady()
     {
-        ready?.Raise();
+        if (enableInput.Value)
+            ready?.Raise();
     }
 
     void OnBuildTower()
     {
-        buildTower?.Raise();
+        if (enableInput.Value)
+            buildTower?.Raise();
     }
 
     void OnSellTower()
     {
-        sellTower?.Raise();
+        if (enableInput.Value)
+            sellTower?.Raise();
     }
 
     void OnUpgradeTower()
     {
-        upgradeTower?.Raise();
+        if (enableInput.Value)
+            upgradeTower?.Raise();
     }
 }

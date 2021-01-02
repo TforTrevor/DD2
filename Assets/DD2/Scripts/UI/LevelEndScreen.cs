@@ -7,24 +7,36 @@ namespace DD2.UI
 {
     public class LevelEndScreen : MonoBehaviour
     {
-        [SerializeField] Transform endScreen;
+        [SerializeField] Transform winScreen;
+        [SerializeField] Transform loseScreen;
         [SerializeField] VoidEvent closeEndScreen;
+        [SerializeField] BoolVariable enableInput;
 
         public void Start()
         {
-            endScreen.gameObject.SetActive(false);
+            winScreen.gameObject.SetActive(false);
+            loseScreen.gameObject.SetActive(false);
         }
 
-        public void Show()
+        public void Show(bool value)
         {
-            endScreen.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+            enableInput.Value = false;
+            if (value)
+            {
+                winScreen.gameObject.SetActive(true);
+            }
+            else
+            {
+                loseScreen.gameObject.SetActive(true);
+            }
         }
 
         public void Close()
         {
-            endScreen.gameObject.SetActive(false);
+            winScreen.gameObject.SetActive(false);
+            loseScreen.gameObject.SetActive(false);
             closeEndScreen.Raise();
         }
     }

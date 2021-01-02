@@ -15,11 +15,12 @@ namespace DD2
         [SerializeField] List<Core> cores;
         [SerializeField] List<Wave> waves;
         [SerializeField] VoidEvent levelLoaded;
-        [SerializeField] VoidEvent showEndScreen;
+        [SerializeField] BoolEvent levelEnded;
         [SerializeField] LoadLevel loadHub;
         [SerializeField] WaveInfo waveInfo;
         [SerializeField] EntityList enemyList;
         [SerializeField] EntityList coreList;
+        [SerializeField] BoolVariable enableInput;
 
         bool gameOver;
 
@@ -37,6 +38,7 @@ namespace DD2
         void Start()
         {
             levelLoaded.Raise();
+            enableInput.Value = true;
         }
 
         public void StartWave()
@@ -57,7 +59,7 @@ namespace DD2
 
         public void WinGame()
         {
-            showEndScreen.Raise();
+            levelEnded.Raise(true);
         }
 
         public void LoseGame()
@@ -71,7 +73,7 @@ namespace DD2
             }
             enemyList.Entities.Clear();
 
-            showEndScreen.Raise();
+            levelEnded.Raise(false);
         }
 
         public void ExitLevel()
