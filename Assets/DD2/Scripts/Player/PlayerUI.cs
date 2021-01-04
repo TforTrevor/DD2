@@ -19,25 +19,31 @@ namespace DD2.UI
         [SerializeField] TextMeshProUGUI waveCountText;
         [SerializeField] WaveInfo waveInfo;
 
+        Canvas canvas;
+
+        void Awake()
+        {
+            canvas = GetComponent<Canvas>();
+        }
+
         void Start()
         {
             healthSlider.maxValue = player.Stats.MaxHealth;
             manaSlider.maxValue = player.Stats.MaxMana;
             player.healthUpdated += UpdateHealth;
             player.manaUpdated += UpdateMana;
-            //LevelManager.Instance.waveUpdated += UpdateEnemyCount;
-            //LevelManager.Instance.WaveStarted += UpdateWaveCount;
-            //LevelManager.Instance.WaveEnded += UpdateWaveCount;
-            //LevelManager.Instance.WaveStarted += (sender, amount) =>
-            //{
-            //    enemyCountSlider.gameObject.SetActive(true);
-            //};
-            //LevelManager.Instance.WaveEnded += (sender, amount) =>
-            //{
-            //    enemyCountSlider.gameObject.SetActive(false);
-            //};
             enemyCountSlider.gameObject.SetActive(false);
             UpdateWaveCount();
+        }
+
+        public void Show()
+        {
+            canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            canvas.enabled = false;
         }
 
         void UpdateHealth(object sender, float amount)

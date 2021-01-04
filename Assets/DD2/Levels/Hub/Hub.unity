@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011939973, g: 0.010962628, b: 0.015710711, a: 1}
+  m_IndirectSpecularColor: {r: 0.011975583, g: 0.010994054, b: 0.015736103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569294602, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0999994
+      value: 1.1000004
       objectReference: {fileID: 0}
     - target: {fileID: 569294602, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -174,17 +174,17 @@ PrefabInstance:
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.9683676
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.75
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.6168127
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 3342988195871786058, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}
@@ -322,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27784764}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 7.9683676, y: 13.849999, z: -6.1168127}
+  m_LocalPosition: {x: 1.5, y: 17.6, z: -30.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1280,7 +1280,6 @@ MonoBehaviour:
   m_Script: {fileID: 1480874526}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &826282265
 Transform:
   m_ObjectHideFlags: 19

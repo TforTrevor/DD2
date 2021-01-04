@@ -44,7 +44,7 @@ namespace DD2.UI
         {
             DamageNumber damageNumber = GetElement();
             Entity entity = (Entity)sender;
-            damageNumber.ToggleVisible(true, difference, entity.transform.position);
+            damageNumber.Show(difference, entity.transform.position);
         }
     }
 }

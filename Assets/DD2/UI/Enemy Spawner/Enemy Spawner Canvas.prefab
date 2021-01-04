@@ -100,6 +100,7 @@ MonoBehaviour:
   uiElement: {fileID: 6667644269140079642, guid: 0fb1060831580ae419c0fa701bb29f64,
     type: 3}
   maxElements: 10
+  waveInfo: {fileID: 11400000, guid: 4ce9e5de2015c35418ebe74572bc9648, type: 2}
 --- !u!114 &4431301316989735727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +209,7 @@ MonoBehaviour:
   _replayEventBufferOnRegister: 1
   _eventReference:
     _usage: 0
-    _event: {fileID: 11400000, guid: 5f30d81e2dcd2ba4caff59600d1e8bd2, type: 2}
+    _event: {fileID: 11400000, guid: 7389600e944f2d9408237597c5b03f07, type: 2}
     _eventInstancer: {fileID: 0}
     _collection: {fileID: 0}
     _list: {fileID: 0}

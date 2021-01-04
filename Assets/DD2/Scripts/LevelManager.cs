@@ -21,6 +21,7 @@ namespace DD2
         [SerializeField] EntityList enemyList;
         [SerializeField] EntityList coreList;
         [SerializeField] BoolVariable enableInput;
+        [SerializeField] bool callLevelLoaded;
 
         bool gameOver;
 
@@ -37,8 +38,11 @@ namespace DD2
         
         void Start()
         {
-            levelLoaded.Raise();
             enableInput.Value = true;
+            if (callLevelLoaded)
+            {
+                levelLoaded.Raise();
+            }            
         }
 
         public void StartWave()

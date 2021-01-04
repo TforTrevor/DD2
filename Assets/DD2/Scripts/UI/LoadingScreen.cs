@@ -24,17 +24,18 @@ namespace DD2.UI
             bool doneLoading = false;
             while (!doneLoading)
             {
-                progressText.text = asyncLoad.progress * 100 + "%";
-                progressSlider.value = asyncLoad.progress;
-
                 if (asyncLoad.progress == 1)
                 {
                     doneLoading = true;
                 }
 
+                progressText.text = asyncLoad.progress * 100 + "%";
+                progressSlider.value = asyncLoad.progress;
+
                 yield return Timing.WaitForOneFrame;
             }
-            //levelLoaded.Raise();
+            yield return Timing.WaitForOneFrame;
+            levelLoaded.Raise();
             Hide();
         }
 

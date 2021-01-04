@@ -21,36 +21,29 @@ namespace DD2.UI
         float yVariance;
         Vector3 offset;
 
-        //public override void ToggleVisible(bool value)
-        //{
-        //    ToggleVisible(value, 0, Vector3.zero);
-        //}
-
-        public void ToggleVisible(bool value, float difference, Vector3 position)
+        public void Show(float difference, Vector3 position)
         {
-            if (value)
+            text.text = difference.ToString();
+            worldPosition = position;
+            offset = Vector3.zero;
+
+            transform.position = GetPosition();
+            if (transform.position.z > 0)
             {
-                text.text = difference.ToString();
-                worldPosition = position;
-                offset = Vector3.zero;
-
-                transform.position = GetPosition();
-                if (transform.position.z > 0)
-                {
-                    CanvasGroup.alpha = 1;
-                }
-                else
-                {
-                    CanvasGroup.alpha = 0;
-                }
-
-                Timing.KillCoroutines(animationHandle);
-                animationHandle = Timing.RunCoroutine(AnimationRoutine());
+                CanvasGroup.alpha = 1;
             }
             else
             {
                 CanvasGroup.alpha = 0;
             }
+
+            Timing.KillCoroutines(animationHandle);
+            animationHandle = Timing.RunCoroutine(AnimationRoutine());
+        }
+
+        void OnDestroy()
+        {
+            Timing.KillCoroutines(animationHandle);
         }
 
         IEnumerator<float> AnimationRoutine()
