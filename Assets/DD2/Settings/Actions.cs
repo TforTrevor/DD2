@@ -217,7 +217,7 @@ namespace DD2.Input
                 {
                     ""name"": """",
                     ""id"": ""a090313e-d725-457b-95f7-e2c80075ee8f"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
@@ -314,6 +314,71 @@ namespace DD2.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""c48bb213-1696-4614-99f9-4944359c0635"",
+            ""actions"": [
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecd19eb3-fae9-45cf-bfe6-acd7413bcea3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Value"",
+                    ""id"": ""64fb3c36-1e07-4172-b815-10231f813724"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""17a9b946-073b-4600-a1be-0320c682ca2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2df58991-a278-4856-ac42-151e8a1506de"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32759208-cfaa-4cd4-817e-ab8060a95d11"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7845033-f963-4384-b433-7e4470fa5729"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -350,6 +415,11 @@ namespace DD2.Input
             m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
             m_Standard_SellTower = m_Standard.FindAction("SellTower", throwIfNotFound: true);
             m_Standard_UpgradeTower = m_Standard.FindAction("UpgradeTower", throwIfNotFound: true);
+            // Menu
+            m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+            m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
+            m_Menu_Point = m_Menu.FindAction("Point", throwIfNotFound: true);
+            m_Menu_LeftClick = m_Menu.FindAction("Left Click", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -524,6 +594,55 @@ namespace DD2.Input
             }
         }
         public StandardActions @Standard => new StandardActions(this);
+
+        // Menu
+        private readonly InputActionMap m_Menu;
+        private IMenuActions m_MenuActionsCallbackInterface;
+        private readonly InputAction m_Menu_Cancel;
+        private readonly InputAction m_Menu_Point;
+        private readonly InputAction m_Menu_LeftClick;
+        public struct MenuActions
+        {
+            private @Actions m_Wrapper;
+            public MenuActions(@Actions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
+            public InputAction @Point => m_Wrapper.m_Menu_Point;
+            public InputAction @LeftClick => m_Wrapper.m_Menu_LeftClick;
+            public InputActionMap Get() { return m_Wrapper.m_Menu; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+            public void SetCallbacks(IMenuActions instance)
+            {
+                if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+                {
+                    @Cancel.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                    @Cancel.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                    @Cancel.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCancel;
+                    @Point.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPoint;
+                    @Point.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPoint;
+                    @Point.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPoint;
+                    @LeftClick.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
+                    @LeftClick.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
+                    @LeftClick.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
+                }
+                m_Wrapper.m_MenuActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Cancel.started += instance.OnCancel;
+                    @Cancel.performed += instance.OnCancel;
+                    @Cancel.canceled += instance.OnCancel;
+                    @Point.started += instance.OnPoint;
+                    @Point.performed += instance.OnPoint;
+                    @Point.canceled += instance.OnPoint;
+                    @LeftClick.started += instance.OnLeftClick;
+                    @LeftClick.performed += instance.OnLeftClick;
+                    @LeftClick.canceled += instance.OnLeftClick;
+                }
+            }
+        }
+        public MenuActions @Menu => new MenuActions(this);
         private int m_KeyboardandMouseSchemeIndex = -1;
         public InputControlScheme KeyboardandMouseScheme
         {
@@ -548,6 +667,12 @@ namespace DD2.Input
             void OnRepairTower(InputAction.CallbackContext context);
             void OnSellTower(InputAction.CallbackContext context);
             void OnUpgradeTower(InputAction.CallbackContext context);
+        }
+        public interface IMenuActions
+        {
+            void OnCancel(InputAction.CallbackContext context);
+            void OnPoint(InputAction.CallbackContext context);
+            void OnLeftClick(InputAction.CallbackContext context);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace DD2.Actions
         {
             LoadingScreen instance = Instantiate(loadingScreen);
             DontDestroyOnLoad(instance);
-            
+
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.Value);
             asyncLoad.allowSceneActivation = false;
 
