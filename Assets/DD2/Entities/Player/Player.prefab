@@ -2685,6 +2685,7 @@ MonoBehaviour:
   upgradeTower: {fileID: 11400000, guid: 076ce8fe8e730da4588c0b1c63472a39, type: 2}
   menu: {fileID: 11400000, guid: 68c777abe9d4f534486e73137a93bb4b, type: 2}
   ready: {fileID: 11400000, guid: c35f358c2c5f4be4ab2cdf5fe7f52cd1, type: 2}
+  toggleTowerRange: {fileID: 11400000, guid: f82a888d4c0f21644b97518b9cf85e23, type: 2}
 --- !u!114 &5629349538429733945
 MonoBehaviour:
   m_ObjectHideFlags: 0

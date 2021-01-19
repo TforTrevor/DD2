@@ -23,6 +23,8 @@ namespace DD2.AI
         [SerializeField] new Collider collider;
         [SerializeField] VisualEffect upgradeEffect;
         [SerializeField] VisualEffect buildEffect;
+        [SerializeField] LineRenderer rangeLineRenderer;
+        [SerializeField] EntityList towerList;
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
@@ -35,6 +37,9 @@ namespace DD2.AI
         public int ManaCost { get => manaCost; private set => manaCost = value; }
         public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
 
+        int progressShaderHash;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -43,15 +48,20 @@ namespace DD2.AI
             {
                 DefaultColor = summonRenderer.material.GetColor("_Color");
                 summonRenderer.material.SetFloat("_Height", summonRenderer.bounds.size.y);
-                summonRenderer.material.SetFloat("_Progress", 0);
                 summonRenderer.transform.localScale *= 1.01f;
                 summonRenderer.material.SetInt("_IsBuilt", 0);
+
+                progressShaderHash = Shader.PropertyToID("_Progress");
+                summonRenderer.material.SetFloat(progressShaderHash, 0);
             }
             if (buildEffect != null)
             {
                 buildEffect.Stop();
                 buildEffect.SetFloat("Height", summonRenderer.bounds.size.y);
             }
+
+            CreateRangeLines();
+            ToggleRangeIndicator(false);
         }
 
         protected override void Start()
@@ -79,6 +89,12 @@ namespace DD2.AI
             IsAlive = false;
         }
 
+        protected override void Die(Entity entity)
+        {
+            base.Die(entity);
+            towerList.Entities.Remove(this);
+        }
+
         public override void AddForce(Vector3 force, ForceMode forceMode)
         {
             
@@ -104,6 +120,7 @@ namespace DD2.AI
         {
             Stats.TowerLevel();
             level++;
+            CreateRangeLines();
         }
 
         protected virtual void Update()
@@ -161,7 +178,7 @@ namespace DD2.AI
                     buildEffect.SetFloat("Progress", buildProgress / buildTime);
                 }
                 
-                summonRenderer.material.SetFloat("_Progress", buildProgress / buildTime);
+                summonRenderer.material.SetFloat(progressShaderHash, buildProgress / buildTime);
                 yield return Timing.WaitForOneFrame;
                 buildProgress += Time.deltaTime;
             }
@@ -177,18 +194,46 @@ namespace DD2.AI
                 aiComponent.enabled = true;
             }
             IsAlive = true;
+            towerList.Entities.Add(this);
 
             summonRenderer.material.SetInt("_IsBuilt", 1);
 
             float hideProgress = 1;
             while (hideProgress > 0)
             {
-                summonRenderer.material.SetFloat("_Progress", hideProgress);
+                summonRenderer.material.SetFloat(progressShaderHash, hideProgress);
                 yield return Timing.WaitForOneFrame;
                 hideProgress -= Time.deltaTime * 2;
             }
 
             towerSummonGraphics.gameObject.SetActive(false);
+        }
+
+        void CreateRangeLines()
+        {
+            if (rangeLineRenderer != null)
+            {
+                int resolution = 16;
+                rangeLineRenderer.positionCount = resolution + 2;
+                rangeLineRenderer.SetPosition(0, Vector3.zero);
+                for (int i = 0; i < resolution; i++)
+                {
+                    float tempAngle = -Stats.AttackAngle / 2;
+                    tempAngle += i * Stats.AttackAngle / (resolution - 1);
+                    Vector3 direction = Quaternion.AngleAxis(tempAngle, Vector3.up) * Vector3.forward;
+                    Vector3 point = direction * Stats.AttackRange;
+                    rangeLineRenderer.SetPosition(i + 1, point);
+                }
+                rangeLineRenderer.SetPosition(resolution + 1, Vector3.zero);
+            }            
+        }
+
+        public void ToggleRangeIndicator(bool value)
+        {
+            if (rangeLineRenderer != null)
+            {
+                rangeLineRenderer.enabled = value;
+            }            
         }
     }
 }

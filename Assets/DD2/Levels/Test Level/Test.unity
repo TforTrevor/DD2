@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 64.08707, g: 47.77832, b: 43.144165, a: 1}
+  m_IndirectSpecularColor: {r: 64.0311, g: 47.754333, b: 43.154236, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8559,6 +8559,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 184165993803470731, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1693914935751567255, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3199320008054047978, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
       propertyPath: m_RootOrder
@@ -8622,11 +8632,36 @@ PrefabInstance:
     - target: {fileID: 3199320008054047988, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4095120498645782536, guid: df38ee13a27d8c34286c0cf69e0ac764,
         type: 3}
       propertyPath: buildOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986340155940673661, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375561326163811203, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7084639472223507661, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7084639472223507661, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794583953937044077, guid: df38ee13a27d8c34286c0cf69e0ac764,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -65540,6 +65575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5629349538429733945, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
+        type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard and Mouse
       objectReference: {fileID: 0}
     - target: {fileID: 8558060160901365186, guid: 7f297c8d2ecda3e4ba72f9fd4b47ef4b,
         type: 3}

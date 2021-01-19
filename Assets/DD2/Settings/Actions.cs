@@ -123,6 +123,14 @@ namespace DD2.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ShowTowerRange"",
+                    ""type"": ""Value"",
+                    ""id"": ""11a7de43-68eb-4081-9722-5640a1502425"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -312,6 +320,17 @@ namespace DD2.Input
                     ""action"": ""UpgradeTower"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0861abe-a4c1-4e62-99b6-538be3661d01"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""ShowTowerRange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -415,6 +434,7 @@ namespace DD2.Input
             m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
             m_Standard_SellTower = m_Standard.FindAction("SellTower", throwIfNotFound: true);
             m_Standard_UpgradeTower = m_Standard.FindAction("UpgradeTower", throwIfNotFound: true);
+            m_Standard_ShowTowerRange = m_Standard.FindAction("ShowTowerRange", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
             m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
@@ -482,6 +502,7 @@ namespace DD2.Input
         private readonly InputAction m_Standard_RepairTower;
         private readonly InputAction m_Standard_SellTower;
         private readonly InputAction m_Standard_UpgradeTower;
+        private readonly InputAction m_Standard_ShowTowerRange;
         public struct StandardActions
         {
             private @Actions m_Wrapper;
@@ -499,6 +520,7 @@ namespace DD2.Input
             public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
             public InputAction @SellTower => m_Wrapper.m_Standard_SellTower;
             public InputAction @UpgradeTower => m_Wrapper.m_Standard_UpgradeTower;
+            public InputAction @ShowTowerRange => m_Wrapper.m_Standard_ShowTowerRange;
             public InputActionMap Get() { return m_Wrapper.m_Standard; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -547,6 +569,9 @@ namespace DD2.Input
                     @UpgradeTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
                     @UpgradeTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
                     @UpgradeTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
+                    @ShowTowerRange.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
+                    @ShowTowerRange.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
+                    @ShowTowerRange.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
                 }
                 m_Wrapper.m_StandardActionsCallbackInterface = instance;
                 if (instance != null)
@@ -590,6 +615,9 @@ namespace DD2.Input
                     @UpgradeTower.started += instance.OnUpgradeTower;
                     @UpgradeTower.performed += instance.OnUpgradeTower;
                     @UpgradeTower.canceled += instance.OnUpgradeTower;
+                    @ShowTowerRange.started += instance.OnShowTowerRange;
+                    @ShowTowerRange.performed += instance.OnShowTowerRange;
+                    @ShowTowerRange.canceled += instance.OnShowTowerRange;
                 }
             }
         }
@@ -667,6 +695,7 @@ namespace DD2.Input
             void OnRepairTower(InputAction.CallbackContext context);
             void OnSellTower(InputAction.CallbackContext context);
             void OnUpgradeTower(InputAction.CallbackContext context);
+            void OnShowTowerRange(InputAction.CallbackContext context);
         }
         public interface IMenuActions
         {

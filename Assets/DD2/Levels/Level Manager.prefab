@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8967000428500284754}
   - component: {fileID: 8580460926421448377}
   - component: {fileID: 26843529110153899}
+  - component: {fileID: 1263482429333026338}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -61,6 +62,7 @@ MonoBehaviour:
   waveInfo: {fileID: 11400000, guid: 4ce9e5de2015c35418ebe74572bc9648, type: 2}
   enemyList: {fileID: 11400000, guid: 06d297c8c75e9e6478a8419b46011e3c, type: 2}
   coreList: {fileID: 11400000, guid: 5b65766609cbf5a4d91918fb11ad795e, type: 2}
+  towerList: {fileID: 11400000, guid: 4fc9a4e6c402103478ecebf5cfbe9555, type: 2}
   enableInput: {fileID: 11400000, guid: 864149a2edd9c3046b8796961ed831e4, type: 2}
   callLevelLoaded: 0
 --- !u!114 &2830449629586393168
@@ -253,3 +255,39 @@ MonoBehaviour:
     _list: {fileID: 0}
     _collectionInstancer: {fileID: 0}
     _listInstancer: {fileID: 0}
+--- !u!114 &1263482429333026338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6ab7cbc45164d19b20476265c251c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: ToggleTowerRange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 0
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: f82a888d4c0f21644b97518b9cf85e23, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}

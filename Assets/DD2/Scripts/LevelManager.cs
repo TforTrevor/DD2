@@ -20,6 +20,7 @@ namespace DD2
         [SerializeField] WaveInfo waveInfo;
         [SerializeField] EntityList enemyList;
         [SerializeField] EntityList coreList;
+        [SerializeField] EntityList towerList;
         [SerializeField] BoolVariable enableInput;
         [SerializeField] bool callLevelLoaded;
 
@@ -100,6 +101,15 @@ namespace DD2
             player.transform.position = playerSpawn.transform.position;
             player.transform.forward = playerSpawn.transform.forward;
             player.gameObject.SetActive(true);
+        }
+
+        public void ToggleTowerRange(bool value)
+        {
+            foreach (Entity entity in towerList.Entities)
+            {
+                Tower tower = (Tower)entity;
+                tower.ToggleRangeIndicator(value);
+            }
         }
     }
 }

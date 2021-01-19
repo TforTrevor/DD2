@@ -108,6 +108,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ShowTowerRange",
+                    "type": "Value",
+                    "id": "11a7de43-68eb-4081-9722-5640a1502425",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -295,6 +303,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "UpgradeTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0861abe-a4c1-4e62-99b6-538be3661d01",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "ShowTowerRange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

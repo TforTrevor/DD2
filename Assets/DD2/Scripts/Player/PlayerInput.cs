@@ -20,6 +20,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] VoidEvent upgradeTower;
     [SerializeField] VoidEvent menu;
     [SerializeField] VoidEvent ready;
+    [SerializeField] BoolEvent toggleTowerRange;
 
     void OnMove(InputValue value)
     {
@@ -110,5 +111,11 @@ public class PlayerInput : MonoBehaviour
     {
         if (enableInput.Value)
             upgradeTower?.Raise();
+    }
+
+    void OnShowTowerRange(InputValue value)
+    {
+        if (enableInput.Value)
+            toggleTowerRange?.Raise(value.isPressed);
     }
 }

@@ -85,6 +85,7 @@ namespace DD2
                 instanceColliders.AddRange(instance.GetComponents<Collider>());
 
                 instance.gameObject.SetActive(true);
+                instance.ToggleRangeIndicator(true);
                 handle = Timing.RunCoroutine(MoveRoutine());
             }
         }
@@ -98,7 +99,8 @@ namespace DD2
 
         void Build()
         {
-            instance.Build();
+            instance.ToggleRangeIndicator(false);
+            instance.Build();            
             player.SpendMana(tower.ManaCost);
             player.ToggleLook(true);
             player.ToggleMovement(true);
