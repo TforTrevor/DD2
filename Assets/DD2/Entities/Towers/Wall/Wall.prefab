@@ -595,6 +595,7 @@ MonoBehaviour:
   isGrounded: 0
   animator: {fileID: 0}
   abilities: []
+  coreList: {fileID: 0}
   buildOnStart: 0
   manaCost: 30
   buildTime: 8
@@ -607,6 +608,8 @@ MonoBehaviour:
   collider: {fileID: 4571618255341315653}
   upgradeEffect: {fileID: 0}
   buildEffect: {fileID: 7830171283059783735}
+  rangeLineRenderer: {fileID: 0}
+  towerList: {fileID: 11400000, guid: 4fc9a4e6c402103478ecebf5cfbe9555, type: 2}
 --- !u!1 &5267178685551948537
 GameObject:
   m_ObjectHideFlags: 0
