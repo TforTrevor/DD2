@@ -14,7 +14,6 @@ namespace DD2.AI.Actions
         [ApexSerialization] bool coneCheck;
         [ApexSerialization] bool losCheck;
         [ApexSerialization] LayerMask losBlock;
-        [ApexSerialization] Range range;
         [ApexSerialization] bool includeRadius = true;
         [ApexSerialization] bool includeTargetRadius = true;
 
@@ -23,10 +22,7 @@ namespace DD2.AI.Actions
             AIContext ctx = (AIContext)context;
             Entity entity = ctx.entity;
 
-            float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;                            
-            float angle = this.range == Range.Attack ? entity.Stats.AttackAngle : entity.Stats.SearchAngle;
-
-            Collider[] colliders = Physics.OverlapSphere(entity.transform.position, range, scanMask);
+            Collider[] colliders = Physics.OverlapSphere(entity.transform.position, entity.Stats.AttackRange, scanMask);
             for (int i = 0; i < colliders.Length; i++)
             {
                 Entity temp = colliders[i].GetComponent<Entity>();
@@ -35,7 +31,7 @@ namespace DD2.AI.Actions
                     float enemyDistance = Vector3.Distance(entity.transform.position, temp.transform.position)
                                         - (includeRadius ? entity.Radius : 0)
                                         - (includeTargetRadius ? temp.Radius : 0);
-                    if (enemyDistance < range)
+                    if (enemyDistance < entity.Stats.AttackRange)
                     {
                         bool cone = false;
                         bool los = false;
@@ -44,7 +40,7 @@ namespace DD2.AI.Actions
                             Vector2 start = new Vector2(entity.EyePosition.x, entity.EyePosition.z);
                             Vector2 direction = new Vector2(entity.transform.forward.x, entity.transform.forward.z);
                             Vector2 end = new Vector2(temp.EyePosition.x, temp.EyePosition.z);
-                            cone = Util.Utilities.IsPositionInCone(start, direction, end, angle / 2);
+                            cone = Util.Utilities.IsPositionInCone(start, direction, end, entity.Stats.AttackAngle / 2);
                         }
                         if (losCheck)
                         {

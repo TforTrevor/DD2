@@ -757,9 +757,8 @@ MonoBehaviour:
   towerGraphics: {fileID: 5721898464044627794}
   towerVertical: {fileID: 1557267556808604506}
   towerSummonGraphics: {fileID: 5771713530179302098}
-  errorColor: {r: 1, g: 0, b: 0, a: 1}
-  summonLight: {fileID: 7342326754161417903}
-  summonRenderer: {fileID: 7029274877072496693}
+  buildLight: {fileID: 7342326754161417903}
+  buildRenderer: {fileID: 7029274877072496693}
   collider: {fileID: 510240830}
   upgradeEffect: {fileID: 250506149425218185}
   buildEffect: {fileID: 110521310203796868}

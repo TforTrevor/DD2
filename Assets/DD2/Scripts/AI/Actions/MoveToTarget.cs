@@ -11,7 +11,6 @@ namespace DD2.AI.Actions
     public class MoveToTarget : ActionBase
     {
         [ApexSerialization] bool ensureMaxRange;
-        [ApexSerialization] Range range;
         [ApexSerialization] bool includeRadius = true;
         [ApexSerialization] bool includeTargetRadius = true;
 
@@ -23,7 +22,6 @@ namespace DD2.AI.Actions
 
             if (ctx.target != null && ctx.pathTarget != ctx.target && entity.IsGrounded && !entity.IsRagdolled)
             {
-                float range = this.range == Range.Attack ? entity.Stats.AttackRange : entity.Stats.SearchRange;
                 float entityRadius = includeRadius ? entity.Radius : 0;
                 float targetRadius = includeTargetRadius ? ctx.target.Radius : 0;
                 float distance = Vector3.Distance(ctx.target.transform.position, entity.transform.position) - entityRadius - targetRadius;
@@ -31,7 +29,7 @@ namespace DD2.AI.Actions
                 if (ensureMaxRange)
                 {
                     Vector3 direction = Vector3.Normalize(ctx.target.transform.position - entity.transform.position);
-                    float distanceFromRange = distance - range + 0.1f;
+                    float distanceFromRange = distance - entity.Stats.AttackRange + 0.1f;
                     Vector3 position = (direction * distanceFromRange) + entity.transform.position;
                     entity.MoveToPosition(position);
                 }
