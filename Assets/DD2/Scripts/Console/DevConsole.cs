@@ -7,7 +7,7 @@ using TMPro;
 
 namespace DD2
 {
-    public class DevConsole : Singleton<DevConsole>
+    public class DevConsole : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI entityName;
         [SerializeField] TextMeshProUGUI consoleText;
@@ -19,6 +19,14 @@ namespace DD2
         Entity selectedEntity;
         Canvas canvas;
 
+        void Awake()
+        {
+            canvas = GetComponent<Canvas>();
+
+            InputManager.Instance.Actions.DevConsole.Toggle.performed += Toggle;
+            InputManager.Instance.Actions.DevConsole.Select.performed += SelectEntity;
+        }
+
         void Start()
         {
             enabled = false;
@@ -26,21 +34,23 @@ namespace DD2
 
         void OnEnable()
         {
-            inputAsset.FindActionMap("Standard").FindAction("Shoot").performed += SelectEntity;
+            //inputAsset.FindActionMap("Standard").FindAction("Shoot").performed += SelectEntity;
             TimeManager.Pause();
             canvas.enabled = true;
         }
 
         void OnDisable()
         {
-            inputAsset.FindActionMap("Standard").FindAction("Shoot").performed -= SelectEntity;
+            //inputAsset.FindActionMap("Standard").FindAction("Shoot").performed -= SelectEntity;
             TimeManager.UnPause();
             canvas.enabled = false;
         }
 
-        public void Toggle()
+        public void Toggle(InputAction.CallbackContext context)
         {
             enabled = !enabled;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void Print(string message)
