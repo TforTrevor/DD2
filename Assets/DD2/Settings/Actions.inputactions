@@ -2,12 +2,12 @@
     "name": "Actions",
     "maps": [
         {
-            "name": "Standard",
+            "name": "Player",
             "id": "4bd46b80-34b9-4dc7-9d1a-d2c853f8d1e7",
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "bdaa640a-f715-4c48-9e05-8030772d7cb2",
                     "expectedControlType": "",
                     "processors": "",
@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "34285968-dc32-477e-b229-4d17bffd0682",
                     "expectedControlType": "",
                     "processors": "",
@@ -57,14 +57,6 @@
                     "name": "Ability2",
                     "type": "Button",
                     "id": "f23f0d7e-b920-487d-bc27-28b63033e5d7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Menu",
-                    "type": "Button",
-                    "id": "498a5b4d-94a8-42ae-bf71-9ed37e76d2e5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -209,17 +201,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a090313e-d725-457b-95f7-e2c80075ee8f",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9dfe5875-e80b-4a7c-bab2-cc6a201f2c15",
                     "path": "<Keyboard>/g",
                     "interactions": "",
@@ -346,6 +327,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "0d9a394e-3d94-4221-9d7e-51dd12c22041",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -379,6 +368,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "Left Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ebfee82-3d30-42ee-8698-d7747a9af02c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Toggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

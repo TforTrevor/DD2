@@ -20,12 +20,21 @@ namespace DD2.UI
         protected override void Start()
         {
             base.Start();
-            inputActions.FindActionMap("Menu").FindAction("Cancel").performed += Toggle;
 
             if (SceneManager.GetActiveScene().buildIndex == hubScene.Value.BuildIndex)
             {
                 exitLevelButton.gameObject.SetActive(false);
             }
+        }
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Menu.Toggle.performed += Toggle;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Menu.Toggle.performed -= Toggle;
         }
 
         public void Toggle(InputAction.CallbackContext context)
@@ -51,7 +60,7 @@ namespace DD2.UI
                 }
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                Time.timeScale = 0;
+                TimeManager.Pause();
                 playerInput.Value = false;
 
                 isOpen = true;
@@ -66,7 +75,7 @@ namespace DD2.UI
                 previousMenu = null;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-                Time.timeScale = 1;
+                TimeManager.UnPause();
                 playerInput.Value = true;
 
                 isOpen = false;
@@ -92,11 +101,6 @@ namespace DD2.UI
         public void ExitGame()
         {
             Application.Quit();
-        }
-
-        void OnDestroy()
-        {
-            inputActions.FindActionMap("Menu").FindAction("Cancel").performed -= Toggle;
         }
     }
 }

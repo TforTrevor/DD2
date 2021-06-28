@@ -26,12 +26,12 @@ namespace DD2
     ""name"": ""Actions"",
     ""maps"": [
         {
-            ""name"": ""Standard"",
+            ""name"": ""Player"",
             ""id"": ""4bd46b80-34b9-4dc7-9d1a-d2c853f8d1e7"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""bdaa640a-f715-4c48-9e05-8030772d7cb2"",
                     ""expectedControlType"": """",
                     ""processors"": """",
@@ -39,7 +39,7 @@ namespace DD2
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""34285968-dc32-477e-b229-4d17bffd0682"",
                     ""expectedControlType"": """",
                     ""processors"": """",
@@ -81,14 +81,6 @@ namespace DD2
                     ""name"": ""Ability2"",
                     ""type"": ""Button"",
                     ""id"": ""f23f0d7e-b920-487d-bc27-28b63033e5d7"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""498a5b4d-94a8-42ae-bf71-9ed37e76d2e5"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -233,17 +225,6 @@ namespace DD2
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a090313e-d725-457b-95f7-e2c80075ee8f"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9dfe5875-e80b-4a7c-bab2-cc6a201f2c15"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
@@ -370,6 +351,14 @@ namespace DD2
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d9a394e-3d94-4221-9d7e-51dd12c22041"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -403,6 +392,17 @@ namespace DD2
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ebfee82-3d30-42ee-8698-d7747a9af02c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Toggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -474,27 +474,27 @@ namespace DD2
         }
     ]
 }");
-            // Standard
-            m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
-            m_Standard_Move = m_Standard.FindAction("Move", throwIfNotFound: true);
-            m_Standard_Look = m_Standard.FindAction("Look", throwIfNotFound: true);
-            m_Standard_Jump = m_Standard.FindAction("Jump", throwIfNotFound: true);
-            m_Standard_PrimaryFire = m_Standard.FindAction("PrimaryFire", throwIfNotFound: true);
-            m_Standard_SecondaryFire = m_Standard.FindAction("SecondaryFire", throwIfNotFound: true);
-            m_Standard_Ability1 = m_Standard.FindAction("Ability1", throwIfNotFound: true);
-            m_Standard_Ability2 = m_Standard.FindAction("Ability2", throwIfNotFound: true);
-            m_Standard_Menu = m_Standard.FindAction("Menu", throwIfNotFound: true);
-            m_Standard_Ready = m_Standard.FindAction("Ready", throwIfNotFound: true);
-            m_Standard_BuildTower = m_Standard.FindAction("BuildTower", throwIfNotFound: true);
-            m_Standard_RepairTower = m_Standard.FindAction("RepairTower", throwIfNotFound: true);
-            m_Standard_SellTower = m_Standard.FindAction("SellTower", throwIfNotFound: true);
-            m_Standard_UpgradeTower = m_Standard.FindAction("UpgradeTower", throwIfNotFound: true);
-            m_Standard_ShowTowerRange = m_Standard.FindAction("ShowTowerRange", throwIfNotFound: true);
+            // Player
+            m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+            m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+            m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_PrimaryFire = m_Player.FindAction("PrimaryFire", throwIfNotFound: true);
+            m_Player_SecondaryFire = m_Player.FindAction("SecondaryFire", throwIfNotFound: true);
+            m_Player_Ability1 = m_Player.FindAction("Ability1", throwIfNotFound: true);
+            m_Player_Ability2 = m_Player.FindAction("Ability2", throwIfNotFound: true);
+            m_Player_Ready = m_Player.FindAction("Ready", throwIfNotFound: true);
+            m_Player_BuildTower = m_Player.FindAction("BuildTower", throwIfNotFound: true);
+            m_Player_RepairTower = m_Player.FindAction("RepairTower", throwIfNotFound: true);
+            m_Player_SellTower = m_Player.FindAction("SellTower", throwIfNotFound: true);
+            m_Player_UpgradeTower = m_Player.FindAction("UpgradeTower", throwIfNotFound: true);
+            m_Player_ShowTowerRange = m_Player.FindAction("ShowTowerRange", throwIfNotFound: true);
             // Menu
             m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
             m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
             m_Menu_Point = m_Menu.FindAction("Point", throwIfNotFound: true);
             m_Menu_LeftClick = m_Menu.FindAction("Left Click", throwIfNotFound: true);
+            m_Menu_Toggle = m_Menu.FindAction("Toggle", throwIfNotFound: true);
             // Dev Console
             m_DevConsole = asset.FindActionMap("Dev Console", throwIfNotFound: true);
             m_DevConsole_Toggle = m_DevConsole.FindAction("Toggle", throwIfNotFound: true);
@@ -555,94 +555,89 @@ namespace DD2
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Standard
-        private readonly InputActionMap m_Standard;
-        private IStandardActions m_StandardActionsCallbackInterface;
-        private readonly InputAction m_Standard_Move;
-        private readonly InputAction m_Standard_Look;
-        private readonly InputAction m_Standard_Jump;
-        private readonly InputAction m_Standard_PrimaryFire;
-        private readonly InputAction m_Standard_SecondaryFire;
-        private readonly InputAction m_Standard_Ability1;
-        private readonly InputAction m_Standard_Ability2;
-        private readonly InputAction m_Standard_Menu;
-        private readonly InputAction m_Standard_Ready;
-        private readonly InputAction m_Standard_BuildTower;
-        private readonly InputAction m_Standard_RepairTower;
-        private readonly InputAction m_Standard_SellTower;
-        private readonly InputAction m_Standard_UpgradeTower;
-        private readonly InputAction m_Standard_ShowTowerRange;
-        public struct StandardActions
+        // Player
+        private readonly InputActionMap m_Player;
+        private IPlayerActions m_PlayerActionsCallbackInterface;
+        private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Look;
+        private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_PrimaryFire;
+        private readonly InputAction m_Player_SecondaryFire;
+        private readonly InputAction m_Player_Ability1;
+        private readonly InputAction m_Player_Ability2;
+        private readonly InputAction m_Player_Ready;
+        private readonly InputAction m_Player_BuildTower;
+        private readonly InputAction m_Player_RepairTower;
+        private readonly InputAction m_Player_SellTower;
+        private readonly InputAction m_Player_UpgradeTower;
+        private readonly InputAction m_Player_ShowTowerRange;
+        public struct PlayerActions
         {
             private @InputActions m_Wrapper;
-            public StandardActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Standard_Move;
-            public InputAction @Look => m_Wrapper.m_Standard_Look;
-            public InputAction @Jump => m_Wrapper.m_Standard_Jump;
-            public InputAction @PrimaryFire => m_Wrapper.m_Standard_PrimaryFire;
-            public InputAction @SecondaryFire => m_Wrapper.m_Standard_SecondaryFire;
-            public InputAction @Ability1 => m_Wrapper.m_Standard_Ability1;
-            public InputAction @Ability2 => m_Wrapper.m_Standard_Ability2;
-            public InputAction @Menu => m_Wrapper.m_Standard_Menu;
-            public InputAction @Ready => m_Wrapper.m_Standard_Ready;
-            public InputAction @BuildTower => m_Wrapper.m_Standard_BuildTower;
-            public InputAction @RepairTower => m_Wrapper.m_Standard_RepairTower;
-            public InputAction @SellTower => m_Wrapper.m_Standard_SellTower;
-            public InputAction @UpgradeTower => m_Wrapper.m_Standard_UpgradeTower;
-            public InputAction @ShowTowerRange => m_Wrapper.m_Standard_ShowTowerRange;
-            public InputActionMap Get() { return m_Wrapper.m_Standard; }
+            public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
+            public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @PrimaryFire => m_Wrapper.m_Player_PrimaryFire;
+            public InputAction @SecondaryFire => m_Wrapper.m_Player_SecondaryFire;
+            public InputAction @Ability1 => m_Wrapper.m_Player_Ability1;
+            public InputAction @Ability2 => m_Wrapper.m_Player_Ability2;
+            public InputAction @Ready => m_Wrapper.m_Player_Ready;
+            public InputAction @BuildTower => m_Wrapper.m_Player_BuildTower;
+            public InputAction @RepairTower => m_Wrapper.m_Player_RepairTower;
+            public InputAction @SellTower => m_Wrapper.m_Player_SellTower;
+            public InputAction @UpgradeTower => m_Wrapper.m_Player_UpgradeTower;
+            public InputAction @ShowTowerRange => m_Wrapper.m_Player_ShowTowerRange;
+            public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(StandardActions set) { return set.Get(); }
-            public void SetCallbacks(IStandardActions instance)
+            public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+            public void SetCallbacks(IPlayerActions instance)
             {
-                if (m_Wrapper.m_StandardActionsCallbackInterface != null)
+                if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
                 {
-                    @Move.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMove;
-                    @Look.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    @Look.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    @Look.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnLook;
-                    @Jump.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
-                    @Jump.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
-                    @Jump.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnJump;
-                    @PrimaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
-                    @PrimaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
-                    @PrimaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnPrimaryFire;
-                    @SecondaryFire.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
-                    @SecondaryFire.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
-                    @SecondaryFire.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnSecondaryFire;
-                    @Ability1.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
-                    @Ability1.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
-                    @Ability1.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility1;
-                    @Ability2.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
-                    @Ability2.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
-                    @Ability2.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnAbility2;
-                    @Menu.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Menu.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Menu.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnMenu;
-                    @Ready.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
-                    @Ready.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
-                    @Ready.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnReady;
-                    @BuildTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @BuildTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @BuildTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnBuildTower;
-                    @RepairTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
-                    @RepairTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
-                    @RepairTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnRepairTower;
-                    @SellTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
-                    @SellTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
-                    @SellTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnSellTower;
-                    @UpgradeTower.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
-                    @UpgradeTower.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
-                    @UpgradeTower.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnUpgradeTower;
-                    @ShowTowerRange.started -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
-                    @ShowTowerRange.performed -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
-                    @ShowTowerRange.canceled -= m_Wrapper.m_StandardActionsCallbackInterface.OnShowTowerRange;
+                    @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                    @PrimaryFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryFire;
+                    @PrimaryFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryFire;
+                    @PrimaryFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryFire;
+                    @SecondaryFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryFire;
+                    @SecondaryFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryFire;
+                    @SecondaryFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryFire;
+                    @Ability1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                    @Ability1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                    @Ability1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility1;
+                    @Ability2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
+                    @Ability2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
+                    @Ability2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility2;
+                    @Ready.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReady;
+                    @Ready.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReady;
+                    @Ready.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReady;
+                    @BuildTower.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildTower;
+                    @BuildTower.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildTower;
+                    @BuildTower.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildTower;
+                    @RepairTower.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRepairTower;
+                    @RepairTower.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRepairTower;
+                    @RepairTower.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRepairTower;
+                    @SellTower.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSellTower;
+                    @SellTower.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSellTower;
+                    @SellTower.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSellTower;
+                    @UpgradeTower.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpgradeTower;
+                    @UpgradeTower.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpgradeTower;
+                    @UpgradeTower.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpgradeTower;
+                    @ShowTowerRange.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowTowerRange;
+                    @ShowTowerRange.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowTowerRange;
+                    @ShowTowerRange.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShowTowerRange;
                 }
-                m_Wrapper.m_StandardActionsCallbackInterface = instance;
+                m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
                 {
                     @Move.started += instance.OnMove;
@@ -666,9 +661,6 @@ namespace DD2
                     @Ability2.started += instance.OnAbility2;
                     @Ability2.performed += instance.OnAbility2;
                     @Ability2.canceled += instance.OnAbility2;
-                    @Menu.started += instance.OnMenu;
-                    @Menu.performed += instance.OnMenu;
-                    @Menu.canceled += instance.OnMenu;
                     @Ready.started += instance.OnReady;
                     @Ready.performed += instance.OnReady;
                     @Ready.canceled += instance.OnReady;
@@ -690,7 +682,7 @@ namespace DD2
                 }
             }
         }
-        public StandardActions @Standard => new StandardActions(this);
+        public PlayerActions @Player => new PlayerActions(this);
 
         // Menu
         private readonly InputActionMap m_Menu;
@@ -698,6 +690,7 @@ namespace DD2
         private readonly InputAction m_Menu_Cancel;
         private readonly InputAction m_Menu_Point;
         private readonly InputAction m_Menu_LeftClick;
+        private readonly InputAction m_Menu_Toggle;
         public struct MenuActions
         {
             private @InputActions m_Wrapper;
@@ -705,6 +698,7 @@ namespace DD2
             public InputAction @Cancel => m_Wrapper.m_Menu_Cancel;
             public InputAction @Point => m_Wrapper.m_Menu_Point;
             public InputAction @LeftClick => m_Wrapper.m_Menu_LeftClick;
+            public InputAction @Toggle => m_Wrapper.m_Menu_Toggle;
             public InputActionMap Get() { return m_Wrapper.m_Menu; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -723,6 +717,9 @@ namespace DD2
                     @LeftClick.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
                     @LeftClick.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
                     @LeftClick.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnLeftClick;
+                    @Toggle.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnToggle;
+                    @Toggle.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnToggle;
+                    @Toggle.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnToggle;
                 }
                 m_Wrapper.m_MenuActionsCallbackInterface = instance;
                 if (instance != null)
@@ -736,6 +733,9 @@ namespace DD2
                     @LeftClick.started += instance.OnLeftClick;
                     @LeftClick.performed += instance.OnLeftClick;
                     @LeftClick.canceled += instance.OnLeftClick;
+                    @Toggle.started += instance.OnToggle;
+                    @Toggle.performed += instance.OnToggle;
+                    @Toggle.canceled += instance.OnToggle;
                 }
             }
         }
@@ -790,7 +790,7 @@ namespace DD2
                 return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
             }
         }
-        public interface IStandardActions
+        public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
@@ -799,7 +799,6 @@ namespace DD2
             void OnSecondaryFire(InputAction.CallbackContext context);
             void OnAbility1(InputAction.CallbackContext context);
             void OnAbility2(InputAction.CallbackContext context);
-            void OnMenu(InputAction.CallbackContext context);
             void OnReady(InputAction.CallbackContext context);
             void OnBuildTower(InputAction.CallbackContext context);
             void OnRepairTower(InputAction.CallbackContext context);
@@ -812,6 +811,7 @@ namespace DD2
             void OnCancel(InputAction.CallbackContext context);
             void OnPoint(InputAction.CallbackContext context);
             void OnLeftClick(InputAction.CallbackContext context);
+            void OnToggle(InputAction.CallbackContext context);
         }
         public interface IDevConsoleActions
         {

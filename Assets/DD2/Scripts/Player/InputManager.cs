@@ -17,7 +17,7 @@ namespace DD2
 
         void Start()
         {
-            Actions.Standard.Enable();
+            Actions.Player.Enable();
             Actions.Menu.Enable();
             Actions.DevConsole.Enable();
         }

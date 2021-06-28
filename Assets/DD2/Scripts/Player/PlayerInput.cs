@@ -24,101 +24,103 @@ namespace DD2
         [SerializeField] VoidEvent ready;
         [SerializeField] BoolEvent toggleTowerRange;
 
-        void OnMove(InputValue value)
+        void OnEnable()
         {
-            if (enableInput.Value)
-                moveVector.Value = value.Get<Vector2>();
-            else
-                moveVector.Value = Vector2.zero;
+            InputManager.Instance.Actions.Player.Move.performed += Move;
+            InputManager.Instance.Actions.Player.Look.performed += Look;
+            InputManager.Instance.Actions.Player.Jump.performed += Jump;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed += PrimaryFire;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed += SecondaryFire;
+            InputManager.Instance.Actions.Player.Ability1.performed += Ability1;
+            InputManager.Instance.Actions.Player.Ability2.performed += Ability2;
+            InputManager.Instance.Actions.Player.Ready.performed += Ready;
+            InputManager.Instance.Actions.Player.BuildTower.performed += BuildTower;
+            InputManager.Instance.Actions.Player.RepairTower.performed += RepairTower;
+            InputManager.Instance.Actions.Player.SellTower.performed += SellTower;
+            InputManager.Instance.Actions.Player.UpgradeTower.performed += UpgradeTower;
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed += ShowTowerRange;
         }
 
-        void OnLook(InputValue value)
+        void OnDisable()
         {
-            if (enableInput.Value)
-                lookVector.Value = value.Get<Vector2>();
-            else
-                lookVector.Value = Vector2.zero;
+            InputManager.Instance.Actions.Player.Move.performed -= Move;
+            InputManager.Instance.Actions.Player.Look.performed -= Look;
+            InputManager.Instance.Actions.Player.Jump.performed -= Jump;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= PrimaryFire;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed -= SecondaryFire;
+            InputManager.Instance.Actions.Player.Ability1.performed -= Ability1;
+            InputManager.Instance.Actions.Player.Ability2.performed -= Ability2;
+            InputManager.Instance.Actions.Player.Ready.performed -= Ready;
+            InputManager.Instance.Actions.Player.BuildTower.performed -= BuildTower;
+            InputManager.Instance.Actions.Player.RepairTower.performed -= RepairTower;
+            InputManager.Instance.Actions.Player.SellTower.performed -= SellTower;
+            InputManager.Instance.Actions.Player.UpgradeTower.performed -= UpgradeTower;
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed -= ShowTowerRange;
         }
 
-        void OnJump(InputValue value)
+        void Move(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                jump.Value = value.isPressed;
-            else
-                jump.Value = false;
+            moveVector.Value = context.ReadValue<Vector2>();
         }
 
-        void OnPrimaryFire(InputValue value)
+        void Look(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                primaryFire.Value = value.isPressed;
-            else
-                primaryFire.Value = false;
+            lookVector.Value = context.ReadValue<Vector2>();
         }
 
-        void OnSecondaryFire(InputValue value)
+        void Jump(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                secondaryFire.Value = value.isPressed;
-            else
-                secondaryFire.Value = false;
+            jump.Value = context.ReadValueAsButton();
         }
 
-        void OnAbility1(InputValue value)
+        void PrimaryFire(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                ability1.Value = value.isPressed;
-            else
-                ability1.Value = false;
+            primaryFire.Value = context.ReadValueAsButton();
         }
 
-        void OnAbility2(InputValue value)
+        void SecondaryFire(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                ability2.Value = value.isPressed;
-            else
-                ability2.Value = false;
+            secondaryFire.Value = context.ReadValueAsButton();
         }
 
-        void OnMenu()
+        void Ability1(InputAction.CallbackContext context)
         {
-            menu?.Raise();
+            ability1.Value = context.ReadValueAsButton();
         }
 
-        void OnRepairTower()
+        void Ability2(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                repairTower?.Raise();
+            ability2.Value = context.ReadValueAsButton();
         }
 
-        void OnReady()
+        void Ready(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                ready?.Raise();
+            ready?.Raise();
         }
 
-        void OnBuildTower()
+        void BuildTower(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                buildTower?.Raise();
+            buildTower?.Raise();
         }
 
-        void OnSellTower()
+        void RepairTower(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                sellTower?.Raise();
+            repairTower?.Raise();
         }
 
-        void OnUpgradeTower()
+        void SellTower(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                upgradeTower?.Raise();
+            sellTower?.Raise();
         }
 
-        void OnShowTowerRange(InputValue value)
+        void UpgradeTower(InputAction.CallbackContext context)
         {
-            if (enableInput.Value)
-                toggleTowerRange?.Raise(value.isPressed);
+            upgradeTower?.Raise();
+        }
+
+        void ShowTowerRange(InputAction.CallbackContext context)
+        {
+            toggleTowerRange?.Raise(context.ReadValueAsButton());
         }
     }
 
