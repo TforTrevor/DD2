@@ -31,6 +31,8 @@ namespace DD2
         protected CoroutineHandle hitlagHandle;
         protected int animatorSpeed;
 
+        bool godMode = false;
+
         public float Radius { get => radius; protected set => radius = value; }
         public InstancedStats Stats { get => instancedStats; protected set => instancedStats = value; }
         public string ObjectPoolKey { get => objectPoolKey; protected set => objectPoolKey = value; }
@@ -73,7 +75,11 @@ namespace DD2
                 healthUpdated?.Invoke(this, -damage);
                 if (CurrentHealth <= 0)
                 {
-                    Die(entity);
+                    CurrentHealth = 0;
+                    if (!godMode)
+                    {
+                        Die(entity);
+                    }                
                 }
             }
         }
@@ -227,6 +233,11 @@ namespace DD2
         public void RemoveStatus(StatusEffect status)
         {
             statusEffects &= ~status;
+        }
+
+        public void ToggleGodMode(bool value)
+        {
+            godMode = value;
         }
     }
 }

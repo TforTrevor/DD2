@@ -21,15 +21,16 @@ namespace DD2
         [SerializeField] LayerMask groundedMask;
         [SerializeField] float groundedOffset;
         [SerializeField] float groundedLength;
+        [SerializeField] Animator animator;
 
         Rigidbody rb;
         int currentJumps;
         int maximumJumps = 1;
-        Vector2 moveInput;
         Vector2 lookInput;
 
         public bool IsMoving { get; private set; }
         public bool IsGrounded { get; private set; }
+        public Vector2 MoveInput { get; private set; }
         public Vector3 Velocity { get; private set; }
         public float VerticalVelocity { get; private set; }
 
@@ -40,24 +41,24 @@ namespace DD2
 
         void OnEnable()
         {
-            InputManager.Instance.Actions.Player.Move.performed += MoveInput;
-            InputManager.Instance.Actions.Player.Look.performed += LookInput;
+            InputManager.Instance.Actions.Player.Move.performed += OnMove;
+            InputManager.Instance.Actions.Player.Look.performed += OnLook;
             InputManager.Instance.Actions.Player.Jump.performed += Jump;
         }
 
         void OnDisable()
         {
-            InputManager.Instance.Actions.Player.Move.performed -= MoveInput;
-            InputManager.Instance.Actions.Player.Look.performed -= LookInput;
+            InputManager.Instance.Actions.Player.Move.performed -= OnMove;
+            InputManager.Instance.Actions.Player.Look.performed -= OnLook;
             InputManager.Instance.Actions.Player.Jump.performed -= Jump;
         }
 
-        void MoveInput(InputAction.CallbackContext context)
+        void OnMove(InputAction.CallbackContext context)
         {
-            moveInput = context.ReadValue<Vector2>();
+            MoveInput = context.ReadValue<Vector2>();
         }
 
-        void LookInput(InputAction.CallbackContext context)
+        void OnLook(InputAction.CallbackContext context)
         {
             lookInput = context.ReadValue<Vector2>();
         }
@@ -91,10 +92,8 @@ namespace DD2
 
         void Move()
         {
-            if (moveInput.magnitude > 0)
+            if (MoveInput.magnitude > 0)
             {
-                IsMoving = true;
-
                 float tempSpeed = stats.MoveSpeed;
                 float tempAcceleration = acceleration;
                 if (!IsGrounded)
@@ -103,16 +102,19 @@ namespace DD2
                     tempSpeed = Mathf.Max(Velocity.magnitude, tempSpeed);
                 }
 
-                Vector3 inputVector = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+                Vector3 inputVector = new Vector3(MoveInput.x, 0, MoveInput.y).normalized;
 
                 Vector3 targetVelocity = transform.TransformDirection(inputVector) * tempSpeed;
                 Vector3 force = (targetVelocity - Velocity).normalized * tempAcceleration;
                 Velocity += force * Time.deltaTime;
+
+                if (Velocity.magnitude > 0)
+                {
+                    IsMoving = true;
+                }
             }
             else
             {
-                IsMoving = false;
-
                 if (IsGrounded)
                 {
                     if (Velocity.magnitude > 0.25f)
@@ -122,6 +124,7 @@ namespace DD2
                     else
                     {
                         Velocity = Vector3.zero;
+                        IsMoving = false;
                     }
                 }
             }
@@ -140,6 +143,7 @@ namespace DD2
             {
                 VerticalVelocity += jumpForce;
                 currentJumps++;
+                animator.SetTrigger("Jump");
             }
         }
 

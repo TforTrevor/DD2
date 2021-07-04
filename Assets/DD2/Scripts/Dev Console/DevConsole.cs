@@ -53,6 +53,10 @@ namespace DD2
                 Cursor.lockState = CursorLockMode.None;
                 TimeManager.Pause();
                 canvas.enabled = true;
+                consoleInput.enabled = true;
+                consoleInput.text = "";
+                consoleInput.Select();
+                consoleInput.ActivateInputField();
 
                 InputManager.Instance.DisableInput(InputManager.Instance.Actions.Player);
             }
@@ -62,6 +66,7 @@ namespace DD2
                 Cursor.lockState = CursorLockMode.Confined;
                 TimeManager.UnPause();
                 canvas.enabled = false;
+                consoleInput.enabled = false;
 
                 InputManager.Instance.EnableInput(InputManager.Instance.Actions.Player);
             }
@@ -104,7 +109,11 @@ namespace DD2
                         }
                         else if (command as ConsoleCommand<float> != null)
                         {
-                            (command as ConsoleCommand<float>).Invoke(int.Parse(properties[1]));
+                            (command as ConsoleCommand<float>).Invoke(float.Parse(properties[1]));
+                        }
+                        else if (command as ConsoleCommand<bool> != null)
+                        {
+                            (command as ConsoleCommand<bool>).Invoke(bool.Parse(properties[1]));
                         }
                     }
                 }
@@ -135,6 +144,11 @@ namespace DD2
 
         void AddConsoleCommands()
         {
+            consoleCommands.Add(new ConsoleCommand("kill", "Kills the selected entity", "kill", () =>
+            {
+                selectedEntity.Damage(null, selectedEntity.CurrentHealth);
+            }));
+
             consoleCommands.Add(new ConsoleCommand<float>("damage", "Damages the selected entity", "damage <amount>", (x) =>
             {
                 selectedEntity.Damage(null, x);
@@ -148,6 +162,21 @@ namespace DD2
             consoleCommands.Add(new ConsoleCommand("getHealth", "Gets the health of the selected entity", "getHealth", () =>
             {
                 Print(selectedEntity.name + " health: " + selectedEntity.CurrentHealth);
+            }));
+
+            consoleCommands.Add(new ConsoleCommand<int>("giveMana", "Gives the selected entity mana", "giveMana <amount>", (x) =>
+            {
+                selectedEntity.GiveMana(x);
+            }));
+
+            consoleCommands.Add(new ConsoleCommand("getMana", "Gets the mana of the selected entity", "getMana", () =>
+            {
+                Print(selectedEntity.name + " mana: " + selectedEntity.CurrentMana);
+            }));
+
+            consoleCommands.Add(new ConsoleCommand<bool>("godMode", "Toggles god mode for the selected entity", "godMode <value>", (value) =>
+            {
+                selectedEntity.ToggleGodMode(value);
             }));
 
             consoleCommands.Add(new ConsoleCommand("help", "Prints all commands", "help", () =>
