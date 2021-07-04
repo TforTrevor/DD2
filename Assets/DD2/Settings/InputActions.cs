@@ -127,11 +127,11 @@ namespace DD2
                 },
                 {
                     ""name"": ""ShowTowerRange"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""11a7de43-68eb-4081-9722-5640a1502425"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [

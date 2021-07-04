@@ -120,7 +120,7 @@ namespace DD2
 
         void ShowTowerRange(InputAction.CallbackContext context)
         {
-            toggleTowerRange?.Raise(context.ReadValueAsButton());
+            //toggleTowerRange?.Raise(context.ReadValueAsButton());
         }
     }
 

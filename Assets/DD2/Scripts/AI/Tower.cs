@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI.Components;
 using UnityEngine.VFX;
-
 using MEC;
+using UnityEngine.InputSystem;
 
 namespace DD2.AI
 {
@@ -75,6 +75,16 @@ namespace DD2.AI
             {
                 Build();
             }
+        }
+
+        protected virtual void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed += OnShowRange;
+        }
+
+        protected virtual void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed -= OnShowRange;
         }
 
         public override void Respawn()
@@ -226,6 +236,18 @@ namespace DD2.AI
                 }
                 rangeLineRenderer.SetPosition(resolution + 1, Vector3.zero);
             }            
+        }
+
+        void OnShowRange(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
+            {
+                ToggleRangeIndicator(true);
+            }
+            else
+            {
+                ToggleRangeIndicator(false);
+            }
         }
 
         public void ToggleRangeIndicator(bool value)
