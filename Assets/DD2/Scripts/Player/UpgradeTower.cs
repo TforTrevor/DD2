@@ -5,6 +5,7 @@ using UnityEngine;
 using DD2.AI;
 using UnityEngine.VFX;
 using UnityAtoms.BaseAtoms;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -23,9 +24,28 @@ namespace DD2
             isUpgrading = false;
         }
 
-        protected override void Action()
+        protected override void OnEnable()
         {
-            player.ToggleRepair(false);
+            base.OnEnable();
+            InputManager.Instance.Actions.Player.UpgradeTower.performed += OnUpgrade;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            InputManager.Instance.Actions.Player.UpgradeTower.performed -= OnUpgrade;
+        }
+
+        void OnUpgrade(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
+            {
+                Begin();
+            }
+        }
+
+        protected override void Continue()
+        {
             if (isUpgrading)
             {
                 Timing.KillCoroutines(upgradeHandle);
@@ -50,24 +70,17 @@ namespace DD2
             }
         }
 
-        public override void Cancel()
-        {
-            base.Cancel();
-            player.ToggleRepair(true);
-        }
-
-        protected override void Begin()
-        {
-            base.Begin();
-            player.ToggleRepair(false);
-        }
-
         IEnumerator<float> UpgradeRoutine(Tower tower)
         {
             player.SpendMana(manaCost);
-            tower.UpgradeEffect.SendEvent("OnPlay");            
-            yield return Timing.WaitForSeconds(upgradeTime);
-            tower.UpgradeEffect.SendEvent("OnStop");
+            //temporary, refactor upgrade effect code later
+            VisualEffect effect = tower.UpgradeEffect;
+            if (effect != null)
+            {
+                tower.UpgradeEffect.SendEvent("OnPlay");
+                yield return Timing.WaitForSeconds(upgradeTime);
+                tower.UpgradeEffect.SendEvent("OnStop");
+            }            
             tower.Upgrade();            
         }
     }

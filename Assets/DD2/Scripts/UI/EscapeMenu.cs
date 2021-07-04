@@ -62,6 +62,7 @@ namespace DD2.UI
                 Cursor.visible = true;
                 TimeManager.Pause();
                 playerInput.Value = false;
+                InputManager.Instance.DisableInput(InputManager.Instance.Actions.Player);
 
                 isOpen = true;
             }          
@@ -77,6 +78,7 @@ namespace DD2.UI
                 Cursor.visible = false;
                 TimeManager.UnPause();
                 playerInput.Value = true;
+                InputManager.Instance.EnableInput(InputManager.Instance.Actions.Player);
 
                 isOpen = false;
             }

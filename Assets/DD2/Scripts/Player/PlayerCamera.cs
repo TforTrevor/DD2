@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityAtoms.BaseAtoms;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] Vector2Variable lookInput;
         [SerializeField] BoolVariable enableLook;
         [SerializeField] float sensitivity;
         [SerializeField] float maxPitch;
@@ -18,6 +18,22 @@ namespace DD2
 
         bool shoulderView;
         float pitch;
+        Vector2 lookInput;
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.Look.performed += LookInput;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.Look.performed -= LookInput;
+        }
+
+        void LookInput(InputAction.CallbackContext context)
+        {
+            lookInput = context.ReadValue<Vector2>();
+        }
 
         void Start()
         {
@@ -31,7 +47,7 @@ namespace DD2
         {
             if (shoulderView && enableLook.Value)
             {
-                pitch -= lookInput.Value.y * sensitivity * Time.deltaTime;
+                pitch -= lookInput.y * sensitivity * Time.deltaTime;
                 pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
                 transform.localEulerAngles = new Vector3(pitch, 0, 0);
             }            

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityAtoms.BaseAtoms;
+using System;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] Stats stats;
-        [SerializeField] Vector2Variable moveInput;
-        [SerializeField] Vector2Variable lookInput;
         [SerializeField] BoolVariable enableMove;
         [SerializeField] BoolVariable enableLook;
         [SerializeField] float sensitivity;
@@ -25,6 +25,8 @@ namespace DD2
         Rigidbody rb;
         int currentJumps;
         int maximumJumps = 1;
+        Vector2 moveInput;
+        Vector2 lookInput;
 
         public bool IsMoving { get; private set; }
         public bool IsGrounded { get; private set; }
@@ -34,6 +36,30 @@ namespace DD2
         void Awake()
         {
             rb = GetComponent<Rigidbody>();
+        }
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.Move.performed += MoveInput;
+            InputManager.Instance.Actions.Player.Look.performed += LookInput;
+            InputManager.Instance.Actions.Player.Jump.performed += Jump;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.Move.performed -= MoveInput;
+            InputManager.Instance.Actions.Player.Look.performed -= LookInput;
+            InputManager.Instance.Actions.Player.Jump.performed -= Jump;
+        }
+
+        void MoveInput(InputAction.CallbackContext context)
+        {
+            moveInput = context.ReadValue<Vector2>();
+        }
+
+        void LookInput(InputAction.CallbackContext context)
+        {
+            lookInput = context.ReadValue<Vector2>();
         }
 
         void FixedUpdate()
@@ -65,7 +91,7 @@ namespace DD2
 
         void Move()
         {
-            if (moveInput.Value.magnitude > 0)
+            if (moveInput.magnitude > 0)
             {
                 IsMoving = true;
 
@@ -77,7 +103,7 @@ namespace DD2
                     tempSpeed = Mathf.Max(Velocity.magnitude, tempSpeed);
                 }
 
-                Vector3 inputVector = new Vector3(moveInput.Value.x, 0, moveInput.Value.y).normalized;
+                Vector3 inputVector = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
                 Vector3 targetVelocity = transform.TransformDirection(inputVector) * tempSpeed;
                 Vector3 force = (targetVelocity - Velocity).normalized * tempAcceleration;
@@ -103,12 +129,13 @@ namespace DD2
 
         void Rotate()
         {
-            transform.Rotate(Vector3.up, lookInput.Value.x * sensitivity * 0.01f * Time.timeScale);
+            transform.Rotate(Vector3.up, lookInput.x * sensitivity * 0.01f * Time.timeScale);
         }
 
-        public void Jump(bool value)
+        public void Jump(InputAction.CallbackContext context)
         {
             //Only call when jump is pressed down
+            bool value = context.ReadValueAsButton();
             if (IsGrounded && value && currentJumps < maximumJumps)
             {
                 VerticalVelocity += jumpForce;

@@ -4,6 +4,7 @@ using UnityEngine;
 using DD2.AI;
 using DD2.Actions;
 using MEC;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -22,8 +23,29 @@ namespace DD2
             isRepairing = false;
         }
 
-        protected override void Action()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+            InputManager.Instance.Actions.Player.RepairTower.performed += OnRepair;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            InputManager.Instance.Actions.Player.RepairTower.performed -= OnRepair;
+        }
+
+        void OnRepair(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
+            {
+                Begin();
+            }
+        }
+
+        protected override void Continue()
+        {
+            base.Continue();
             if (isRepairing)
             {
                 Timing.KillCoroutines(repairHandle);
@@ -46,18 +68,6 @@ namespace DD2
                     }
                 }
             }
-        }
-
-        public override void Cancel()
-        {
-            base.Cancel();
-            player.ToggleUpgrade(true);
-        }
-
-        protected override void Begin()
-        {
-            base.Begin();
-            player.ToggleUpgrade(false);
         }
 
         IEnumerator<float> RepairRoutine(Tower tower)

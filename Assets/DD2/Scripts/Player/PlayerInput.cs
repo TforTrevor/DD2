@@ -60,62 +60,62 @@ namespace DD2
 
         void Move(InputAction.CallbackContext context)
         {
-            moveVector.Value = context.ReadValue<Vector2>();
+            //moveVector.Value = context.ReadValue<Vector2>();
         }
 
         void Look(InputAction.CallbackContext context)
         {
-            lookVector.Value = context.ReadValue<Vector2>();
+            //lookVector.Value = context.ReadValue<Vector2>();
         }
 
         void Jump(InputAction.CallbackContext context)
         {
-            jump.Value = context.ReadValueAsButton();
+            //jump.Value = context.ReadValueAsButton();
         }
 
         void PrimaryFire(InputAction.CallbackContext context)
         {
-            primaryFire.Value = context.ReadValueAsButton();
+            //primaryFire.Value = context.ReadValueAsButton();
         }
 
         void SecondaryFire(InputAction.CallbackContext context)
         {
-            secondaryFire.Value = context.ReadValueAsButton();
+            //secondaryFire.Value = context.ReadValueAsButton();
         }
 
         void Ability1(InputAction.CallbackContext context)
         {
-            ability1.Value = context.ReadValueAsButton();
+            //ability1.Value = context.ReadValueAsButton();
         }
 
         void Ability2(InputAction.CallbackContext context)
         {
-            ability2.Value = context.ReadValueAsButton();
+            //ability2.Value = context.ReadValueAsButton();
         }
 
         void Ready(InputAction.CallbackContext context)
         {
-            ready?.Raise();
+            //ready?.Raise();
         }
 
         void BuildTower(InputAction.CallbackContext context)
         {
-            buildTower?.Raise();
+            //buildTower?.Raise();
         }
 
         void RepairTower(InputAction.CallbackContext context)
         {
-            repairTower?.Raise();
+            //repairTower?.Raise();
         }
 
         void SellTower(InputAction.CallbackContext context)
         {
-            sellTower?.Raise();
+            //sellTower?.Raise();
         }
 
         void UpgradeTower(InputAction.CallbackContext context)
         {
-            upgradeTower?.Raise();
+            //upgradeTower?.Raise();
         }
 
         void ShowTowerRange(InputAction.CallbackContext context)

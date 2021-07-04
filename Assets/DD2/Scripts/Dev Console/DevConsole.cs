@@ -54,7 +54,7 @@ namespace DD2
                 TimeManager.Pause();
                 canvas.enabled = true;
 
-                InputManager.Instance.Actions.Player.Disable();
+                InputManager.Instance.DisableInput(InputManager.Instance.Actions.Player);
             }
             else
             {
@@ -63,7 +63,7 @@ namespace DD2
                 TimeManager.UnPause();
                 canvas.enabled = false;
 
-                InputManager.Instance.Actions.Player.Enable();
+                InputManager.Instance.EnableInput(InputManager.Instance.Actions.Player);
             }
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using DD2.Actions;
 using DD2.Abilities;
 using UnityAtoms.BaseAtoms;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -30,6 +31,16 @@ namespace DD2
         {
             base.Awake();
             manaOrbs = new Collider[100];
+        }
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.PrimaryFire.performed += DoPrimaryFire;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= DoPrimaryFire;
         }
 
         protected override void Die(Entity entity)
@@ -70,8 +81,9 @@ namespace DD2
             }
         }
 
-        public void DoPrimaryFire(bool value)
+        public void DoPrimaryFire(InputAction.CallbackContext context)
         {
+            bool value = context.ReadValueAsButton();
             if (!primaryFire.ToggleState && value)
             {
                 primaryFire.UseAbility(this, null);

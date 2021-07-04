@@ -471,6 +471,111 @@ MonoBehaviour:
   cloudMapResolution:
     m_OverrideState: 1
     m_Value: 64
+  customDensityCurve:
+    m_OverrideState: 1
+    m_Value:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.21249747
+        value: 0.9905656
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.43750614
+        value: 0.17593959
+        inSlope: -1.0567687
+        outSlope: -1.0567687
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.40983397
+        outWeight: 0.2162084
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  customErosionCurve:
+    m_OverrideState: 1
+    m_Value:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.18390633
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  customAmbientOcclusionCurve:
+    m_OverrideState: 1
+    m_Value:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   scatteringTint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -482,22 +587,31 @@ MonoBehaviour:
     m_Value: 0.5
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.349
+    m_Value: 0.413
   shapeFactor:
     m_OverrideState: 1
-    m_Value: 0.675
+    m_Value: 0.671
   shapeScale:
     m_OverrideState: 1
+    m_Value: 2.65
+  shapeOffsetX:
+    m_OverrideState: 0
+    m_Value: 0
+  shapeOffsetZ:
+    m_OverrideState: 0
     m_Value: 0
   erosionFactor:
     m_OverrideState: 1
-    m_Value: 0.253
+    m_Value: 0.349
   erosionScale:
     m_OverrideState: 1
-    m_Value: 0.129
+    m_Value: 23.3
   ambientLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
+  erosionOcclusion:
+    m_OverrideState: 0
+    m_Value: 0.5
   globalWindSpeed:
     m_OverrideState: 1
     m_Value: 1000
@@ -518,10 +632,10 @@ MonoBehaviour:
     m_Value: 0.95
   shadows:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   shadowResolution:
     m_OverrideState: 1
-    m_Value: 512
+    m_Value: 256
   shadowPlaneHeightOffset:
     m_OverrideState: 1
     m_Value: 0
@@ -710,6 +824,12 @@ MonoBehaviour:
     m_Value:
       serializedVersion: 2
       m_Bits: 4294967295
+  occluderMotionRejection:
+    m_OverrideState: 0
+    m_Value: 1
+  receiverMotionRejection:
+    m_OverrideState: 0
+    m_Value: 1
   m_StepCount:
     m_OverrideState: 1
     m_Value: 16

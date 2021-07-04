@@ -4,6 +4,7 @@ using MEC;
 using System.Collections.Generic;
 using UnityAtoms.BaseAtoms;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -46,7 +47,17 @@ namespace DD2
             }            
         }
 
-        public void StartWave()
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.Ready.performed += StartWave;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.Ready.performed -= StartWave;
+        }
+
+        public void StartWave(InputAction.CallbackContext context)
         {
             if (!gameOver)
             {

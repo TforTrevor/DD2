@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityAtoms.BaseAtoms;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -16,11 +17,22 @@ namespace DD2
 
         bool fading;
 
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Menu.Toggle.performed += StartFade;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Menu.Toggle.performed -= StartFade;
+        }
+
         public void Play()
         {
             introDirector.Play();
             enableInput.Value = false;
             fading = false;
+            //InputManager.Instance.DisableInput(InputManager.Instance.Actions.Player);
         }
 
         public void Finished()
@@ -28,9 +40,10 @@ namespace DD2
             introFinished.Raise();
             virtualCamera.gameObject.SetActive(false);
             enableInput.Value = true;
+            //InputManager.Instance.EnableInput(InputManager.Instance.Actions.Player);
         }
 
-        public void StartFade()
+        public void StartFade(InputAction.CallbackContext context)
         {
             if (!fading)
             {

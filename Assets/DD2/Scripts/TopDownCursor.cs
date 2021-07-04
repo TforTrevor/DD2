@@ -5,14 +5,14 @@ using UnityAtoms.BaseAtoms;
 using UnityEngine;
 using UnityEngine.VFX;
 using MEC;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
     public class TopDownCursor : MonoBehaviour
     {
         [SerializeField] protected Player player;
-        [SerializeField] protected Rigidbody cursor;
-        [SerializeField] protected Vector2Variable lookInput;
+        [SerializeField] protected Transform cursor;
         [SerializeField] float sensitivity;
         [SerializeField] float maxRange;
         [SerializeField] LayerMask cursorMask;
@@ -29,6 +29,8 @@ namespace DD2
         LTDescr lightHandle;
         float lightIntensity;
         Renderer rangeRenderer;
+        protected Vector2 lookInput;
+        CoroutineHandle moveHandle;
 
         void Awake()
         {
@@ -43,86 +45,154 @@ namespace DD2
             lightIntensity = cursorLight.intensity;
         }
 
-        public void Toggle()
+        protected virtual void OnEnable()
         {
-            if (enableUse.Value)
+            
+            
+            
+        }
+
+        protected virtual void OnDisable()
+        {
+            
+        }
+
+        void OnLook(InputAction.CallbackContext context)
+        {
+            lookInput = context.ReadValue<Vector2>();
+        }
+
+        void OnContinue(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
             {
-                toggleState = !toggleState;
-                if (toggleState)
-                {
-                    Begin();
-                }
-                else
-                {
-                    toggleState = true;
-                    Cancel();
-                }
+                Continue();
             }
         }
 
-        public void DoAction()
+        void OnCancel(InputAction.CallbackContext context)
         {
-            if (toggleState)
+            if (context.ReadValueAsButton())
             {
-                Action();
+                Cancel();
             }
         }
 
         protected virtual void Begin()
         {
+            InputManager.Instance.Actions.Player.Look.performed += OnLook;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed += OnContinue;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed += OnCancel;
+
             topView.Raise();
-            cursor.transform.position = player.transform.position;
-            localPos = Vector3.zero;
+            player.ToggleLook(false);
+            
             cursor.gameObject.SetActive(true);
             rangeIndicator.gameObject.SetActive(true);
-            player.ToggleLook(false);
-
-            Timing.KillCoroutines(effectHandle);
-            //cursorEffect.Play();
-            cursorEffect.Stop();
-            if (lightHandle != null)
-                LeanTween.cancel(lightHandle.uniqueId);
-            cursorLight.intensity = lightIntensity;
             rangeRenderer.material.color = cursorLight.color;
+
+            moveHandle = Timing.RunCoroutine(MoveRoutine());
         }
 
-        public virtual void Cancel()
+        protected virtual void Continue()
         {
-            if (toggleState)
+
+        }
+
+        protected virtual void Cancel()
+        {
+            InputManager.Instance.Actions.Player.Look.performed -= OnLook;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= OnContinue;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed -= OnCancel;
+
+            shoulderView.Raise();
+            player.ToggleLook(true);
+
+            cursor.gameObject.SetActive(false);
+            rangeIndicator.gameObject.SetActive(false);
+
+            Timing.KillCoroutines(moveHandle);
+        }
+        
+        IEnumerator<float> MoveRoutine()
+        {
+            localPos = Vector3.zero;
+
+            while (true)
             {
-                toggleState = false;
-                shoulderView.Raise();
-                rangeIndicator.gameObject.SetActive(false);
-                player.ToggleLook(true);
-                cursorEffect.Stop();
-                lightIntensity = cursorLight.intensity;
-                lightHandle = LeanTween.value(cursorLight.intensity, 0, Mathf.Pow(cursorEffect.GetFloat("Lifetime"), 2));
-                lightHandle.setOnUpdate((value) => cursorLight.intensity = value);
-                effectHandle = Timing.CallDelayed(Mathf.Pow(cursorEffect.GetFloat("Lifetime"), 2), () => cursor.gameObject.SetActive(false));
-            }
-        }
-
-        protected virtual void Action()
-        {
-
-        }
-
-        void FixedUpdate()
-        {
-            if (toggleState)
-            {
-                Vector3 direction = new Vector3(lookInput.Value.x * sensitivity * Time.deltaTime, 0, lookInput.Value.y * sensitivity * Time.deltaTime);
+                Vector3 direction = new Vector3(lookInput.x * sensitivity * Time.deltaTime, 0, lookInput.y * sensitivity * Time.deltaTime);
                 localPos += direction;
                 localPos = Vector3.ClampMagnitude(localPos, maxRange);
-                RaycastHit hit;
                 Vector3 worldPos = player.transform.TransformPoint(localPos);
+
+                RaycastHit hit;
                 if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, cursorMask))
                 {
                     worldPos.y = hit.point.y;
                 }
-                cursor.MovePosition(worldPos);
+
+                cursor.transform.position = worldPos;
+
+                yield return Timing.WaitForOneFrame;
             }
         }
+
+        protected void OnDestroy()
+        {
+            InputManager.Instance.Actions.Player.Look.performed -= OnLook;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= OnContinue;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed -= OnCancel;
+        }
+
+        //protected virtual void Begin()
+        //{
+        //    topView.Raise();
+        //    cursor.transform.position = player.transform.position;
+        //    localPos = Vector3.zero;
+        //    cursor.gameObject.SetActive(true);
+        //    rangeIndicator.gameObject.SetActive(true);
+        //    player.ToggleLook(false);
+
+        //    Timing.KillCoroutines(effectHandle);
+        //    //cursorEffect.Play();
+        //    cursorEffect.Stop();
+        //    if (lightHandle != null)
+        //        LeanTween.cancel(lightHandle.uniqueId);
+        //    cursorLight.intensity = lightIntensity;
+        //    rangeRenderer.material.color = cursorLight.color;
+        //}
+
+        //public virtual void Cancel()
+        //{
+        //    if (toggleState)
+        //    {
+        //        toggleState = false;
+        //        shoulderView.Raise();
+        //        rangeIndicator.gameObject.SetActive(false);
+        //        player.ToggleLook(true);
+        //        cursorEffect.Stop();
+        //        lightIntensity = cursorLight.intensity;
+        //        lightHandle = LeanTween.value(cursorLight.intensity, 0, Mathf.Pow(cursorEffect.GetFloat("Lifetime"), 2));
+        //        lightHandle.setOnUpdate((value) => cursorLight.intensity = value);
+        //        effectHandle = Timing.CallDelayed(Mathf.Pow(cursorEffect.GetFloat("Lifetime"), 2), () => cursor.gameObject.SetActive(false));
+        //    }
+        //}
+
+        //void FixedUpdate()
+        //{
+        //    if (toggleState)
+        //    {
+        //        Vector3 direction = new Vector3(lookInput.x * sensitivity * Time.deltaTime, 0, lookInput.y * sensitivity * Time.deltaTime);
+        //        localPos += direction;
+        //        localPos = Vector3.ClampMagnitude(localPos, maxRange);
+        //        RaycastHit hit;
+        //        Vector3 worldPos = player.transform.TransformPoint(localPos);
+        //        if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, cursorMask))
+        //        {
+        //            worldPos.y = hit.point.y;
+        //        }
+        //        cursor.MovePosition(worldPos);
+        //    }
+        //}
     }
 }
-

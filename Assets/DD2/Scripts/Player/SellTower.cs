@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -9,8 +10,29 @@ namespace DD2
     {
         [SerializeField] LayerMask sellMask;
 
-        protected override void Action()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+            InputManager.Instance.Actions.Player.SellTower.performed += OnSell;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            InputManager.Instance.Actions.Player.SellTower.performed -= OnSell;
+        }
+
+        void OnSell(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
+            {
+                Begin();
+            }
+        }
+
+        protected override void Continue()
+        {
+            base.Continue();
             RaycastHit hit;
             if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, sellMask))
             {
@@ -24,18 +46,6 @@ namespace DD2
                     }
                 }
             }
-        }
-
-        public override void Cancel()
-        {
-            base.Cancel();
-            player.ToggleRepair(true);
-        }
-
-        protected override void Begin()
-        {
-            base.Begin();
-            player.ToggleRepair(false);
         }
     }
 }
