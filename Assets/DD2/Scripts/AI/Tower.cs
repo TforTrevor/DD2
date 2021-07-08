@@ -16,8 +16,6 @@ namespace DD2.AI
         [SerializeField] protected Transform towerGraphics;
         [SerializeField] Transform towerVertical;
         [SerializeField] protected Transform towerSummonGraphics;
-        //[SerializeField] protected Material towerSummonMaterial;
-        [SerializeField] Color errorColor = Color.red;
         [SerializeField] Light summonLight;
         [SerializeField] protected MeshRenderer summonRenderer;
         [SerializeField] new Collider collider;
@@ -33,7 +31,6 @@ namespace DD2.AI
 
         public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
         public Color CurrentColor { get => currentColor; private set => currentColor = value; }
-        public Color ErrorColor { get => errorColor; private set => errorColor = value; }
         public int ManaCost { get => manaCost; private set => manaCost = value; }
         public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
 

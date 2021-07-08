@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 140649440673629
+      data1: 140649440935773
       data2: 4539628434053103640
     lodBias: 1
     lodBiasMode: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  rendererListCulling: 0
   DLSSProjectId: 000000
   useDLSSCustomProjectId: 0
   supportProbeVolumes: 0
