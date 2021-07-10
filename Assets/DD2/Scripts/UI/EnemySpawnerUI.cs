@@ -4,45 +4,77 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DD2
+namespace DD2.UI
 {
-    public class EnemySpawnerUI : MonoBehaviour
+    public class EnemySpawnerUI : FloatingUI
     {
         [SerializeField] EnemySpawnerUIElement elementPrefab;
-        [SerializeField] Transform parent;
+        [SerializeField] float heightOffset;
+        [SerializeField] float maxRange;
+        [SerializeField] float minRange;
 
         List<EnemySpawnerUIElement> elements = new List<EnemySpawnerUIElement>();
-        Canvas canvas;
-        bool visible;
+        EnemySpawner currentSpawner;
+        int currentWave;
+        bool isEnabled;
 
-        void Awake()
+        protected override void Awake()
         {
-            canvas = GetComponent<Canvas>();
-            visible = canvas.enabled;
+            base.Awake();
+            isEnabled = true;
         }
 
-        public void ToggleVisibility(bool value)
+        public void Show(EnemySpawner spawner)
         {
-            if (value != visible)
+            if (!isEnabled)
             {
-                canvas.enabled = value;
-                visible = value;
+                currentSpawner = spawner;
+
+                foreach (KeyValuePair<string, int> item in spawner.GetEnemies())
+                {
+                    EnemySpawnerUIElement instance = Instantiate(elementPrefab, transform);
+                    instance.SetEnemy(item.Key, item.Value);
+                    elements.Add(instance);
+                }
+
+                isEnabled = true;
             }
         }
 
-        public void Clear()
+        public override void Hide()
         {
-            foreach (EnemySpawnerUIElement element in elements)
+            base.Hide();
+
+            if (isEnabled)
             {
-                Destroy(element);
+                foreach (EnemySpawnerUIElement element in elements)
+                {
+                    Destroy(element.gameObject);
+                }
+                elements.Clear();
+
+                isEnabled = false;
             }
         }
 
-        public void AddEnemy(string name, int count)
+        void LateUpdate()
         {
-            EnemySpawnerUIElement instance = Instantiate(elementPrefab, parent);
-            instance.SetEnemy(name, count);
-            elements.Add(instance);
+            if (isEnabled)
+            {
+                Vector3 pos = Camera.main.WorldToScreenPoint(currentSpawner.transform.position + Vector3.up * heightOffset);
+                if (pos.z > 0 && pos.z < maxRange)
+                {
+                    CanvasGroup.alpha = 1;
+                    transform.position = pos;
+
+                    float value = Util.Utilities.Remap(pos.z, maxRange, minRange, 0, 1);
+                    transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 0.5f, value);
+                }
+                else
+                {
+                    CanvasGroup.alpha = 0;
+                }
+            }
         }
     }
 }

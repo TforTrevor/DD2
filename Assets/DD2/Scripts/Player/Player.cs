@@ -4,6 +4,7 @@ using UnityEngine;
 using DD2.Actions;
 using DD2.Abilities;
 using UnityAtoms.BaseAtoms;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -30,6 +31,16 @@ namespace DD2
         {
             base.Awake();
             manaOrbs = new Collider[100];
+        }
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.PrimaryFire.performed += DoPrimaryFire;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= DoPrimaryFire;
         }
 
         protected override void Die(Entity entity)
@@ -70,8 +81,9 @@ namespace DD2
             }
         }
 
-        public void DoPrimaryFire(bool value)
+        public void DoPrimaryFire(InputAction.CallbackContext context)
         {
+            bool value = context.ReadValueAsButton();
             if (!primaryFire.ToggleState && value)
             {
                 primaryFire.UseAbility(this, null);
@@ -145,8 +157,26 @@ namespace DD2
         void Update()
         {
             Vector3 velocity = transform.InverseTransformDirection(movement.Velocity);
-            Animator.SetFloat("Blend_X", velocity.x / Stats.MoveSpeed);
-            Animator.SetFloat("Blend_Y", velocity.z / Stats.MoveSpeed);
+            float xVelocity = velocity.x / Stats.MoveSpeed;
+            float yVelocity = velocity.z / Stats.MoveSpeed;
+            if (Mathf.Abs(xVelocity) > 0.9f)
+            {
+                xVelocity = 1 * Mathf.Sign(xVelocity);
+            }
+            else if (Mathf.Abs(xVelocity) < 0.1f)
+            {
+                xVelocity = 0;
+            }
+            if (Mathf.Abs(yVelocity) > 0.9f)
+            {
+                yVelocity = 1 * Mathf.Sign(yVelocity);
+            }
+            else if (Mathf.Abs(yVelocity) < 0.1f)
+            {
+                yVelocity = 0;
+            }
+            Animator.SetFloat("Run_X", xVelocity);
+            Animator.SetFloat("Run_Y", yVelocity);
             Animator.SetBool("Is_Moving", movement.IsMoving);
             Animator.SetBool("Is_Grounded", movement.IsGrounded);
         }

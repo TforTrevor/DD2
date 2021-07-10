@@ -13,7 +13,7 @@ namespace DD2.AI.Actions
         {
             AIContext ctx = (AIContext)context;
 
-            ctx.targetList.AddRange(LevelManager.Instance.Cores);
+            ctx.targetList.AddRange(ctx.coreList.Entities);
         }
     }
 }

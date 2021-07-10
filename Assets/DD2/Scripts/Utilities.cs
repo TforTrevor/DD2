@@ -7,6 +7,8 @@ namespace DD2.Util
 {
     public static class Utilities
     {
+        public static Color ErrorColor { get { return Color.red; } }
+
         public static Collider GetClosestToPoint(Collider[] colliders, Vector3 position)
         {
             Collider closestCollider = null;

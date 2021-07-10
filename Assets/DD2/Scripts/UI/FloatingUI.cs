@@ -7,32 +7,29 @@ using UnityEngine.Rendering;
 
 namespace DD2.UI
 {
+    [RequireComponent(typeof(CanvasGroup), typeof(SortingGroup))]
     public class FloatingUI : MonoBehaviour
     {
-        [SerializeField] CanvasGroup canvasGroup;
-        [SerializeField] SortingGroup sortingGroup;
-        [SerializeField] float heightOffset = 2;
+        CanvasGroup canvasGroup;
+        SortingGroup sortingGroup;
 
         public CanvasGroup CanvasGroup { get => canvasGroup; private set => canvasGroup = value; }
         public SortingGroup SortingGroup { get => sortingGroup; private set => sortingGroup = value; }
-        public float HeightOffset { get => heightOffset; set => heightOffset = value; }        
 
-        public virtual void ToggleCanvas(bool value)
+        protected virtual void Awake()
         {
-            ToggleCanvas(value, null);
+            canvasGroup = GetComponent<CanvasGroup>();
+            sortingGroup = GetComponent<SortingGroup>();
         }
 
-        public virtual void ToggleCanvas(bool value, System.Action onComplete)
+        public virtual void Show()
         {
-            if (value)
-            {
-                canvasGroup.alpha = 1;
-            }
-            else
-            {
-                canvasGroup.alpha = 0;
-            }
-            onComplete?.Invoke();
+            canvasGroup.alpha = 1;
+        }
+
+        public virtual void Hide()
+        {
+            canvasGroup.alpha = 0;
         }
     }
 }

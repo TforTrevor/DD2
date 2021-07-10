@@ -1,4 +1,4 @@
-﻿using NaughtyAttributes;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +51,6 @@ namespace DD2.UI
             UpdateColor();
         }
 
-        [Button]
         public void UpdateColor()
         {
             foregroundFill.color = foregroundColor;

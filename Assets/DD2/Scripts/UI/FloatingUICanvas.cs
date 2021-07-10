@@ -1,104 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 
 namespace DD2.UI
 {
-    public class FloatingUICanvas : MonoBehaviour
+    public class FloatingUICanvas<T> : MonoBehaviour where T : FloatingUI
     {
-        [SerializeField] protected string poolKey;
-        [SerializeField] float maxDistance;
-        [SerializeField] LayerMask layerMask;
+        [SerializeField] T uiElement;
+        [SerializeField] int maxElements;
 
-        Dictionary<Transform, FloatingUI> floatingUI = new Dictionary<Transform, FloatingUI>();
-        Dictionary<Transform, FloatingUI> overlap = new Dictionary<Transform, FloatingUI>();
-        Dictionary<Transform, FloatingUI> remove = new Dictionary<Transform, FloatingUI>();
-        Collider[] colliders;
-        int colliderCount;
+        T[] inactiveElements;
+        T[] activeElements;
+        int activeCount;
 
-        void Start()
+        public int MaxElements { get => maxElements; }
+
+        void Awake()
         {
-            colliders = new Collider[FloatingUIPool.Instance.GetCount(poolKey)];
-        }
+            inactiveElements = new T[maxElements];
+            activeElements = new T[maxElements];
 
-        void FixedUpdate()
-        {
-            overlap.Clear();
-            Util.Utilities.ClearArray(colliders, colliderCount);
-            colliderCount = Physics.OverlapSphereNonAlloc(LevelManager.Instance.Camera.transform.position, maxDistance + 1, colliders, layerMask);
-            for (int i = 0; i < colliderCount; i++)
+            for (int i = 0; i < maxElements; i++)
             {
-                Collider collider = colliders[i];
-                if (floatingUI.ContainsKey(collider.transform))
-                {
-                    FloatingUI floating = floatingUI[collider.transform];
-                    if (floating != null && !overlap.ContainsKey(collider.transform))
-                    {
-                        overlap.Add(collider.transform, floating);
-                    }
-                }
-                else
-                {
-                    if (!overlap.ContainsKey(collider.transform))
-                    {
-                        overlap.Add(collider.transform, GetFloatingUI(collider.transform));
-                    }
-                }
-            }
-            remove.Clear();
-            foreach (KeyValuePair<Transform, FloatingUI> entry in floatingUI)
-            {
-                if (!overlap.ContainsKey(entry.Key))
-                {
-                    remove.Add(entry.Key, entry.Value);
-                }
-            }
-            foreach (KeyValuePair<Transform, FloatingUI> entry in remove)
-            {
-                FloatingUIPool.Instance.ReturnObject(poolKey, floatingUI[entry.Key]);
-                floatingUI.Remove(entry.Key);
-            }
-            foreach (KeyValuePair<Transform, FloatingUI> entry in overlap)
-            {
-                if (entry.Value != null && !floatingUI.ContainsKey(entry.Key))
-                {
-                    floatingUI.Add(entry.Key, entry.Value);
-                }
+                T temp = Instantiate(uiElement, transform);
+                temp.Hide();
+                inactiveElements[i] = temp;
             }
         }
 
-        void LateUpdate()
+        public virtual T GetElement()
         {
-            foreach (KeyValuePair<Transform, FloatingUI> entry in floatingUI)
+            T element;
+            //Take oldest active element (front of queue) and send it to the back of the active queue
+            if (activeCount == maxElements)
             {
-                Transform transform = entry.Key;
-                FloatingUI floating = entry.Value;
-
-                Vector3 pos = LevelManager.Instance.Camera.WorldToScreenPoint(transform.position + Vector3.up * floating.HeightOffset);
-                if (pos.z > maxDistance || pos.z < 0)
+                element = activeElements[0];
+                for (int i = 0; i < activeCount - 1; i++)
                 {
-                    floating.ToggleCanvas(false);
+                    activeElements[i] = activeElements[i + 1];
                 }
-                else
-                {
-                    floating.ToggleCanvas(true);
-                    floating.SortingGroup.sortingOrder = (int)(pos.z * -10);
-                    //floating.Canvas.sortingOrder = (int)(pos.z * -10);
-                    floating.transform.position = pos;
-                }
+                activeElements[activeCount - 1] = element;
             }
+            //Take inactive element and send it to the back of the active queue
+            else
+            {
+                element = inactiveElements[0];
+                for (int i = 0; i < maxElements - activeCount - 1; i++)
+                {
+                    inactiveElements[i] = inactiveElements[i + 1];
+                }
+                inactiveElements[maxElements - activeCount - 1] = null;
+                //inactiveElements[activeCount] = null;
+                activeElements[activeCount] = element;
+                activeCount++;
+            }
+
+            return element;
         }
 
-        protected virtual FloatingUI GetFloatingUI(Transform transform)
+        public virtual void ReturnElement(T element)
         {
-            return FloatingUIPool.Instance.GetObject(poolKey);
-        }
-
-        void OnDestroy()
-        {
-            //Entity.EntityEnabled -= AddHealthBar;
-            //Entity.EntityDisabled -= RemoveHealthBar;
+            if (activeCount > 0)
+            {
+                inactiveElements[maxElements - activeCount] = element;
+                activeElements[activeCount - 1] = null;
+                activeCount--;
+            }
         }
     }
 }

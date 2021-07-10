@@ -358,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -480,7 +481,6 @@ GameObject:
   - component: {fileID: 459180752402527281}
   - component: {fileID: 459180752402527280}
   - component: {fileID: 459180752402527295}
-  - component: {fileID: 459180752402527294}
   - component: {fileID: 4119409940246176236}
   m_Layer: 5
   m_Name: PlayerUI
@@ -555,23 +555,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &459180752402527294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 459180752402527293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_PresetInfoIsWorld: 0
 --- !u!114 &4119409940246176236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,6 +576,7 @@ MonoBehaviour:
   enemyCountSlider: {fileID: 5761812765876569278}
   enemyCountText: {fileID: 6738515832344697571}
   waveCountText: {fileID: 563018038}
+  waveInfo: {fileID: 11400000, guid: 4ce9e5de2015c35418ebe74572bc9648, type: 2}
 --- !u!1 &459180752548944345
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1485,6 +1471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

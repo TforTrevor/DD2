@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.4109014}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6360611477532334145}
   m_RootOrder: 1
@@ -58,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f0df50cc211e4286e9232300dd315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   delay: 0
   duration: 0.2
   repeatDelay: 0.2
@@ -90,6 +92,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 0.25, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2335672029017669443}
   m_RootOrder: 1
@@ -113,6 +116,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -170,6 +174,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6360611477532334145}
   m_RootOrder: 0
@@ -186,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30515ffc821eacd43b205ffb43cfb372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tickActions: []
   abilityEffects:
   - {fileID: 11400000, guid: 64ba8968c7f0e474bb0d3afa13541f2f, type: 2}
   - {fileID: 11400000, guid: 60fdcb036c354d44d856b23fabad0d05, type: 2}
@@ -202,6 +208,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 11264
+  confuseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   multiTarget: 0
   hitSelf: 0
   hitboxTickRate: 0
@@ -236,6 +245,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3054706925385295348}
   m_RootOrder: 2
@@ -266,6 +276,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 414079550277057753}
   - {fileID: 531768132}
@@ -319,13 +330,14 @@ MonoBehaviour:
   currentMana: 0
   radius: 1
   isAlive: 0
+  statusEffects: 0
   fireTransform: {fileID: 1547989622}
   eyeTransform: {fileID: 0}
   isGrounded: 0
   animator: {fileID: 0}
   abilities:
   - {fileID: 1004062947}
-  target: {fileID: 0}
+  coreList: {fileID: 11400000, guid: 5b65766609cbf5a4d91918fb11ad795e, type: 2}
   distance: 0.2
   offset: {x: 0, y: -0.95, z: 0}
   groundedMask:
@@ -402,6 +414,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2335672029017669443}
   m_RootOrder: 0
@@ -425,6 +438,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -481,6 +495,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1004062946}
   - {fileID: 142802714}
@@ -506,6 +521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.398231
       objectReference: {fileID: 0}
@@ -521,6 +541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -532,16 +557,6 @@ PrefabInstance:
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7919328407858033595, guid: 73bc88534bb5f2842921913f787d6630,

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DD2.AI;
-using NaughtyAttributes;
 using MEC;
 using UnityAtoms.BaseAtoms;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -20,55 +20,81 @@ namespace DD2
         bool isUsing;
         Tower instance;
         List<Collider> instanceColliders = new List<Collider>();
-        CoroutineHandle handle;
+        CoroutineHandle moveRotHandle;
         Tower tower;
 
         public bool Begin(Tower tower)
         {
             if (!isUsing && tower.ManaCost <= player.CurrentMana)
             {
-                Toggle();
-                stage = Stage.position;
-                isUsing = true;
-                enableBuild = true;
                 this.tower = tower;
-                Continue(false);
+                Begin();
                 return true;
             }
             return false;
         }
 
-        public void Continue(bool value)
+        protected override void Begin()
         {
-            //Only call on mouse up event
-            if (enableBuild && isUsing && !value)
+            base.Begin();
+
+            stage = Stage.position;
+            isUsing = true;
+            enableBuild = true;
+            
+            Continue();
+        }
+
+        protected override void Continue()
+        {
+            base.Continue();
+
+            if (enableBuild && isUsing)
             {
                 if (stage == Stage.position)
                 {
-                    Position();
+                    instance = (Tower)EntityPool.Instance.GetObject(tower.ObjectPoolKey);
+                    if (instance != null)
+                    {
+                        instanceColliders.Clear();
+                        instanceColliders.AddRange(instance.GetComponents<Collider>());
+
+                        instance.gameObject.SetActive(true);
+                        instance.ToggleRangeIndicator(true);
+                        moveRotHandle = Timing.RunCoroutine(MoveRoutine());
+                    }                    
                 }
                 else if (stage == Stage.rotation)
                 {
-                    Timing.KillCoroutines(handle);
-                    Rotation();
+                    Timing.KillCoroutines(moveRotHandle);
+
+                    player.ToggleMovement(false);
+                    moveRotHandle = Timing.RunCoroutine(RotateRoutine());
                 }
                 else if (stage == Stage.build)
                 {
-                    Timing.KillCoroutines(handle);
-                    Build();
+                    Timing.KillCoroutines(moveRotHandle);
+
+                    instance.ToggleRangeIndicator(false);
+                    instance.Build();
+                    player.SpendMana(tower.ManaCost);
+                    player.ToggleMovement(true);
+                    isUsing = false;
+                    tower = null;
+                    instance = null;
+                    base.Cancel();
                 }
                 stage++;
             }
         }
 
-        public override void Cancel()
+        protected override void Cancel()
         {
             base.Cancel();
             if (isUsing && instance != null)
             {
-                Timing.KillCoroutines(handle);
+                Timing.KillCoroutines(moveRotHandle);
                 EntityPool.Instance.ReturnObject(instance.ObjectPoolKey, instance);
-                player.ToggleLook(true);
                 player.ToggleMovement(true);
                 isUsing = false;
                 tower = null;
@@ -76,44 +102,12 @@ namespace DD2
             }
         }
 
-        void Position()
-        {
-            instance = (Tower)EntityPool.Instance.GetObject(tower.ObjectPoolKey);
-            if (instance != null)
-            {
-                instanceColliders.Clear();
-                instanceColliders.AddRange(instance.GetComponents<Collider>());
-
-                instance.gameObject.SetActive(true);
-                handle = Timing.RunCoroutine(MoveRoutine());
-            }
-        }
-
-        void Rotation()
-        {
-            player.ToggleLook(false);
-            player.ToggleMovement(false);
-            handle = Timing.RunCoroutine(RotateRoutine());
-        }
-
-        void Build()
-        {
-            instance.Build();
-            player.SpendMana(tower.ManaCost);
-            player.ToggleLook(true);
-            player.ToggleMovement(true);
-            isUsing = false;
-            tower = null;
-            instance = null;
-            base.Cancel();
-        }
-
         IEnumerator<float> MoveRoutine()
         {
             while (true)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(new Vector3(cursor.position.x, LevelManager.Instance.Camera.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, buildMask))
+                if (Physics.Raycast(new Vector3(cursor.position.x, Camera.main.transform.position.y, cursor.position.z), Vector3.down, out hit, 1000, buildMask))
                 {
                     instance.transform.position = hit.point;
                     CollisionCheck();
@@ -121,7 +115,7 @@ namespace DD2
                 else
                 {
                     //instance.transform.position = LevelManager.Instance.Camera.transform.position + LevelManager.Instance.Camera.transform.forward * 5;
-                    instance.SetError(true);
+                    instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                 }
                 instance.transform.localEulerAngles = new Vector3(0, player.transform.localEulerAngles.y, 0);
@@ -133,7 +127,7 @@ namespace DD2
         {
             while (true)
             {
-                instance.transform.Rotate(Vector3.up, lookInput.Value.x * Time.deltaTime * rotSensitivity);
+                instance.transform.Rotate(Vector3.up, lookInput.x * Time.deltaTime * rotSensitivity);
                 CollisionCheck();
                 yield return Timing.WaitForOneFrame;
             }
@@ -151,12 +145,12 @@ namespace DD2
             {
                 if (!instanceColliders.Contains(collider) && instanceColliders[0].bounds.Intersects(collider.bounds))
                 {
-                    instance.SetError(true);
+                    instance.SetColor(instance.ErrorColor);
                     enableBuild = false;
                     return;
                 }
             }
-            instance.SetError(false);
+            instance.SetColor(instance.DefaultColor);
             enableBuild = true;
         }
 

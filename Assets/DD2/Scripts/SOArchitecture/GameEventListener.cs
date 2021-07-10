@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using NaughtyAttributes;
+
 using System.Collections.Generic;
 
 namespace DD2.SOArchitecture
 {
     public class GameEventListener : MonoBehaviour
     {
-        [ReorderableList] public List<GameEventListenerContainer> gameEvents;
+         public List<GameEventListenerContainer> gameEvents;
 
         void OnEnable()
         {

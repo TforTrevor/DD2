@@ -2,12 +2,12 @@
     "name": "Actions",
     "maps": [
         {
-            "name": "Standard",
+            "name": "Player",
             "id": "4bd46b80-34b9-4dc7-9d1a-d2c853f8d1e7",
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "bdaa640a-f715-4c48-9e05-8030772d7cb2",
                     "expectedControlType": "",
                     "processors": "",
@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "34285968-dc32-477e-b229-4d17bffd0682",
                     "expectedControlType": "",
                     "processors": "",
@@ -62,14 +62,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Menu",
-                    "type": "Button",
-                    "id": "498a5b4d-94a8-42ae-bf71-9ed37e76d2e5",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Ready",
                     "type": "Button",
                     "id": "f6b9770b-cdb8-4a5b-80e1-33b2d516a9e8",
@@ -108,6 +100,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ShowTowerRange",
+                    "type": "Button",
+                    "id": "11a7de43-68eb-4081-9722-5640a1502425",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -201,17 +201,6 @@
                 },
                 {
                     "name": "",
-                    "id": "a090313e-d725-457b-95f7-e2c80075ee8f",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Menu",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9dfe5875-e80b-4a7c-bab2-cc6a201f2c15",
                     "path": "<Keyboard>/g",
                     "interactions": "",
@@ -295,6 +284,147 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "UpgradeTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0861abe-a4c1-4e62-99b6-538be3661d01",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "ShowTowerRange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Menu",
+            "id": "c48bb213-1696-4614-99f9-4944359c0635",
+            "actions": [
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "ecd19eb3-fae9-45cf-bfe6-acd7413bcea3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "64fb3c36-1e07-4172-b815-10231f813724",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Left Click",
+                    "type": "Button",
+                    "id": "17a9b946-073b-4600-a1be-0320c682ca2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "0d9a394e-3d94-4221-9d7e-51dd12c22041",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2df58991-a278-4856-ac42-151e8a1506de",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32759208-cfaa-4cd4-817e-ab8060a95d11",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7845033-f963-4384-b433-7e4470fa5729",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Left Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ebfee82-3d30-42ee-8698-d7747a9af02c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dev Console",
+            "id": "f840fb65-e39e-4884-b8ae-c542a24ce1d5",
+            "actions": [
+                {
+                    "name": "Toggle",
+                    "type": "Button",
+                    "id": "ab573691-ceab-4c56-aabd-d736964651fd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "9df0272f-d2c6-409e-b402-0de0ec66114a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "90fae129-3a3c-42ba-ae01-d4d90b00f009",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f57d94eb-2e22-49a8-bdee-acc5c11749d3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

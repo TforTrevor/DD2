@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 using System;
 
 namespace DD2
@@ -17,7 +17,7 @@ namespace DD2
 
     public class ComponentPool<T> : Singleton<ComponentPool<T>> where T : MonoBehaviour
     {
-        [SerializeField] [ReorderableList] protected List<Pool<T>> pools;
+        [SerializeField]  protected List<Pool<T>> pools;
         protected Dictionary<string, Queue<T>> poolDictionary = new Dictionary<string, Queue<T>>();
 
         protected override void Awake()

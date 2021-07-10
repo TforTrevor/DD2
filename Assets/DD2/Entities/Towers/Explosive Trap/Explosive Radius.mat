@@ -10,7 +10,7 @@ Material:
   m_Name: Explosive Radius
   m_Shader: {fileID: -6465566751694194690, guid: 36a9c11f56d08324bb0621c23f051297,
     type: 3}
-  m_ShaderKeywords: _BLENDMODE_ADD _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -25,23 +25,42 @@ Material:
   - TransparentDepthPostpass
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_82C5322C: 0.5
     - Vector1_8EC12412: 0.5
-    - Vector1_EA6BE072: 1
+    - Vector1_EA6BE072: 0
+    - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 1
     - _CullMode: 0
     - _CullModeForward: 0
+    - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 1
-    - _EnableFogOnTransparent: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableFogOnTransparent: 0
+    - _OpaqueCullMode: 2
     - _ReceivesSSR: 0
-    - _RenderQueueType: 5
+    - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -60,6 +79,7 @@ Material:
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
     - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
@@ -68,7 +88,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - Color_7C7647FA: {r: 1, g: 0.248, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 11.313708, g: 2.1296391, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
@@ -84,4 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  version: 12

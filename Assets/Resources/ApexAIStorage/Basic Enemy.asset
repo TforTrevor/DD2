@@ -70,18 +70,18 @@ MonoBehaviour:
     Assembly-CSharp","scanMask":4096,"coneCheck":true,"losCheck":true,"losBlock":512,"range":Attack,"includeRadius":true,"includeTargetRadius":true},{"@type":"DD2.AI.Actions.SelectBestTarget,
     Assembly-CSharp","_scorers":[{"@type":"DD2.AI.Scorers.PresenceOption, Assembly-CSharp","multiplier":1}]},{"@type":"DD2.AI.Actions.ResetAttention,
     Assembly-CSharp"}]}}}]}'
-  editorConfiguration: '{"offset":{"@x":406,"@y":146},"zoom":0.69999999,"SelectorView":{"ViewArea":{"@left":966,"@top":286,"@width":140,"@height":112},"Name":"Has
-    Attention","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":784,"@top":356,"@width":140,"@height":112},"Name":"Has
-    Target","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1148,"@top":286,"@width":140,"@height":112},"Name":"Alive
-    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1526,"@top":286,"@width":140,"@height":70},"Name":"Clear
-    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":966,"@top":566,"@width":140,"@height":70},"Name":"Scan
-    for Targets","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":1344,"@top":566,"@width":140,"@height":112},"Name":"Attention
-    Check","QualifierView":{"Name":"Passed"},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1148,"@top":566,"@width":140,"@height":112},"Name":"Cone
+  editorConfiguration: '{"offset":{"@x":-35,"@y":-53},"zoom":0.75,"SelectorView":{"ViewArea":{"@left":565,"@top":97,"@width":150,"@height":120},"Name":"Has
+    Attention","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":370,"@top":172,"@width":150,"@height":120},"Name":"Has
+    Target","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":760,"@top":97,"@width":150,"@height":120},"Name":"Alive
+    Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":1165,"@top":97,"@width":150,"@height":75},"Name":"Clear
+    Target","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":565,"@top":397,"@width":150,"@height":75},"Name":"Scan
+    for Targets","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}},"SelectorView":{"ViewArea":{"@left":970,"@top":397,"@width":150,"@height":120},"Name":"Attention
+    Check","QualifierView":{"Name":"Passed"},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":760,"@top":397,"@width":150,"@height":120},"Name":"Cone
     Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Composite","Name":"Use
     Ability"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Composite","Name":"Stop
-    Ability"}}},"SelectorView":{"ViewArea":{"@left":1148,"@top":426,"@width":140,"@height":112},"Name":"Range
+    Ability"}}},"SelectorView":{"ViewArea":{"@left":760,"@top":247,"@width":150,"@height":120},"Name":"Range
     Check","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Composite","Name":"Move
-    To Target"}}},"SelectorView":{"ViewArea":{"@left":378,"@top":258,"@width":140,"@height":112},"Name":"Is
-    Confused","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":588,"@top":132,"@width":140,"@height":112},"Name":"Has
-    Target (Enemy)","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":784,"@top":258,"@width":140,"@height":70},"Name":"Scan
+    To Target"}}},"SelectorView":{"ViewArea":{"@left":-65,"@top":67,"@width":150,"@height":120},"Name":"Is
+    Confused","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":160,"@top":-68,"@width":150,"@height":120},"Name":"Has
+    Target (Enemy)","QualifierView":{"Name":"Passed","ActionView":{"@connectorType":"Selector"}},"DefaultQualifier":{"Name":"Failed","ActionView":{"@connectorType":"Selector"}}},"SelectorView":{"ViewArea":{"@left":370,"@top":67,"@width":150,"@height":75},"Name":"Scan
     for Targets (Enemy)","DefaultQualifier":{"ActionView":{"@connectorType":"Composite"}}}}'

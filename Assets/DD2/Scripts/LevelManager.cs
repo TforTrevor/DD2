@@ -1,99 +1,99 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using NaughtyAttributes;
-using UnityAtoms.BaseAtoms;
-using DD2.Actions;
+﻿using DD2.Actions;
 using DD2.AI;
 using MEC;
+using System.Collections.Generic;
+using UnityAtoms.BaseAtoms;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
-    public class LevelManager : Singleton<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
         [SerializeField] Player player;
-        [SerializeField] new Camera camera;
         [SerializeField] Transform playerSpawn;
         [SerializeField] float respawnTime;
-        [SerializeField] [ReorderableList] List<Core> cores;
-        [SerializeField] [ReorderableList] List<Wave> waves;
-        [SerializeField] int currentWave = 0;
-        [SerializeField] [ReadOnly] bool waveInProgress;
-        [SerializeField] VoidEvent waveStarted;
-        [SerializeField] VoidEvent waveUpdated;
-        [SerializeField] VoidEvent waveEnded;
+        [SerializeField] List<Core> cores;
+        [SerializeField] List<Wave> waves;
+        [SerializeField] VoidEvent levelLoaded;
+        [SerializeField] BoolEvent levelEnded;
         [SerializeField] LoadLevel loadHub;
+        [SerializeField] WaveInfo waveInfo;
+        [SerializeField] EntityList enemyList;
+        [SerializeField] EntityList coreList;
+        [SerializeField] EntityList towerList;
+        [SerializeField] BoolVariable enableInput;
+        [SerializeField] bool callLevelLoaded;
 
         bool gameOver;
 
-        public List<Core> Cores { get => cores; private set => cores = value; }
-        public int WaveCount { get => waves.Count; }
-        public int CurrentWave { get => currentWave; private set => currentWave = value; }
-        public Camera Camera { get => camera; set => camera = value; }
-        public VoidEvent WaveStarted { get => waveStarted; private set => waveStarted = value; }
-        public VoidEvent WaveUpdated { get => waveUpdated; private set => waveUpdated = value; }
-        public VoidEvent WaveEnded { get => waveEnded; private set => waveEnded = value; }   
-        public List<Enemy> Enemies { get; private set; }
-
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
-            Enemies = new List<Enemy>();
+            waveInfo.Initialize(waves);
+            enemyList.Entities.Clear();
+            coreList.Entities.Clear();
+            foreach (Core core in cores)
+            {
+                coreList.Entities.Add(core);
+            }
         }
         
         void Start()
         {
-            CurrentWave = 0;
-            waveInProgress = false;
-        }
-
-        public void StartWave()
-        {
-            if (!waveInProgress)
+            enableInput.Value = true;
+            if (callLevelLoaded)
             {
-                waves[CurrentWave].StartWave();
-                waveInProgress = true;
-                WaveStarted.Raise();
-                //waveStarted?.Invoke(this, CurrentWave);
+                levelLoaded.Raise();
             }            
         }
 
-        public void UpdateWave()
+        void OnEnable()
         {
-            WaveUpdated.Raise();
+            InputManager.Instance.Actions.Player.Ready.performed += StartWave;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.Ready.performed -= StartWave;
+        }
+
+        public void StartWave(InputAction.CallbackContext context)
+        {
+            if (!gameOver)
+            {
+                waveInfo.StartWave();
+            }            
         }
 
         public void EndWave()
         {
             if (!gameOver)
             {
-                CurrentWave++;
-                waveInProgress = false;
-                WaveEnded.Raise();
-                //waveEnded?.Invoke(this, CurrentWave);
+                waveInfo.NextWave();
             }
         }
 
-        public Wave GetWave()
+        public void WinGame()
         {
-            if (CurrentWave < waves.Count)
-            {
-                return waves[CurrentWave];
-            }
-            return null;
+            levelEnded.Raise(true);
         }
 
         public void LoseGame()
         {
             gameOver = true;
 
-            List<Enemy> tempEnemies = new List<Enemy>(Enemies);
-            foreach (Enemy enemy in tempEnemies)
+            List<Entity> tempEnemies = new List<Entity>(enemyList.Entities);
+            foreach (Entity enemy in tempEnemies)
             {
                 enemy.Damage(null, float.MaxValue);
             }
+            enemyList.Entities.Clear();
 
+            levelEnded.Raise(false);
+        }
+
+        public void ExitLevel()
+        {
             loadHub.DoAction(null, null);
         }
 
@@ -112,6 +112,15 @@ namespace DD2
             player.transform.position = playerSpawn.transform.position;
             player.transform.forward = playerSpawn.transform.forward;
             player.gameObject.SetActive(true);
+        }
+
+        public void ToggleTowerRange(bool value)
+        {
+            foreach (Entity entity in towerList.Entities)
+            {
+                Tower tower = (Tower)entity;
+                tower.ToggleRangeIndicator(value);
+            }
         }
     }
 }

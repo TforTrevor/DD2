@@ -13,6 +13,7 @@ namespace DD2.AI
     public class EntityAI : Entity, IContextProvider
     {
         protected AIContext context;
+        [SerializeField] EntityList coreList;
 
         CoroutineHandle lookHandle;
 
@@ -20,6 +21,7 @@ namespace DD2.AI
         {
             base.Awake();
             context = new AIContext(this);
+            context.coreList = coreList;
         }
 
         protected override void Die(Entity entity)

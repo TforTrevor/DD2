@@ -4,17 +4,17 @@ using UnityEngine;
 using MEC;
 using UnityEngine.AI;
 using DD2.Abilities;
-using NaughtyAttributes;
+
 
 namespace DD2.AI
 {
     public class Enemy : EntityAI
     {
-        [BoxGroup("Enemy")] [SerializeField] float distance;
-        [BoxGroup("Enemy")] [SerializeField] Vector3 offset;
-        [BoxGroup("Enemy")] [SerializeField] LayerMask groundedMask;
-        [BoxGroup("Enemy")] [SerializeField] float ragdollTime;
-        [BoxGroup("Enemy")] [SerializeField] bool isRagdolled;
+        [SerializeField] float distance;
+        [SerializeField] Vector3 offset;
+        [SerializeField] LayerMask groundedMask;
+        [SerializeField] float ragdollTime;
+        [SerializeField] bool isRagdolled;
 
         NavMeshAgent navMeshAgent;
         NavMeshObstacle navMeshObstacle;
@@ -43,13 +43,11 @@ namespace DD2.AI
         public override void Respawn()
         {
             base.Respawn();
-            LevelManager.Instance.Enemies.Add(this);
         }
 
         protected override void Die(Entity entity)
         {
             base.Die(entity);
-            LevelManager.Instance.Enemies.Remove(this);
         }
 
         void RandomizeStats()

@@ -3,48 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using Apex.AI.Components;
 using UnityEngine.VFX;
-using NaughtyAttributes;
 using MEC;
+using UnityEngine.InputSystem;
 
 namespace DD2.AI
 {
     public class Tower : EntityAI
     {
-        [BoxGroup("Tower")] [SerializeField] bool buildOnStart;
-        [BoxGroup("Tower")] [SerializeField] int manaCost;
-        [BoxGroup("Tower")] [SerializeField] float buildTime;
-        [BoxGroup("Tower")] [SerializeField] protected Transform towerGraphics;
-        [BoxGroup("Tower")] [SerializeField] Transform towerVertical;
-        [BoxGroup("Tower")] [SerializeField] protected Transform towerSummonGraphics;
-        [BoxGroup("Tower")] [SerializeField] Light buildLight;
-        [BoxGroup("Tower")] [SerializeField] protected MeshRenderer buildRenderer;
-        [BoxGroup("Tower")] [SerializeField] new Collider collider;
-        [BoxGroup("Tower")] [SerializeField] VisualEffect upgradeEffect;
-        [BoxGroup("Tower")] [SerializeField] VisualEffect buildEffect;
+        [SerializeField] bool buildOnStart;
+        [SerializeField] int manaCost;
+        [SerializeField] int buildTime;
+        [SerializeField] protected Transform towerGraphics;
+        [SerializeField] Transform towerVertical;
+        [SerializeField] protected Transform towerSummonGraphics;
+        [SerializeField] Light summonLight;
+        [SerializeField] protected MeshRenderer summonRenderer;
+        [SerializeField] new Collider collider;
+        [SerializeField] VisualEffect upgradeEffect;
+        [SerializeField] VisualEffect buildEffect;
+        [SerializeField] LineRenderer rangeLineRenderer;
+        [SerializeField] EntityList towerList;
 
         protected UtilityAIComponent aiComponent;
         protected int level = 0;
+        Color defaultColor;
+        Color currentColor;
 
-        int shaderBuildProgress;
-        int shaderBuildTime;
-        int shaderIsError;
-        int shaderColor;
-        int shaderErrorColor;
-        int shaderHeight;
-        CoroutineHandle upgradeHandle;
-
+        public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
+        public Color CurrentColor { get => currentColor; private set => currentColor = value; }
         public int ManaCost { get => manaCost; private set => manaCost = value; }
+        public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
+
+        int progressShaderHash;
+
 
         protected override void Awake()
         {
             base.Awake();
             aiComponent = GetComponent<UtilityAIComponent>();
-            shaderBuildProgress = Shader.PropertyToID("_BuildProgress");
-            shaderBuildTime = Shader.PropertyToID("_BuildTime");
-            shaderIsError = Shader.PropertyToID("_IsError");
-            shaderColor = Shader.PropertyToID("_Color");
-            shaderErrorColor = Shader.PropertyToID("_ErrorColor");
-            shaderHeight = Shader.PropertyToID("_Height");
+            if (summonRenderer != null)
+            {
+                DefaultColor = summonRenderer.material.GetColor("_Color");
+                summonRenderer.material.SetFloat("_Height", summonRenderer.bounds.size.y);
+                summonRenderer.transform.localScale *= 1.01f;
+                summonRenderer.material.SetInt("_IsBuilt", 0);
+
+                progressShaderHash = Shader.PropertyToID("_Progress");
+                summonRenderer.material.SetFloat(progressShaderHash, 0);
+            }
+            if (buildEffect != null)
+            {
+                buildEffect.Stop();
+                buildEffect.SetFloat("Height", summonRenderer.bounds.size.y);
+            }
+
+            CreateRangeLines();
+            ToggleRangeIndicator(false);
         }
 
         protected override void Start()
@@ -60,19 +74,42 @@ namespace DD2.AI
             }
         }
 
+        protected virtual void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed += OnShowRange;
+        }
+
+        protected virtual void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed -= OnShowRange;
+        }
+
         public override void Respawn()
         {
             base.Respawn();
             towerGraphics.gameObject.SetActive(false);
             towerSummonGraphics.gameObject.SetActive(true);
-            aiComponent.enabled = false;
+            if (aiComponent != null)
+            {
+                aiComponent.enabled = false;
+            }
             IsAlive = false;
         }
 
         protected override void Die(Entity entity)
         {
             base.Die(entity);
-            Timing.KillCoroutines(upgradeHandle);
+            towerList.Entities.Remove(this);
+        }
+
+        public override void AddForce(Vector3 force, ForceMode forceMode)
+        {
+            
+        }
+
+        public override void ClearVelocity(bool x, bool y, bool z)
+        {
+            
         }
 
         public virtual void Sell(Player player)
@@ -88,7 +125,9 @@ namespace DD2.AI
 
         public virtual void Upgrade()
         {
-            upgradeHandle = Timing.RunCoroutine(UpgradeRoutine());
+            Stats.TowerLevel();
+            level++;
+            CreateRangeLines();
         }
 
         protected virtual void Update()
@@ -109,59 +148,111 @@ namespace DD2.AI
             }
         }
 
-        public void SetError(bool value)
+        public void SetColor(Color color)
         {
-            if (buildLight != null & buildRenderer != null)
+            if (color != CurrentColor)
             {
-                if (value)
+                if (summonLight != null)
                 {
-                    buildLight.color = buildRenderer.material.GetColor(shaderErrorColor);
-                    buildRenderer.material.SetInt(shaderIsError, 1);
+                    summonLight.color = color;
                 }
-                else
+                if (summonRenderer != null)
                 {
-                    buildLight.color = buildRenderer.material.GetColor(shaderColor);
-                    buildRenderer.material.SetInt(shaderIsError, 0);
+                    summonRenderer.material.SetColor("_Color", color);
                 }
-            }                    
+                CurrentColor = color;
+            }            
         }
 
         IEnumerator<float> BuildRoutine()
         {
-            if (collider != null) collider.isTrigger = false;
-
-            buildRenderer.material.SetFloat(shaderHeight, buildRenderer.bounds.size.y);
-            buildRenderer.material.SetFloat(shaderBuildTime, buildTime);
-
-            if (buildEffect != null) buildEffect.SendEvent("OnPlay");
-            float currentTime = 0;
-
-            while (currentTime < buildTime)
+            if (collider != null)
             {
-                buildRenderer.material.SetFloat(shaderBuildProgress, currentTime);
-                yield return Timing.WaitForOneFrame;
-                currentTime += Time.deltaTime;
+                collider.isTrigger = false;
             }
 
-            if (buildEffect != null) buildEffect.SendEvent("OnStop");
+            if (buildEffect != null)
+            {
+                buildEffect.SetFloat("Progress", 0);
+                buildEffect.Play();
+            }            
+
+            float buildProgress = 0;
+            while (buildProgress < buildTime)
+            {
+                if (buildEffect != null)
+                {
+                    buildEffect.SetFloat("Progress", buildProgress / buildTime);
+                }
+                
+                summonRenderer.material.SetFloat(progressShaderHash, buildProgress / buildTime);
+                yield return Timing.WaitForOneFrame;
+                buildProgress += Time.deltaTime;
+            }
+
+            if (buildEffect != null)
+            {
+                buildEffect.Stop();
+            }
+            
+            towerGraphics.gameObject.SetActive(true);
+            if (aiComponent != null)
+            {
+                aiComponent.enabled = true;
+            }
+            IsAlive = true;
+            towerList.Entities.Add(this);
+
+            summonRenderer.material.SetInt("_IsBuilt", 1);
+
+            float hideProgress = 1;
+            while (hideProgress > 0)
+            {
+                summonRenderer.material.SetFloat(progressShaderHash, hideProgress);
+                yield return Timing.WaitForOneFrame;
+                hideProgress -= Time.deltaTime * 2;
+            }
 
             towerSummonGraphics.gameObject.SetActive(false);
-            towerGraphics.gameObject.SetActive(true);
-            aiComponent.enabled = true;
-            IsAlive = true;
         }
 
-        IEnumerator<float> UpgradeRoutine()
+        void CreateRangeLines()
         {
-            upgradeEffect.SendEvent("OnPlay");
-            yield return Timing.WaitForSeconds(buildTime);
-            Stats.TowerLevel();
-            level++;
-            upgradeEffect.SendEvent("OnStop");
+            if (rangeLineRenderer != null)
+            {
+                int resolution = 16;
+                rangeLineRenderer.positionCount = resolution + 2;
+                rangeLineRenderer.SetPosition(0, Vector3.zero);
+                for (int i = 0; i < resolution; i++)
+                {
+                    float tempAngle = -Stats.AttackAngle / 2;
+                    tempAngle += i * Stats.AttackAngle / (resolution - 1);
+                    Vector3 direction = Quaternion.AngleAxis(tempAngle, Vector3.up) * Vector3.forward;
+                    Vector3 point = direction * Stats.AttackRange;
+                    rangeLineRenderer.SetPosition(i + 1, point);
+                }
+                rangeLineRenderer.SetPosition(resolution + 1, Vector3.zero);
+            }            
         }
 
-        public override void AddForce(Vector3 force, ForceMode forceMode) { }
+        void OnShowRange(InputAction.CallbackContext context)
+        {
+            if (context.ReadValueAsButton())
+            {
+                ToggleRangeIndicator(true);
+            }
+            else
+            {
+                ToggleRangeIndicator(false);
+            }
+        }
 
-        public override void ClearVelocity(bool x, bool y, bool z) { }
+        public void ToggleRangeIndicator(bool value)
+        {
+            if (rangeLineRenderer != null)
+            {
+                rangeLineRenderer.enabled = value;
+            }            
+        }
     }
 }

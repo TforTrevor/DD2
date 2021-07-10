@@ -1,5 +1,5 @@
 ﻿using DD2.Actions;
-using NaughtyAttributes;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

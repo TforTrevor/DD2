@@ -1,24 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DD2.Util;
 
 namespace DD2.UI
 {
-    public class HealthBarCanvas : FloatingUICanvas
+    public class HealthBarCanvas : FloatingUICanvas<HealthBar>
     {
-        protected override FloatingUI GetFloatingUI(Transform transform)
+        [SerializeField] float range;
+        [SerializeField] LayerMask healthBarMask;
+
+        Transform currentTransform;
+        Entity currentEntity;
+        HealthBar currentHealthBar;
+
+        //Add and remove colliders from dictionary
+        void FixedUpdate()
         {
-            Entity entity = transform.GetComponent<Entity>();
-            if (entity != null)
+            RaycastHit hit;
+            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            if (Physics.Raycast(ray, out hit, range, healthBarMask))
             {
-                HealthBar healthbar = (HealthBar)FloatingUIPool.Instance.GetObject(poolKey);
-                if (healthbar != null)
+                if (hit.transform != currentTransform)
                 {
-                    healthbar.SetEntity(entity);
-                    return healthbar;
+                    Entity newEntity = hit.transform.GetComponent<Entity>();
+                    if (newEntity != null)
+                    {
+                        HideHealthBar();
+
+                        currentTransform = hit.transform;
+                        currentEntity = newEntity;
+                        currentHealthBar = GetElement();
+                        currentHealthBar.Show(currentEntity);
+                    }
                 }
             }
-            return null;
+            else
+            {
+                HideHealthBar();
+            }
+        }
+
+        void HideHealthBar()
+        {
+            if (currentHealthBar != null)
+            {
+                currentHealthBar.Hide();
+                ReturnElement(currentHealthBar);
+
+                currentHealthBar = null;
+                currentTransform = null;
+                currentEntity = null;
+            }
         }
     }
 }

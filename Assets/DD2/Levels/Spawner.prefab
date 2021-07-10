@@ -47,6 +47,7 @@ MonoBehaviour:
   wave: {fileID: 0}
   randomPosition: 2
   spawns: []
+  enemyList: {fileID: 11400000, guid: 06d297c8c75e9e6478a8419b46011e3c, type: 2}
 --- !u!1 &4135702890293788264
 GameObject:
   m_ObjectHideFlags: 0

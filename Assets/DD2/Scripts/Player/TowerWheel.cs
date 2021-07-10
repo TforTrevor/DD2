@@ -1,10 +1,11 @@
 ﻿using DD2.AI;
-using NaughtyAttributes;
+
 using RoboRyanTron.SearchableEnum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace DD2
 {
@@ -13,7 +14,7 @@ namespace DD2
         [SerializeField] BuildTower buildTower;
         [SerializeField] TowerWheelButton towerButton;
         [SerializeField] Transform parent;
-        [SerializeField] [ReorderableList] List<Tower> towerPrefabs;
+        [SerializeField]  List<Tower> towerPrefabs;
 
         Canvas canvas;
         List<TowerWheelButton> towerButtons = new List<TowerWheelButton>();
@@ -21,6 +22,18 @@ namespace DD2
         void Awake()
         {
             canvas = GetComponent<Canvas>();
+        }
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.BuildTower.performed += Build;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed += Cancel;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.BuildTower.performed -= Build;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed -= Cancel;
         }
 
         void Start()
@@ -43,14 +56,14 @@ namespace DD2
             }
         }
 
-        public void Build()
+        public void Build(InputAction.CallbackContext context)
         {
             canvas.enabled = true;
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
 
-        public void Cancel()
+        public void Cancel(InputAction.CallbackContext context)
         {
             canvas.enabled = false;
             Cursor.lockState = CursorLockMode.Locked;

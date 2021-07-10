@@ -4,84 +4,124 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityAtoms.BaseAtoms;
 
-public class PlayerInput : MonoBehaviour
+namespace DD2
 {
-    [SerializeField] Vector2Variable moveVector;
-    [SerializeField] Vector2Variable lookVector;
-    [SerializeField] BoolVariable jump;
-    [SerializeField] BoolVariable primaryFire;
-    [SerializeField] BoolVariable secondaryFire;
-    [SerializeField] BoolVariable ability1;
-    [SerializeField] BoolVariable ability2;
-    [SerializeField] VoidEvent buildTower;
-    [SerializeField] VoidEvent repairTower;
-    [SerializeField] VoidEvent sellTower;
-    [SerializeField] VoidEvent upgradeTower;
-    [SerializeField] VoidEvent menu;
-    [SerializeField] VoidEvent ready;
-
-    void OnMove(InputValue value)
+    public class PlayerInput : MonoBehaviour
     {
-        moveVector.Value = value.Get<Vector2>();
+        [SerializeField] BoolVariable enableInput;
+        [SerializeField] Vector2Variable moveVector;
+        [SerializeField] Vector2Variable lookVector;
+        [SerializeField] BoolVariable jump;
+        [SerializeField] BoolVariable primaryFire;
+        [SerializeField] BoolVariable secondaryFire;
+        [SerializeField] BoolVariable ability1;
+        [SerializeField] BoolVariable ability2;
+        [SerializeField] VoidEvent buildTower;
+        [SerializeField] VoidEvent repairTower;
+        [SerializeField] VoidEvent sellTower;
+        [SerializeField] VoidEvent upgradeTower;
+        [SerializeField] VoidEvent menu;
+        [SerializeField] VoidEvent ready;
+        [SerializeField] BoolEvent toggleTowerRange;
+
+        void OnEnable()
+        {
+            InputManager.Instance.Actions.Player.Move.performed += Move;
+            InputManager.Instance.Actions.Player.Look.performed += Look;
+            InputManager.Instance.Actions.Player.Jump.performed += Jump;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed += PrimaryFire;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed += SecondaryFire;
+            InputManager.Instance.Actions.Player.Ability1.performed += Ability1;
+            InputManager.Instance.Actions.Player.Ability2.performed += Ability2;
+            InputManager.Instance.Actions.Player.Ready.performed += Ready;
+            InputManager.Instance.Actions.Player.BuildTower.performed += BuildTower;
+            InputManager.Instance.Actions.Player.RepairTower.performed += RepairTower;
+            InputManager.Instance.Actions.Player.SellTower.performed += SellTower;
+            InputManager.Instance.Actions.Player.UpgradeTower.performed += UpgradeTower;
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed += ShowTowerRange;
+        }
+
+        void OnDisable()
+        {
+            InputManager.Instance.Actions.Player.Move.performed -= Move;
+            InputManager.Instance.Actions.Player.Look.performed -= Look;
+            InputManager.Instance.Actions.Player.Jump.performed -= Jump;
+            InputManager.Instance.Actions.Player.PrimaryFire.performed -= PrimaryFire;
+            InputManager.Instance.Actions.Player.SecondaryFire.performed -= SecondaryFire;
+            InputManager.Instance.Actions.Player.Ability1.performed -= Ability1;
+            InputManager.Instance.Actions.Player.Ability2.performed -= Ability2;
+            InputManager.Instance.Actions.Player.Ready.performed -= Ready;
+            InputManager.Instance.Actions.Player.BuildTower.performed -= BuildTower;
+            InputManager.Instance.Actions.Player.RepairTower.performed -= RepairTower;
+            InputManager.Instance.Actions.Player.SellTower.performed -= SellTower;
+            InputManager.Instance.Actions.Player.UpgradeTower.performed -= UpgradeTower;
+            InputManager.Instance.Actions.Player.ShowTowerRange.performed -= ShowTowerRange;
+        }
+
+        void Move(InputAction.CallbackContext context)
+        {
+            //moveVector.Value = context.ReadValue<Vector2>();
+        }
+
+        void Look(InputAction.CallbackContext context)
+        {
+            //lookVector.Value = context.ReadValue<Vector2>();
+        }
+
+        void Jump(InputAction.CallbackContext context)
+        {
+            //jump.Value = context.ReadValueAsButton();
+        }
+
+        void PrimaryFire(InputAction.CallbackContext context)
+        {
+            //primaryFire.Value = context.ReadValueAsButton();
+        }
+
+        void SecondaryFire(InputAction.CallbackContext context)
+        {
+            //secondaryFire.Value = context.ReadValueAsButton();
+        }
+
+        void Ability1(InputAction.CallbackContext context)
+        {
+            //ability1.Value = context.ReadValueAsButton();
+        }
+
+        void Ability2(InputAction.CallbackContext context)
+        {
+            //ability2.Value = context.ReadValueAsButton();
+        }
+
+        void Ready(InputAction.CallbackContext context)
+        {
+            //ready?.Raise();
+        }
+
+        void BuildTower(InputAction.CallbackContext context)
+        {
+            //buildTower?.Raise();
+        }
+
+        void RepairTower(InputAction.CallbackContext context)
+        {
+            //repairTower?.Raise();
+        }
+
+        void SellTower(InputAction.CallbackContext context)
+        {
+            //sellTower?.Raise();
+        }
+
+        void UpgradeTower(InputAction.CallbackContext context)
+        {
+            //upgradeTower?.Raise();
+        }
+
+        void ShowTowerRange(InputAction.CallbackContext context)
+        {
+            //toggleTowerRange?.Raise(context.ReadValueAsButton());
+        }
     }
 
-    void OnLook(InputValue value)
-    {
-        lookVector.Value = value.Get<Vector2>();
-    }
-
-    void OnJump(InputValue value)
-    {
-        jump.Value = value.isPressed;
-    }
-
-    void OnPrimaryFire(InputValue value)
-    {
-        primaryFire.Value = value.isPressed;
-    }
-
-    void OnSecondaryFire(InputValue value)
-    {
-        secondaryFire.Value = value.isPressed;
-    }
-
-    void OnAbility1(InputValue value)
-    {
-        ability1.Value = value.isPressed;
-    }
-
-    void OnAbility2(InputValue value)
-    {
-        ability2.Value = value.isPressed;
-    }
-
-    void OnMenu()
-    {
-        menu?.Raise();
-    }
-
-    void OnRepairTower()
-    {
-        repairTower?.Raise();
-    }
-
-    void OnReady()
-    {
-        ready?.Raise();
-    }
-
-    void OnBuildTower()
-    {
-        buildTower?.Raise();
-    }
-
-    void OnSellTower()
-    {
-        sellTower?.Raise();
-    }
-
-    void OnUpgradeTower()
-    {
-        upgradeTower?.Raise();
-    }
 }

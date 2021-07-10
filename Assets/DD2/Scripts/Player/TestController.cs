@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
+
 using DD2.SOArchitecture;
 
 public class TestController : MonoBehaviour
@@ -16,7 +16,7 @@ public class TestController : MonoBehaviour
     [SerializeField] LayerMask groundedMask;
 
     [SerializeField] float jumpVelocity = 10;
-    [ReadOnly] [SerializeField] Vector3 gravity = Vector3.zero;
+     [SerializeField] Vector3 gravity = Vector3.zero;
 
     bool grounded = false;
 

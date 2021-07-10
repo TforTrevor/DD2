@@ -4,7 +4,7 @@ using UnityEngine;
 using Apex.AI;
 using Apex.Serialization;
 using DD2.AI.Context;
-using NaughtyAttributes;
+
 
 namespace DD2.AI.Scorers
 {

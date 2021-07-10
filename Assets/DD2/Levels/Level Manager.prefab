@@ -11,6 +11,11 @@ GameObject:
   - component: {fileID: 7088168222625471301}
   - component: {fileID: 806832901}
   - component: {fileID: 2830449629586393168}
+  - component: {fileID: 341768024762016304}
+  - component: {fileID: 8967000428500284754}
+  - component: {fileID: 8580460926421448377}
+  - component: {fileID: 26843529110153899}
+  - component: {fileID: 1263482429333026338}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -44,17 +49,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fbfea43d09449d479d39b36e8e54b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
-  camera: {fileID: 0}
+  player: {fileID: 0}
+  playerSpawn: {fileID: 0}
+  respawnTime: 0
   cores:
   - {fileID: 0}
   waves:
   - {fileID: 0}
-  currentWave: 0
-  waveInProgress: 0
-  waveStarted: {fileID: 11400000, guid: 5ffa5f0aa9e8a9f4fa6458b1e2b72517, type: 2}
-  waveUpdated: {fileID: 11400000, guid: 9a5690a8b5725b74cbdcb86329f55106, type: 2}
-  waveEnded: {fileID: 11400000, guid: f3ec27885ab1e8a43b1fc5af4d46b8c6, type: 2}
+  levelLoaded: {fileID: 11400000, guid: 5f30d81e2dcd2ba4caff59600d1e8bd2, type: 2}
+  levelEnded: {fileID: 11400000, guid: 6fd3bfeb84c4afd43963ea0d6763962c, type: 2}
+  loadHub: {fileID: 11400000, guid: fbdabd32114335f47b872579c5effd85, type: 2}
+  waveInfo: {fileID: 11400000, guid: 4ce9e5de2015c35418ebe74572bc9648, type: 2}
+  enemyList: {fileID: 11400000, guid: 06d297c8c75e9e6478a8419b46011e3c, type: 2}
+  coreList: {fileID: 11400000, guid: 5b65766609cbf5a4d91918fb11ad795e, type: 2}
+  towerList: {fileID: 11400000, guid: 4fc9a4e6c402103478ecebf5cfbe9555, type: 2}
+  enableInput: {fileID: 11400000, guid: 864149a2edd9c3046b8796961ed831e4, type: 2}
+  callLevelLoaded: 0
 --- !u!114 &2830449629586393168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,3 +103,191 @@ MonoBehaviour:
     _list: {fileID: 0}
     _collectionInstancer: {fileID: 0}
     _listInstancer: {fileID: 0}
+--- !u!114 &341768024762016304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: RespawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 0
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 0fdaa62d57ac2ce429b0bd3dca43c4fa, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &8967000428500284754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: LoseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 1
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 21c5588e5ef1e584babf47f060619ed2, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &8580460926421448377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: ExitLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 0
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 3babfcdd578f0a84fa9db9e49c626df0, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &26843529110153899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2458933140c54c9db0aec7a69c1b617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: ExitLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 0
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: 79c7ec36f20ee9d40b549f4f5ec85584, type: 2}
+    _eventInstancer: {fileID: 0}
+    _collection: {fileID: 0}
+    _list: {fileID: 0}
+    _collectionInstancer: {fileID: 0}
+    _listInstancer: {fileID: 0}
+--- !u!114 &1263482429333026338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5399919937950216522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6ab7cbc45164d19b20476265c251c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _developerDescription: 
+  _unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806832901}
+        m_TargetAssemblyTypeName: DD2.LevelManager, Assembly-CSharp
+        m_MethodName: ToggleTowerRange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _actionResponses: []
+  _replayEventBufferOnRegister: 0
+  _eventReference:
+    _usage: 0
+    _event: {fileID: 11400000, guid: f82a888d4c0f21644b97518b9cf85e23, type: 2}
+    _eventInstancer: {fileID: 0}
+    _variable: {fileID: 0}
+    _variableInstancer: {fileID: 0}

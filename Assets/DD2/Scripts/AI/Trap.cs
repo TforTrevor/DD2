@@ -7,14 +7,21 @@ namespace DD2.AI
 {
     public class Trap : Tower
     {
-        [SerializeField] protected Collider trigger;
+        [SerializeField] protected SphereCollider trigger;
         [SerializeField] LayerMask triggerLayerMask;
+        [SerializeField] List<Transform> scaleWithRange = new List<Transform>();
+
         List<Collider> triggerColliders = new List<Collider>();        
 
         protected override void Start()
         {
             base.Start();
-            transform.localScale *= Stats.AttackRange;
+
+            trigger.radius *= Stats.AttackRange;
+            foreach (Transform transform in scaleWithRange)
+            {
+                transform.localScale *= Stats.AttackRange;
+            }            
         }
 
         protected override void Update()

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DD2.Util;
 
-namespace DD2
+namespace DD2.UI
 {
     public class PlayerUI : MonoBehaviour
     {
@@ -16,6 +17,14 @@ namespace DD2
         [SerializeField] Slider enemyCountSlider;
         [SerializeField] TextMeshProUGUI enemyCountText;
         [SerializeField] TextMeshProUGUI waveCountText;
+        [SerializeField] WaveInfo waveInfo;
+
+        Canvas canvas;
+
+        void Awake()
+        {
+            canvas = GetComponent<Canvas>();
+        }
 
         void Start()
         {
@@ -23,19 +32,18 @@ namespace DD2
             manaSlider.maxValue = player.Stats.MaxMana;
             player.healthUpdated += UpdateHealth;
             player.manaUpdated += UpdateMana;
-            //LevelManager.Instance.waveUpdated += UpdateEnemyCount;
-            //LevelManager.Instance.WaveStarted += UpdateWaveCount;
-            //LevelManager.Instance.WaveEnded += UpdateWaveCount;
-            //LevelManager.Instance.WaveStarted += (sender, amount) =>
-            //{
-            //    enemyCountSlider.gameObject.SetActive(true);
-            //};
-            //LevelManager.Instance.WaveEnded += (sender, amount) =>
-            //{
-            //    enemyCountSlider.gameObject.SetActive(false);
-            //};
             enemyCountSlider.gameObject.SetActive(false);
             UpdateWaveCount();
+        }
+
+        public void Show()
+        {
+            canvas.enabled = true;
+        }
+
+        public void Hide()
+        {
+            canvas.enabled = false;
         }
 
         void UpdateHealth(object sender, float amount)
@@ -57,20 +65,16 @@ namespace DD2
 
         public void UpdateEnemyCount()
         {
-            Wave wave = LevelManager.Instance.GetWave();
-            if (wave != null)
-            {
-                enemyCountSlider.maxValue = wave.MaxCount;
-                enemyCountSlider.value = wave.CurrentCount;
-                enemyCountText.text = wave.CurrentCount + "/" + wave.MaxCount;
-            }            
+            enemyCountSlider.maxValue = waveInfo.TotalEnemyCount;
+            enemyCountSlider.value = waveInfo.CurrentEnemyCount;
+            enemyCountText.text = waveInfo.CurrentEnemyCount + "/" + waveInfo.TotalEnemyCount;
         }
 
         public void UpdateWaveCount()
         {
-            if (LevelManager.Instance.WaveCount > 0)
+            if (waveInfo.TotalWaves > 0)
             {
-                waveCountText.text = LevelManager.Instance.CurrentWave + 1 + "/" + LevelManager.Instance.WaveCount;
+                waveCountText.text = waveInfo.WaveIndex + 1 + "/" + waveInfo.TotalWaves;
             }
             else
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
-using NaughtyAttributes;
+
 using RoboRyanTron.SearchableEnum;
 using DD2.Actions;
 
@@ -11,42 +11,42 @@ namespace DD2.Abilities
     public class Ability : MonoBehaviour
     {
         //Effects
-        [SerializeField] [ReorderableList] [Expandable]
+        [SerializeField] [Expandable]
         protected Action[] tickActions;
-        [SerializeField] [ReorderableList] [Expandable]
+        [SerializeField]  [Expandable]
         protected Action[] abilityEffects;
         //Cooldown
-        [SerializeField] [MinValue(0)] [BoxGroup("Cooldown")]
+        [SerializeField]
         protected float cooldown;
-        [SerializeField] [BoxGroup("Cooldown")]
+        [SerializeField]
         protected bool beforeEnd;
-        [ReadOnly] [SerializeField] [BoxGroup("Cooldown")]
+        [SerializeField]
         protected bool onCooldown;
-        [ReadOnly] [SerializeField] [BoxGroup("Cooldown")]
+        [SerializeField]
         protected bool isUsing;
         //Toggle
-        [SerializeField] [BoxGroup("Toggle")]
+        [SerializeField]
         protected bool isToggle;
-        [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
+        [SerializeField]
         private float toggleTickRate;
-        [ReadOnly] [SerializeField] [BoxGroup("Toggle")] [ShowIf("isToggle")]
+        [SerializeField]
         private bool toggleState;
         //Input buffering
-        [SerializeField] [BoxGroup("Input Buffering")]
+        [SerializeField]
         protected bool bufferInput;
-        [SerializeField] [BoxGroup("Input Buffering")] [ShowIf("bufferInput")]
+        [SerializeField]
         protected float bufferTime;
-        [ReadOnly] [SerializeField] [BoxGroup("Input Buffering")] [ShowIf("bufferInput")]
+        [SerializeField]
         protected bool isBuffered;
         protected CoroutineHandle bufferHandle;
         //Targetting
-        [SerializeField] [BoxGroup("Targetting")]
+        [SerializeField]
         private LayerMask layerMask;
-        [SerializeField] [BoxGroup("Targetting")]
+        [SerializeField]
         private LayerMask confuseLayerMask;
-        [SerializeField] [BoxGroup("Targetting")]
+        [SerializeField]
         protected bool multiTarget;
-        [SerializeField] [BoxGroup("Targetting")]
+        [SerializeField]
         protected bool hitSelf;
         
         protected Entity entity;

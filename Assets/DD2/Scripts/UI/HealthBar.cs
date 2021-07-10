@@ -17,9 +17,11 @@ namespace DD2.UI
 
         Entity entity;
         CoroutineHandle damageHandle;
+        bool isEnabled;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             if (showText)
             {
                 healthNumber.gameObject.SetActive(true);
@@ -28,13 +30,65 @@ namespace DD2.UI
             {
                 healthNumber.gameObject.SetActive(false);
             }
+            isEnabled = true;
         }
 
-        public void SetEntity(Entity entity)
+        public virtual void Show(Entity entity)
         {
-            this.entity = entity;
-            this.entity.healthUpdated += UpdateHealth;
-            UpdateHealth(null, 0);
+            if (!isEnabled)
+            {
+                if (entity != null)
+                {
+                    this.entity = entity;
+                    this.entity.healthUpdated += UpdateHealth;
+                    float fillAmount = entity.CurrentHealth / entity.Stats.MaxHealth;
+                    foregroundFill.fillAmount = fillAmount;
+                    backgroundFill.fillAmount = fillAmount;
+                }
+
+                isEnabled = true;
+            }
+        }
+
+        public override void Hide()
+        {
+            base.Hide();
+
+            if (isEnabled)
+            {
+                if (entity != null)
+                {
+                    entity.healthUpdated -= UpdateHealth;
+                }
+
+                Timing.KillCoroutines(damageHandle);
+                isEnabled = false;
+            }
+        }
+
+        void OnDestroy()
+        {
+            if (entity != null)
+            {
+                entity.healthUpdated -= UpdateHealth;
+            }
+        }
+
+        void LateUpdate()
+        {
+            if (isEnabled && entity != null)
+            {
+                Vector3 elementPosition = Camera.main.WorldToScreenPoint(entity.transform.position);
+                transform.position = elementPosition;
+                if (elementPosition.z > 0)
+                {
+                    CanvasGroup.alpha = 1;
+                }
+                else
+                {
+                    CanvasGroup.alpha = 0;
+                }
+            }
         }
 
         void UpdateHealth(object sender, float amount)
@@ -51,38 +105,9 @@ namespace DD2.UI
                     if (backgroundFill != null)
                     {
                         backgroundFill.fillAmount = value;
-                    }                    
+                    }
                 });
             });
-        }
-
-        void OnDestroy()
-        {
-            if (entity != null)
-            {
-                entity.healthUpdated -= UpdateHealth;
-            }            
-        }
-
-        public override void ToggleCanvas(bool value, System.Action onComplete)
-        {              
-            if (!CanvasGroup.enabled && value)
-            {
-                CanvasGroup.enabled = value;
-                transform.localScale = Vector3.zero;
-                LeanTween.scale(gameObject, Vector3.one, 0.4f).setOnComplete(() =>
-                {
-                    onComplete?.Invoke();
-                });
-            }
-            else if (CanvasGroup.enabled && !value)
-            {
-                LeanTween.scale(gameObject, Vector3.zero, 0.4f).setOnComplete(() =>
-                {
-                    CanvasGroup.enabled = false;
-                    onComplete?.Invoke();
-                });
-            }
         }
     }
 }

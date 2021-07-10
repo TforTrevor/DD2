@@ -18,7 +18,13 @@ MonoBehaviour:
   attackSpeed: 0
   moveSpeed: 1.5
   presence: 5
-  castSpeed: 0
   resistedElements: 0
+  physicalResist: 0
+  fireResist: 100
+  lightningResist: 0
+  energyResist: 0
+  waterResist: 0
   attackRange: 1
   attackAngle: 80
+  searchRange: 1
+  searchAngle: 80
