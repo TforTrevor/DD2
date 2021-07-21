@@ -28,9 +28,11 @@ namespace DD2.AI
         protected int level = 0;
         Color defaultColor;
         Color currentColor;
+        Color errorColor = Color.red;
 
         public Color DefaultColor { get => defaultColor; protected set => defaultColor = value; }
         public Color CurrentColor { get => currentColor; private set => currentColor = value; }
+        public Color ErrorColor { get => errorColor; }
         public int ManaCost { get => manaCost; private set => manaCost = value; }
         public VisualEffect UpgradeEffect { get => upgradeEffect; private set => upgradeEffect = value; }
 

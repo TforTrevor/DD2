@@ -106,9 +106,10 @@ MonoBehaviour:
   DLSSProjectId: 000000
   useDLSSCustomProjectId: 0
   supportProbeVolumes: 0
+  supportRuntimeDebugDisplay: 1
   apvScenesBounds:
     serializedBounds: []
     serializedHasVolumes:
     - scenePath: Assets/DD2/Levels/Test Level/Test.unity
       hasProbeVolumes: 0
-  m_Version: 2
+  m_Version: 3
