@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.autodesk.fbx": {
-      "version": "4.1.0-pre.1",
+      "version": "4.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -102,7 +102,7 @@
       "dependencies": {}
     },
     "com.unity.burst": {
-      "version": "1.6.0-pre.2",
+      "version": "1.6.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -111,7 +111,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.8.0-pre.1",
+      "version": "2.8.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -125,12 +125,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.formats.fbx": {
-      "version": "4.1.0-pre.2",
+      "version": "4.1.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.timeline": "1.5.2",
-        "com.autodesk.fbx": "4.1.0-pre.1"
+        "com.autodesk.fbx": "4.1.1"
       },
       "url": "https://packages.unity.com"
     },
@@ -144,7 +144,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.1.0-pre.5",
+      "version": "1.1.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -184,6 +184,8 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.burst": "1.5.0",
         "com.unity.modules.video": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
         "com.unity.modules.imageconversion": "1.0.0",
@@ -203,7 +205,7 @@
       }
     },
     "com.unity.searcher": {
-      "version": "4.3.2",
+      "version": "4.8.0",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
@@ -222,11 +224,11 @@
       "source": "builtin",
       "dependencies": {
         "com.unity.render-pipelines.core": "12.0.0",
-        "com.unity.searcher": "4.3.1"
+        "com.unity.searcher": "4.8.0"
       }
     },
     "com.unity.test-framework": {
-      "version": "1.1.26",
+      "version": "1.1.29",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -246,7 +248,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.6.1",
+      "version": "1.6.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {

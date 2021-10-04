@@ -66,6 +66,7 @@ MonoBehaviour:
   m_RenderPipelineRayTracingResources: {fileID: 0}
   beforeTransparentCustomPostProcesses: []
   beforePostProcessCustomPostProcesses: []
+  afterPostProcessBlursCustomPostProcesses: []
   afterPostProcessCustomPostProcesses: []
   beforeTAACustomPostProcesses: []
   lightLayerName0: Light Layer default
@@ -105,11 +106,20 @@ MonoBehaviour:
   rendererListCulling: 0
   DLSSProjectId: 000000
   useDLSSCustomProjectId: 0
-  supportProbeVolumes: 0
+  supportProbeVolumes: 1
   supportRuntimeDebugDisplay: 1
-  apvScenesBounds:
-    serializedBounds: []
+  apvScenesData:
+    serializedBounds:
+    - scenePath: Assets/DD2/Levels/Test Level/Test.unity
+      bounds:
+        m_Center: {x: 0, y: 7.5, z: 0}
+        m_Extent: {x: 54, y: 10.5, z: 54}
     serializedHasVolumes:
     - scenePath: Assets/DD2/Levels/Test Level/Test.unity
-      hasProbeVolumes: 0
+      hasProbeVolumes: 1
+    serializedProfiles:
+    - sceneGUID: 8025d7d3a947ad141abc2f1aea0155d7
+      profile: {fileID: 11400000, guid: 37dbd037b239cb941aff83b1060e8095, type: 2}
+    serializedBakeSettings:
+    - sceneGUID: 8025d7d3a947ad141abc2f1aea0155d7
   m_Version: 3
