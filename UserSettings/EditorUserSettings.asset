@@ -32,6 +32,9 @@ EditorUserSettings:
     UnityEditor.ShaderGraph.ToggleSettings:
       value: 18135d1527590858060c032302276919051e1a26296a7c243f3c187fa0e92708f0e220e0e22d09352a0bed30017c5b2be01f0c47b40805071e1ccd1c1ee9191714d75a9f58943113c51c428cd0
       flags: 0
+    lightmappingBakingProfile:
+      value: 51
+      flags: 0
     lightmappingDeviceAndPlatform:
       value: 53
       flags: 0
@@ -43,7 +46,9 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 0
+  m_DesiredImportWorkerCount: 1
+  m_StandbyImportWorkerCount: 1
+  m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1
   m_VCOverwriteFailedCheckoutAssets: 1
   m_VCProjectOverlayIcons: 1
